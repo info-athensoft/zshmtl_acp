@@ -6,6 +6,10 @@
 <c:set var="webapp_name" value="/acp"/>
 
 
+<!-- page variables  -->
+<c:set var="inc_dir" value="inc"/>
+<!-- ENDS page variables -->
+
 <!DOCTYPE html>
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.4
@@ -75,7 +79,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- BEGIN HEADER INNER -->
 	<div class="page-header-inner container">
 		<!-- BEGIN LOGO -->
-			<jsp:include page="page-logo.jsp"></jsp:include>
+			<jsp:include page="${inc_dir}/page-logo.jsp"></jsp:include>
 		<!-- END LOGO -->
 		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
@@ -83,10 +87,10 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- END RESPONSIVE MENU TOGGLER -->
 		<!-- BEGIN PAGE ACTIONS -->
 		<!-- DOC: Remove "hide" class to enable the page header actions -->
-			<jsp:include page="page-action.jsp"></jsp:include>
+			<jsp:include page="${inc_dir}/page-action.jsp"></jsp:include>
 		<!-- END PAGE ACTIONS -->
 		<!-- BEGIN PAGE TOP -->
-			<jsp:include page="page-top.jsp"></jsp:include>
+			<jsp:include page="${inc_dir}/page-top.jsp"></jsp:include>
 		<!-- END PAGE TOP -->
 	</div>
 	<!-- END HEADER INNER -->
@@ -98,7 +102,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <div class="container">
 	<div class="page-container">
 		<!-- BEGIN SIDEBAR -->
-			<jsp:include page="page-sidebar.jsp"></jsp:include>
+			<jsp:include page="${inc_dir}/page-sidebar.jsp"></jsp:include>
 		<!-- END SIDEBAR -->
 		<!-- BEGIN CONTENT -->
 		<div class="page-content-wrapper">
@@ -2352,7 +2356,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	</div>
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
-		<jsp:include page="page-footer.jsp"></jsp:include>
+		<jsp:include page="${inc_dir}/page-footer.jsp"></jsp:include>
 	<!-- END FOOTER -->
 </div>
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->

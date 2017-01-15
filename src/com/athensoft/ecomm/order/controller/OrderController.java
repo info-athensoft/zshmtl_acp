@@ -28,13 +28,13 @@ public class OrderController {
 
 	@RequestMapping(value="/ecomm/orders")
 	public String gotoOrders(){
-		String viewName = "ecommerce_orders";
+		String viewName = "order/ecommerce_orders";
 		return viewName;
 	}
 	
 	@RequestMapping("/ecomm/ordersview")
 	public String gotoOrdersView(){
-		String viewName = "ecommerce_orders_view";
+		String viewName = "order/ecommerce_orders_view";
 		return viewName;
 	}
 	
@@ -49,7 +49,7 @@ public class OrderController {
 		
 		Map<String,Object> data = mav.getModel();
 		data.put("orderList", orders);		
-		mav.setViewName("ecommerce_orders");
+		mav.setViewName("order/ecommerce_orders");
 		return mav;
 	}
 	
