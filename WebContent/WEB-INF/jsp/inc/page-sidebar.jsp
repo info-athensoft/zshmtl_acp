@@ -84,7 +84,7 @@
 								News List</a>
 							</li>
 							<li>
-								<a href="#">
+								<a href="/acp/content/eventsNewsEdit">
 								<i class="icon-paper-plane"></i>
 								News Edit</a>
 							</li>
