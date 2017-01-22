@@ -79,7 +79,7 @@
 								Dashboard</a>
 							</li>
 							<li>
-								<a href="#">
+								<a href="/acp/content/eventsNewsList">
 								<i class="icon-pencil"></i>
 								News List</a>
 							</li>
