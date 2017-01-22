@@ -74,7 +74,17 @@
 								Dashboard</a>
 							</li>
 							<li>
-								<a href="#">
+								<a href="/acp/item/categoryList">
+								<i class="icon-paper-plane"></i>
+								Category List</a>
+							</li>
+							<li>
+								<a href="/acp/item/categoryEdit">
+								<i class="icon-pencil"></i>
+								Category Edit</a>
+							</li>
+							<li>
+								<a href="/acp/item/productList">
 								<i class="icon-paper-plane"></i>
 								Product List</a>
 							</li>
