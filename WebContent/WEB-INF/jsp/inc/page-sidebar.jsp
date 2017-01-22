@@ -40,11 +40,6 @@
 								<i class="icon-doc"></i>
 								Orders View</a>
 							</li>
-							<li>
-								<a href="/acp/test">
-								<i class="icon-doc"></i>
-								Test</a>
-							</li>
 							<!-- 
 							<li>
 								<a href="ecommerce_index.html">
@@ -64,6 +59,33 @@
 							 -->
 						</ul>
 					</li>
+					
+					<!-- product system -->
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">My Products</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li>
+								<a href="#">
+								<i class="icon-home"></i>
+								Dashboard</a>
+							</li>
+							<li>
+								<a href="#">
+								<i class="icon-paper-plane"></i>
+								Product List</a>
+							</li>
+							<li>
+								<a href="/acp/item/productEdit">
+								<i class="icon-pencil"></i>
+								Product Edit</a>
+							</li>
+						</ul>
+					</li>
+					<!-- end product system -->
 					
 					<!-- event system -->
 					<li>
@@ -90,7 +112,7 @@
 							</li>
 						</ul>
 					</li>
-					
+					<!-- end event system -->
 					
 					<!-- 
 					<li>
