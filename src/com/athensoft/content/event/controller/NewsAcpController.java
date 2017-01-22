@@ -26,6 +26,12 @@ public class NewsAcpController {
 	public void setNewsService(NewsService newsService) {
 		this.newsService = newsService;
 	}
+	
+	@RequestMapping(value="/content/eventsNewsList")
+	public String gotoNewsList(){
+		String viewName = "events/event_news_list";
+		return viewName;
+	}
 
 	@RequestMapping(value="/content/eventsNewsEdit")
 	public String gotoNewsEdit(){
