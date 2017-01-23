@@ -6,16 +6,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.athensoft.content.event.entity.Event;
+import com.athensoft.content.event.entity.TestNews;
 import com.athensoft.content.event.service.NewsService;
-import com.athensoft.ecomm.order.entity.Order;
-import com.athensoft.ecomm.order.entity.OrderHead;
-import com.athensoft.ecomm.order.service.OrderService;
 
 @Controller
 public class NewsAcpController {
@@ -27,11 +24,64 @@ public class NewsAcpController {
 		this.newsService = newsService;
 	}
 	
+	
 	@RequestMapping(value="/content/eventsNewsList")
 	public String gotoNewsList(){
 		String viewName = "events/event_news_list";
 		return viewName;
 	}
+	
+	@RequestMapping(value="/content/eventsNewsListData",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> getDataNewsList(){
+		ModelAndView mav = new ModelAndView();
+		
+		//String viewName = "events/news";
+		//mav.setViewName(viewName);
+		
+		//data
+		List<Event> listNews = newsService.getAllNews();
+		
+		List<TestNews> listTestNews = new ArrayList<TestNews>();
+		
+		
+		for(Event news : listNews){
+			TestNews tn = new TestNews();
+			tn.setAuthor(news.getAuthor());
+			tn.setEventClass(news.getEventClass());
+			tn.setEventStatus(news.getEventStatus());
+			tn.setEventUUID(news.getEventUUID());
+			tn.setGlobalId(news.getGlobalId());
+			tn.setPostDatetime(news.getPostDatetime());
+			tn.setTitle(news.getTitle());
+			//tn.setViewNum(news.getViewNum());
+			listTestNews.add(tn);
+		}
+		
+		
+		
+		/*
+		for(Event news : listNews){
+			String eventUUID = news.getEventUUID();
+			List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
+			news.setListEventMedia(listEventMedia);
+			news.setPrimaryEventMedia();
+			
+			List<EventTag> listEventTag = eventTagService.getEventTagByEventUUID(eventUUID);
+			news.setListEventTag(listEventTag);
+		}*/
+		
+		Map<String, Object> data = mav.getModel();
+		data.put("listNews", listTestNews);
+//		data.put("listNews", listNews);
+		
+		System.out.println("/content/eventsNewsListData");
+		
+		return data;
+	}
+	
+	
+	
 
 	@RequestMapping(value="/content/eventsNewsEdit")
 	public String gotoNewsEdit(){
