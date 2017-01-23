@@ -29,7 +29,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>Athensoft | Event - News List</title>
+<title>Athensoft | Events - News List</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -46,9 +46,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/select2/select2.css"/>
 <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
-<link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap-datepicker/css/datepicker.css"/>
-<link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
-<link href="../../assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css"/>
 <!-- END PAGE LEVEL STYLES -->
 <!-- BEGIN THEME STYLES -->
 <link href="${webapp_name}/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
@@ -84,9 +82,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- END RESPONSIVE MENU TOGGLER -->
 		<!-- BEGIN PAGE ACTIONS -->
 		<!-- DOC: Remove "hide" class to enable the page header actions -->
-		<div class="page-actions hide">
+		<div class="page-actions">
 			<div class="btn-group">
-				<button type="button" class="btn btn-circle red-pink dropdown-toggle" data-toggle="dropdown">
+				<button type="button" class="btn btn-circle red-pink dropdown-toggle hide" data-toggle="dropdown">
 				<i class="icon-bar-chart"></i>&nbsp;<span class="hidden-sm hidden-xs">New&nbsp;</span>&nbsp;<i class="fa fa-angle-down"></i>
 				</button>
 				<ul class="dropdown-menu" role="menu">
@@ -292,7 +290,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!-- END STYLE CUSTOMIZER -->
 				<!-- BEGIN PAGE HEADER-->
 				<h3 class="page-title">
-				Editable Datatables <small>editable datatable samples</small>
+				Event <small>news listing</small>
 				</h3>
 				<div class="page-bar">
 					<ul class="page-breadcrumb">
@@ -302,11 +300,11 @@ License: You must have a valid license purchased only from themeforest(the above
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">Data Tables</a>
+							<a href="#">eCommerce</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">Editable Datatables</a>
+							<a href="#">Events</a>
 						</li>
 					</ul>
 					<div class="page-toolbar">
@@ -337,219 +335,186 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!-- BEGIN PAGE CONTENT-->
 				<div class="row">
 					<div class="col-md-12">
-						<!-- BEGIN EXAMPLE TABLE PORTLET-->
-						<div class="portlet box blue">
+						<!-- 
+						<div class="note note-danger note-bordered">
+							<p>
+								 NOTE: The below datatable is not connected to a real database so the filter and sorting is just simulated for demo purposes only.
+							</p>
+						</div>\
+						 -->
+						<!-- Begin: life time stats -->
+						<div class="portlet light">
 							<div class="portlet-title">
 								<div class="caption">
-									<i class="fa fa-edit"></i>Editable Table
+									<i class="fa fa-gift font-green-sharp"></i>
+									<span class="caption-subject font-green-sharp bold uppercase">Events</span>
+									<span class="caption-helper">manage news...</span>
 								</div>
-								<div class="tools">
-									<a href="javascript:;" class="collapse">
+								<div class="actions">
+									<a href="javascript:;" class="btn btn-circle btn-default">
+									<i class="fa fa-plus"></i>
+									<span class="hidden-480">
+									New Event </span>
 									</a>
-									<a href="#portlet-config" data-toggle="modal" class="config">
-									</a>
-									<a href="javascript:;" class="reload">
-									</a>
-									<a href="javascript:;" class="remove">
-									</a>
+									<div class="btn-group">
+										<a class="btn btn-default btn-circle" href="javascript:;" data-toggle="dropdown">
+										<i class="fa fa-share"></i> Tools <i class="fa fa-angle-down"></i>
+										</a>
+										<ul class="dropdown-menu pull-right">
+											<li>
+												<a href="javascript:;">
+												Export to Excel </a>
+											</li>
+											<li>
+												<a href="javascript:;">
+												Export to CSV </a>
+											</li>
+											<li>
+												<a href="javascript:;">
+												Export to XML </a>
+											</li>
+											<li class="divider">
+											</li>
+											<li>
+												<a href="javascript:;">
+												Print Invoices </a>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>
 							<div class="portlet-body">
-								<div class="table-toolbar">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="btn-group">
-												<button id="sample_editable_1_new" class="btn green">
-												Add New <i class="fa fa-plus"></i>
-												</button>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="btn-group pull-right">
-												<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
-												</button>
-												<ul class="dropdown-menu pull-right">
-													<li>
-														<a href="javascript:;">
-														Print </a>
-													</li>
-													<li>
-														<a href="javascript:;">
-														Save as PDF </a>
-													</li>
-													<li>
-														<a href="javascript:;">
-														Export to Excel </a>
-													</li>
-												</ul>
-											</div>
-										</div>
+								<div class="table-container">
+									<div class="table-actions-wrapper">
+										<span>
+										</span>
+										<select class="table-group-action-input form-control input-inline input-small input-sm">
+											<option value="">Select...</option>
+											<option value="publish">Publish</option>
+											<option value="unpublished">Un-publish</option>
+											<option value="delete">Delete</option>
+										</select>
+										<button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
 									</div>
+									<table class="table table-striped table-bordered table-hover" id="datatable_products">
+									<thead>
+									<tr role="row" class="heading">
+										<th width="1%">
+											<input type="checkbox" class="group-checkable">
+										</th>
+										<th width="10%">
+											 ID
+										</th>
+										<th width="15%">
+											 Product&nbsp;Name
+										</th>
+										<th width="15%">
+											 Category
+										</th>
+										<th width="10%">
+											 Price
+										</th>
+										<th width="10%">
+											 Quantity
+										</th>
+										<th width="15%">
+											 Date&nbsp;Created
+										</th>
+										<th width="10%">
+											 Status
+										</th>
+										<th width="10%">
+											 Actions
+										</th>
+									</tr>
+									<tr role="row" class="filter">
+										<td>
+										</td>
+										<td>
+											<input type="text" class="form-control form-filter input-sm" name="product_id">
+										</td>
+										<td>
+											<input type="text" class="form-control form-filter input-sm" name="product_name">
+										</td>
+										<td>
+											<select name="product_category" class="form-control form-filter input-sm">
+												<option value="">Select...</option>
+												<option value="1">Mens</option>
+												<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Footwear</option>
+												<option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clothing</option>
+												<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessories</option>
+												<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fashion Outlet</option>
+												<option value="6">Football Shirts</option>
+												<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Premier League</option>
+												<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Football League</option>
+												<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serie A</option>
+												<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bundesliga</option>
+												<option value="11">Brands</option>
+												<option value="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adidas</option>
+												<option value="13">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nike</option>
+												<option value="14">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Airwalk</option>
+												<option value="15">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;USA Pro</option>
+												<option value="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kangol</option>
+											</select>
+										</td>
+										<td>
+											<div class="margin-bottom-5">
+												<input type="text" class="form-control form-filter input-sm" name="product_price_from" placeholder="From"/>
+											</div>
+											<input type="text" class="form-control form-filter input-sm" name="product_price_to" placeholder="To"/>
+										</td>
+										<td>
+											<div class="margin-bottom-5">
+												<input type="text" class="form-control form-filter input-sm" name="product_quantity_from" placeholder="From"/>
+											</div>
+											<input type="text" class="form-control form-filter input-sm" name="product_quantity_to" placeholder="To"/>
+										</td>
+										<td>
+											<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+												<input type="text" class="form-control form-filter input-sm" readonly name="product_created_from" placeholder="From">
+												<span class="input-group-btn">
+												<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+												</span>
+											</div>
+											<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+												<input type="text" class="form-control form-filter input-sm" readonly name="product_created_to " placeholder="To">
+												<span class="input-group-btn">
+												<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+												</span>
+											</div>
+										</td>
+										<td>
+											<select name="product_status" class="form-control form-filter input-sm">
+												<option value="">Select...</option>
+												<option value="published">Published</option>
+												<option value="notpublished">Not Published</option>
+												<option value="deleted">Deleted</option>
+											</select>
+										</td>
+										<td>
+											<div class="margin-bottom-5">
+												<button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i> Search</button>
+											</div>
+											<button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Reset</button>
+										</td>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+									</table>
+									
+									<!-- test data for orders -->
+									
+									
+									
+									
 								</div>
-								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-								<thead>
-								<tr>
-									<th>
-										 Username
-									</th>
-									<th>
-										 Full Name
-									</th>
-									<th>
-										 Points
-									</th>
-									<th>
-										 Notes
-									</th>
-									<th>
-										 Edit
-									</th>
-									<th>
-										 Delete
-									</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr>
-									<td>
-										 alex
-									</td>
-									<td>
-										 Alex Nilson
-									</td>
-									<td>
-										 1234
-									</td>
-									<td class="center">
-										 power user
-									</td>
-									<td>
-										<a class="edit" href="javascript:;">
-										Edit </a>
-									</td>
-									<td>
-										<a class="delete" href="javascript:;">
-										Delete </a>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										 lisa
-									</td>
-									<td>
-										 Lisa Wong
-									</td>
-									<td>
-										 434
-									</td>
-									<td class="center">
-										 new user
-									</td>
-									<td>
-										<a class="edit" href="javascript:;">
-										Edit </a>
-									</td>
-									<td>
-										<a class="delete" href="javascript:;">
-										Delete </a>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										 nick12
-									</td>
-									<td>
-										 Nick Roberts
-									</td>
-									<td>
-										 232
-									</td>
-									<td class="center">
-										 power user
-									</td>
-									<td>
-										<a class="edit" href="javascript:;">
-										Edit </a>
-									</td>
-									<td>
-										<a class="delete" href="javascript:;">
-										Delete </a>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										 goldweb
-									</td>
-									<td>
-										 Sergio Jackson
-									</td>
-									<td>
-										 132
-									</td>
-									<td class="center">
-										 elite user
-									</td>
-									<td>
-										<a class="edit" href="javascript:;">
-										Edit </a>
-									</td>
-									<td>
-										<a class="delete" href="javascript:;">
-										Delete </a>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										 webriver
-									</td>
-									<td>
-										 Antonio Sanches
-									</td>
-									<td>
-										 462
-									</td>
-									<td class="center">
-										 new user
-									</td>
-									<td>
-										<a class="edit" href="javascript:;">
-										Edit </a>
-									</td>
-									<td>
-										<a class="delete" href="javascript:;">
-										Delete </a>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										 gist124
-									</td>
-									<td>
-										 Nick Roberts
-									</td>
-									<td>
-										 62
-									</td>
-									<td class="center">
-										 new user
-									</td>
-									<td>
-										<a class="edit" href="javascript:;">
-										Edit </a>
-									</td>
-									<td>
-										<a class="delete" href="javascript:;">
-										Delete </a>
-									</td>
-								</tr>
-								</tbody>
-								</table>
 							</div>
 						</div>
-						<!-- END EXAMPLE TABLE PORTLET-->
+						<!-- End: life time stats -->
 					</div>
 				</div>
-				<!-- END PAGE CONTENT -->
+				<!-- END PAGE CONTENT-->
 			</div>
 		</div>
 		<!-- END CONTENT -->
@@ -559,14 +524,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	</div>
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
-	<div class="page-footer">
-		<div class="page-footer-inner">
-			 2014 &copy; Metronic by keenthemes. <a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
-		</div>
-		<div class="scroll-to-top">
-			<i class="icon-arrow-up"></i>
-		</div>
-	</div>
+		<jsp:include page="${inc_dir}/page-footer.jsp"></jsp:include>
 	<!-- END FOOTER -->
 </div>
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
@@ -592,27 +550,28 @@ License: You must have a valid license purchased only from themeforest(the above
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script src="${webapp_name}/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
-<script type="text/javascript" src="../../assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
-<script src="${webapp_name}/assets/global/plugins/plupload/js/plupload.full.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="${webapp_name}/assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
-<script src="${webapp_name}/assets/admin/pages/scripts/ecommerce-products-edit.js"></script>
+<script src="${webapp_name}/assets/admin/pages/scripts-local/ecommerce-products.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-jQuery(document).ready(function() {       
-   Metronic.init(); // init metronic core components
-Layout.init(); // init current layout
-Demo.init(); // init demo features
-   TableEditable.init();
-});
-</script>
+        jQuery(document).ready(function() {    
+          	Metronic.init(); // init metronic core components
+			Layout.init(); // init current layout
+			Demo.init(); // init demo features
+          	//EcommerceOrders.init();
+			EcommerceProducts.init();
+          	//$('#datatable_orders').DataTable( {
+            //    "ajax":'${webapp_name}/orders'
+           //} );
+			
+        });
+    </script>
+<!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
 </html>
