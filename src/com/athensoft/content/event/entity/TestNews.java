@@ -6,25 +6,8 @@ public class TestNews {
 	
 	//private int checked = 0;
 	
-	/*
-	public int getChecked() {
-		return checked;
-	}
-	public void setChecked(int checked) {
-		this.checked = checked;
-	}*/
-	
+
 	private long globalId;
-	private String eventUUID;
-	private String title;
-	private String author;
-	private Date postDatetime;
-	private int viewNum;
-	//private String descShort;
-	//private String descLong;
-	private String eventClass;
-	private int eventStatus;
-	
 	public long getGlobalId() {
 		return globalId;
 	}
@@ -55,12 +38,6 @@ public class TestNews {
 	public void setPostDatetime(Date postDatetime) {
 		this.postDatetime = postDatetime;
 	}
-	public int getViewNum() {
-		return viewNum;
-	}
-	public void setViewNum(int viewNum) {
-		this.viewNum = viewNum;
-	}
 	public String getEventClass() {
 		return eventClass;
 	}
@@ -73,6 +50,17 @@ public class TestNews {
 	public void setEventStatus(int eventStatus) {
 		this.eventStatus = eventStatus;
 	}
+	private String eventUUID;
+	private String title;
+	private String author;
+	private Date postDatetime;
+	//private int viewNum;
+	//private String descShort;
+	//private String descLong;
+	private String eventClass;
+	private int eventStatus;
+	
+	
 	
 	
 }

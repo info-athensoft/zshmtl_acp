@@ -14,21 +14,6 @@ var EcommerceProducts = function () {
         grid.init({
             src: $("#datatable_products"),
             onSuccess: function (grid) {
-                // execute some code after table records loaded
-            	//alert("onSuccess");
-//            	var obj = $.parseJSON(grid.getTable());
-//            	var obj = JSON.parse(grid.getTable());
-            	alert("ok 1");
-            	var x = grid.getDataTable();
-            	//x = grid.tableOptions.ajax.dataSrc();
-            	//alert(x.pageLength);
-     
-            	//alert(obj.listNews);
-            	
-            	
-            	//alert(x);
-            	alert("ok 2");
-            	
             	
             },
             onError: function (grid) {

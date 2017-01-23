@@ -54,7 +54,7 @@ public class NewsAcpController {
 			tn.setGlobalId(news.getGlobalId());
 			tn.setPostDatetime(news.getPostDatetime());
 			tn.setTitle(news.getTitle());
-			tn.setViewNum(news.getViewNum());
+			//tn.setViewNum(news.getViewNum());
 			listTestNews.add(tn);
 		}
 		
