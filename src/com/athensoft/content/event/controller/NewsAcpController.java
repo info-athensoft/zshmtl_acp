@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.event.entity.Event;
-import com.athensoft.content.event.entity.TestNews;
 import com.athensoft.content.event.service.NewsService;
 
 @Controller
@@ -41,21 +40,60 @@ public class NewsAcpController {
 		
 		//data
 		List<Event> listNews = newsService.getAllNews();
+		System.out.println(listNews.size());
 		
-		List<TestNews> listTestNews = new ArrayList<TestNews>();
 		
+		DatatableObject datatableObj= new DatatableObject();
+		
+//		datatableObj.setCustomActionStatus("OK");   
+//		datatableObj.setCustomActionMessage("");
+//		datatableObj.setDraw(1);
+//		datatableObj.setRecordsTotal(3);
+//		datatableObj.setRecordsFiltered(3);
+		
+		List<Object> data = datatableObj.getData();
+		
+		
+		
+		//datatableObj.setiTotalDisplayRecords("100");
+		//datatableObj.setiTotalRecords("100");
+		
+		
+		
+	
+		
+		String field1 = "";
+		String field8 = "";
+		String field9 = "";
+		
+		List<String> dataArray = new ArrayList<String>();
 		
 		for(Event news : listNews){
-			TestNews tn = new TestNews();
-			tn.setAuthor(news.getAuthor());
-			tn.setEventClass(news.getEventClass());
-			tn.setEventStatus(news.getEventStatus());
-			tn.setEventUUID(news.getEventUUID());
-			tn.setGlobalId(news.getGlobalId());
-			tn.setPostDatetime(news.getPostDatetime());
-			tn.setTitle(news.getTitle());
-			//tn.setViewNum(news.getViewNum());
-			listTestNews.add(tn);
+			
+			field1 = "<input type='checkbox' name='id[]' value="+news.getGlobalId()+">";
+			dataArray.add(field1);
+			dataArray.add(news.getAuthor());
+			dataArray.add(news.getEventClass());
+			dataArray.add(news.getEventStatus()+"");
+			//data.add(news.getEventUUID());
+			dataArray.add(news.getGlobalId()+"");
+			dataArray.add(news.getPostDatetime()+"");
+			dataArray.add(news.getTitle());
+			
+			String eventStatus = news.getEventStatus()+"";
+			eventStatus = "Published";
+			String eventStatusKey = "success";
+			
+			field8 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
+			dataArray.add(field8);
+			
+			field9 = "<a href='ecommerce_products_edit.html' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			dataArray.add(field9);
+			
+			data.add(dataArray);
+			
+			dataArray = new ArrayList<String>(); 
+			
 		}
 		
 		
@@ -71,13 +109,21 @@ public class NewsAcpController {
 			news.setListEventTag(listEventTag);
 		}*/
 		
-		Map<String, Object> data = mav.getModel();
-		data.put("listNews", listTestNews);
+		Map<String, Object> data1 = mav.getModel();
+		//data.put("listNews", listTestNews);
+		
 //		data.put("listNews", listNews);
+		data1.put("draw", new Integer(1));
+		data1.put("recordsTotal", new Integer(3));
+		data1.put("recordsFiltered", new Integer(3));
+		data1.put("data", datatableObj);
+		data1.put("customActionStatus","OK");
+		data1.put("customActionMessage","OK");
+		
 		
 		System.out.println("/content/eventsNewsListData");
 		
-		return data;
+		return data1;
 	}
 	
 	
