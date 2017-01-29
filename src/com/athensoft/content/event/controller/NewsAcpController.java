@@ -1,5 +1,6 @@
 package com.athensoft.content.event.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -7,10 +8,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.event.entity.Event;
+import com.athensoft.content.event.entity.News;
 import com.athensoft.content.event.service.NewsService;
 
 @Controller
@@ -209,5 +213,52 @@ public class NewsAcpController {
 	
 	*/
 	
+	@RequestMapping(value="/createNews",method=RequestMethod.POST)
+	public ModelAndView createNews(
+			@RequestParam long globalId,
+			@RequestParam String eventUUID,
+			@RequestParam String title,
+			@RequestParam String author,
+			@RequestParam String postDatetime,
+			@RequestParam int viewNum,
+			@RequestParam String descShort,
+			@RequestParam String descLong,
+			@RequestParam String eventClass,
+			@RequestParam int eventStatus) {
+		
+		logger.info("/createNews");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		Map<String,Object> data = mav.getModel();
+		String viewName = "events/event_news_create";
+		
+		/* data construction */
+		
+
+		News news = new News();
+
+		news.setGlobalId(globalId);;
+		news.setEventUUID(eventUUID);
+		news.setTitle(title);
+		news.setAuthor(author);
+		news.setPostDatetime(new Date());
+		news.setViewNum(viewNum);
+		news.setDescShort(descShort);
+		news.setDescLong(descLong);
+		news.setEventClass(eventClass);
+		news.setEventStatus(eventStatus);
+		
+
+		/* business logic*/
+
+	newsService.createNews(news);
+		
+		/* assemble model and view */
+		data.put("news", news);		
+		mav.setViewName(viewName);		
+		
+		return mav;		
+	}
 	
 }

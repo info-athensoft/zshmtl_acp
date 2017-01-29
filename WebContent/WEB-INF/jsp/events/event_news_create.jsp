@@ -349,7 +349,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="actions btn-set">
 										<button type="button" name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Back</button>
 										<button class="btn btn-default btn-circle "><i class="fa fa-reply"></i> Reset</button>
-										<button class="btn green-haze btn-circle"><i class="fa fa-check"></i> Save</button>
+										<button class="btn green-haze btn-circle" onclick="createNews();"><i class="fa fa-check"></i> Save</button>
 										<button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
 										<div class="btn-group">
 											<a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
@@ -416,7 +416,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="product[name]" placeholder="">
+															<input type="text" class="form-control" name="eventUUID" placeholder="">
 														</div>
 													</div>
 													<div class="form-group">
@@ -424,7 +424,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="product[price]" placeholder="">
+															<input type="text" class="form-control" name="title" placeholder="">
 														</div>
 													</div>
 													<div class="form-group">
@@ -432,7 +432,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="product[name]" placeholder="">
+															<input type="text" class="form-control" name="author" placeholder="">
 														</div>
 													</div>
 													<div class="form-group">
@@ -441,7 +441,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														</label>
 														<div class="col-md-10">
 															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" name="product[available_from]">
+																<input type="text" class="form-control" name="postDatetime">
 																
 															</div>
 															<span class="help-block">
@@ -453,7 +453,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="product[sku]" placeholder="">
+															<input type="text" class="form-control" name="viewNum" placeholder="">
 														</div>
 													</div>
 													<div class="form-group">
@@ -461,7 +461,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<textarea class="form-control" name="product[short_description]"></textarea>
+															<textarea class="form-control" name="descShort"></textarea>
 															<span class="help-block">
 															shown in product listing </span>
 														</div>
@@ -473,7 +473,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<textarea class="form-control" name="product[description]"></textarea>
+															<textarea class="form-control" name="descLong"></textarea>
 														</div>
 														
 													</div>
@@ -483,7 +483,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" name="product[tax_class]">
+															<select class="table-group-action-input form-control input-medium" name="eventClass">
 																<option value="">Select...</option>
 																<option value="0">News Class 0</option>
 																<option value="1">News Class 1</option>
@@ -502,7 +502,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" name="product[status]">
+															<select class="table-group-action-input form-control input-medium" name="eventStatus">
 																<option value="">Select...</option>
 																<option value="0">Undetermined</option>
 																<option value="1">Active</option>
@@ -879,6 +879,12 @@ Demo.init(); // init demo features
            EcommerceProductsEdit.init();
         });
     </script>
+    
+<script>
+function createNews() {
+	
+}
+</script>
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
