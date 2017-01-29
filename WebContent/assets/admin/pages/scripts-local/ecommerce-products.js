@@ -14,7 +14,7 @@ var EcommerceProducts = function () {
         grid.init({
             src: $("#datatable_products"),
             onSuccess: function (grid) {
-            	alert("success");
+            	//alert("success");
             },
             onError: function (grid) {
                 // execute some code on network or other general error
@@ -29,8 +29,8 @@ var EcommerceProducts = function () {
                 //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
 
                 "lengthMenu": [
-                    [10, 20, 50, 100, 150, -1],
-                    [10, 20, 50, 100, 150, All] // change per page values here 
+                    [10, 20, 50, 100, 150, 200],
+                    [10, 20, 50, 100, 150, 200] // change per page values here 
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {

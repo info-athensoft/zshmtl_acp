@@ -35,6 +35,11 @@ License: You must have a valid license purchased only from themeforest(the above
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta content="" name="description"/>
 <meta content="" name="author"/>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0"> 
+
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css">
 <link href="${webapp_name}/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -563,11 +568,12 @@ License: You must have a valid license purchased only from themeforest(the above
           	Metronic.init(); // init metronic core components
 			Layout.init(); // init current layout
 			Demo.init(); // init demo features
-          	//EcommerceOrders.init();
+			//alert("hello");
 			EcommerceProducts.init();
           	//$('#datatable_orders').DataTable( {
             //    "ajax":'${webapp_name}/orders'
            //} );
+          	
 			
         });
     </script>
