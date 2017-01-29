@@ -117,7 +117,7 @@ public class NewsAcpController {
 		data1.put("customActionMessage","OK");
 		
 		
-		logger.debug("/content/eventsNewsListData");
+		logger.info("/content/eventsNewsListData");
 		
 		return data1;
 	}
