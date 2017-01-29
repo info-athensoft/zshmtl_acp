@@ -35,80 +35,55 @@ public class NewsAcpController {
 	@RequestMapping(value="/content/eventsNewsListData",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> getDataNewsList(){
-		ModelAndView mav = new ModelAndView();
+		logger.info("entering /content/eventsNewsListData");
 		
-		//String viewName = "events/news";
-		//mav.setViewName(viewName);
+		ModelAndView mav = new ModelAndView();
 		
 		//data
 		List<Event> listNews = newsService.getAllNews();
 		logger.info("Length of news entries: "+ listNews.size());
 		
-		
-		//DatatableObject datatableObj= new DatatableObject();
 		int entryLength = listNews.size();
-		String[][] data = new String[entryLength][9];
+		final int COLUMN_NUM = 9;
+		String[][] data = new String[entryLength][COLUMN_NUM];
 		
-//		datatableObj.setCustomActionStatus("OK");   
-//		datatableObj.setCustomActionMessage("");
-//		datatableObj.setDraw(1);
-//		datatableObj.setRecordsTotal(3);
-//		datatableObj.setRecordsFiltered(3);
-		//datatableObj.setiTotalDisplayRecords("100");
-		//datatableObj.setiTotalRecords("100");
-
-		
+		String field0 = "";
 		String field1 = "";
+		String field2 = "";
+		String field3 = "";
+		String field4 = "";
+		String field5 = "";
+		String field6 = "";
+		String field7 = "";
 		String field8 = "";
-		String field9 = "";
 		
-		//List<String> dataArray = new ArrayList<String>();
-		
-		//String[] deo = new DataEntryObject();
-		
-		for(int i=0; i<entryLength ; i++){
-			
-			field1 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getGlobalId()+">";
-			data[i][0] = (field1);
-			data[i][1]=(listNews.get(i).getAuthor());
-			data[i][2]=(listNews.get(i).getEventClass());
-			data[i][3]=(listNews.get(i).getEventStatus()+"");
-			//data.add(news.getEventUUID());
-			data[i][4]=(listNews.get(i).getGlobalId()+"");
-			data[i][5]=(listNews.get(i).getPostDatetime()+"");
-			data[i][6]=(listNews.get(i).getTitle());
-			
+		for(int i=0; i<entryLength ; i++){			
+			field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
+			field1 = listNews.get(i).getEventUUID()+"";
+			field2 = listNews.get(i).getTitle();
+			field3 = listNews.get(i).getAuthor();
+			field4 = listNews.get(i).getEventClass();
+			field5 = listNews.get(i).getPostDatetime()+"";
+			field6 = listNews.get(i).getEventStatus()+"";
 			String eventStatus = listNews.get(i).getEventStatus()+"";
 			eventStatus = "Published";
 			String eventStatusKey = "success";
+			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
+			field8 = "<a href='/acp/content/eventsNewsEdit' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
 			
-			field8 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-			data[i][7]=(field8);
-			
-			field9 = "<a href='ecommerce_products_edit.html' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
-			data[i][8]=(field9);
-			
-			//data.add(deo);
-			//deo = new DataEntryObject(); 
+			data[i][0] = field0;
+			data[i][1] = field1;
+			data[i][2] = field2;
+			data[i][3] = field3;
+			data[i][4] = field4;
+			data[i][5] = field5;
+			data[i][6] = field6;
+			data[i][7] = field7;
+			data[i][8] = field8;
 		}
 		
-		
-		
-		/*
-		for(Event news : listNews){
-			String eventUUID = news.getEventUUID();
-			List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
-			news.setListEventMedia(listEventMedia);
-			news.setPrimaryEventMedia();
-			
-			List<EventTag> listEventTag = eventTagService.getEventTagByEventUUID(eventUUID);
-			news.setListEventTag(listEventTag);
-		}*/
-		
 		Map<String, Object> data1 = mav.getModel();
-		//data.put("listNews", listTestNews);
 		
-//		data.put("listNews", listNews);
 		data1.put("draw", new Integer(1));
 		data1.put("recordsTotal", new Integer(3));
 		data1.put("recordsFiltered", new Integer(3));
@@ -116,9 +91,7 @@ public class NewsAcpController {
 		data1.put("customActionStatus","OK");
 		data1.put("customActionMessage","OK");
 		
-		
-		logger.info("/content/eventsNewsListData");
-		
+		logger.info("leaving /content/eventsNewsListData");
 		return data1;
 	}
 	

@@ -61,8 +61,29 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="${webapp_name}/assets/admin/layout2/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
+
+<!-- CSS local -->
+<style type="text/css">
+
+table{
+	table-layout:fixed
+}
+
+table tr td{
+	word-wrap:break-all; 
+	/* overflow:hidden; */
+	
+	text-overflow: ellipsis;  
+  	overflow: hidden;  
+  	white-space: nowrap;
+}
+
+</style>
+
+<!-- end CSS local -->
 </head>
 <!-- END HEAD -->
+
 <!-- BEGIN BODY -->
 <!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
 <!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
@@ -404,45 +425,49 @@ License: You must have a valid license purchased only from themeforest(the above
 									<table class="table table-striped table-bordered table-hover" id="datatable_products">
 									<thead>
 									<tr role="row" class="heading">
-										<th width="1%">
+										<th width="4%">
 											<input type="checkbox" class="group-checkable">
 										</th>
-										<th width="10%">
+										<th width="8%">
 											 ID
 										</th>
-										<th width="15%">
-											 Product&nbsp;Name
+										<th width="25%">
+											 Title
 										</th>
-										<th width="15%">
+										<th width="8%">
+											 Author
+										</th>
+										<th width="8%">
 											 Category
 										</th>
-										<th width="10%">
-											 Price
-										</th>
-										<th width="10%">
-											 Quantity
-										</th>
 										<th width="15%">
-											 Date&nbsp;Created
+											 Date&nbsp;Post
 										</th>
-										<th width="10%">
+										<th width="6%">
+											 Views
+										</th>
+										<th width="8%">
 											 Status
 										</th>
-										<th width="10%">
+										<th width="8%">
 											 Actions
 										</th>
 									</tr>
+									
 									<tr role="row" class="filter">
 										<td>
 										</td>
 										<td>
-											<input type="text" class="form-control form-filter input-sm" name="product_id">
+											<input type="text" class="form-control form-filter input-sm" name="event_uuid">
 										</td>
 										<td>
-											<input type="text" class="form-control form-filter input-sm" name="product_name">
+											<input type="text" class="form-control form-filter input-sm" name="event_title">
 										</td>
 										<td>
-											<select name="product_category" class="form-control form-filter input-sm">
+											<input type="text" class="form-control form-filter input-sm" name="event_auther">
+										</td>
+										<td>
+											<select name="event_class" class="form-control form-filter input-sm">
 												<option value="">Select...</option>
 												<option value="1">Mens</option>
 												<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Footwear</option>
@@ -462,18 +487,7 @@ License: You must have a valid license purchased only from themeforest(the above
 												<option value="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kangol</option>
 											</select>
 										</td>
-										<td>
-											<div class="margin-bottom-5">
-												<input type="text" class="form-control form-filter input-sm" name="product_price_from" placeholder="From"/>
-											</div>
-											<input type="text" class="form-control form-filter input-sm" name="product_price_to" placeholder="To"/>
-										</td>
-										<td>
-											<div class="margin-bottom-5">
-												<input type="text" class="form-control form-filter input-sm" name="product_quantity_from" placeholder="From"/>
-											</div>
-											<input type="text" class="form-control form-filter input-sm" name="product_quantity_to" placeholder="To"/>
-										</td>
+										
 										<td>
 											<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
 												<input type="text" class="form-control form-filter input-sm" readonly name="product_created_from" placeholder="From">
@@ -489,7 +503,13 @@ License: You must have a valid license purchased only from themeforest(the above
 											</div>
 										</td>
 										<td>
-											<select name="product_status" class="form-control form-filter input-sm">
+											<div class="margin-bottom-5">
+												<input type="text" class="form-control form-filter input-sm" name="product_quantity_from" placeholder="From"/>
+											</div>
+											<input type="text" class="form-control form-filter input-sm" name="product_quantity_to" placeholder="To"/>
+										</td>
+										<td>
+											<select name="event_status" class="form-control form-filter input-sm">
 												<option value="">Select...</option>
 												<option value="published">Published</option>
 												<option value="notpublished">Not Published</option>
