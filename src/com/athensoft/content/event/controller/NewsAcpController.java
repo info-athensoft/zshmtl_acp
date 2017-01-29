@@ -130,6 +130,12 @@ public class NewsAcpController {
 		String viewName = "events/event_news_edit";
 		return viewName;
 	}
+	
+	@RequestMapping(value="/content/eventsNewsCreate")
+	public String gotoNewsCreate(){
+		String viewName = "events/event_news_create";
+		return viewName;
+	}
 
 	/*
 	@RequestMapping("/ecomm/ordersview")

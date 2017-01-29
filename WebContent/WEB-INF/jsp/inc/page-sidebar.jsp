@@ -120,6 +120,11 @@
 								<i class="icon-paper-plane"></i>
 								News Edit</a>
 							</li>
+							<li>
+								<a href="/acp/content/eventsNewsCreate">
+								<i class="icon-paper-plane"></i>
+								News Create</a>
+							</li>
 						</ul>
 					</li>
 					<!-- end event system -->
