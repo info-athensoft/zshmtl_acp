@@ -337,7 +337,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!-- BEGIN PAGE CONTENT-->
 				<div class="row">
 					<div class="col-md-12">
-						<form class="form-horizontal form-row-seperated" action="#">
+						<form class="form-horizontal form-row-seperated" >
 							<div class="portlet light">
 								<div class="portlet-title">
 									<div class="caption">
@@ -349,7 +349,8 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="actions btn-set">
 										<button type="button" name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Back</button>
 										<button class="btn btn-default btn-circle "><i class="fa fa-reply"></i> Reset</button>
-										<button class="btn green-haze btn-circle" onclick="createNews();"><i class="fa fa-check"></i> Save</button>
+										<input type="button" class="btn green-haze btn-circle" value="Save" onclick="createNews();">
+										<button class="btn green-haze btn-circle" onclick="createNews();"><i class="fa fa-check"></i> Save Original</button>
 										<button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
 										<div class="btn-group">
 											<a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
@@ -408,7 +409,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="globalId" placeholder="">
+															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="">
 														</div>
 													</div>
 													<div class="form-group">
@@ -416,7 +417,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="eventUUID" placeholder="">
+															<input type="text" class="form-control" id="eventUUID" name="eventUUID" placeholder="">
 														</div>
 													</div>
 													<div class="form-group">
@@ -424,7 +425,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="title" placeholder="">
+															<input type="text" class="form-control" id="title" name="title" placeholder="">
 														</div>
 													</div>
 													<div class="form-group">
@@ -432,7 +433,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="author" placeholder="">
+															<input type="text" class="form-control" id="author" name="author" placeholder="">
 														</div>
 													</div>
 													<div class="form-group">
@@ -441,7 +442,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														</label>
 														<div class="col-md-10">
 															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" name="postDatetime">
+																<input type="text" class="form-control" id="postDatetime" name="postDatetime">
 																
 															</div>
 															<span class="help-block">
@@ -453,7 +454,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="viewNum" placeholder="">
+															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder="">
 														</div>
 													</div>
 													<div class="form-group">
@@ -461,7 +462,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<textarea class="form-control" name="descShort"></textarea>
+															<textarea class="form-control" id="descShort" name="descShort"></textarea>
 															<span class="help-block">
 															shown in product listing </span>
 														</div>
@@ -473,7 +474,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<textarea class="form-control" name="descLong"></textarea>
+															<textarea class="form-control" id="descLong" name="descLong"></textarea>
 														</div>
 														
 													</div>
@@ -483,7 +484,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" name="eventClass">
+															<select class="table-group-action-input form-control input-medium" id="eventClass"  name="eventClass">
 																<option value="">Select...</option>
 																<option value="0">News Class 0</option>
 																<option value="1">News Class 1</option>
@@ -502,7 +503,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" name="eventStatus">
+															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
 																<option value="">Select...</option>
 																<option value="0">Undetermined</option>
 																<option value="1">Active</option>
@@ -859,30 +860,103 @@ License: You must have a valid license purchased only from themeforest(the above
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script src="${webapp_name}/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
-<script type="text/javascript" src="../../assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
 <script src="${webapp_name}/assets/global/plugins/plupload/js/plupload.full.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
+
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="${webapp_name}/assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
-<script src="${webapp_name}/assets/admin/pages/scripts/ecommerce-products-edit.js"></script>
+<!-- <script src="${webapp_name}/assets/admin/pages/scripts/ecommerce-products-edit.js"></script>
+ -->
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
         jQuery(document).ready(function() {    
-           Metronic.init(); // init metronic core components
-Layout.init(); // init current layout
-Demo.init(); // init demo features
-           EcommerceProductsEdit.init();
+       Metronic.init(); // init metronic core components
+		Layout.init(); // init current layout
+		Demo.init(); // init demo features
+           //EcommerceProductsEdit.init();
         });
     </script>
     
 <script>
 function createNews() {
-	
+	alert("create news");
+	 //create a json object
+    var p1 = $("#globalId").val();
+    var p2 = $("#eventUUID").val();        
+    var p3 = $("#title").val();
+    var p4 = $("#author").val();
+    var p5 = $("#postDatetime").val();
+    var p6 = $("#viewNum").val();
+    var p7 = $("#descShort").val();
+    var p8 = $("#descLong").val();
+    var p9 = $("#eventClass").val();
+    var p10 = $("#eventStatus").val();
+    
+    var itemObject =
+    {
+    		globalId    :    p1,
+    		eventUUID    :    p2,
+    		title    :    p3,
+    		author    :    p4,
+    		postDatetime    :    p5,            
+    		viewNum    :    p6,            
+    		descShort    :    p7,
+    		descLong:    p8,
+    		eventClass    :    p9,
+    		eventStatus:    p10
+    };
+    //alert(JSON.stringify(itemObject));
+/*
+ * long globalId,
+	@RequestParam String eventUUID,
+	@RequestParam String title,
+	@RequestParam String author,
+	@RequestParam String postDatetime,
+	@RequestParam int viewNum,
+	@RequestParam String descShort,
+	@RequestParam String descLong,
+	@RequestParam String eventClass,
+	@RequestParam int eventStatus
+ 
+    //check
+    if(itemObject.itemName==""){
+        alert("ERROR: Item creating failed, please input an item name.");
+        return;
+    }
+    
+    if(itemObject.itemClassId=="0" || itemObject.itemClassId==""){
+        alert("ERROR: Item creating failed, please choose an item class.");
+        return;
+    }
+    */ 
+    
+    //execute saving
+    $.ajax({
+        type    :    "post",
+        url        : "createNews?itemJSONString="+JSON.stringify(itemObject),
+        dataType:    "html",
+        timeout :     30000,
+        
+        success:function(msg){
+            //refresh and show current class family
+            //searchClassByParentId(itemClassObject.parentId);
+            //viewAllJSONArray();
+            //searchByClassId(itemObject.itemClassId);
+        },
+        error:function(){
+            alert("ERROR: item creating failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+            //reset to avoid duplication
+            //createReset();
+        }        
+    });
 }
 </script>
 <!-- END JAVASCRIPTS -->

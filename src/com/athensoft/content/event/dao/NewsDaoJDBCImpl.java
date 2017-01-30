@@ -87,15 +87,15 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		
 		StringBuffer sbf = new StringBuffer();
 		sbf.append("insert into "+TABLE1);
-		sbf.append("(global_id,event_uuid,title,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");
-		sbf.append("values(:global_id,:event_uuid,:title,:author,:post_datetime,:view_num,:desc_short,:desc_long,:event_class,:event_status)");
+		sbf.append("(event_uuid,title,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");
+		sbf.append("values(:event_uuid,:title,:author,:post_datetime,:view_num,:desc_short,:desc_long,:event_class,:event_status)");
 		String sql = sbf.toString();
 		
 		final int USER_ACCOUNT_STATUS 	= 0;  //1: registered and active, 0: in-activated, 2: locked, pending     
 		final Date dateCreate 			= new Date();
 		final Date dateLastModified 	= dateCreate;
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("global_id", news.getGlobalId());
+//		paramSource.addValue("global_id", news.getGlobalId());
 		paramSource.addValue("event_uuid", news.getEventUUID());
 		paramSource.addValue("title",news.getTitle());
 		paramSource.addValue("author",news.getAuthor());
