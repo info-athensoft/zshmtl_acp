@@ -44,11 +44,11 @@ var Datatable = function() {
                     "dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r><'table-scrollable't><'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>", // datatable layout
                     "pageLength": 10, // default records per page
                     "language": { // language settings
-                        // metronic spesific
+                        // metronic specific
                         "metronicGroupActions": "_TOTAL_ records selected:  ",
                         "metronicAjaxRequestGeneralError": "Could not complete request. Please check your internet connection",
 
-                        // data tables spesific
+                        // data tables specific
                         "lengthMenu": "<span class='seperator'>|</span>View _MENU_ records",
                         "info": "<span class='seperator'>|</span>Found total _TOTAL_ records",
                         "infoEmpty": "No records found to show",
@@ -72,12 +72,12 @@ var Datatable = function() {
 
                     "pagingType": "bootstrap_extended", // pagination type(bootstrap, bootstrap_full_number or bootstrap_extended)
                     "autoWidth": false, // disable fixed width and enable fluid table
-                    "processing": false, // enable/disable display message box on record load
+                    "processing": true, // enable/disable display message box on record load
                     "serverSide": true, // enable/disable server side ajax loading
 
                     "ajax": { // define ajax settings
                         "url": "", // ajax URL
-                        "type": "POST", // request type
+                        "type": "GET", // request type
                         "timeout": 20000,
                         "data": function(data) { // add request parameters before submit
                             $.each(ajaxParams, function(key, value) {
@@ -116,7 +116,7 @@ var Datatable = function() {
                             if (tableOptions.onSuccess) {
                                 tableOptions.onSuccess.call(undefined, the);
                             }
-
+							
                             Metronic.unblockUI(tableContainer);
 
                             return res.data;

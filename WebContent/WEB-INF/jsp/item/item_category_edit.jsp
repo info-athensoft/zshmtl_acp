@@ -195,7 +195,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!-- END STYLE CUSTOMIZER -->
 				<!-- BEGIN PAGE HEADER-->
 				<h3 class="page-title">
-				Product Edit <small>create &amp; edit product</small>
+				Category Edit <small>create &amp; edit item category</small>
 				</h3>
 				<div class="page-bar">
 					<ul class="page-breadcrumb">

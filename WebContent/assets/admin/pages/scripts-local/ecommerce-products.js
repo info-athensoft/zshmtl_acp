@@ -14,13 +14,13 @@ var EcommerceProducts = function () {
         grid.init({
             src: $("#datatable_products"),
             onSuccess: function (grid) {
-            	
+            	//alert("success");
             },
             onError: function (grid) {
                 // execute some code on network or other general error
             	alert("onError");
             },
-            loadingMessage: 'Loading...',
+            loadingMessage: 'Loading ...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
 
                 // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
@@ -29,12 +29,14 @@ var EcommerceProducts = function () {
                 //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
 
                 "lengthMenu": [
-                    [10, 20, 50, 100, 150],
-                    [10, 20, 50, 100, 150] // change per page values here 
+                    [10, 20, 50, 100, 150, 200],
+                    [10, 20, 50, 100, 150, 200] // change per page values here 
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
                     "url": "http://localhost:8080/acp/content/eventsNewsListData", // ajax source
+                    //"url": "http://localhost:8080/acp/content/eventsNewsListData?length=3", // ajax source
+                   // "dataSrc": "data"
                 },
                 "order": [
                     [1, "asc"]
@@ -44,7 +46,7 @@ var EcommerceProducts = function () {
 
          // handle group action submit button click
         grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
-        	alert("getTableWrapper 处理");
+        	//alert("getTableWrapper");
             e.preventDefault();
             var action = $(".table-group-action-input", grid.getTableWrapper());
             if (action.val() != "" && grid.getSelectedRowsCount() > 0) {

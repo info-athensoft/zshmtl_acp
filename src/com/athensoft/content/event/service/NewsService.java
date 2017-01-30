@@ -32,4 +32,9 @@ public class NewsService {
 	public List<Event> getAllNews(){
 		return newsDao.findAll();
 	}
+	
+	public void createNews(News news) {
+		this.newsDao.create(news);
+		return;
+	}
 }
