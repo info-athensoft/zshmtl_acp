@@ -349,7 +349,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="actions btn-set">
 										<button type="button" name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Back</button>
 										<button class="btn btn-default btn-circle "><i class="fa fa-reply"></i> Reset</button>
-										<input type="button" class="btn green-haze btn-circle" value="Save" onclick="createNews();">
+<!-- 										<input type="button" class="btn green-haze btn-circle" value="Save" onclick="createNews();"> -->
 										<button class="btn green-haze btn-circle" onclick="createNews(); return false;"><i class="fa fa-check"></i> Save Original</button>
 										<button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
 										<div class="btn-group">
