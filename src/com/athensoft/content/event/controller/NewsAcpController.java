@@ -1,16 +1,21 @@
 package com.athensoft.content.event.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.event.entity.Event;
+import com.athensoft.content.event.entity.News;
 import com.athensoft.content.event.service.NewsService;
 
 @Controller
@@ -184,5 +189,58 @@ public class NewsAcpController {
 	
 	*/
 	
+	@RequestMapping(value="/content/createNews",method=RequestMethod.POST)
+	public ModelAndView createNews(@RequestParam String itemJSONString) {
+		
+		logger.info("/content/createNews");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+        Map<String, Object> model = mav.getModel();
+        JSONObject ic_job= new JSONObject(itemJSONString);
+   
+        
+        /*
+         * @RequestParam String eventUUID,
+	@RequestParam String title,
+	@RequestParam String author,
+	@RequestParam String postDatetime,
+	@RequestParam int viewNum,
+	@RequestParam String descShort,
+	@RequestParam String descLong,
+	@RequestParam String eventClass,
+	@RequestParam int eventStatus
+         * 
+         */
+          News news = new News();
+          //news.setGlobalId(ic_job.getLong("globalId"));
+          news.setEventUUID(ic_job.getString("eventUUID"));
+          news.setTitle(ic_job.getString("title"));
+          news.setAuthor(ic_job.getString("author"));
+          
+//          news.setPostDatetime(new Date(ic_job.getString("postDatetime")));
+          news.setPostDatetime(new Date());
+          news.setViewNum(ic_job.getInt("viewNum"));
+          news.setDescShort(ic_job.getString("descShort"));
+          news.setDescLong(ic_job.getString("descLong"));
+          news.setEventClass(ic_job.getString("eventClass"));
+          news.setEventStatus(ic_job.getInt("eventStatus"));
+          
+          logger.info(news);
+          
+		/* business logic*/
+        //long itemId = itemService.createItem(ic); 
+
+          newsService.createNews(news);
+		
+		/* assemble model and view */
+//        model.put("news", news);
+         String viewName = "events/event_news_list";
+		mav.setViewName(viewName);		
+		
+		return mav;		
+	}
 	
 }

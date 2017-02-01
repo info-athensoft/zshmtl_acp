@@ -92,10 +92,6 @@ var Datatable = function() {
                             });
                         },
                         "dataSrc": function(res) { // Manipulate the data returned from the server
-                        	
-                        	//alert(res.data);
-                        	
-                        	
                         	if (res.customActionMessage) {
                                 Metronic.alert({
                                     type: (res.customActionStatus == 'OK' ? 'success' : 'danger'),
