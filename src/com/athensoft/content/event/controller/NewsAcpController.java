@@ -64,12 +64,14 @@ public class NewsAcpController {
 			field3 = listNews.get(i).getAuthor();
 			field4 = listNews.get(i).getEventClass();
 			field5 = listNews.get(i).getPostDatetime()+"";
-			field6 = listNews.get(i).getEventStatus()+"";
+			field6 = listNews.get(i).getViewNum()+"";
 			String eventStatus = listNews.get(i).getEventStatus()+"";
 			eventStatus = "Published";
 			String eventStatusKey = "success";
 			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-			field8 = "<a href='/acp/content/eventsNewsEdit' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			field8 = "<a href='/acp/content/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			
+			logger.info("field8="+field8);
 			
 			data[i][0] = field0;
 			data[i][1] = field1;
