@@ -7,8 +7,9 @@ import com.athensoft.content.event.entity.News;
 
 public interface NewsDao {
 	public List<Event> findAll();
+	public List<Event> findByFilter(String queryString);
 	public Event findById(long globalId);
-	public Event findByEventUUID(String eventUUID);
+	public Event findByEventUUID(String eventUUID);	
 	
 	public void create(News news);
 	public void update();

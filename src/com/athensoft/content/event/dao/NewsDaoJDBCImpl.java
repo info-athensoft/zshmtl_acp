@@ -48,6 +48,12 @@ public class NewsDaoJDBCImpl implements NewsDao {
 	}
 
 	@Override
+	public List<Event> findByFilter(String queryString) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public Event findById(long globalId) {
 		String sql = "select * from event_news where global_id =:global_id";
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
