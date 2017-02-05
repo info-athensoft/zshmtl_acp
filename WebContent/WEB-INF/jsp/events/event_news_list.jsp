@@ -475,7 +475,7 @@ table tr td{
 <script src="${webapp_name}/assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
-<script src="${webapp_name}/assets/admin/pages/scripts-local/ecommerce-products.js"></script>
+<script src="${webapp_name}/assets/admin/pages/scripts-local/content-news.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    

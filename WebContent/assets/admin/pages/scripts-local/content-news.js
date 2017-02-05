@@ -36,7 +36,7 @@ var EcommerceProducts = function () {
                 "ajax": {
                     "url": "http://localhost:8080/acp/content/eventsNewsListData", // ajax source
                     //"url": "http://localhost:8080/acp/content/eventsNewsListData?length=3", // ajax source
-                   // "dataSrc": "data"
+                    //"dataSrc": "data"
                 },
                 "order": [
                     [1, "asc"]
