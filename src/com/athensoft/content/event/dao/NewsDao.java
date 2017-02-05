@@ -12,7 +12,7 @@ public interface NewsDao {
 	public Event findByEventUUID(String eventUUID);	
 	
 	public void create(News news);
-	public void update();
 	public void delete();
+	public void update(News news);
 	
 }

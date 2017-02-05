@@ -873,6 +873,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
 <!-- <script src="${webapp_name}/assets/admin/pages/scripts/ecommerce-products-edit.js"></script>
  -->
+ <script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 	jQuery(document).ready(function() {    
@@ -883,82 +884,6 @@ License: You must have a valid license purchased only from themeforest(the above
 });
 </script>
     
-<script>
-function createNews() {
-	alert("create news");
-	 //create a json object
-    var p1 = $("#globalId").val();
-    var p2 = $("#eventUUID").val();        
-    var p3 = $("#title").val();
-    var p4 = $("#author").val();
-    var p5 = $("#postDatetime").val();
-    var p6 = $("#viewNum").val();
-    var p7 = $("#descShort").val();
-    var p8 = $("#descLong").val();
-    var p9 = $("#eventClass").val();
-    var p10 = $("#eventStatus").val();
-    
-    var itemObject =
-    {
-    		globalId    :    p1,
-    		eventUUID    :    p2,
-    		title    :    p3,
-    		author    :    p4,
-    		postDatetime    :    p5,            
-    		viewNum    :    p6,            
-    		descShort    :    p7,
-    		descLong:    p8,
-    		eventClass    :    p9,
-    		eventStatus:    p10
-    };
-    //alert(JSON.stringify(itemObject));
-/*
- * long globalId,
-	@RequestParam String eventUUID,
-	@RequestParam String title,
-	@RequestParam String author,
-	@RequestParam String postDatetime,
-	@RequestParam int viewNum,
-	@RequestParam String descShort,
-	@RequestParam String descLong,
-	@RequestParam String eventClass,
-	@RequestParam int eventStatus
- 
-    //check
-    if(itemObject.itemName==""){
-        alert("ERROR: Item creating failed, please input an item name.");
-        return;
-    }
-    
-    if(itemObject.itemClassId=="0" || itemObject.itemClassId==""){
-        alert("ERROR: Item creating failed, please choose an item class.");
-        return;
-    }
-    */ 
-    
-    //execute saving
-    $.ajax({
-        type    :    "post",
-        url        : "createNews?itemJSONString="+JSON.stringify(itemObject),
-        dataType:    "html",
-        timeout :     30000,
-        
-        success:function(msg){
-            //refresh and show current class family
-            //searchClassByParentId(itemClassObject.parentId);
-            //viewAllJSONArray();
-            //searchByClassId(itemObject.itemClassId);
-        },
-        error:function(){
-            alert("ERROR: item creating failed.");     
-        },            
-        complete: function(XMLHttpRequest, textStatus){
-            //reset to avoid duplication
-            //createReset();
-        }        
-    });
-}
-</script>
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

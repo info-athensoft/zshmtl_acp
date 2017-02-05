@@ -106,9 +106,24 @@ public class NewsAcpController {
 	
 
 	@RequestMapping(value="/content/eventsNewsEdit")
-	public String gotoNewsEdit(@RequestParam String eventUUID){
+	public ModelAndView gotoNewsEdit(@RequestParam String eventUUID){
+		logger.info("entering /content/eventsNewsEdit");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//view
 		String viewName = "events/event_news_edit";
-		return viewName;
+		mav.setViewName(viewName);
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		
+		News news = newsService.getNewsByEventUUID(eventUUID);	
+			
+		model.put("newsObject", news);
+		
+		logger.info("leaving /content/eventsNewsEdit");
+		return mav;
 	}
 	
 	@RequestMapping(value="/content/eventsNewsCreate")
@@ -243,4 +258,45 @@ public class NewsAcpController {
 		return mav;		
 	}
 	
+	@RequestMapping(value="/content/updateNews",method=RequestMethod.POST)
+	public ModelAndView updateNews(@RequestParam String itemJSONString) {
+		
+		logger.info("entering /content/updateNews");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+        Map<String, Object> model = mav.getModel();
+        JSONObject ic_job= new JSONObject(itemJSONString);
+   
+        News news = new News();
+//          news.setGlobalId(ic_job.getLong("globalId"));
+          news.setEventUUID(ic_job.getString("eventUUID"));
+          news.setTitle(ic_job.getString("title"));
+          news.setAuthor(ic_job.getString("author"));
+          
+//          news.setPostDatetime(new Date(ic_job.getString("postDatetime")));
+          news.setPostDatetime(new Date());
+          news.setViewNum(ic_job.getInt("viewNum"));
+          news.setDescShort(ic_job.getString("descShort"));
+          news.setDescLong(ic_job.getString("descLong"));
+          news.setEventClass(ic_job.getString("eventClass"));
+          news.setEventStatus(ic_job.getInt("eventStatus"));
+          
+          logger.info(news);
+          
+		/* business logic*/
+        //long itemId = itemService.createItem(ic); 
+
+          newsService.updateNews(news);
+		
+		/* assemble model and view */
+//        model.put("news", news);
+        String viewName = "events/event_news_list";
+		mav.setViewName(viewName);		
+		
+		logger.info("leaving /content/updateNews");
+		return mav;		
+	}
 }

@@ -180,7 +180,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								 Widget settings form goes here
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn blue">Save changes</button>
+								<button type="button" class="btn blue" onclick="updateNews(); return false;">Save changes</button>
 								<button type="button" class="btn default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
@@ -349,7 +349,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="actions btn-set">
 										<button type="button" name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Back</button>
 										<button class="btn btn-default btn-circle "><i class="fa fa-reply"></i> Reset</button>
-										<button class="btn green-haze btn-circle"><i class="fa fa-check"></i> Save</button>
+										<button class="btn green-haze btn-circle" onclick="updateNews(); return false;"><i class="fa fa-check"></i> Save Change</button>
 										<button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
 										<div class="btn-group">
 											<a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
@@ -408,7 +408,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="globalId" placeholder="">
+															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled"  value="${newsObject.globalId}">
 														</div>
 													</div>
 													<div class="form-group">
@@ -416,7 +416,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="product[name]" placeholder="">
+															<input type="text" class="form-control" id="eventUUID" name="eventUUID"  placeholder="" value="${newsObject.eventUUID}" disabled="disabled">
 														</div>
 													</div>
 													<div class="form-group">
@@ -424,7 +424,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="product[price]" placeholder="">
+															<input type="text" class="form-control" id="title" name="title" placeholder=""  value="${newsObject.title}">
 														</div>
 													</div>
 													<div class="form-group">
@@ -432,7 +432,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="product[name]" placeholder="">
+															<input type="text" class="form-control" id="author" name="author" placeholder=""  value="${newsObject.author}">
 														</div>
 													</div>
 													<div class="form-group">
@@ -441,7 +441,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														</label>
 														<div class="col-md-10">
 															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" name="product[available_from]">
+																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${newsObject.postDatetime}">
 																
 															</div>
 															<span class="help-block">
@@ -453,7 +453,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" name="product[sku]" placeholder="">
+															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder=""  value="${newsObject.viewNum}">
 														</div>
 													</div>
 													<div class="form-group">
@@ -461,7 +461,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<textarea class="form-control" name="product[short_description]"></textarea>
+															<textarea class="form-control" id="descShort" name="descShort">${newsObject.descShort}</textarea>
 															<span class="help-block">
 															shown in product listing </span>
 														</div>
@@ -473,7 +473,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<textarea class="form-control" name="product[description]"></textarea>
+															<textarea class="form-control" id="descLong" name="descLong">${newsObject.descLong}</textarea>
 														</div>
 														
 													</div>
@@ -483,7 +483,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" name="product[tax_class]">
+															<select class="table-group-action-input form-control input-medium" id="eventClass"  name="eventClass">
 																<option value="">Select...</option>
 																<option value="0">News Class 0</option>
 																<option value="1">News Class 1</option>
@@ -493,16 +493,12 @@ License: You must have a valid license purchased only from themeforest(the above
 														</div>
 													</div>
 													
-											
-													
-													
-													
 													<div class="form-group">
 														<label class="col-md-2 control-label">Event Status: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" name="product[status]">
+															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
 																<option value="">Select...</option>
 																<option value="0">Undetermined</option>
 																<option value="1">Active</option>
@@ -870,15 +866,29 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
 <script src="${webapp_name}/assets/admin/pages/scripts/ecommerce-products-edit.js"></script>
+
+<script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
+
+
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-        jQuery(document).ready(function() {    
-           Metronic.init(); // init metronic core components
+jQuery(document).ready(function() {    
+Metronic.init(); // init metronic core components
 Layout.init(); // init current layout
 Demo.init(); // init demo features
-           EcommerceProductsEdit.init();
-        });
-    </script>
+EcommerceProductsEdit.init();
+
+//local
+//select object for event class
+var eventClassValue = ${newsObject.eventClass};
+$("#eventClass").val(eventClassValue);
+
+//select object for event status
+var eventStatusValue = ${newsObject.eventStatus};
+$("#eventStatus").val(eventStatusValue);
+
+});
+</script>
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

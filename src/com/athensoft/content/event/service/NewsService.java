@@ -37,4 +37,9 @@ public class NewsService {
 		this.newsDao.create(news);
 		return;
 	}
+
+	public void updateNews(News news) {
+		this.newsDao.update(news);
+		
+	}
 }

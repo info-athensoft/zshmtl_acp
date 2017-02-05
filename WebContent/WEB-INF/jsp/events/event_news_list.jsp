@@ -476,6 +476,9 @@ table tr td{
 <script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
 <script src="${webapp_name}/assets/admin/pages/scripts-local/content-news.js"></script>
+
+<script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
+
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
@@ -497,31 +500,7 @@ function filterSearch(){
     
     alert(p1+" "+p2+" "+p3+" "+p4);
     
-    /*
-    var p5 = $("#postDatetime").val();
-    var p6 = $("#viewNum").val();
-    var p7 = $("#descShort").val();
-    var p8 = $("#descLong").val();
-    var p9 = $("#eventClass").val();
-    var p10 = $("#eventStatus").val();
-    */
-    
-    
-    /*
-    var itemObject =
-    {
-    		globalId    :    p1,
-    		eventUUID   :    p2,
-    		title    	:    p3,
-    		author    	:    p4,
-    		postDatetime:    p5,            
-    		viewNum    	:    p6,            
-    		descShort   :    p7,
-    		descLong	:    p8,
-    		eventClass  :    p9,
-    		eventStatus	:    p10
-    };*/
-    
+
     var dt = $("#datatable_products").DataTable();
     alert("dt"+dt);
     

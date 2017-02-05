@@ -120,12 +120,6 @@ public class NewsDaoJDBCImpl implements NewsDao {
 	}
 
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void delete() {
 		// TODO Auto-generated method stub
 
@@ -150,6 +144,48 @@ public class NewsDaoJDBCImpl implements NewsDao {
 			
             return x;
 		}		
+	}
+
+	@Override
+	public void update(News news) {
+		final String TABLE1 = "event_news";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("update "+TABLE1+" ");
+		sbf.append("set ");
+		sbf.append("title = :title, ");
+		sbf.append("author = :author, ");
+//		sbf.append("post_datetime = :post_datetime, ");
+		sbf.append("view_num = :view_num, ");
+		sbf.append("desc_short = :desc_short, ");
+		sbf.append("desc_long = :desc_long, ");
+		sbf.append("event_class = :event_class, ");
+		sbf.append("event_status = :event_status ");
+		sbf.append("where ");
+		sbf.append("event_uuid = :event_uuid");
+				
+				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
+		
+		String sql = sbf.toString();
+		
+//		final Date dateCreate 			= new Date();
+//		final Date dateLastModified 	= dateCreate;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("global_id", news.getGlobalId());
+		paramSource.addValue("event_uuid", news.getEventUUID());
+		paramSource.addValue("title",news.getTitle());
+		paramSource.addValue("author",news.getAuthor());
+		paramSource.addValue("post_datetime",news.getPostDatetime());
+		paramSource.addValue("view_num", news.getViewNum());
+		paramSource.addValue("desc_short", news.getDescShort());
+		paramSource.addValue("desc_long",news.getDescLong());
+		paramSource.addValue("event_class",news.getEventClass());
+		paramSource.addValue("event_status",news.getEventStatus());
+		
+		KeyHolder keyholder = new GeneratedKeyHolder();
+		jdbc.update(sql, paramSource, keyholder);
+		return;
+		
 	}
 
 }
