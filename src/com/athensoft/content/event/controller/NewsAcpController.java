@@ -106,7 +106,7 @@ public class NewsAcpController {
 	
 
 	@RequestMapping(value="/content/eventsNewsEdit")
-	public String gotoNewsEdit(){
+	public String gotoNewsEdit(@RequestParam String eventUUID){
 		String viewName = "events/event_news_edit";
 		return viewName;
 	}
