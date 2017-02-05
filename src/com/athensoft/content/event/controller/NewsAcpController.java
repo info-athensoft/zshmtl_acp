@@ -92,8 +92,8 @@ public class NewsAcpController {
 		Map<String, Object> data1 = mav.getModel();
 		
 		data1.put("draw", new Integer(1));
-		data1.put("recordsTotal", new Integer(3));
-		data1.put("recordsFiltered", new Integer(3));
+		data1.put("recordsTotal", new Integer(5));
+		data1.put("recordsFiltered", new Integer(5));
 		data1.put("data", data);
 		data1.put("customActionStatus","OK");
 		data1.put("customActionMessage","OK");

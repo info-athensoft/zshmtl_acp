@@ -361,33 +361,23 @@ table tr td{
 										<td>
 										</td>
 										<td>
-											<input type="text" class="form-control form-filter input-sm" name="event_uuid">
+											<input type="text" class="form-control form-filter input-sm" name="event_uuid" id="eventUUID">
 										</td>
 										<td>
-											<input type="text" class="form-control form-filter input-sm" name="event_title">
+											<input type="text" class="form-control form-filter input-sm" name="event_title" id="eventTitle">
 										</td>
 										<td>
-											<input type="text" class="form-control form-filter input-sm" name="event_auther">
+											<input type="text" class="form-control form-filter input-sm" name="event_author" id="eventAuthor">
 										</td>
 										<td>
-											<select name="event_class" class="form-control form-filter input-sm">
+											<select name="event_class" class="form-control form-filter input-sm" id="eventClass">
 												<option value="">Select...</option>
 												<option value="1">Mens</option>
 												<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Footwear</option>
-												<option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clothing</option>
-												<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessories</option>
-												<option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fashion Outlet</option>
 												<option value="6">Football Shirts</option>
 												<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Premier League</option>
-												<option value="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Football League</option>
-												<option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serie A</option>
-												<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bundesliga</option>
 												<option value="11">Brands</option>
 												<option value="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adidas</option>
-												<option value="13">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nike</option>
-												<option value="14">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Airwalk</option>
-												<option value="15">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;USA Pro</option>
-												<option value="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kangol</option>
 											</select>
 										</td>
 										
@@ -499,6 +489,46 @@ jQuery(document).ready(function() {
 <script>
 function filterSearch(){
 	alert("do filterSearch()");
+	//create a json object
+    var p1 = $("#eventUUID").val();
+    var p2 = $("#eventTitle").val();        
+    var p3 = $("#eventAuthor").val();
+    var p4 = $("#eventClass").val();
+    
+    alert(p1+" "+p2+" "+p3+" "+p4);
+    
+    /*
+    var p5 = $("#postDatetime").val();
+    var p6 = $("#viewNum").val();
+    var p7 = $("#descShort").val();
+    var p8 = $("#descLong").val();
+    var p9 = $("#eventClass").val();
+    var p10 = $("#eventStatus").val();
+    */
+    
+    
+    /*
+    var itemObject =
+    {
+    		globalId    :    p1,
+    		eventUUID   :    p2,
+    		title    	:    p3,
+    		author    	:    p4,
+    		postDatetime:    p5,            
+    		viewNum    	:    p6,            
+    		descShort   :    p7,
+    		descLong	:    p8,
+    		eventClass  :    p9,
+    		eventStatus	:    p10
+    };*/
+    
+    var dt = $("#datatable_products").DataTable();
+    alert("dt"+dt);
+    
+    x = dt.ajax.url("eventsNewsListData").load();
+    // alert("x"+x);
+    
+    
 }
 
 function filterReset(){

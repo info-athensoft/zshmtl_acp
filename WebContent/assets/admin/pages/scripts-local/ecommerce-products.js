@@ -29,8 +29,8 @@ var EcommerceProducts = function () {
                 //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
 
                 "lengthMenu": [
-                    [10, 20, 50, 100, 150, 200],
-                    [10, 20, 50, 100, 150, 200] // change per page values here 
+                    [2,10, 20, 50, 100, 150, 200],
+                    [2,10, 20, 50, 100, 150, 200] // change per page values here 
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
