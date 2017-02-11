@@ -49,8 +49,23 @@ public class NewsDaoJDBCImpl implements NewsDao {
 
 	@Override
 	public List<Event> findByFilter(String queryString) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		final String TABLE1 = "event_news";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append(" select * from "+TABLE1);
+		sbf.append(" where 1=1 ");
+		sbf.append(queryString);
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		List<Event> x = new ArrayList<Event>();
+		try{
+			x = jdbc.query(sql, paramSource, new NewsRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
 	}
 
 	@Override

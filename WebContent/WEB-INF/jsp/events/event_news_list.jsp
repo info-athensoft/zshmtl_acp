@@ -491,21 +491,32 @@ jQuery(document).ready(function() {
 </script>
 <script>
 function filterSearch(){
-	alert("do filterSearch()");
+	//alert("do filterSearch()");
 	//create a json object
-    var p1 = $("#eventUUID").val();
-    var p2 = $("#eventTitle").val();        
-    var p3 = $("#eventAuthor").val();
-    var p4 = $("#eventClass").val();
+    var p2 = $("#eventUUID").val();
+    var p3 = $("#eventTitle").val();        
+    var p4 = $("#eventAuthor").val();
+    var p9 = $("#eventClass").val();
     
-    alert(p1+" "+p2+" "+p3+" "+p4);
-    
+    //alert(p1+" "+p2+" "+p3+" "+p4);
+    var businessObject =
+    {
+    //		globalId    :    p1,
+    		eventUUID   :    p2,
+    		title    	:    p3,
+    		author    	:    p4,
+    // 		postDatetime:    p5,            
+    //		viewNum    	:    p6,            
+    //		descShort   :    p7,
+    //		descLong	:    p8,
+      		eventClass  :    p9
+    //		eventStatus	:    p10
+    };
 
     var dt = $("#datatable_products").DataTable();
-    alert("dt"+dt);
+    //alert("dt"+dt);
     
-    x = dt.ajax.url("eventsNewsListData").load();
-    // alert("x"+x);
+    x = dt.ajax.url("eventsNewsSearchFilterData?itemJSONString="+JSON.stringify(businessObject)).load();
     
     
 }
