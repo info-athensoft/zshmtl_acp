@@ -485,46 +485,10 @@ jQuery(document).ready(function() {
 	Metronic.init(); // init metronic core components
 	Layout.init(); // init current layout
 	Demo.init(); // init demo features
-	//alert("hello");
 	EcommerceProducts.init();
 });
 </script>
-<script>
-function filterSearch(){
-	//alert("do filterSearch()");
-	//create a json object
-    var p2 = $("#eventUUID").val();
-    var p3 = $("#eventTitle").val();        
-    var p4 = $("#eventAuthor").val();
-    var p9 = $("#eventClass").val();
-    
-    //alert(p1+" "+p2+" "+p3+" "+p4);
-    var businessObject =
-    {
-    //		globalId    :    p1,
-    		eventUUID   :    p2,
-    		title    	:    p3,
-    		author    	:    p4,
-    // 		postDatetime:    p5,            
-    //		viewNum    	:    p6,            
-    //		descShort   :    p7,
-    //		descLong	:    p8,
-      		eventClass  :    p9
-    //		eventStatus	:    p10
-    };
 
-    var dt = $("#datatable_products").DataTable();
-    //alert("dt"+dt);
-    
-    x = dt.ajax.url("eventsNewsSearchFilterData?itemJSONString="+JSON.stringify(businessObject)).load();
-    
-    
-}
-
-function filterReset(){
-	alert("do filterReset()");
-}
-</script>
 
 <!-- END JAVASCRIPTS -->
 </body>
