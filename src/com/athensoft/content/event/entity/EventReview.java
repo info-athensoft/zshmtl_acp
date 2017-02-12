@@ -3,6 +3,9 @@ package com.athensoft.content.event.entity;
 import java.util.Date;
 
 public class EventReview {
+	public static final int APPROVED = 1;
+	public static final int PENDING = 2;
+	public static final int REJECTED = 3;
 	private long globalId;
 	private String eventUUID;
 	private String reviewUUID;

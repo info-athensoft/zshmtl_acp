@@ -485,6 +485,7 @@ public class NewsAcpController {
 		logger.info("entering /content/eventsNewsReviewListData");
 		
 		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
 		
 		//data
 		List<EventReview> listEventReview = eventReviewService.getAllEventReview();
@@ -510,9 +511,27 @@ public class NewsAcpController {
 			field3 = listEventReview.get(i).getReviewContent();
 			
 			
-			String reviewStatus = listEventReview.get(i).getReviewStatus()+"";
-			reviewStatus = "Published";
-			String reviewStatusKey = "success";
+			int intReviewStatus = listEventReview.get(i).getReviewStatus();
+			String reviewStatus = "";
+			String reviewStatusKey = "";
+			switch(intReviewStatus){
+				case EventReview.APPROVED: 
+					reviewStatus = "Approved";
+					reviewStatusKey = "success";
+					break;
+				case EventReview.PENDING: 
+					reviewStatus = "Pending";
+					reviewStatusKey = "info";
+					break;
+				case EventReview.REJECTED: 
+					reviewStatus = "Rejected";
+					reviewStatusKey = "warning";
+					break;
+				default: 
+					break;
+			}
+			
+			
 			field4 = "<span class='label label-sm label-"+reviewStatusKey+"'>"+reviewStatus+"</span>";
 			field5 = "<a href='/acp/content/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
 			
@@ -525,16 +544,14 @@ public class NewsAcpController {
 			data[i][5] = field5;
 		}
 		
-		Map<String, Object> data1 = mav.getModel();
-		
-		data1.put("draw", new Integer(1));
-		data1.put("recordsTotal", new Integer(5));
-		data1.put("recordsFiltered", new Integer(5));
-		data1.put("data", data);
-		data1.put("customActionStatus","OK");
-		data1.put("customActionMessage","OK");
+		model.put("draw", new Integer(1));
+		model.put("recordsTotal", new Integer(5));
+		model.put("recordsFiltered", new Integer(5));
+		model.put("data", data);
+		model.put("customActionStatus","OK");
+		model.put("customActionMessage","OK");
 		
 		logger.info("leaving /content/eventsNewsReviewListData");
-		return data1;
+		return model;
 	}
 }
