@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.event.entity.Event;
+import com.athensoft.content.event.entity.EventReview;
 import com.athensoft.content.event.entity.News;
+import com.athensoft.content.event.service.EventReviewService;
 import com.athensoft.content.event.service.NewsService;
 
 @Controller
@@ -28,6 +30,13 @@ public class NewsAcpController {
 	@Autowired
 	public void setNewsService(NewsService newsService) {
 		this.newsService = newsService;
+	}
+	
+	private EventReviewService eventReviewService;
+	
+	@Autowired
+	public void setEventReviewService(EventReviewService eventReviewService) {
+		this.eventReviewService = eventReviewService;
 	}
 	
 	
@@ -298,5 +307,64 @@ public class NewsAcpController {
 		
 		logger.info("leaving /content/updateNews");
 		return mav;		
+	}
+	
+	@RequestMapping(value="/content/eventsNewsReviewListData",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> getDataNewsReviewList(){
+		logger.info("entering /content/eventsNewsReviewListData");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//data
+		List<EventReview> listEventReview = eventReviewService.getAllEventReview();
+		logger.info("Length of EventReview entries: "+ listEventReview.size());
+		
+		int entryLength = listEventReview.size();
+		final int COLUMN_NUM = 6;
+		String[][] data = new String[entryLength][COLUMN_NUM];
+		
+		String field0 = "";
+		String field1 = "";
+		String field2 = "";
+		String field3 = "";
+		String field4 = "";
+		String field5 = "";
+	
+		
+		for(int i=0; i<entryLength ; i++){			
+//			field0 = "<input type='checkbox' name='id[]' value="+listEventReview.get(i).getEventUUID()+">";
+			field0 = listEventReview.get(i).getEventUUID()+"";
+			field1 = listEventReview.get(i).getReviewDatetime()+"";
+			field2 = listEventReview.get(i).getCustomerId()+"";
+			field3 = listEventReview.get(i).getReviewContent();
+			
+			
+			String reviewStatus = listEventReview.get(i).getReviewStatus()+"";
+			reviewStatus = "Published";
+			String reviewStatusKey = "success";
+			field4 = "<span class='label label-sm label-"+reviewStatusKey+"'>"+reviewStatus+"</span>";
+			field5 = "<a href='/acp/content/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			
+			
+			data[i][0] = field0;
+			data[i][1] = field1;
+			data[i][2] = field2;
+			data[i][3] = field3;
+			data[i][4] = field4;
+			data[i][5] = field5;
+		}
+		
+		Map<String, Object> data1 = mav.getModel();
+		
+		data1.put("draw", new Integer(1));
+		data1.put("recordsTotal", new Integer(5));
+		data1.put("recordsFiltered", new Integer(5));
+		data1.put("data", data);
+		data1.put("customActionStatus","OK");
+		data1.put("customActionMessage","OK");
+		
+		logger.info("leaving /content/eventsNewsReviewListData");
+		return data1;
 	}
 }

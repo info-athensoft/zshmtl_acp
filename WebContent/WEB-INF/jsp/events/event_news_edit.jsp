@@ -865,7 +865,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="${webapp_name}/assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
-<script src="${webapp_name}/assets/admin/pages/scripts/ecommerce-products-edit.js"></script>
+<script src="${webapp_name}/assets/admin/pages/scripts-local/ecommerce-products-edit.js"></script>
 
 <script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
 

@@ -21,6 +21,7 @@ public class Event {
 	//
 	private List<EventTag> listEventTag = new ArrayList<EventTag>();
 	private List<EventMedia> listEventMedia = new ArrayList<EventMedia>();
+	private List<EventReview> listEventReview = new ArrayList<EventReview>();
 	
 	public long getGlobalId() {
 		return globalId;
