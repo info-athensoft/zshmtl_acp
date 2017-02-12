@@ -170,7 +170,7 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		sbf.append("set ");
 		sbf.append("title = :title, ");
 		sbf.append("author = :author, ");
-//		sbf.append("post_datetime = :post_datetime, ");
+		sbf.append("post_datetime = :post_datetime, ");
 		sbf.append("view_num = :view_num, ");
 		sbf.append("desc_short = :desc_short, ");
 		sbf.append("desc_long = :desc_long, ");
