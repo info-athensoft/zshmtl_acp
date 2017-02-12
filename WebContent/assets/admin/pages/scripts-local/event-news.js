@@ -94,14 +94,31 @@ function updateNews() {
 
 /* event_news_list.jsp */
 function filterSearch(){
-	//alert("do filterSearch()");
-	//create a json object
+	
+//	alert("do filterSearch()");
+//	create a json object
     var p2 = $("#eventUUID").val();
     var p3 = $("#eventTitle").val();        
     var p4 = $("#eventAuthor").val();
+    var p5a = $("#postDatetimeFrom").val();
+    var p5b = $("#postDatetimeTo").val();
+    var p6a = $("#viewNumFrom").val();
+    var p6b = $("#viewNumTo").val();
     var p9 = $("#eventClass").val();
-    
-    //alert(p1+" "+p2+" "+p3+" "+p4);
+    var p10 = $("#eventStatus").val();
+
+//	validate
+	if(!isNonNegativeInteger(p6a)){
+		p6a = "";
+		$("#viewNumFrom").val("");
+	}
+	if(!isNonNegativeInteger(p6b)){
+		p6b = "";
+		$("#viewNumTo").val("");
+	}
+//	isNonNegativeInteger(p6b);
+	alert(p5a+" "+p5b);
+  
     var businessObject =
     {
     //		globalId    :    p1,
@@ -109,15 +126,15 @@ function filterSearch(){
     		title    	:    p3,
     		author    	:    p4,
     // 		postDatetime:    p5,            
-    //		viewNum    	:    p6,            
+    		viewNumFrom :    p6a,            
+    		viewNumTo 	:    p6b,            
     //		descShort   :    p7,
     //		descLong	:    p8,
-      		eventClass  :    p9
-    //		eventStatus	:    p10
+      		eventClass  :    p9,
+    		eventStatus	:    p10
     };
 
     var dt = $("#datatable_products").DataTable();
-    //alert("dt"+dt);
     
     var x = dt.ajax.url("eventsNewsSearchFilterData?itemJSONString="+JSON.stringify(businessObject)).load();
     
@@ -125,5 +142,12 @@ function filterSearch(){
 }
 
 function filterReset(){
-	alert("do filterReset()");
+//	alert("do filterReset()");
+	var p2 = $("#eventUUID").val("");
+    var p3 = $("#eventTitle").val("");        
+    var p4 = $("#eventAuthor").val("");
+    var p6a = $("#viewNumFrom").val("");
+    var p6b = $("#viewNumTo").val("");
+    var p9 = $("#eventClass").val(0);
+    var p10 = $("#eventStatus").val(0);
 }

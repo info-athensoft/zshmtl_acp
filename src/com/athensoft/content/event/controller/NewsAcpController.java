@@ -77,9 +77,25 @@ public class NewsAcpController {
 			field4 = listNews.get(i).getEventClass();
 			field5 = listNews.get(i).getPostDatetime()+"";
 			field6 = listNews.get(i).getViewNum()+"";
-			String eventStatus = listNews.get(i).getEventStatus()+"";
-			eventStatus = "Published";
-			String eventStatusKey = "success";
+			int intEventStatus = listNews.get(i).getEventStatus();
+			String eventStatus = "";
+			String eventStatusKey = "";
+			switch(intEventStatus){
+				case News.PUBLISHED: 
+					eventStatus = "Published";
+					eventStatusKey = "success";
+					break;
+				case News.NOT_PUBLISHED: 
+					eventStatus = "Not published";
+					eventStatusKey = "info";
+					break;
+				case News.DELETED: 
+					eventStatus = "Deleted";
+					eventStatusKey = "warning";
+					break;
+				default: 
+					break;
+			}
 			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
 			field8 = "<a href='/acp/content/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
 			
@@ -124,12 +140,55 @@ public class NewsAcpController {
 		String where1 = jobj.getString("eventUUID").trim();
 		String where2 = jobj.getString("title").trim();
 		String where3 = jobj.getString("author").trim();
+		int where4 = jobj.getInt("eventClass");
+		String strViewNumFrom = jobj.getString("viewNumFrom").trim();
+		String strViewNumTo = jobj.getString("viewNumTo").trim();
+		int where5a = 0;
+		int where5b = 0;
 		
+//		System.out.println("strViewNumFrom="+strViewNumFrom+"##");
+//		System.out.println("strViewNumTo="+strViewNumTo+"##");
+		
+		if(strViewNumFrom==null){
+			strViewNumFrom = "";
+		}
+		if(strViewNumTo==null){
+			strViewNumTo = "";
+		}
+		
+		if(!strViewNumFrom.equals("")){
+			where5a = Integer.parseInt(strViewNumFrom);
+		}
+		if(!strViewNumTo.equals("")){
+			where5b = Integer.parseInt(strViewNumTo);
+		}
+		
+		int where7 = jobj.getInt("eventStatus");
 		
 		StringBuffer queryString = new StringBuffer();
 		queryString.append(where1.length()==0?" ":" and event_uuid like '%"+where1+"%' ");
 		queryString.append(where2.length()==0?" ":" and title like '%"+where2+"%' ");
 		queryString.append(where3.length()==0?" ":" and author like '%"+where3+"%' ");
+		queryString.append(where4==0?" ":" and event_class = "+where4+" ");
+		
+		String queryString_where5 = "";
+		if(strViewNumFrom.equals("")&&strViewNumTo.equals("")){
+			queryString_where5 = " ";
+		}else if(!strViewNumFrom.equals("")&&strViewNumTo.equals("")){
+			queryString_where5 = " and view_num >= "+where5a;
+		}else if(strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
+			queryString_where5 = " and view_num <= "+where5b;
+		}else if(!strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
+			if(where5a<=where5b){
+				queryString_where5 = " and (view_num between "+where5a+" and "+where5b+" ) ";
+			}else{
+				queryString_where5 = " and (view_num between "+where5b+" and "+where5a+" ) ";
+			}
+			
+		}
+		queryString.append(queryString_where5);
+		
+		queryString.append(where7==0?" ":" and event_status = "+where7+" ");
 		
 		logger.info("QueryString = "+ queryString.toString());
 		
@@ -159,9 +218,27 @@ public class NewsAcpController {
 			field4 = listNews.get(i).getEventClass();
 			field5 = listNews.get(i).getPostDatetime()+"";
 			field6 = listNews.get(i).getViewNum()+"";
-			String eventStatus = listNews.get(i).getEventStatus()+"";
-			eventStatus = "Published";
-			String eventStatusKey = "success";
+			int intEventStatus = listNews.get(i).getEventStatus();
+			String eventStatus = "";
+			String eventStatusKey = "";
+			switch(intEventStatus){
+				case News.PUBLISHED: 
+					eventStatus = "Published";
+					eventStatusKey = "success";
+					break;
+				case News.NOT_PUBLISHED: 
+					eventStatus = "Not published";
+					eventStatusKey = "info";
+					break;
+				case News.DELETED: 
+					eventStatus = "Deleted";
+					eventStatusKey = "warning";
+					break;
+				default: 
+					break;
+			}
+			
+			
 			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
 			field8 = "<a href='/acp/content/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
 			
