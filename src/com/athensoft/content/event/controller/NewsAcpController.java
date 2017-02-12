@@ -141,10 +141,28 @@ public class NewsAcpController {
 		String where2 = jobj.getString("title").trim();
 		String where3 = jobj.getString("author").trim();
 		int where4 = jobj.getInt("eventClass");
+		
+		/* where5a, where5b */
+		String strPostDatetimeFrom = jobj.getString("postDatetimeFrom").trim();
+		String strPostDatetimeTo = jobj.getString("postDatetimeTo").trim();
+		
+		if(strPostDatetimeFrom==null){
+			strPostDatetimeFrom = "";
+		}
+		if(strPostDatetimeTo==null){
+			strPostDatetimeTo = "";
+		}
+		String where5a = strPostDatetimeFrom;
+		String where5b = strPostDatetimeTo;
+		
+		System.out.println("strViewNumFrom="+strPostDatetimeFrom+"##");
+		System.out.println("strViewNumTo="+strPostDatetimeTo+"##");
+		
+		/* where6a, where6b */
 		String strViewNumFrom = jobj.getString("viewNumFrom").trim();
 		String strViewNumTo = jobj.getString("viewNumTo").trim();
-		int where5a = 0;
-		int where5b = 0;
+		int where6a = 0;
+		int where6b = 0;
 		
 //		System.out.println("strViewNumFrom="+strViewNumFrom+"##");
 //		System.out.println("strViewNumTo="+strViewNumTo+"##");
@@ -157,36 +175,64 @@ public class NewsAcpController {
 		}
 		
 		if(!strViewNumFrom.equals("")){
-			where5a = Integer.parseInt(strViewNumFrom);
+			where6a = Integer.parseInt(strViewNumFrom);
 		}
 		if(!strViewNumTo.equals("")){
-			where5b = Integer.parseInt(strViewNumTo);
+			where6b = Integer.parseInt(strViewNumTo);
 		}
 		
 		int where7 = jobj.getInt("eventStatus");
 		
+		/* construct query string */
 		StringBuffer queryString = new StringBuffer();
 		queryString.append(where1.length()==0?" ":" and event_uuid like '%"+where1+"%' ");
 		queryString.append(where2.length()==0?" ":" and title like '%"+where2+"%' ");
 		queryString.append(where3.length()==0?" ":" and author like '%"+where3+"%' ");
 		queryString.append(where4==0?" ":" and event_class = "+where4+" ");
 		
+		
+		
+		
 		String queryString_where5 = "";
-		if(strViewNumFrom.equals("")&&strViewNumTo.equals("")){
+		if(strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
 			queryString_where5 = " ";
+		}else if(!strPostDatetimeFrom.equals("")&&strViewNumTo.equals("")){
+			/* select * from event_news where date(post_datetime) >= adddate('2017-01-12', -1); */
+			queryString_where5 = " and date(post_datetime) >= '"+where5a+"' ";
+		}else if(strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
+			/* select * from event_news where date(post_datetime) <= '2017-02-05'; */
+			queryString_where5 = " and date(post_datetime) <= '"+where5b+"' ";
+		}else if(!strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
+			/*
+			select * from event_news where date(post_datetime) between adddate('2017-01-12', -1) and '2017-02-05';
+			*/
+			queryString_where5 = " and (date(post_datetime) between adddate('"+where5a+"', -1) and '"+where5b+"' ) ";
+		}
+		queryString.append(queryString_where5);
+		
+		
+		String queryString_where6 = "";
+		if(strViewNumFrom.equals("")&&strViewNumTo.equals("")){
+			queryString_where6 = " ";
 		}else if(!strViewNumFrom.equals("")&&strViewNumTo.equals("")){
-			queryString_where5 = " and view_num >= "+where5a;
+			queryString_where6 = " and view_num >= "+where6a;
 		}else if(strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
-			queryString_where5 = " and view_num <= "+where5b;
+			queryString_where6 = " and view_num <= "+where6b;
 		}else if(!strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
-			if(where5a<=where5b){
-				queryString_where5 = " and (view_num between "+where5a+" and "+where5b+" ) ";
+			if(where6a<=where6b){
+				queryString_where6 = " and (view_num between "+where6a+" and "+where6b+" ) ";
 			}else{
-				queryString_where5 = " and (view_num between "+where5b+" and "+where5a+" ) ";
+				queryString_where6 = " and (view_num between "+where6b+" and "+where6a+" ) ";
 			}
 			
 		}
-		queryString.append(queryString_where5);
+		queryString.append(queryString_where6);
+		
+		
+		
+		
+		
+		
 		
 		queryString.append(where7==0?" ":" and event_status = "+where7+" ");
 		

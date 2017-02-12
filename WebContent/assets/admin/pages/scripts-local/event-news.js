@@ -117,7 +117,7 @@ function filterSearch(){
 		$("#viewNumTo").val("");
 	}
 //	isNonNegativeInteger(p6b);
-	alert(p5a+" "+p5b);
+//	alert(p5a+" "+p5b);
   
     var businessObject =
     {
@@ -125,7 +125,8 @@ function filterSearch(){
     		eventUUID   :    p2,
     		title    	:    p3,
     		author    	:    p4,
-    // 		postDatetime:    p5,            
+     		postDatetimeFrom:  p5a,            
+     		postDatetimeTo:    p5b,            
     		viewNumFrom :    p6a,            
     		viewNumTo 	:    p6b,            
     //		descShort   :    p7,
@@ -146,6 +147,8 @@ function filterReset(){
 	var p2 = $("#eventUUID").val("");
     var p3 = $("#eventTitle").val("");        
     var p4 = $("#eventAuthor").val("");
+    var p5a = $("#postDatetimeFrom").val("");
+    var p5b = $("#postDatetimeTo").val("");
     var p6a = $("#viewNumFrom").val("");
     var p6b = $("#viewNumTo").val("");
     var p9 = $("#eventClass").val(0);
