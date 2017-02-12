@@ -370,26 +370,22 @@ table tr td{
 											<input type="text" class="form-control form-filter input-sm" name="event_author" id="eventAuthor">
 										</td>
 										<td>
-											<select name="event_class" class="form-control form-filter input-sm" id="eventClass">
-												<option value="">Select...</option>
-												<option value="1">Mens</option>
-												<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Footwear</option>
-												<option value="6">Football Shirts</option>
-												<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Premier League</option>
-												<option value="11">Brands</option>
-												<option value="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adidas</option>
+											<select class="form-control form-filter input-sm" name="event_class" id="eventClass">
+												<option value="0">Select...</option>
+												<option value="1">New</option>
+												<option value="2">Hot</option>
 											</select>
 										</td>
 										
 										<td>
-											<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-												<input type="text" class="form-control form-filter input-sm" readonly name="product_created_from" placeholder="From">
+											<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+												<input type="text" class="form-control form-filter input-sm" readonly name="product_created_from" placeholder="From" id="postDatetimeFrom">
 												<span class="input-group-btn">
 												<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 												</span>
 											</div>
-											<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-												<input type="text" class="form-control form-filter input-sm" readonly name="product_created_to " placeholder="To">
+											<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+												<input type="text" class="form-control form-filter input-sm" readonly name="product_created_to " placeholder="To" id="postDatetimeTo">
 												<span class="input-group-btn">
 												<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 												</span>
@@ -397,16 +393,16 @@ table tr td{
 										</td>
 										<td>
 											<div class="margin-bottom-5">
-												<input type="text" class="form-control form-filter input-sm" name="product_quantity_from" placeholder="From"/>
+												<input type="text" class="form-control form-filter input-sm" name="viewNum_from" placeholder="From" id="viewNumFrom">
 											</div>
-											<input type="text" class="form-control form-filter input-sm" name="product_quantity_to" placeholder="To"/>
+											<input type="text" class="form-control form-filter input-sm" name="viewNum_to" placeholder="To" id="viewNumTo"/>
 										</td>
 										<td>
-											<select name="event_status" class="form-control form-filter input-sm">
-												<option value="">Select...</option>
-												<option value="published">Published</option>
-												<option value="notpublished">Not Published</option>
-												<option value="deleted">Deleted</option>
+											<select class="form-control form-filter input-sm" name="event_status" id="eventStatus">
+												<option value="0">Select...</option>
+												<option value="1">Published</option>
+												<option value="2">Not Published</option>
+												<option value="3">Deleted</option>
 											</select>
 										</td>
 										<td>
@@ -478,6 +474,7 @@ table tr td{
 <script src="${webapp_name}/assets/admin/pages/scripts-local/content-news.js"></script>
 
 <script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
+<script src="${webapp_name}/assets/admin/pages/scripts-local/global-validate.js"></script>
 
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
@@ -485,35 +482,10 @@ jQuery(document).ready(function() {
 	Metronic.init(); // init metronic core components
 	Layout.init(); // init current layout
 	Demo.init(); // init demo features
-	//alert("hello");
 	EcommerceProducts.init();
 });
 </script>
-<script>
-function filterSearch(){
-	alert("do filterSearch()");
-	//create a json object
-    var p1 = $("#eventUUID").val();
-    var p2 = $("#eventTitle").val();        
-    var p3 = $("#eventAuthor").val();
-    var p4 = $("#eventClass").val();
-    
-    alert(p1+" "+p2+" "+p3+" "+p4);
-    
 
-    var dt = $("#datatable_products").DataTable();
-    alert("dt"+dt);
-    
-    x = dt.ajax.url("eventsNewsListData").load();
-    // alert("x"+x);
-    
-    
-}
-
-function filterReset(){
-	alert("do filterReset()");
-}
-</script>
 
 <!-- END JAVASCRIPTS -->
 </body>

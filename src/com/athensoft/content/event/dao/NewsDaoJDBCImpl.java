@@ -49,8 +49,23 @@ public class NewsDaoJDBCImpl implements NewsDao {
 
 	@Override
 	public List<Event> findByFilter(String queryString) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		final String TABLE1 = "event_news";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append(" select * from "+TABLE1);
+		sbf.append(" where 1=1 ");
+		sbf.append(queryString);
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		List<Event> x = new ArrayList<Event>();
+		try{
+			x = jdbc.query(sql, paramSource, new NewsRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
 	}
 
 	@Override
@@ -155,7 +170,7 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		sbf.append("set ");
 		sbf.append("title = :title, ");
 		sbf.append("author = :author, ");
-//		sbf.append("post_datetime = :post_datetime, ");
+		sbf.append("post_datetime = :post_datetime, ");
 		sbf.append("view_num = :view_num, ");
 		sbf.append("desc_short = :desc_short, ");
 		sbf.append("desc_long = :desc_long, ");

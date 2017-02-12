@@ -3,6 +3,10 @@
  * Module:  event-news system
  */
 
+/*
+ * event_news_create.jsp
+ * event_news_edit.jsp
+ */
 function getBusinessObject(){	
 //	create a json object
     var p1 = $("#globalId").val();
@@ -33,6 +37,9 @@ function getBusinessObject(){
     return businessObject;
 }
 
+
+
+/* event_news_create.jsp */
 function createNews() {
     //alert(JSON.stringify(businessObject));
     var businessObject = getBusinessObject();
@@ -56,6 +63,9 @@ function createNews() {
     });
 }
 
+
+
+/* event_news_edit.jsp */
 function updateNews() {
     
     var businessObject = getBusinessObject();
@@ -78,4 +88,69 @@ function updateNews() {
             //reset to avoid duplication
         }        
     });
+}
+
+
+
+/* event_news_list.jsp */
+function filterSearch(){
+	
+//	alert("do filterSearch()");
+//	create a json object
+    var p2 = $("#eventUUID").val();
+    var p3 = $("#eventTitle").val();        
+    var p4 = $("#eventAuthor").val();
+    var p5a = $("#postDatetimeFrom").val();
+    var p5b = $("#postDatetimeTo").val();
+    var p6a = $("#viewNumFrom").val();
+    var p6b = $("#viewNumTo").val();
+    var p9 = $("#eventClass").val();
+    var p10 = $("#eventStatus").val();
+
+//	validate
+	if(!isNonNegativeInteger(p6a)){
+		p6a = "";
+		$("#viewNumFrom").val("");
+	}
+	if(!isNonNegativeInteger(p6b)){
+		p6b = "";
+		$("#viewNumTo").val("");
+	}
+//	isNonNegativeInteger(p6b);
+//	alert(p5a+" "+p5b);
+  
+    var businessObject =
+    {
+    //		globalId    :    p1,
+    		eventUUID   :    p2,
+    		title    	:    p3,
+    		author    	:    p4,
+     		postDatetimeFrom:  p5a,            
+     		postDatetimeTo:    p5b,            
+    		viewNumFrom :    p6a,            
+    		viewNumTo 	:    p6b,            
+    //		descShort   :    p7,
+    //		descLong	:    p8,
+      		eventClass  :    p9,
+    		eventStatus	:    p10
+    };
+
+    var dt = $("#datatable_products").DataTable();
+    
+    var x = dt.ajax.url("eventsNewsSearchFilterData?itemJSONString="+JSON.stringify(businessObject)).load();
+    
+    
+}
+
+function filterReset(){
+//	alert("do filterReset()");
+	var p2 = $("#eventUUID").val("");
+    var p3 = $("#eventTitle").val("");        
+    var p4 = $("#eventAuthor").val("");
+    var p5a = $("#postDatetimeFrom").val("");
+    var p5b = $("#postDatetimeTo").val("");
+    var p6a = $("#viewNumFrom").val("");
+    var p6b = $("#viewNumTo").val("");
+    var p9 = $("#eventClass").val(0);
+    var p10 = $("#eventStatus").val(0);
 }

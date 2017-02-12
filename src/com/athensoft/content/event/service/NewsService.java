@@ -42,4 +42,9 @@ public class NewsService {
 		this.newsDao.update(news);
 		
 	}
+	
+	//acp at EventNewsList > datatable > filter section 
+	public List<Event> getNewsByFilter(String queryString){
+		return newsDao.findByFilter(queryString);
+	}
 }
