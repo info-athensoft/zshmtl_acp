@@ -58,6 +58,25 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="${webapp_name}/assets/admin/layout2/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
+
+<!-- CSS local -->
+<style type="text/css">
+
+table{
+	table-layout:fixed
+}
+
+table tr td{
+	word-wrap:break-all; 
+	/* overflow:hidden; */
+	
+	text-overflow: ellipsis;  
+  	overflow: hidden;  
+  	white-space: nowrap;
+}
+
+</style>
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -866,26 +885,25 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
 <script src="${webapp_name}/assets/admin/pages/scripts-local/ecommerce-products-edit.js"></script>
-
 <script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
 
 
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
-Metronic.init(); // init metronic core components
-Layout.init(); // init current layout
-Demo.init(); // init demo features
-EcommerceProductsEdit.init();
+	Metronic.init(); // init metronic core components
+	Layout.init(); // init current layout
+	Demo.init(); // init demo features
+	EcommerceProductsEdit.init();
 
 //local
 //select object for event class
-var eventClassValue = ${newsObject.eventClass};
-$("#eventClass").val(eventClassValue);
+	var eventClassValue = ${newsObject.eventClass};
+	$("#eventClass").val(eventClassValue);
 
 //select object for event status
-var eventStatusValue = ${newsObject.eventStatus};
-$("#eventStatus").val(eventStatusValue);
+	var eventStatusValue = ${newsObject.eventStatus};
+	$("#eventStatus").val(eventStatusValue);
 
 });
 </script>
