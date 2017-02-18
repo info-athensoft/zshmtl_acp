@@ -1,10 +1,10 @@
-package com.athensoft.ecomm.order.controller;
+package com.athensoft.global.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class TestController {
+public class GlobalController {
 	
 	@RequestMapping("/")
 	public String gotoHome(){
