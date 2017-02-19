@@ -175,7 +175,7 @@ var EcommerceProductsEdit = function () {
         init: function () {
             initComponents();
 
-            //handleImages();
+            handleImages();
             handleReviews();
             //handleHistory();
         }

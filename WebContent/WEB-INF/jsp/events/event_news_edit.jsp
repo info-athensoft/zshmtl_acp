@@ -600,8 +600,8 @@ table tr td{
 												<tbody>
 												<tr>
 													<td>
-														<a href="../../assets/admin/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">
-														<img class="img-responsive" src="../../assets/admin/pages/media/works/img1.jpg" alt="">
+														<a href="${webapp_name}/assets/admin/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">
+														<img class="img-responsive" src="${webapp_name}/assets/admin/pages/media/works/img1.jpg" alt="">
 														</a>
 													</td>
 													<td>
@@ -632,8 +632,8 @@ table tr td{
 												</tr>
 												<tr>
 													<td>
-														<a href="../../assets/admin/pages/media/works/img2.jpg" class="fancybox-button" data-rel="fancybox-button">
-														<img class="img-responsive" src="../../assets/admin/pages/media/works/img2.jpg" alt="">
+														<a href="${webapp_name}/assets/admin/pages/media/works/img2.jpg" class="fancybox-button" data-rel="fancybox-button">
+														<img class="img-responsive" src="${webapp_name}/assets/admin/pages/media/works/img2.jpg" alt="">
 														</a>
 													</td>
 													<td>
@@ -664,8 +664,8 @@ table tr td{
 												</tr>
 												<tr>
 													<td>
-														<a href="../../assets/admin/pages/media/works/img3.jpg" class="fancybox-button" data-rel="fancybox-button">
-														<img class="img-responsive" src="../../assets/admin/pages/media/works/img3.jpg" alt="">
+														<a href="${webapp_name}/assets/admin/pages/media/works/img3.jpg" class="fancybox-button" data-rel="fancybox-button">
+														<img class="img-responsive" src="${webapp_name}/assets/admin/pages/media/works/img3.jpg" alt="">
 														</a>
 													</td>
 													<td>
@@ -884,7 +884,7 @@ table tr td{
 <script src="${webapp_name}/assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
-<script src="${webapp_name}/assets/admin/pages/scripts-local/ecommerce-products-edit.js"></script>
+<script src="${webapp_name}/assets/admin/pages/scripts-local/event-news-edit.js"></script>
 <script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
 
 
