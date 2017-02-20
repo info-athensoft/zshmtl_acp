@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 import com.athensoft.content.event.entity.EventMedia;
 
-
 @Component
 @Qualifier("eventMediaDaoJDBCImpl")
 public class EventMediaDaoJDBCImpl implements EventMediaDao {
@@ -33,8 +32,15 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 	
 	@Override
 	public List<EventMedia> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from event_media";
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		List<EventMedia> x = new ArrayList<EventMedia>();		
+		try{
+			x = jdbc.query(sql, paramSource, new EventMediaRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
 	}
 
 	@Override
@@ -56,6 +62,11 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 		}
 		return x;
 	}
+	
+	@Override
+	public void create(EventMedia media) {
+		
+	}
 
 	
 	private static class EventMediaRowMapper implements RowMapper<EventMedia>{
@@ -66,13 +77,41 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 			x.setMediaURL(rs.getString("media_url"));
 			x.setMediaName(rs.getString("media_name"));
 			x.setSortNumber(rs.getInt("sort_number"));
-				int intIsPrimaryMedia = rs.getInt("sort_number");
-				boolean isPrimaryMedia = intIsPrimaryMedia==1?true:false;
-			x.setPrimaryMedia(isPrimaryMedia);
+//				int intIsPrimaryMedia = rs.getInt("sort_number");
+//				boolean isPrimaryMedia = intIsPrimaryMedia==1?true:false;
+			x.setPrimaryMedia(rs.getBoolean("is_primary_media"));
 			x.setMediaType(rs.getInt("media_type"));
 				Timestamp ts = rs.getTimestamp("post_timestamp");			
 			x.setPostTimestamp(new Date(ts.getTime()));
             return x;
 		}		
+	}
+
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(EventMedia media) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public EventMedia findPrimaryMediaByEventUUID(String eventUUID) {
+		//select the eventmedia which is already the primary media 
+		String sql = "select * from event_media where event_uuid=:event_uuid and is_primary_media = 1";
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("event_uuid", eventUUID);
+		EventMedia x = new EventMedia();
+		try{
+			x = jdbc.queryForObject(sql, paramSource, new EventMediaRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
 	}
 }

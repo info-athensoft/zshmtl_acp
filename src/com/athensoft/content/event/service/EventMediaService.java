@@ -22,4 +22,26 @@ public class EventMediaService {
 	public List<EventMedia> getEventMediaByEventUUID(String eventUUID){
 		return eventMediaDao.findByEventUUID(eventUUID);
 	}
+	
+	public EventMedia getEventMediaByMediaId(long mediaId) {
+		return eventMediaDao.findById(mediaId);
+	}
+	
+	public EventMedia getPrimaryMediaByEventUUID(String eventUUID) {
+		return eventMediaDao.findPrimaryMediaByEventUUID(eventUUID);
+	}
+	
+	public List<EventMedia> getAllEventMedia() {
+		return eventMediaDao.findAll();
+	}
+	
+	public void creatEventMedia(EventMedia media) {
+		this.eventMediaDao.create(media);
+	}
+	
+	public void updateEventMedia(EventMedia media) {
+		this.eventMediaDao.update(media);
+	}
+	
+
 }

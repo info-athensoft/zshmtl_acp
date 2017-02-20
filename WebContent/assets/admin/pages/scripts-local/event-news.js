@@ -90,8 +90,29 @@ function updateNews() {
     });
 }
 
-
-
+function setCoverMedia(mediaId, eventUUID) {
+	alert('ENTERING setCoverMedia');
+//    var businessObject = getBusinessObject();
+//    alert(JSON.stringify(businessObject));
+	
+    $.ajax({
+        type    :    "post",
+        url        : "setCoverMedia?mediaId="+mediaId+"&eventUUID="+eventUUID,
+        dataType:    "html",
+        timeout :     30000,
+        
+        success:function(msg){
+            alert('success');
+        },
+        error:function(){
+            alert("ERROR: Set Cover Media failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+            //reset to avoid duplication
+        }        
+    });
+}
+    
 /* event_news_list.jsp */
 function filterSearch(){
 	

@@ -8,9 +8,15 @@ public class EventMedia {
 	private String mediaURL;
 	private String mediaName;
 	private int sortNumber;
-	private boolean isPrimaryMedia;
+	private boolean primaryMedia;
 	private int mediaType;
 	private Date postTimestamp;
+	
+	
+	private boolean flag;
+	
+	
+	
 	
 	public long getMediaId() {
 		return mediaId;
@@ -43,10 +49,10 @@ public class EventMedia {
 		this.sortNumber = sortNumber;
 	}
 	public boolean isPrimaryMedia() {
-		return isPrimaryMedia;
+		return primaryMedia;
 	}
 	public void setPrimaryMedia(boolean isPrimaryMedia) {
-		this.isPrimaryMedia = isPrimaryMedia;
+		this.primaryMedia = isPrimaryMedia;
 	}
 	public int getMediaType() {
 		return mediaType;
@@ -64,7 +70,7 @@ public class EventMedia {
 	@Override
 	public String toString() {
 		return "EventMedia [mediaId=" + mediaId + ", eventUUID=" + eventUUID + ", mediaURL=" + mediaURL + ", mediaName="
-				+ mediaName + ", sortNumber=" + sortNumber + ", isPrimaryMedia=" + isPrimaryMedia + ", mediaType="
+				+ mediaName + ", sortNumber=" + sortNumber + ", isPrimaryMedia=" + primaryMedia + ", mediaType="
 				+ mediaType + ", postTimestamp=" + postTimestamp + "]";
 	}
 	

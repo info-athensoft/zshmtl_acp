@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.event.entity.Event;
+import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.entity.EventReview;
 import com.athensoft.content.event.entity.News;
+import com.athensoft.content.event.service.EventMediaService;
 import com.athensoft.content.event.service.EventReviewService;
 import com.athensoft.content.event.service.NewsService;
 
@@ -33,10 +35,17 @@ public class NewsAcpController {
 	}
 	
 	private EventReviewService eventReviewService;
-	
+		
 	@Autowired
 	public void setEventReviewService(EventReviewService eventReviewService) {
 		this.eventReviewService = eventReviewService;
+	}
+	
+	private EventMediaService eventMediaService;
+	
+	@Autowired
+	public void setEventMediaService(EventMediaService eventMediaService) {
+		this.eventMediaService = eventMediaService;
 	}
 	
 	@RequestMapping(value="/content/eventsNewsList")
@@ -338,9 +347,14 @@ public class NewsAcpController {
 		//data
 		Map<String, Object> model = mav.getModel();
 		
+		//data - news
 		News news = newsService.getNewsByEventUUID(eventUUID);	
-			
 		model.put("newsObject", news);
+		
+		//data - media
+		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
+		logger.info("Length of EventReview entries: "+ listEventMedia.size());
+		model.put("eventMediaList", listEventMedia);
 		
 		logger.info("leaving /content/eventsNewsEdit");
 		return mav;
@@ -535,7 +549,6 @@ public class NewsAcpController {
 			field4 = "<span class='label label-sm label-"+reviewStatusKey+"'>"+reviewStatus+"</span>";
 			field5 = "<a href='/acp/content/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
 			
-			
 			data[i][0] = field0;
 			data[i][1] = field1;
 			data[i][2] = field2;
@@ -553,5 +566,40 @@ public class NewsAcpController {
 		
 		logger.info("leaving /content/eventsNewsReviewListData");
 		return model;
+	}
+	
+	@RequestMapping(value="/content/setCoverMedia")
+	public ModelAndView setCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID){
+		logger.info("entering /content/setCoverMedia");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//view
+		String viewName = "events/event_news_edit";
+		mav.setViewName(viewName);
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		
+		//data - set cover primary state		
+		EventMedia previousPrimaryMedia = eventMediaService.getPrimaryMediaByEventUUID(eventUUID);
+		if (previousPrimaryMedia!=null){
+			previousPrimaryMedia.setPrimaryMedia(false);
+			eventMediaService.updateEventMedia(previousPrimaryMedia);
+		}
+		
+		EventMedia media = eventMediaService.getEventMediaByMediaId(mediaId);
+		media.setPrimaryMedia(true);
+		eventMediaService.updateEventMedia(media);
+		
+//		model.put("newsObject", news);
+		
+		//data - media
+		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
+		logger.info("Length of EventReview entries: "+ listEventMedia.size());
+		model.put("eventMediaList", listEventMedia);
+		
+		logger.info("leaving /content/setCoverMedia");
+		return mav;
 	}
 }

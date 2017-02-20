@@ -582,22 +582,54 @@ table tr td{
 														 Label
 													</th>
 													<th width="8%">
-														 Sort Order
+														 Sort Number
 													</th>
 													<th width="10%">
-														 Base Image
+														 Post Time
 													</th>
 													<th width="10%">
-														 Small Image
+														 Primary Media
 													</th>
 													<th width="10%">
-														 Thumbnail
-													</th>
-													<th width="10%">
+														Action
 													</th>
 												</tr>
 												</thead>
 												<tbody>
+												
+												<c:forEach items="${eventMediaList}" var="eventMedia">
+													<tr>
+													<td>
+														<a href="${webapp_name}/assets/admin/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">
+														<img class="img-responsive" src="${webapp_name}/assets/admin/pages/media/works/img1.jpg" alt="">
+														</a>
+													</td>
+													<td>
+														<input type="text" class="form-control" name="product[images][1][label]" value="${eventMedia.mediaName}">
+													</td>
+													<td>
+														<input type="text" class="form-control" name="product[images][1][sortNumber]" value="${eventMedia.sortNumber}">
+													</td>
+													
+													<td>
+														<input type="text" class="form-control" name="product[images][1][postTimestamp]" value="${eventMedia.postTimestamp}">
+													</td>
+													<td>
+														<input type="text" class="form-control" name="product[images][1][primaryMedia]" value="${eventMedia.primaryMedia}">
+													</td>
+													
+													<td>
+														<a href="javascript:;" class="btn default btn-sm">
+														<i class="fa fa-times"></i> Remove </a>
+														<div>
+														<a href="javascript:;" class="btn default btn-sm">
+														<i class="fa fa-edit" onclick="setCoverMedia(${eventMedia.mediaId},${eventMedia.eventUUID});"></i> Set Cover </a>
+														</div>
+													</td>
+												</tr>
+												</c:forEach>
+												
+												<!-- 
 												<tr>
 													<td>
 														<a href="${webapp_name}/assets/admin/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">
@@ -630,70 +662,7 @@ table tr td{
 														<i class="fa fa-times"></i> Remove </a>
 													</td>
 												</tr>
-												<tr>
-													<td>
-														<a href="${webapp_name}/assets/admin/pages/media/works/img2.jpg" class="fancybox-button" data-rel="fancybox-button">
-														<img class="img-responsive" src="${webapp_name}/assets/admin/pages/media/works/img2.jpg" alt="">
-														</a>
-													</td>
-													<td>
-														<input type="text" class="form-control" name="product[images][2][label]" value="Product image #1">
-													</td>
-													<td>
-														<input type="text" class="form-control" name="product[images][2][sort_order]" value="1">
-													</td>
-													<td>
-														<label>
-														<input type="radio" name="product[images][2][image_type]" value="1">
-														</label>
-													</td>
-													<td>
-														<label>
-														<input type="radio" name="product[images][2][image_type]" value="2" checked>
-														</label>
-													</td>
-													<td>
-														<label>
-														<input type="radio" name="product[images][2][image_type]" value="3">
-														</label>
-													</td>
-													<td>
-														<a href="javascript:;" class="btn default btn-sm">
-														<i class="fa fa-times"></i> Remove </a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<a href="${webapp_name}/assets/admin/pages/media/works/img3.jpg" class="fancybox-button" data-rel="fancybox-button">
-														<img class="img-responsive" src="${webapp_name}/assets/admin/pages/media/works/img3.jpg" alt="">
-														</a>
-													</td>
-													<td>
-														<input type="text" class="form-control" name="product[images][3][label]" value="Product image #2">
-													</td>
-													<td>
-														<input type="text" class="form-control" name="product[images][3][sort_order]" value="1">
-													</td>
-													<td>
-														<label>
-														<input type="radio" name="product[images][3][image_type]" value="1" checked>
-														</label>
-													</td>
-													<td>
-														<label>
-														<input type="radio" name="product[images][3][image_type]" value="2">
-														</label>
-													</td>
-													<td>
-														<label>
-														<input type="radio" name="product[images][3][image_type]" value="3">
-														</label>
-													</td>
-													<td>
-														<a href="javascript:;" class="btn default btn-sm">
-														<i class="fa fa-times"></i> Remove </a>
-													</td>
-												</tr>
+												 -->
 												</tbody>
 												</table>
 											</div>
@@ -876,7 +845,7 @@ table tr td{
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="${webapp_name}/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
-<script type="text/javascript" src="../../assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
 <script src="${webapp_name}/assets/global/plugins/plupload/js/plupload.full.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
