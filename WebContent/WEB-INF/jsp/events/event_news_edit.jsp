@@ -48,7 +48,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap-datepicker/css/datepicker.css"/>
 <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
-<link href="../../assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
+<link href="${webapp_name}/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE LEVEL STYLES -->
 <!-- BEGIN THEME STYLES -->
 <link href="${webapp_name}/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
@@ -394,7 +394,7 @@ table tr td{
 									</div>
 								</div>
 								<div class="portlet-body">
-									<div class="tabbable">
+									<div class="tabbable" id="tabs_event">
 										<ul class="nav nav-tabs">
 											<li class="active">
 												<a href="#tab_general" data-toggle="tab">
@@ -622,9 +622,11 @@ table tr td{
 														<a href="javascript:;" class="btn default btn-sm">
 														<i class="fa fa-times"></i> Remove </a>
 														<div>
-														<a href="javascript:;" class="btn default btn-sm">
-														<i class="fa fa-edit" onclick="setCoverMedia(${eventMedia.mediaId},${eventMedia.eventUUID});"></i> Set Cover </a>
+														<a href="javascript:;" onclick="setCoverMedia(${eventMedia.mediaId},'${eventMedia.eventUUID}'); return false;" class="btn default btn-sm">
+														<i class="fa fa-edit"></i> Set Cover </a>
 														</div>
+														
+														
 													</td>
 												</tr>
 												</c:forEach>
@@ -875,6 +877,31 @@ jQuery(document).ready(function() {
 	$("#eventStatus").val(eventStatusValue);
 
 });
+
+function setCoverMedia(mediaId, eventUUID) {
+	//alert('ENTERING setCoverMedia='+mediaId+"    "+eventUUID);
+//    var businessObject = getBusinessObject();
+//    alert(JSON.stringify(businessObject));
+	
+    $.ajax({
+        type    :    "post",
+        url        : "setCoverMedia?mediaId="+mediaId+"&eventUUID="+eventUUID,
+        dataType:    "html",
+        timeout :     30000,
+        
+        success:function(msg){
+        	
+        	alert("ok");
+        },
+        error:function(){
+            alert("ERROR: Set Cover Media failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+        	location.href="eventsNewsEdit?eventUUID="+eventUUID;
+        	$("#tabs_event").tabs({ active: 2 });
+        }        
+    });
+}
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

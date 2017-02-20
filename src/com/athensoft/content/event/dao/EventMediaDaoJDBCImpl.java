@@ -15,6 +15,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import com.athensoft.content.event.entity.EventMedia;
@@ -44,9 +46,17 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 	}
 
 	@Override
-	public EventMedia findById(long globalId) {
-		// TODO Auto-generated method stub
-		return null;
+	public EventMedia findById(long medialId) {
+		String sql = "select * from event_media where media_id=:media_id";
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("media_id", medialId);
+		EventMedia x = new EventMedia();
+		try{
+			x = jdbc.queryForObject(sql, paramSource, new EventMediaRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
 	}
 
 	@Override
@@ -96,7 +106,29 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 
 	@Override
 	public void update(EventMedia media) {
-		// TODO Auto-generated method stub
+		final String TABLE1 = "event_media";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("update "+TABLE1+" ");
+		sbf.append("set ");
+		sbf.append("is_primary_media = :is_primary_media ");
+		sbf.append("where ");
+		sbf.append("media_id = :media_id");
+				
+				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
+		
+		String sql = sbf.toString();
+		
+//		final Date dateCreate 			= new Date();
+//		final Date dateLastModified 	= dateCreate;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("global_id", news.getGlobalId());
+		paramSource.addValue("is_primary_media", media.isPrimaryMedia()?1:0);
+		paramSource.addValue("media_id",media.getMediaId());
+		
+		KeyHolder keyholder = new GeneratedKeyHolder();
+		jdbc.update(sql, paramSource, keyholder);
+		return;
 		
 	}
 
