@@ -46,7 +46,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/select2/select2.css"/>
 <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
-<link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap-datepicker/css/datepicker.css"/>
+<link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css"/>
 <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
 <link href="${webapp_name}/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE LEVEL STYLES -->
@@ -210,104 +210,7 @@ table tr td{
 				<!-- /.modal -->
 				<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 				<!-- BEGIN STYLE CUSTOMIZER -->
-				<div class="theme-panel">
-					<div class="toggler tooltips" data-container="body" data-placement="left" data-html="true" data-original-title="Click to open advance theme customizer panel">
-						<i class="icon-settings"></i>
-					</div>
-					<div class="toggler-close">
-						<i class="icon-close"></i>
-					</div>
-					<div class="theme-options">
-						<div class="theme-option theme-colors clearfix">
-							<span>
-							THEME COLOR </span>
-							<ul>
-								<li class="color-default current tooltips" data-style="default" data-container="body" data-original-title="Default">
-								</li>
-								<li class="color-grey tooltips" data-style="grey" data-container="body" data-original-title="Grey">
-								</li>
-								<li class="color-blue tooltips" data-style="blue" data-container="body" data-original-title="Blue">
-								</li>
-								<li class="color-dark tooltips" data-style="dark" data-container="body" data-original-title="Dark">
-								</li>
-								<li class="color-light tooltips" data-style="light" data-container="body" data-original-title="Light">
-								</li>
-							</ul>
-						</div>
-						<div class="theme-option">
-							<span>
-							Theme Style </span>
-							<select class="layout-style-option form-control input-small">
-								<option value="square" selected="selected">Square corners</option>
-								<option value="rounded">Rounded corners</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Layout </span>
-							<select class="layout-option form-control input-small">
-								<option value="fluid" selected="selected">Fluid</option>
-								<option value="boxed">Boxed</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Header </span>
-							<select class="page-header-option form-control input-small">
-								<option value="fixed" selected="selected">Fixed</option>
-								<option value="default">Default</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Top Dropdown</span>
-							<select class="page-header-top-dropdown-style-option form-control input-small">
-								<option value="light" selected="selected">Light</option>
-								<option value="dark">Dark</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Sidebar Mode</span>
-							<select class="sidebar-option form-control input-small">
-								<option value="fixed">Fixed</option>
-								<option value="default" selected="selected">Default</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Sidebar Style</span>
-							<select class="sidebar-style-option form-control input-small">
-								<option value="default" selected="selected">Default</option>
-								<option value="compact">Compact</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Sidebar Menu </span>
-							<select class="sidebar-menu-option form-control input-small">
-								<option value="accordion" selected="selected">Accordion</option>
-								<option value="hover">Hover</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Sidebar Position </span>
-							<select class="sidebar-pos-option form-control input-small">
-								<option value="left" selected="selected">Left</option>
-								<option value="right">Right</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Footer </span>
-							<select class="page-footer-option form-control input-small">
-								<option value="fixed">Fixed</option>
-								<option value="default" selected="selected">Default</option>
-							</select>
-						</div>
-					</div>
-				</div>
+				<jsp:include page="${inc_dir}/page-stylecustomizer.jsp"/>
 				<!-- END STYLE CUSTOMIZER -->
 				<!-- BEGIN PAGE HEADER-->
 				<h3 class="page-title">
@@ -572,19 +475,22 @@ table tr td{
 													<div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12">
 													</div>
 												</div>
+												
+												<div id="event-media-table">
+												
 												<table class="table table-bordered table-hover">
 												<thead>
 												<tr role="row" class="heading">
 													<th width="8%">
 														 Image
 													</th>
-													<th width="25%">
+													<th width="20%">
 														 Label
 													</th>
 													<th width="8%">
 														 Sort Number
 													</th>
-													<th width="10%">
+													<th width="15%">
 														 Post Time
 													</th>
 													<th width="10%">
@@ -605,68 +511,33 @@ table tr td{
 														</a>
 													</td>
 													<td>
-														<input type="text" class="form-control" name="product[images][1][label]" value="${eventMedia.mediaName}">
+														<input type="text" class="form-control" name="mediaName" value="${eventMedia.mediaName}">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="product[images][1][sortNumber]" value="${eventMedia.sortNumber}">
-													</td>
-													
-													<td>
-														<input type="text" class="form-control" name="product[images][1][postTimestamp]" value="${eventMedia.postTimestamp}">
-													</td>
-													<td>
-														<input type="text" class="form-control" name="product[images][1][primaryMedia]" value="${eventMedia.primaryMedia}">
+														<input type="text" class="form-control" name="sortNumber" value="${eventMedia.sortNumber}">
 													</td>
 													
 													<td>
-														<a href="javascript:;" class="btn default btn-sm">
-														<i class="fa fa-times"></i> Remove </a>
+														<input type="text" class="form-control" name="postTimestamp" value="${eventMedia.postTimestamp}">
+													</td>
+													<td>
+														<input type="text" class="form-control" name="primaryMedia" value="${eventMedia.primaryMedia}" disabled="disabled">
 														<div>
-														<a href="javascript:;" onclick="setCoverMedia(${eventMedia.mediaId},'${eventMedia.eventUUID}'); return false;" class="btn default btn-sm">
+														<a href="javascript:;" onclick="setCoverMedia(${eventMedia.mediaId},'${eventMedia.eventUUID}');return false;" class="btn default btn-sm">
 														<i class="fa fa-edit"></i> Set Cover </a>
 														</div>
-														
-														
+													</td>
+													<td>
+														<a href="javascript:test();" class="btn default btn-sm">
+														<i class="fa fa-times"></i> Remove </a>
 													</td>
 												</tr>
 												</c:forEach>
 												
-												<!-- 
-												<tr>
-													<td>
-														<a href="${webapp_name}/assets/admin/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">
-														<img class="img-responsive" src="${webapp_name}/assets/admin/pages/media/works/img1.jpg" alt="">
-														</a>
-													</td>
-													<td>
-														<input type="text" class="form-control" name="product[images][1][label]" value="Thumbnail image">
-													</td>
-													<td>
-														<input type="text" class="form-control" name="product[images][1][sort_order]" value="1">
-													</td>
-													<td>
-														<label>
-														<input type="radio" name="product[images][1][image_type]" value="1">
-														</label>
-													</td>
-													<td>
-														<label>
-														<input type="radio" name="product[images][1][image_type]" value="2">
-														</label>
-													</td>
-													<td>
-														<label>
-														<input type="radio" name="product[images][1][image_type]" value="3" checked>
-														</label>
-													</td>
-													<td>
-														<a href="javascript:;" class="btn default btn-sm">
-														<i class="fa fa-times"></i> Remove </a>
-													</td>
-												</tr>
-												 -->
+												
 												</tbody>
 												</table>
+												</div>
 											</div>
 											<div class="tab-pane" id="tab_reviews">
 												<div class="table-container">
@@ -845,18 +716,19 @@ table tr td{
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script src="${webapp_name}/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
-<script src="${webapp_name}/assets/global/plugins/plupload/js/plupload.full.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/plupload/js/plupload.full.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="${webapp_name}/assets/global/scripts/metronic.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
-<script src="${webapp_name}/assets/admin/pages/scripts-local/event-news-edit.js"></script>
-<script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/scripts/metronic.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/admin/layout2/scripts/layout.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/admin/layout2/scripts/demo.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/scripts/datatable.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news-edit.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/test.js"></script>
 
 
 <!-- END PAGE LEVEL SCRIPTS -->
@@ -865,7 +737,7 @@ jQuery(document).ready(function() {
 	Metronic.init(); // init metronic core components
 	Layout.init(); // init current layout
 	Demo.init(); // init demo features
-	EcommerceProductsEdit.init();
+	EventNewsEdit.init();
 
 //local
 //select object for event class
@@ -875,33 +747,13 @@ jQuery(document).ready(function() {
 //select object for event status
 	var eventStatusValue = ${newsObject.eventStatus};
 	$("#eventStatus").val(eventStatusValue);
+	
 
 });
 
-function setCoverMedia(mediaId, eventUUID) {
-	//alert('ENTERING setCoverMedia='+mediaId+"    "+eventUUID);
-//    var businessObject = getBusinessObject();
-//    alert(JSON.stringify(businessObject));
-	
-    $.ajax({
-        type    :    "post",
-        url        : "setCoverMedia?mediaId="+mediaId+"&eventUUID="+eventUUID,
-        dataType:    "html",
-        timeout :     30000,
-        
-        success:function(msg){
-        	
-        	alert("ok");
-        },
-        error:function(){
-            alert("ERROR: Set Cover Media failed.");     
-        },            
-        complete: function(XMLHttpRequest, textStatus){
-        	location.href="eventsNewsEdit?eventUUID="+eventUUID;
-        	$("#tabs_event").tabs({ active: 2 });
-        }        
-    });
-}
+
+
+
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

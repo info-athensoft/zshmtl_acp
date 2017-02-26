@@ -568,9 +568,11 @@ public class NewsAcpController {
 		return model;
 	}
 	
-	@RequestMapping(value="/content/setCoverMedia")
-	public ModelAndView setCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID){
-//		public Map<String,Object> setCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID){
+//	@RequestMapping(value="/content/setCoverMedia")
+	@RequestMapping(value="/content/setCoverMedia",produces="application/json")
+	@ResponseBody
+//	public ModelAndView setCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID){
+	public Map<String,Object> setCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID){
 		logger.info("entering /content/setCoverMedia");
 		
 		ModelAndView mav = new ModelAndView();
@@ -589,7 +591,7 @@ public class NewsAcpController {
 			eventMediaService.updateEventMedia(previousPrimaryMedia);
 		}
 		
-		System.out.println("mediaId="+mediaId+",eventUUID="+eventUUID);
+		logger.info("mediaId="+mediaId+",eventUUID="+eventUUID);
 		
 		EventMedia media = eventMediaService.getEventMediaByMediaId(mediaId);
 		media.setPrimaryMedia(true);
@@ -602,7 +604,7 @@ public class NewsAcpController {
 		model.put("eventMediaList", listEventMedia);
 		
 		logger.info("leaving /content/setCoverMedia");
-		return mav;
-//		return model;
+//		return mav;
+		return model;
 	}
 }

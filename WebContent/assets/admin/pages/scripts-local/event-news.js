@@ -69,7 +69,7 @@ function createNews() {
 function updateNews() {
     
     var businessObject = getBusinessObject();
-    alert(JSON.stringify(businessObject));
+    //alert(JSON.stringify(businessObject));
 	
     //execute saving
     $.ajax({
@@ -90,28 +90,7 @@ function updateNews() {
     });
 }
 
-function setCoverMedia(mediaId,eventUUID) {
-	alert('ENTERING setCoverMedia');
-//    var businessObject = getBusinessObject();
-//    alert(JSON.stringify(businessObject));
-	/*
-    $.ajax({
-        type    :    "post",
-        url        : "setCoverMedia?mediaId="+mediaId+"&eventUUID="+eventUUID,
-        dataType:    "html",
-        timeout :     30000,
-        
-        success:function(msg){
-            alert('success');
-        },
-        error:function(){
-            alert("ERROR: Set Cover Media failed.");     
-        },            
-        complete: function(XMLHttpRequest, textStatus){
-            //reset to avoid duplication
-        }        
-    });*/
-}
+
 
 
     
@@ -177,3 +156,5 @@ function filterReset(){
     var p9 = $("#eventClass").val(0);
     var p10 = $("#eventStatus").val(0);
 }
+
+

@@ -109,21 +109,29 @@
 								<a href="#">
 								<i class="icon-home"></i>
 								Dashboard</a>
+								
 							</li>
 							<li>
-								<a href="/acp/content/eventsNewsList">
-								<i class="icon-pencil"></i>
-								News List</a>
-							</li>
-							<li>
-								<a href="/acp/content/eventsNewsEdit">
-								<i class="icon-paper-plane"></i>
-								News Edit</a>
-							</li>
-							<li>
-								<a href="/acp/content/eventsNewsCreate">
-								<i class="icon-paper-plane"></i>
-								News Create</a>
+								<a href="#">
+								<i class="icon-home"></i>
+								My News<span class="arrow"></a>
+								<ul class="sub-menu">
+								<li>
+									<a href="/acp/content/eventsNewsList">
+									<i class="icon-pencil"></i>
+									News List</a>
+								</li>
+								<li>
+									<a href="/acp/content/eventsNewsList">
+									<i class="icon-paper-plane"></i>
+									News Edit</a>
+								</li>
+								<li>
+									<a href="/acp/content/eventsNewsCreate">
+									<i class="icon-paper-plane"></i>
+									News Create</a>
+								</li>
+								</ul>
 							</li>
 						</ul>
 					</li>
