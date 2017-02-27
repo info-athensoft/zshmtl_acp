@@ -9,7 +9,7 @@ var EventNewsEdit = function () {
             browse_button : document.getElementById('tab_images_uploader_pickfiles'), // you can pass in id...
             container: document.getElementById('tab_images_uploader_container'), // ... or DOM Element itself
              
-            url : "assets/plugins/plupload/examples/upload.php",
+            url : "http://localhost:8080/acp/content/fileUpload", //TODO: Change to relative url
              
             filters : {
                 max_file_size : '10mb',
@@ -52,7 +52,8 @@ var EventNewsEdit = function () {
 
                 FileUploaded: function(up, file, response) {
                     var response = $.parseJSON(response.response);
-
+                  
+                    
                     if (response.result && response.result == 'OK') {
                         var id = response.id; // uploaded file's unique name. Here you can collect uploaded file names and submit an jax request to your server side script to process the uploaded files and update the images tabke
 
