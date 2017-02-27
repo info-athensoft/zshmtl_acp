@@ -52,6 +52,8 @@ var EventNewsEdit = function () {
 
                 FileUploaded: function(up, file, response) {
                     var response = $.parseJSON(response.response);
+                    
+              
 
                     if (response.result && response.result == 'OK') {
                         var id = response.id; // uploaded file's unique name. Here you can collect uploaded file names and submit an jax request to your server side script to process the uploaded files and update the images tabke
@@ -241,8 +243,4 @@ function setCoverMedia(mediaId, eventUUID) {
         	
         }        
     });   
-}
-
-function uploadFiles(){
-	alert("uploadFiles()");
 }
