@@ -737,7 +737,16 @@ jQuery(document).ready(function() {
 	Metronic.init(); // init metronic core components
 	Layout.init(); // init current layout
 	Demo.init(); // init demo features
-	EventNewsEdit.init();
+	//EventNewsEdit.init();
+	var eventUUID = $("#eventUUID").val();
+	EventNewsEdit.init(eventUUID);
+	//var eventUUID =  "5f06c334dc1242eb94eeb815541d5d19";
+	//var up = $('#tab_images_uploader_container').plupload('getUploader');
+//    up.settings.url = 'http://localhost:8080/acp/content/fileUpload?eventUUID='+eventUUID;
+   //up.setOption(url,'http://localhost:8080/acp/content/fileUpload?eventUUID='+eventUUID);
+	
+	
+	
 
 //local
 //select object for event class
