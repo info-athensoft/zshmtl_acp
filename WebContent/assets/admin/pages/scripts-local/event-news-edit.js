@@ -1,6 +1,6 @@
-var EventNewsEdit = function () {
+var EventNewsEdit = function (option) {
 
-    var handleImages = function() {
+    var handleImages = function(option) {
 
         // see http://www.plupload.com/
         var uploader = new plupload.Uploader({
@@ -9,7 +9,8 @@ var EventNewsEdit = function () {
             browse_button : document.getElementById('tab_images_uploader_pickfiles'), // you can pass in id...
             container: document.getElementById('tab_images_uploader_container'), // ... or DOM Element itself
              
-            url : "http://localhost:8080/acp/content/fileUpload", //TODO: Change to relative url
+            //url : "http://localhost:8080/acp/content/fileUpload", //TODO: Change to relative url
+            url : "", //TODO: Change to relative url
              
             filters : {
                 max_file_size : '10mb',
@@ -58,6 +59,11 @@ var EventNewsEdit = function () {
                         var id = response.id; // uploaded file's unique name. Here you can collect uploaded file names and submit an jax request to your server side script to process the uploaded files and update the images tabke
 
                         $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-success").html('<i class="fa fa-check"></i> Done'); // set successfull upload
+                        
+                        //create media record to database
+                        
+                        
+                        
                     } else {
                         $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-danger").html('<i class="fa fa-warning"></i> Failed'); // set failed upload
                         Metronic.alert({type: 'danger', message: 'One of uploads failed. Please retry.', closeInSeconds: 10, icon: 'warning'});
@@ -70,6 +76,8 @@ var EventNewsEdit = function () {
             }
         });
 
+        
+        uploader.setOption('url','http://localhost:8080/acp/content/fileUpload?eventUUID='+option);
         uploader.init();
 
     }
@@ -173,10 +181,10 @@ var EventNewsEdit = function () {
     return {
 
         //main function to initiate the module
-        init: function () {
+        init: function (option) {
             initComponents();
 
-            handleImages();
+            handleImages(option);
             handleReviews();
             //handleHistory();
         }

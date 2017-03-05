@@ -9,7 +9,6 @@ import java.io.OutputStream;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
@@ -18,6 +17,7 @@ import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,7 +28,6 @@ public class FileUploadAcpController {
 	private static final Logger logger = Logger.getLogger(NewsAcpController.class);
 	
 	public static final String FileDir = "D:\\Shared\\2017_athensoft_website\\fileupload";
-//	private static final String RESP_SUCCESS = "{\"jsonrpc\" : \"2.0\", \"result\" : \"success\", \"id\" : \"id\"}";
 	private static final String RESP_SUCCESS = "{\"jsonrpc\" : \"2.0\", \"result\" : \"OK\", \"id\" : \"id\"}";
 	private static final String RESP_ERROR = "{\"jsonrpc\" : \"2.0\", \"error\" : {\"code\": 101, \"message\": \"Failed to open input stream.\"}, \"id\" : \"id\"}";
 	public static final int BUF_SIZE = 2 * 1024;
@@ -41,12 +40,15 @@ public class FileUploadAcpController {
 
 	
 	
-//	@RequestMapping(value="/content/fileUpload",produces="text/html")
 	@RequestMapping(value="/content/fileUpload",produces="application/json")
-//	@RequestMapping(value="/content/fileUpload",produces="text/plain")
 	@ResponseBody
 	public Map<String,Object> fileUpload(HttpServletRequest req){
 		logger.info("entering /content/fileUpload");
+		
+		//parameter
+		String eventUUID = (String)req.getParameter("eventUUID");
+		logger.info("eventUUID="+eventUUID);
+		
 		
 		String responseString = RESP_SUCCESS;
 		
@@ -130,12 +132,7 @@ public class FileUploadAcpController {
 		Map<String, Object> model = mav.getModel();
 		
 		
-		//response.setContentType(JSON);
-		//byte[] responseBytes = responseString.getBytes();
-		//response.setContentLength(responseBytes.length);
-		//ServletOutputStream output = response.getOutputStream();
-		//output.write(responseBytes);
-		//output.flush();
+		
 		
 		model.put("jsonrpc", "2.0");
 		model.put("result", "OK");
