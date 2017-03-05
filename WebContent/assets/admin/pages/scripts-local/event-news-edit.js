@@ -54,6 +54,7 @@ var EventNewsEdit = function () {
                     var response = $.parseJSON(response.response);
 
                     if (response.result && response.result == 'OK') {
+                    	alert(file.id);
                         var id = response.id; // uploaded file's unique name. Here you can collect uploaded file names and submit an jax request to your server side script to process the uploaded files and update the images tabke
 
                         $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-success").html('<i class="fa fa-check"></i> Done'); // set successfull upload
