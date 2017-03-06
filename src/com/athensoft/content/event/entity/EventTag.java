@@ -1,9 +1,25 @@
 package com.athensoft.content.event.entity;
 
 public class EventTag {
+	
+	/**
+	 * the id of event tag
+	 */
 	private long tagId;
+	
+	/**
+	 * event UUID, the unique id for event objects
+	 */
 	private String eventUUID;
+	
+	/**
+	 * the name of tag
+	 */
 	private String tagName;
+	
+	/**
+	 * the description of tag
+	 */
 	private String tagDesc;
 	
 	public long getTagId() {
