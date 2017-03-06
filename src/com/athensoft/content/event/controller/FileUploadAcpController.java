@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +17,14 @@ import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.athensoft.content.event.service.EventMediaService;
 
 
 @Controller
@@ -38,6 +43,13 @@ public class FileUploadAcpController {
 	private String user;
 	private String time;
 
+	
+	private EventMediaService eventMediaService;
+	
+	@Autowired
+	public void setEventMediaService(EventMediaService eventMediaService) {
+		this.eventMediaService = eventMediaService;
+	}
 	
 	
 	@RequestMapping(value="/content/fileUpload",produces="application/json")
@@ -174,5 +186,116 @@ public class FileUploadAcpController {
 				}
 			}
 		}
+	}
+	
+	@RequestMapping(value="/content/fileUploadAndCreateRecord",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> fileUploadAndCreateRecord(HttpServletRequest req){
+		
+		logger.info("entering /content/fileUpload");
+		
+		//parameter
+		String eventUUID = (String)req.getParameter("eventUUID");
+		logger.info("eventUUID="+eventUUID);
+		
+		
+		String responseString = RESP_SUCCESS;
+		
+		boolean isMultipart = ServletFileUpload.isMultipartContent(req);
+		logger.info("isMultipart:" + isMultipart);
+		
+		if(isMultipart){
+			ServletFileUpload upload = new ServletFileUpload();
+			try {
+				FileItemIterator iter = upload.getItemIterator(req);
+				while (iter.hasNext()) {
+				    FileItemStream item = iter.next();
+				    InputStream input = item.openStream();
+
+				    
+				    
+				    // Handle a form field.
+				    if(item.isFormField()){
+				        String fileName = item.getFieldName();
+				        String value = Streams.asString(input);
+
+				        if("name".equals(fileName)){
+				        	this.name = value;
+				        }
+				        else if("chunks".equals(fileName)){
+				        	this.chunks = Integer.parseInt(value);
+				        }else if("chunk".equals(fileName)){
+				        	this.chunk = Integer.parseInt(value);
+				        }else if("user".equals(fileName)){
+				        	this.user = value;
+				        }else if("time".equals(fileName)){
+				        	this.time = value;
+				        }
+				        logger.info("name:" + this.name);
+				        logger.info("chunks:" + this.chunks);
+				        logger.info("chunk:" + this.chunk);
+				        logger.info("user:" + this.user);
+				        logger.info("time:" + this.time);
+				    }
+				    
+				    // Handle a multi-part MIME encoded file.
+				    else {
+//				    	String fileDir = req.getSession().getServletContext().getRealPath("/")+FileDir;
+				    	
+				    	String fileDir = FileDir+File.separator+eventUUID;
+//						
+				    	File dstFile = new File(fileDir);
+						if (!dstFile.exists()){
+							dstFile.mkdirs();
+						}
+//						
+						File dst = new File(dstFile.getPath()+ "/" + this.name);
+						
+						logger.info("fileDir:" + fileDir);
+						logger.info("fileName:" + this.name);
+						
+				        saveUploadFile(input, dst);
+				        
+				        String mediaURL = fileDir+File.separator+this.name;
+				        
+				        // persist media record into database
+				        
+				    }
+				}//end-of-while-loop
+			}
+			catch (Exception e) {
+				responseString = RESP_ERROR;
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
+		
+		// Not a multi-part MIME request.
+		else {
+			responseString = RESP_ERROR;
+		}
+		
+		logger.info("responseString:" + responseString);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//view
+		String viewName = "events/event_news_edit";
+		mav.setViewName(viewName);
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		
+		
+		
+		
+		model.put("jsonrpc", "2.0");
+		model.put("result", "OK");
+		model.put("id", "id");
+		
+		logger.info("leaving /content/fileUpload");
+		return model;
 	}
 }

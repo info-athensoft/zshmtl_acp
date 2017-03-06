@@ -77,7 +77,7 @@ var EventNewsEdit = function (option) {
         });
 
         
-        uploader.setOption('url','http://localhost:8080/acp/content/fileUpload?eventUUID='+option);
+        uploader.setOption('url','http://localhost:8080/acp/content/fileUploadAndCreateRecord?eventUUID='+option);
         uploader.init();
 
     }
