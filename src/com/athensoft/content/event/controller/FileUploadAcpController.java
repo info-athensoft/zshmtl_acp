@@ -192,7 +192,7 @@ public class FileUploadAcpController {
 	@ResponseBody
 	public Map<String,Object> fileUploadAndCreateRecord(HttpServletRequest req){
 		
-		logger.info("entering /content/fileUpload");
+		logger.info("entering /content/fileUploadAndCreateRecord");
 		
 		//parameter
 		String eventUUID = (String)req.getParameter("eventUUID");
@@ -288,14 +288,11 @@ public class FileUploadAcpController {
 		//data
 		Map<String, Object> model = mav.getModel();
 		
-		
-		
-		
 		model.put("jsonrpc", "2.0");
 		model.put("result", "OK");
 		model.put("id", "id");
 		
-		logger.info("leaving /content/fileUpload");
+		logger.info("leaving /content/fileUploadAndCreateRecord");
 		return model;
 	}
 }
