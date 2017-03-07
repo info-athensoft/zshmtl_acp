@@ -25,7 +25,7 @@ import com.athensoft.content.event.service.NewsService;
 /**
  * News Controller for ACP
  * @author Athens
- *
+ * @version 1.0
  */
 @Controller
 public class NewsAcpController {
@@ -172,6 +172,7 @@ public class NewsAcpController {
 	/**
 	 * get news objects in JSON data form, which comply with criteria
 	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
+	 * @param itemJSONString search criteria object in JSON format
 	 * @return a map structure containing data rendered to views
 	 */
 	@RequestMapping(value="/content/eventsNewsSearchFilterData",produces="application/json")
@@ -426,8 +427,8 @@ public class NewsAcpController {
 	}
 	
 	/**
-	 * update news object based on data passed in JSON format
-	 * @param itemJSONString
+	 * update news object
+	 * @param itemJSONString news object to update in JSON format
 	 * @return data and target view
 	 */
 	@RequestMapping(value="/content/updateNews",method=RequestMethod.POST)
@@ -456,7 +457,7 @@ public class NewsAcpController {
         news.setEventClass(ic_job.getString("eventClass"));
         news.setEventStatus(ic_job.getInt("eventStatus"));
           
-        logger.info(news);
+        logger.info("news = "+news);
           
 		/* business logic*/
         //long itemId = itemService.createItem(ic); 
@@ -473,7 +474,7 @@ public class NewsAcpController {
 	}
 	
 	/**
-	 * get news review objects in JSON data form
+	 * get news review objects in JSON data form<p>
 	 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
 	 * @return data table of new review objects
 	 */
