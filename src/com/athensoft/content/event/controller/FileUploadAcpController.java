@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.service.EventMediaService;
 
 
@@ -32,7 +34,8 @@ public class FileUploadAcpController {
 	
 	private static final Logger logger = Logger.getLogger(NewsAcpController.class);
 	
-	public static final String FileDir = "D:\\Shared\\2017_athensoft_website\\fileupload";
+//	public static final String FileDir = "D:\\Shared\\2017_athensoft_website\\fileupload";
+	public static final String FileDir = "C:\\temp\\fileupload";
 	private static final String RESP_SUCCESS = "{\"jsonrpc\" : \"2.0\", \"result\" : \"OK\", \"id\" : \"id\"}";
 	private static final String RESP_ERROR = "{\"jsonrpc\" : \"2.0\", \"error\" : {\"code\": 101, \"message\": \"Failed to open input stream.\"}, \"id\" : \"id\"}";
 	public static final int BUF_SIZE = 2 * 1024;
@@ -256,10 +259,17 @@ public class FileUploadAcpController {
 						
 				        saveUploadFile(input, dst);
 				        
-				        String mediaURL = fileDir+File.separator+this.name;
+//				        String mediaURL = fileDir+File.separator+this.name;
 				        
 				        // persist media record into database
+				        logger.info("Start creating event media - Name:" + this.name);
+				        EventMedia eventMedia = new EventMedia();
+				        eventMedia.setEventUUID(eventUUID);
+				        eventMedia.setMediaName(this.name);
+				        eventMedia.setMediaURL(fileDir);
+				        eventMedia.setPostTimestamp(new Date());
 				        
+				        eventMediaService.creatEventMedia(eventMedia);
 				    }
 				}//end-of-while-loop
 			}

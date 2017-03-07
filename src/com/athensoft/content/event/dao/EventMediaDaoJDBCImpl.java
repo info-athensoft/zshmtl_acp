@@ -75,7 +75,22 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 	
 	@Override
 	public void create(EventMedia media) {
+		final String TABLE1 = "event_media";
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("insert into "+TABLE1);
+		sbf.append(" (event_uuid,media_url,media_name,post_timestamp) ");
+		sbf.append(" values(:event_uuid,:media_url,:media_name,:post_timestamp)");
+		String sql =  sbf.toString();
 		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("event_uuid", media.getEventUUID());
+		paramSource.addValue("media_url", media.getMediaURL());
+		paramSource.addValue("media_name", media.getMediaName());
+		paramSource.addValue("post_timestamp", media.getPostTimestamp());
+		
+		KeyHolder keyholder = new GeneratedKeyHolder();
+		jdbc.update(sql, paramSource, keyholder);
+		return;
 	}
 
 	
@@ -92,7 +107,7 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 			x.setPrimaryMedia(rs.getBoolean("is_primary_media"));
 			x.setMediaType(rs.getInt("media_type"));
 				Timestamp ts = rs.getTimestamp("post_timestamp");			
-			x.setPostTimestamp(new Date(ts.getTime()));
+//			x.setPostTimestamp(new Date(ts.getTime()));
             return x;
 		}		
 	}
