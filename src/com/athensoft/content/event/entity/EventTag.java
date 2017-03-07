@@ -1,5 +1,11 @@
 package com.athensoft.content.event.entity;
 
+/**
+ * A tag object binding to an event object, which represents a keyword
+ * 
+ * @author Athens
+ * @version 1.0 
+ */
 public class EventTag {
 	
 	/**

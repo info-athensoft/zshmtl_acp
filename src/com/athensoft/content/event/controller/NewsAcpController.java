@@ -22,11 +22,19 @@ import com.athensoft.content.event.service.EventMediaService;
 import com.athensoft.content.event.service.EventReviewService;
 import com.athensoft.content.event.service.NewsService;
 
+/**
+ * News Controller for ACP
+ * @author Athens
+ *
+ */
 @Controller
 public class NewsAcpController {
 	
 	private static final Logger logger = Logger.getLogger(NewsAcpController.class);
 	
+	/**
+	 * News Service instance
+	 */
 	private NewsService newsService;
 	
 	@Autowired
@@ -34,6 +42,9 @@ public class NewsAcpController {
 		this.newsService = newsService;
 	}
 	
+	/**
+	 * EventReview Service instance
+	 */
 	private EventReviewService eventReviewService;
 		
 	@Autowired
@@ -41,6 +52,9 @@ public class NewsAcpController {
 		this.eventReviewService = eventReviewService;
 	}
 	
+	/**
+	 * EventMedia Service instance
+	 */
 	private EventMediaService eventMediaService;
 	
 	@Autowired
@@ -48,12 +62,20 @@ public class NewsAcpController {
 		this.eventMediaService = eventMediaService;
 	}
 	
+	/**
+	 * go to the view of news listing
+	 * @return the target view name 
+	 */
 	@RequestMapping(value="/content/eventsNewsList")
 	public String gotoNewsList(){
 		String viewName = "events/event_news_list";
 		return viewName;
 	}
 	
+	/**
+	 * go to the view of news creating
+	 * @return the target view name 
+	 */
 	@RequestMapping(value="/content/eventsNewsCreate")
 	public String gotoNewsCreate(){
 		String viewName = "events/event_news_create";
@@ -61,7 +83,11 @@ public class NewsAcpController {
 	}
 	
 	
-	
+	/**
+	 * get news objects in JSON data form
+	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
+	 * @return a map structure containing data rendered to view
+	 */
 	@RequestMapping(value="/content/eventsNewsListData",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> getDataNewsList(){
@@ -143,7 +169,11 @@ public class NewsAcpController {
 		return model;
 	}
 	
-	
+	/**
+	 * get news objects in JSON data form, which comply with criteria
+	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
+	 * @return a map structure containing data rendered to views
+	 */
 	@RequestMapping(value="/content/eventsNewsSearchFilterData",produces="application/json")
 	@ResponseBody
 	public Map<String, Object> getDataSearchByFilter(@RequestParam String itemJSONString){
@@ -208,9 +238,6 @@ public class NewsAcpController {
 		queryString.append(where3.length()==0?" ":" and author like '%"+where3+"%' ");
 		queryString.append(where4==0?" ":" and event_class = "+where4+" ");
 		
-		
-		
-		
 		String queryString_where5 = "";
 		if(strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
 			queryString_where5 = " ";
@@ -228,7 +255,6 @@ public class NewsAcpController {
 		}
 		queryString.append(queryString_where5);
 		
-		
 		String queryString_where6 = "";
 		if(strViewNumFrom.equals("")&&strViewNumTo.equals("")){
 			queryString_where6 = " ";
@@ -242,16 +268,9 @@ public class NewsAcpController {
 			}else{
 				queryString_where6 = " and (view_num between "+where6b+" and "+where6a+" ) ";
 			}
-			
 		}
 		queryString.append(queryString_where6);
-		
-		
-		
-		
-		
-		
-		
+				
 		queryString.append(where7==0?" ":" and event_status = "+where7+" ");
 		
 		logger.info("QueryString = "+ queryString.toString());
@@ -302,11 +321,8 @@ public class NewsAcpController {
 					break;
 			}
 			
-			
 			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
 			field8 = "<a href='/acp/content/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
-			
-			//logger.info("field8="+field8);
 			
 			data[i][0] = field0;
 			data[i][1] = field1;
@@ -318,8 +334,6 @@ public class NewsAcpController {
 			data[i][7] = field7;
 			data[i][8] = field8;
 		}
-		
-		
 		
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
@@ -334,6 +348,11 @@ public class NewsAcpController {
 	}
 	
 	
+	/**
+	 * goto event-news edit page with data for updating
+	 * @param eventUUID the eventUUID of new object selected
+	 * @return data of news object, event media objects, and target view
+	 */
 	@RequestMapping(value="/content/eventsNewsEdit")
 	public ModelAndView gotoNewsEdit(@RequestParam String eventUUID){
 		logger.info("entering /content/eventsNewsEdit");
@@ -360,56 +379,12 @@ public class NewsAcpController {
 		return mav;
 	}
 	
-
-	/*
-	@RequestMapping(value="/orders",method=RequestMethod.POST,produces="application/json")
-	@ResponseBody
-	public List<Order> getAllOrders(){
-		
-		List<Order> orders = orderService.getAllOrders();
-		System.out.println("size of orders:\t"+orders.size());
-		return orders;
-	}
 	
-	@RequestMapping(value="/orders",method=RequestMethod.GET,produces="application/json")
-	@ResponseBody
-	public List<OrderHead> getAllOrders2(){
-		
-		List<Order> orders = orderService.getAllOrders();
-		System.out.println("size of orders:\t"+orders.size());
-		
-		List<OrderHead> orderheads = new ArrayList<OrderHead>();
-		for(Order order:orders){
-			OrderHead oh = new OrderHead();
-			oh.setOrderId(order.getOrderId());
-			oh.setOrderNo(order.getOrderNo());
-			oh.setOrderDateTime(order.getOrderDateTime());
-			oh.setGrandTotalAmount(order.getGrandTotalAmount());
-			oh.setOrderStatus(order.getOrderStatus());
-			oh.setPaymentMethod(order.getPaymentMethod());
-			orderheads.add(oh);
-		}
-		return orderheads;
-	}
-	*/
-	
-	/*
-	@RequestMapping(value="/orders/{orderId}")
-	public ModelAndView getOrderDetail(@PathVariable long orderId){
-		ModelAndView mav = new ModelAndView();
-		
-		Order order = orderService.getOrderByOrderId(orderId);
-		System.out.println("getOrderDetail()\n"+order.toString());
-		
-		
-		Map<String,Object> data = mav.getModel();
-		data.put("order", order);		
-		mav.setViewName("ecommerce_orders_view");
-		return mav;
-	}
-	
-	*/
-	
+	/**
+	 * create news object based on data passed in JSON format
+	 * @param itemJSONString news object in JSON format 
+	 * @return data and event-news view
+	 */
 	@RequestMapping(value="/content/createNews",method=RequestMethod.POST)
 	public ModelAndView createNews(@RequestParam String itemJSONString) {
 		
@@ -422,35 +397,39 @@ public class NewsAcpController {
         Map<String, Object> model = mav.getModel();
         JSONObject ic_job= new JSONObject(itemJSONString);
    
-          News news = new News();
-          //news.setGlobalId(ic_job.getLong("globalId"));
-          news.setEventUUID(ic_job.getString("eventUUID"));
-          news.setTitle(ic_job.getString("title"));
-          news.setAuthor(ic_job.getString("author"));
+        News news = new News();
+//		news.setGlobalId(ic_job.getLong("globalId"));
+        news.setEventUUID(ic_job.getString("eventUUID"));
+        news.setTitle(ic_job.getString("title"));
+        news.setAuthor(ic_job.getString("author"));
           
-//          news.setPostDatetime(new Date(ic_job.getString("postDatetime")));
-          news.setPostDatetime(new Date());
-          news.setViewNum(ic_job.getInt("viewNum"));
-          news.setDescShort(ic_job.getString("descShort"));
-          news.setDescLong(ic_job.getString("descLong"));
-          news.setEventClass(ic_job.getString("eventClass"));
-          news.setEventStatus(ic_job.getInt("eventStatus"));
+//      news.setPostDatetime(new Date(ic_job.getString("postDatetime")));
+        news.setPostDatetime(new Date());
+        news.setViewNum(ic_job.getInt("viewNum"));
+        news.setDescShort(ic_job.getString("descShort"));
+        news.setDescLong(ic_job.getString("descLong"));
+        news.setEventClass(ic_job.getString("eventClass"));
+        news.setEventStatus(ic_job.getInt("eventStatus"));
           
-          logger.info(news);
+        logger.info(news);
           
 		/* business logic*/
         //long itemId = itemService.createItem(ic); 
-
-          newsService.createNews(news);
+        newsService.createNews(news);
 		
 		/* assemble model and view */
-//        model.put("news", news);
-         String viewName = "events/event_news_list";
-		mav.setViewName(viewName);		
+//      model.put("news", news);
+        String viewName = "events/event_news_list";
+        mav.setViewName(viewName);		
 		
 		return mav;		
 	}
 	
+	/**
+	 * update news object based on data passed in JSON format
+	 * @param itemJSONString
+	 * @return data and target view
+	 */
 	@RequestMapping(value="/content/updateNews",method=RequestMethod.POST)
 	public ModelAndView updateNews(@RequestParam String itemJSONString) {
 		
@@ -464,28 +443,28 @@ public class NewsAcpController {
         JSONObject ic_job= new JSONObject(itemJSONString);
    
         News news = new News();
-//          news.setGlobalId(ic_job.getLong("globalId"));
-          news.setEventUUID(ic_job.getString("eventUUID"));
-          news.setTitle(ic_job.getString("title"));
-          news.setAuthor(ic_job.getString("author"));
+//      news.setGlobalId(ic_job.getLong("globalId"));
+        news.setEventUUID(ic_job.getString("eventUUID"));
+        news.setTitle(ic_job.getString("title"));
+        news.setAuthor(ic_job.getString("author"));
           
-//          news.setPostDatetime(new Date(ic_job.getString("postDatetime")));
-          news.setPostDatetime(new Date());
-          news.setViewNum(ic_job.getInt("viewNum"));
-          news.setDescShort(ic_job.getString("descShort"));
-          news.setDescLong(ic_job.getString("descLong"));
-          news.setEventClass(ic_job.getString("eventClass"));
-          news.setEventStatus(ic_job.getInt("eventStatus"));
+//      news.setPostDatetime(new Date(ic_job.getString("postDatetime")));
+        news.setPostDatetime(new Date());
+        news.setViewNum(ic_job.getInt("viewNum"));
+        news.setDescShort(ic_job.getString("descShort"));
+        news.setDescLong(ic_job.getString("descLong"));
+        news.setEventClass(ic_job.getString("eventClass"));
+        news.setEventStatus(ic_job.getInt("eventStatus"));
           
-          logger.info(news);
+        logger.info(news);
           
 		/* business logic*/
         //long itemId = itemService.createItem(ic); 
 
-          newsService.updateNews(news);
+        newsService.updateNews(news);
 		
 		/* assemble model and view */
-//        model.put("news", news);
+//      model.put("news", news);
         String viewName = "events/event_news_list";
 		mav.setViewName(viewName);		
 		
@@ -493,6 +472,11 @@ public class NewsAcpController {
 		return mav;		
 	}
 	
+	/**
+	 * get news review objects in JSON data form
+	 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
+	 * @return data table of new review objects
+	 */
 	@RequestMapping(value="/content/eventsNewsReviewListData",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> getDataNewsReviewList(){
@@ -568,10 +552,14 @@ public class NewsAcpController {
 		return model;
 	}
 	
-//	@RequestMapping(value="/content/setCoverMedia")
+	/**
+	 * set current media to as a cover media and refresh all media objects 
+	 * @param mediaId the mediaId of current media
+	 * @param eventUUID the eventUUID of current event
+	 * @return data table of updated media object
+	 */
 	@RequestMapping(value="/content/setCoverMedia",produces="application/json")
 	@ResponseBody
-//	public ModelAndView setCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID){
 	public Map<String,Object> setCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID){
 		logger.info("entering /content/setCoverMedia");
 		

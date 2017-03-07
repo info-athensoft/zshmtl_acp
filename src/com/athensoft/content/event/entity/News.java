@@ -1,5 +1,11 @@
 package com.athensoft.content.event.entity;
 
+/**
+ * A concrete class of event, represents a piece of news
+ * 
+ * @author Athens
+ * @version 1.0 
+ */
 public class News extends Event {
 
 	/**

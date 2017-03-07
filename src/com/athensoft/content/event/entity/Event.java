@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * A high-level class of event, may have multiple subclasses, represents a message to publish
+ * 
  * @author Athens
- *
+ * @version 1.0 
  */
 public class Event {
 	/**

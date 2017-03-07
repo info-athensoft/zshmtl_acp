@@ -2,6 +2,12 @@ package com.athensoft.content.event.entity;
 
 import java.util.Date;
 
+/**
+ * A concrete class of event, represents an activity
+ * 
+ * @author Athens
+ * @version 1.0 
+ */
 public class Activity extends Event {
 	
 	/**

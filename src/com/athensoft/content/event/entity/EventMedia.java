@@ -2,6 +2,12 @@ package com.athensoft.content.event.entity;
 
 import java.util.Date;
 
+/**
+ * A media object binding to an event object, which contains such media as picture,audio,video
+ * 
+ * @author Athens
+ * @version 1.0 
+ */
 public class EventMedia {
 	/**
 	 * the global media id without business sense

@@ -2,6 +2,12 @@ package com.athensoft.content.event.entity;
 
 import java.util.Date;
 
+/**
+ * A review object binding to an event object, which represents a review from web visitors
+ * 
+ * @author Athens
+ * @version 1.0 
+ */
 public class EventReview {
 	/**
 	 * the status of review, constant value, APPROVED = 1
