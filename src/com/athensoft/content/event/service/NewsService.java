@@ -10,9 +10,17 @@ import com.athensoft.content.event.dao.NewsDao;
 import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.News;
 
+/**
+ * News Service
+ * @author Athens
+ * @version 1.0
+ */
 @Service
 public class NewsService {
 	
+	/**
+	 * DAO of News
+	 */
 	@Autowired
 	@Qualifier("newsDaoJDBCImpl")
 	private NewsDao newsDao;
@@ -21,29 +29,56 @@ public class NewsService {
 		this.newsDao = newsDao;
 	}
 	
+	/**
+	 * get a news object by its globalId
+	 * @param globalId the globalId of news object
+	 * @return the target News object
+	 */
 	public News getNewsById(long globalId){
 		return (News)newsDao.findById(globalId);
 	}
 	
+	/**
+	 * get a news object by its eventUUID
+	 * @param eventUUID the eventUUID of news object
+	 * @return the target News object
+	 */
 	public News getNewsByEventUUID(String eventUUID){
 		return (News)newsDao.findByEventUUID(eventUUID);
 	}
 	
+	/**
+	 * get all news objects<p>
+	 * WARNING: DO NOT USE THIS METHOD IN PRODUCT. JUST FOR TEST.
+	 * @return list of news objects
+	 */
 	public List<Event> getAllNews(){
 		return newsDao.findAll();
 	}
 	
+	/**
+	 * create a news object and persist it
+	 * @param news a news object to persist
+	 */
 	public void createNews(News news) {
 		this.newsDao.create(news);
 		return;
 	}
 
+	/**
+	 * update a news object and persist it
+	 * @param news a news object to persist
+	 */
 	public void updateNews(News news) {
 		this.newsDao.update(news);
 		
 	}
 	
-	//acp at EventNewsList > datatable > filter section 
+	/**
+	 * get news objects by search criteria
+	 * @param queryString search criteria for qualified news objects
+	 * @return list of news object
+	 */
 	public List<Event> getNewsByFilter(String queryString){
 		return newsDao.findByFilter(queryString);
 	}
