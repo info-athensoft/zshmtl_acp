@@ -1,13 +1,32 @@
 package com.athensoft.content.event.entity;
 
+/**
+ * A concrete class of event, represents a piece of news
+ * 
+ * @author Athens
+ * @version 1.0 
+ */
 public class News extends Event {
 
-	
+	/**
+	 * the status of event, constant value, UNKNOWN = 0
+	 */
 	public final static int UNKNOWN = 0;
-	public final static int PUBLISHED = 1;
-	public final static int NOT_PUBLISHED = 2;
-	public final static int DELETED = 3;
 	
+	/**
+	 * the status of event, constant value, PUBLISHED = 1
+	 */
+	public final static int PUBLISHED = 1;
+	
+	/**
+	 * the status of event, constant value, NOT_PUBLISHED = 2
+	 */
+	public final static int NOT_PUBLISHED = 2;
+	
+	/**
+	 * the status of event, constant value, DELETED = 3
+	 */
+	public final static int DELETED = 3;
 	
 	@Override
 	public String toString() {
