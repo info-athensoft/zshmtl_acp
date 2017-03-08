@@ -157,4 +157,29 @@ function filterReset(){
     var p10 = $("#eventStatus").val(0);
 }
 
+function groupUpdateStatus(eventUUIDArray,newsStatus){
+	//alert("groupUpdateStatus()");
+    //alert(eventUUIDArray+":"+newsStatus);
+	
+    //execute saving
+	
+    $.ajax({
+        type    :    "post",
+        url        : "updateNewsGroup?eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
+        dataType:    "json",
+        timeout :     30000,
+        
+        success:function(msg){
+            location.href="eventsNewsList";
+        	//alert("INFO: News status updated.");
+        },
+        error:function(){
+            alert("ERROR: News updating failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+            //reset to avoid duplication
+        }        
+    });
+}
+
 

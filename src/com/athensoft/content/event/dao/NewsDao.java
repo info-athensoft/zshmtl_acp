@@ -58,4 +58,10 @@ public interface NewsDao {
 	 */
 	public void update(News news);
 	
+	/**
+	 * update news objects and persist them in batch
+	 * @param news list of news objects to persist
+	 */
+	public void updateBatch(List<News> news);
+	
 }

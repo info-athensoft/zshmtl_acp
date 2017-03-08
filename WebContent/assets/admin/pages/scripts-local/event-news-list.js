@@ -1,4 +1,4 @@
-var EcommerceProducts = function () {
+var EventNewsList = function () {
 
     var initPickers = function () {
         //init date pickers
@@ -12,7 +12,7 @@ var EcommerceProducts = function () {
         var grid = new Datatable();
 
         grid.init({
-            src: $("#datatable_products"),
+            src: $("#datatable_eventNewsList"),
             onSuccess: function (grid) {
             	//alert("success");
             },
@@ -34,7 +34,7 @@ var EcommerceProducts = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "http://localhost:8080/acp/content/eventsNewsListData", // ajax source
+                    "url": "/acp/content/eventsNewsListData", // ajax source
                     //"url": "http://localhost:8080/acp/content/eventsNewsListData?length=3", // ajax source
                     //"dataSrc": "data"
                 },
@@ -49,12 +49,26 @@ var EcommerceProducts = function () {
         	//alert("getTableWrapper");
             e.preventDefault();
             var action = $(".table-group-action-input", grid.getTableWrapper());
+            
+            //alert(action.val());
+            
             if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
                 grid.setAjaxParam("customActionType", "group_action");
                 grid.setAjaxParam("customActionName", action.val());
                 grid.setAjaxParam("id", grid.getSelectedRows());
-                grid.getDataTable().ajax.reload();
+                
+                //modified by Athens
+                var eventUUIDArray = grid.getSelectedRows();
+                var newsStatus = action.val();
+                groupUpdateStatus(eventUUIDArray,newsStatus);
+                //end-of-modified
+                
+                //grid.getDataTable().ajax.reload();
+                //grid.getDataTable().ajax.url("/acp/content/eventsNewsListData").load();
+                //grid.getDataTable().ajax.reload();
                 grid.clearAjaxParams();
+                
+                
             } else if (action.val() == "") {
                 Metronic.alert({
                     type: 'danger',
@@ -79,10 +93,8 @@ var EcommerceProducts = function () {
 
         //main function to initiate the module
         init: function () {
-
             handleProducts();
             initPickers();
-            
         }
 
     };
