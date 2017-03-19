@@ -421,12 +421,12 @@ table tr td{
 														</label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
-																<option value="">Select...</option>
-																<option value="0">Undetermined</option>
-																<option value="1">Active</option>
-																<option value="2">Waiting to post</option>
-																<option value="3">Out-of-date</option>
-																<option value="4">Deleted</option>
+																<option value="0">Select...</option>
+																<option value="1">Published</option>
+																<option value="2">Wait to post</option>
+																<option value="3">Deleted</option>
+																<option value="4">Out of date</option>
+																<option value="5">Suspended</option>
 															</select>
 														</div>
 													</div>
