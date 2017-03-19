@@ -97,10 +97,10 @@ function updateNews() {
 /* event_news_list.jsp */
 function filterSearch(){
 	
-//	alert("do filterSearch()");
+	alert("do filterSearch()");
 //	create a json object
     var p2 = $("#eventUUID").val();
-    var p3 = $("#eventTitle").val();        
+    var p3 = $("#eventTitle").val();
     var p4 = $("#eventAuthor").val();
     var p5a = $("#postDatetimeFrom").val();
     var p5b = $("#postDatetimeTo").val();
@@ -137,7 +137,7 @@ function filterSearch(){
     		eventStatus	:    p10
     };
 
-    var dt = $("#datatable_products").DataTable();
+    var dt = $("#datatable_eventNewsList").DataTable();
     
     var x = dt.ajax.url("eventsNewsSearchFilterData?itemJSONString="+JSON.stringify(businessObject)).load();
     
