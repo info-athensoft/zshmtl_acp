@@ -401,8 +401,10 @@ table tr td{
 											<select class="form-control form-filter input-sm" name="event_status" id="eventStatus">
 												<option value="0">Select...</option>
 												<option value="1">Published</option>
-												<option value="2">Not Published</option>
+												<option value="2">Wait to post</option>
 												<option value="3">Deleted</option>
+												<option value="4">Out of date</option>
+												<option value="5">Suspended</option>
 											</select>
 										</td>
 										<td>

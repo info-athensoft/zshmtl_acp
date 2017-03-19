@@ -130,13 +130,21 @@ public class NewsAcpController {
 					eventStatus = "Published";
 					eventStatusKey = "success";
 					break;
-				case News.NOT_PUBLISHED: 
-					eventStatus = "Not published";
-					eventStatusKey = "info";
+				case News.WAIT_TO_POST: 
+					eventStatus = "Wait to post";
+					eventStatusKey = "warning";
 					break;
 				case News.DELETED: 
 					eventStatus = "Deleted";
-					eventStatusKey = "warning";
+					eventStatusKey = "default";
+					break;
+				case News.OUT_OF_DATE: 
+					eventStatus = "Out of date";
+					eventStatusKey = "info";
+					break;
+				case News.SUSPENDED: 
+					eventStatus = "Suspended";
+					eventStatusKey = "danger";
 					break;
 				default: 
 					break;
@@ -307,18 +315,26 @@ public class NewsAcpController {
 			String eventStatus = "";
 			String eventStatusKey = "";
 			switch(intEventStatus){
-				case News.PUBLISHED: 
-					eventStatus = "Published";
-					eventStatusKey = "success";
-					break;
-				case News.NOT_PUBLISHED: 
-					eventStatus = "Not published";
-					eventStatusKey = "info";
-					break;
-				case News.DELETED: 
-					eventStatus = "Deleted";
-					eventStatusKey = "warning";
-					break;
+			case News.PUBLISHED: 
+				eventStatus = "Published";
+				eventStatusKey = "success";
+				break;
+			case News.WAIT_TO_POST: 
+				eventStatus = "Wait to post";
+				eventStatusKey = "warning";
+				break;
+			case News.DELETED: 
+				eventStatus = "Deleted";
+				eventStatusKey = "default";
+				break;
+			case News.OUT_OF_DATE: 
+				eventStatus = "Out of date";
+				eventStatusKey = "info";
+				break;
+			case News.SUSPENDED: 
+				eventStatus = "Suspended";
+				eventStatusKey = "danger";
+				break;
 				default: 
 					break;
 			}
