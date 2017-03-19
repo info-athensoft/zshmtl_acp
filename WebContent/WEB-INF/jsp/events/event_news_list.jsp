@@ -319,13 +319,13 @@ table tr td{
 										</span>
 										<select class="table-group-action-input form-control input-inline input-small input-sm">
 											<option value="">Select...</option>
-											<option value="publish">Publish</option>
-											<option value="unpublished">Un-publish</option>
-											<option value="delete">Delete</option>
+											<option value="1">Publish</option>
+											<option value="2">Un-publish</option>
+											<option value="3">Delete</option>
 										</select>
 										<button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
 									</div>
-									<table class="table table-striped table-bordered table-hover" id="datatable_products">
+									<table class="table table-striped table-bordered table-hover" id="datatable_eventNewsList">
 									<thead>
 									<tr role="row" class="heading">
 										<th width="4%">
@@ -419,10 +419,7 @@ table tr td{
 									</table>
 									
 									<!-- test data for orders -->
-									
-									
-									
-									
+	
 								</div>
 							</div>
 						</div>
@@ -471,7 +468,7 @@ table tr td{
 <script src="${webapp_name}/assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
-<script src="${webapp_name}/assets/admin/pages/scripts-local/content-news.js"></script>
+<script src="${webapp_name}/assets/admin/pages/scripts-local/event-news-list.js"></script>
 <script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
 <script src="${webapp_name}/assets/admin/pages/scripts-local/global-validate.js"></script>
 
@@ -481,7 +478,7 @@ jQuery(document).ready(function() {
 	Metronic.init(); // init metronic core components
 	Layout.init(); // init current layout
 	Demo.init(); // init demo features
-	EcommerceProducts.init();
+	EventNewsList.init();
 });
 </script>
 

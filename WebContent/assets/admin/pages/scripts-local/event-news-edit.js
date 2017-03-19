@@ -108,7 +108,7 @@ var EventNewsEdit = function (option) {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "http://localhost:8080/acp/content/eventsNewsReviewListData", // ajax source
+                    "url": "/acp/content/eventsNewsReviewListData", // ajax source
                 },
                 "columnDefs": [{ // define columns sorting options(by default all columns are sortable extept the first checkbox column)
                     'orderable': true,
@@ -229,8 +229,8 @@ function setCoverMedia(mediaId, eventUUID) {
 				var i = index;
 				
 				str = str+ '<tr>'
-				+'<td><a href="${webapp_name}/assets/admin/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">'
-				+	'<img class="img-responsive" src="${webapp_name}/assets/admin/pages/media/works/img1.jpg" alt=""></a></td>'
+				+'<td><a href="/acp/assets/admin/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">'
+				+	'<img class="img-responsive" src="/acp/assets/admin/pages/media/works/img1.jpg" alt=""></a></td>'
 				+'<td><input type="text" class="form-control" name="mediaName" value="'+mydata[i].mediaName+'"></td>'
 				+'<td><input type="text" class="form-control" name="sortNumber" value="'+mydata[i].sortNumber+'"></td>'
 				+'<td><input type="text" class="form-control" name="postTimestamp" value="'+mydata[i].postTimestamp+'"></td>'

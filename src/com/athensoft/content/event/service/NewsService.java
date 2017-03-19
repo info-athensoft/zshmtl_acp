@@ -15,6 +15,10 @@ import com.athensoft.content.event.entity.News;
  * @author Athens
  * @version 1.0
  */
+/**
+ * @author Athens
+ *
+ */
 @Service
 public class NewsService {
 	
@@ -71,7 +75,14 @@ public class NewsService {
 	 */
 	public void updateNews(News news) {
 		this.newsDao.update(news);
-		
+	}
+	
+	/**
+	 * update news objects and persist them in batch
+	 * @param newsList
+	 */
+	public void updateNewsGroup(List<News> newsList) {
+		this.newsDao.updateBatch(newsList);
 	}
 	
 	/**

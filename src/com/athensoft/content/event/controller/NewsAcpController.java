@@ -1,5 +1,6 @@
 package com.athensoft.content.event.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -177,7 +178,7 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/content/eventsNewsSearchFilterData",produces="application/json")
 	@ResponseBody
-	public Map<String, Object> getDataSearchByFilter(@RequestParam String itemJSONString){
+	public Map<String, Object> getDataSearchNewsByFilter(@RequestParam String itemJSONString){
 		logger.info("entering /content/eventsNewsSearchFilterData");
 		
 		ModelAndView mav = new ModelAndView();
@@ -474,6 +475,51 @@ public class NewsAcpController {
 	}
 	
 	/**
+	 * update news objects in group
+	 * @param itemJSONString news object to update in JSON format
+	 * @return data and target view
+	 */
+	@RequestMapping(value="/content/updateNewsGroup",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> updateNewsGroup(
+			@RequestParam String eventUUIDArray,
+			@RequestParam int newsStatus
+			) {
+		
+		logger.info("entering /content/updateNewsGroup");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+        Map<String, Object> model = mav.getModel();
+   
+        List<News> newsList = new ArrayList<News>();
+        String[] eventUUIDs = eventUUIDArray.split(",");
+        int eventUUIDLength = eventUUIDs.length;
+        
+        for(int i=0; i<eventUUIDLength; i++){
+        	 News news = new News();
+             news.setEventUUID(eventUUIDs[i]);
+             news.setEventStatus(newsStatus);
+             newsList.add(news);
+             news = null;
+        }
+        
+        logger.info("newsList size="+newsList.size());
+        logger.info("newsList ="+newsList.toString());
+        
+		/* business logic*/
+        newsService.updateNewsGroup(newsList);
+        
+		
+		/* assemble model and view */
+		logger.info("leaving /content/updateNewsGroup");
+		return model;		
+	}
+	
+	
+	/**
 	 * get news review objects in JSON data form<p>
 	 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
 	 * @return data table of new review objects
@@ -561,7 +607,9 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/content/setCoverMedia",produces="application/json")
 	@ResponseBody
-	public Map<String,Object> setCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID){
+	public Map<String,Object> setCoverMedia(
+			@RequestParam long mediaId, 
+			@RequestParam String eventUUID){
 		logger.info("entering /content/setCoverMedia");
 		
 		ModelAndView mav = new ModelAndView();

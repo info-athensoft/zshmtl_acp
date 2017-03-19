@@ -13,14 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.News;
+import com.mysql.jdbc.PreparedStatement;
 
 @Component
 @Qualifier("newsDaoJDBCImpl")
@@ -141,46 +144,58 @@ public class NewsDaoJDBCImpl implements NewsDao {
 	}
 	
 	@Override
-		public void update(News news) {
-			final String TABLE1 = "event_news";
-			
-			StringBuffer sbf = new StringBuffer();
-			sbf.append("update "+TABLE1+" ");
-			sbf.append("set ");
-			sbf.append("title = :title, ");
-			sbf.append("author = :author, ");
-			sbf.append("post_datetime = :post_datetime, ");
-			sbf.append("view_num = :view_num, ");
-			sbf.append("desc_short = :desc_short, ");
-			sbf.append("desc_long = :desc_long, ");
-			sbf.append("event_class = :event_class, ");
-			sbf.append("event_status = :event_status ");
-			sbf.append("where ");
-			sbf.append("event_uuid = :event_uuid");
-					
-					/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
-			
-			String sql = sbf.toString();
-			
-	//		final Date dateCreate 			= new Date();
-	//		final Date dateLastModified 	= dateCreate;
-			MapSqlParameterSource paramSource = new MapSqlParameterSource();
-	//		paramSource.addValue("global_id", news.getGlobalId());
-			paramSource.addValue("event_uuid", news.getEventUUID());
-			paramSource.addValue("title",news.getTitle());
-			paramSource.addValue("author",news.getAuthor());
-			paramSource.addValue("post_datetime",news.getPostDatetime());
-			paramSource.addValue("view_num", news.getViewNum());
-			paramSource.addValue("desc_short", news.getDescShort());
-			paramSource.addValue("desc_long",news.getDescLong());
-			paramSource.addValue("event_class",news.getEventClass());
-			paramSource.addValue("event_status",news.getEventStatus());
-			
-			KeyHolder keyholder = new GeneratedKeyHolder();
-			jdbc.update(sql, paramSource, keyholder);
-			return;
-			
+	public void update(News news) {
+		final String TABLE1 = "event_news";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("update "+TABLE1+" ");
+		sbf.append("set ");
+		sbf.append("title = :title, ");
+		sbf.append("author = :author, ");
+		sbf.append("post_datetime = :post_datetime, ");
+		sbf.append("view_num = :view_num, ");
+		sbf.append("desc_short = :desc_short, ");
+		sbf.append("desc_long = :desc_long, ");
+		sbf.append("event_class = :event_class, ");
+		sbf.append("event_status = :event_status ");
+		sbf.append("where ");
+		sbf.append("event_uuid = :event_uuid");
+				
+				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
+		
+		String sql = sbf.toString();
+		
+//		final Date dateCreate 			= new Date();
+//		final Date dateLastModified 	= dateCreate;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("global_id", news.getGlobalId());
+		paramSource.addValue("event_uuid", news.getEventUUID());
+		paramSource.addValue("title",news.getTitle());
+		paramSource.addValue("author",news.getAuthor());
+		paramSource.addValue("post_datetime",news.getPostDatetime());
+		paramSource.addValue("view_num", news.getViewNum());
+		paramSource.addValue("desc_short", news.getDescShort());
+		paramSource.addValue("desc_long",news.getDescLong());
+		paramSource.addValue("event_class",news.getEventClass());
+		paramSource.addValue("event_status",news.getEventStatus());
+		
+		KeyHolder keyholder = new GeneratedKeyHolder();
+		jdbc.update(sql, paramSource, keyholder);
+		return;
+		
+	}
+
+	@Override
+	public void updateBatch(final List<News> newsList) {
+		String sql = "update event_news set event_status=:eventStatus where event_uuid =:eventUUID";
+
+		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();
+		for (News x : newsList) {
+			parameters.add(new BeanPropertySqlParameterSource(x));
 		}
+
+		jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
+	}
 
 	private static class NewsRowMapper implements RowMapper<Event>{
 		public Event mapRow(ResultSet rs, int rowNumber) throws SQLException {

@@ -97,10 +97,10 @@ function updateNews() {
 /* event_news_list.jsp */
 function filterSearch(){
 	
-//	alert("do filterSearch()");
+	alert("do filterSearch()");
 //	create a json object
     var p2 = $("#eventUUID").val();
-    var p3 = $("#eventTitle").val();        
+    var p3 = $("#eventTitle").val();
     var p4 = $("#eventAuthor").val();
     var p5a = $("#postDatetimeFrom").val();
     var p5b = $("#postDatetimeTo").val();
@@ -137,7 +137,7 @@ function filterSearch(){
     		eventStatus	:    p10
     };
 
-    var dt = $("#datatable_products").DataTable();
+    var dt = $("#datatable_eventNewsList").DataTable();
     
     var x = dt.ajax.url("eventsNewsSearchFilterData?itemJSONString="+JSON.stringify(businessObject)).load();
     
@@ -155,6 +155,31 @@ function filterReset(){
     var p6b = $("#viewNumTo").val("");
     var p9 = $("#eventClass").val(0);
     var p10 = $("#eventStatus").val(0);
+}
+
+function groupUpdateStatus(eventUUIDArray,newsStatus){
+	//alert("groupUpdateStatus()");
+    //alert(eventUUIDArray+":"+newsStatus);
+	
+    //execute saving
+	
+    $.ajax({
+        type    :    "post",
+        url        : "updateNewsGroup?eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
+        dataType:    "json",
+        timeout :     30000,
+        
+        success:function(msg){
+            location.href="eventsNewsList";
+        	//alert("INFO: News status updated.");
+        },
+        error:function(){
+            alert("ERROR: News updating failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+            //reset to avoid duplication
+        }        
+    });
 }
 
 
