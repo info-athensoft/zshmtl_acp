@@ -6,6 +6,10 @@ package com.athensoft.content.event.entity;
  * @author Athens
  * @version 1.0 
  */
+/**
+ * @author Athens
+ *
+ */
 public class News extends Event {
 
 	/**
@@ -33,6 +37,23 @@ public class News extends Event {
 	 * the status of event, constant value, SUSPENDED = 5
 	 */
 	public final static int SUSPENDED = 5;
+	
+	/**
+	 * the category of news, constant value, CLASS_DEFAULT = 0
+	 */
+	public final static int CLASS_DEFAULT = 0;
+	
+	/**
+	 * the category of news, constant value, CLASS_NEW = 1
+	 */
+	public final static int CLASS_NEW = 1;
+	
+	/**
+	 * the category of news, constant value, CLASS_HOT = 2
+	 */
+	public final static int CLASS_HOT = 2;
+	
+	
 	
 	@Override
 	public String toString() {

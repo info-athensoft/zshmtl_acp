@@ -55,10 +55,10 @@ public class FileUploadAcpController {
 	}
 	
 	
-	@RequestMapping(value="/content/fileUpload",produces="application/json")
+	@RequestMapping(value="/events/fileUpload",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> fileUpload(HttpServletRequest req){
-		logger.info("entering /content/fileUpload");
+		logger.info("entering /events/fileUpload");
 		
 		//parameter
 		String eventUUID = (String)req.getParameter("eventUUID");
@@ -153,7 +153,7 @@ public class FileUploadAcpController {
 		model.put("result", "OK");
 		model.put("id", "id");
 		
-		logger.info("leaving /content/fileUpload");
+		logger.info("leaving /events/fileUpload");
 		return model;
 	}
 	
@@ -191,11 +191,11 @@ public class FileUploadAcpController {
 		}
 	}
 	
-	@RequestMapping(value="/content/fileUploadAndCreateRecord",produces="application/json")
+	@RequestMapping(value="/events/fileUploadAndCreateRecord",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> fileUploadAndCreateRecord(HttpServletRequest req){
 		
-		logger.info("entering /content/fileUploadAndCreateRecord");
+		logger.info("entering /events/fileUploadAndCreateRecord");
 		
 		//parameter
 		String eventUUID = (String)req.getParameter("eventUUID");
@@ -302,7 +302,7 @@ public class FileUploadAcpController {
 		model.put("result", "OK");
 		model.put("id", "id");
 		
-		logger.info("leaving /content/fileUploadAndCreateRecord");
+		logger.info("leaving /events/fileUploadAndCreateRecord");
 		return model;
 	}
 }

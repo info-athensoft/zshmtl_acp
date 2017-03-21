@@ -106,7 +106,7 @@
 						</a>
 						<ul class="sub-menu">
 							<li>
-								<a href="#">
+								<a href="/acp/events/eventsDashboard">
 								<i class="icon-home"></i>
 								Dashboard</a>
 								
@@ -117,17 +117,17 @@
 								My News<span class="arrow"></a>
 								<ul class="sub-menu">
 								<li>
-									<a href="/acp/content/eventsNewsList">
+									<a href="/acp/events/eventsNewsList">
 									<i class="icon-pencil"></i>
 									News List</a>
 								</li>
 								<li>
-									<a href="/acp/content/eventsNewsList">
+									<a href="/acp/events/eventsNewsList">
 									<i class="icon-paper-plane"></i>
 									News Edit</a>
 								</li>
 								<li>
-									<a href="/acp/content/eventsNewsCreate">
+									<a href="/acp/events/eventsNewsCreate">
 									<i class="icon-paper-plane"></i>
 									News Create</a>
 								</li>

@@ -97,7 +97,7 @@ function updateNews() {
 /* event_news_list.jsp */
 function filterSearch(){
 	
-	alert("do filterSearch()");
+//	alert("do filterSearch()");
 //	create a json object
     var p2 = $("#eventUUID").val();
     var p3 = $("#eventTitle").val();

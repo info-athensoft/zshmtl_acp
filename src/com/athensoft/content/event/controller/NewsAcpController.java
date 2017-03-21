@@ -63,11 +63,23 @@ public class NewsAcpController {
 		this.eventMediaService = eventMediaService;
 	}
 	
+	
+	/**
+	 * go to the view of event dashboard
+	 * @return the target view name
+	 */
+	@RequestMapping(value="/events/eventsDashboard")
+	public String gotoDashboard(){
+		String viewName = "events/event_dashboard";
+		return viewName;
+	}
+	
+	
 	/**
 	 * go to the view of news listing
 	 * @return the target view name 
 	 */
-	@RequestMapping(value="/content/eventsNewsList")
+	@RequestMapping(value="/events/eventsNewsList")
 	public String gotoNewsList(){
 		String viewName = "events/event_news_list";
 		return viewName;
@@ -77,7 +89,7 @@ public class NewsAcpController {
 	 * go to the view of news creating
 	 * @return the target view name 
 	 */
-	@RequestMapping(value="/content/eventsNewsCreate")
+	@RequestMapping(value="/events/eventsNewsCreate")
 	public String gotoNewsCreate(){
 		String viewName = "events/event_news_create";
 		return viewName;
@@ -89,10 +101,10 @@ public class NewsAcpController {
 	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
 	 * @return a map structure containing data rendered to view
 	 */
-	@RequestMapping(value="/content/eventsNewsListData",produces="application/json")
+	@RequestMapping(value="/events/eventsNewsListData",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> getDataNewsList(){
-		logger.info("entering /content/eventsNewsListData");
+		logger.info("entering /events/eventsNewsListData");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -119,7 +131,22 @@ public class NewsAcpController {
 			field1 = listNews.get(i).getEventUUID()+"";
 			field2 = listNews.get(i).getTitle();
 			field3 = listNews.get(i).getAuthor();
-			field4 = listNews.get(i).getEventClass();
+			
+			int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
+			String eventClass = "";
+			switch(intEventClass){
+				case News.CLASS_NEW:
+					eventClass = "New";
+					break;
+				case News.CLASS_HOT:
+					eventClass = "Hot";
+					break;
+				default: 
+					eventClass = "Default";
+					break;
+			}
+			field4 = eventClass;
+			
 			field5 = listNews.get(i).getPostDatetime()+"";
 			field6 = listNews.get(i).getViewNum()+"";
 			int intEventStatus = listNews.get(i).getEventStatus();
@@ -150,7 +177,7 @@ public class NewsAcpController {
 					break;
 			}
 			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-			field8 = "<a href='/acp/content/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			field8 = "<a href='/acp/events/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
 			
 			//logger.info("field8="+field8);
 			
@@ -174,7 +201,7 @@ public class NewsAcpController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving /content/eventsNewsListData");
+		logger.info("leaving /events/eventsNewsListData");
 		return model;
 	}
 	
@@ -184,10 +211,10 @@ public class NewsAcpController {
 	 * @param itemJSONString search criteria object in JSON format
 	 * @return a map structure containing data rendered to views
 	 */
-	@RequestMapping(value="/content/eventsNewsSearchFilterData",produces="application/json")
+	@RequestMapping(value="/events/eventsNewsSearchFilterData",produces="application/json")
 	@ResponseBody
 	public Map<String, Object> getDataSearchNewsByFilter(@RequestParam String itemJSONString){
-		logger.info("entering /content/eventsNewsSearchFilterData");
+		logger.info("entering /events/eventsNewsSearchFilterData");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -308,39 +335,54 @@ public class NewsAcpController {
 			field1 = listNews.get(i).getEventUUID()+"";
 			field2 = listNews.get(i).getTitle();
 			field3 = listNews.get(i).getAuthor();
-			field4 = listNews.get(i).getEventClass();
+			
+			int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
+			String eventClass = "";
+			switch(intEventClass){
+				case News.CLASS_NEW:
+					eventClass = "New";
+					break;
+				case News.CLASS_HOT:
+					eventClass = "Hot";
+					break;
+				default: 
+					eventClass = "Default";
+					break;
+			}
+			field4 = eventClass;
+					
 			field5 = listNews.get(i).getPostDatetime()+"";
 			field6 = listNews.get(i).getViewNum()+"";
 			int intEventStatus = listNews.get(i).getEventStatus();
 			String eventStatus = "";
 			String eventStatusKey = "";
 			switch(intEventStatus){
-			case News.PUBLISHED: 
-				eventStatus = "Published";
-				eventStatusKey = "success";
-				break;
-			case News.WAIT_TO_POST: 
-				eventStatus = "Wait to post";
-				eventStatusKey = "warning";
-				break;
-			case News.DELETED: 
-				eventStatus = "Deleted";
-				eventStatusKey = "default";
-				break;
-			case News.OUT_OF_DATE: 
-				eventStatus = "Out of date";
-				eventStatusKey = "info";
-				break;
-			case News.SUSPENDED: 
-				eventStatus = "Suspended";
-				eventStatusKey = "danger";
-				break;
+				case News.PUBLISHED: 
+					eventStatus = "Published";
+					eventStatusKey = "success";
+					break;
+				case News.WAIT_TO_POST: 
+					eventStatus = "Wait to post";
+					eventStatusKey = "warning";
+					break;
+				case News.DELETED: 
+					eventStatus = "Deleted";
+					eventStatusKey = "default";
+					break;
+				case News.OUT_OF_DATE: 
+					eventStatus = "Out of date";
+					eventStatusKey = "info";
+					break;
+				case News.SUSPENDED: 
+					eventStatus = "Suspended";
+					eventStatusKey = "danger";
+					break;
 				default: 
 					break;
 			}
 			
 			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-			field8 = "<a href='/acp/content/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			field8 = "<a href='/acp/events/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
 			
 			data[i][0] = field0;
 			data[i][1] = field1;
@@ -360,7 +402,7 @@ public class NewsAcpController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving /content/eventsNewsSearchFilterData");
+		logger.info("leaving /events/eventsNewsSearchFilterData");
 		
 		return model;
 	}
@@ -371,9 +413,9 @@ public class NewsAcpController {
 	 * @param eventUUID the eventUUID of new object selected
 	 * @return data of news object, event media objects, and target view
 	 */
-	@RequestMapping(value="/content/eventsNewsEdit")
+	@RequestMapping(value="/events/eventsNewsEdit")
 	public ModelAndView gotoNewsEdit(@RequestParam String eventUUID){
-		logger.info("entering /content/eventsNewsEdit");
+		logger.info("entering /events/eventsNewsEdit");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -393,7 +435,7 @@ public class NewsAcpController {
 		logger.info("Length of EventReview entries: "+ listEventMedia.size());
 		model.put("eventMediaList", listEventMedia);
 		
-		logger.info("leaving /content/eventsNewsEdit");
+		logger.info("leaving /events/eventsNewsEdit");
 		return mav;
 	}
 	
@@ -403,10 +445,10 @@ public class NewsAcpController {
 	 * @param itemJSONString news object in JSON format 
 	 * @return data and event-news view
 	 */
-	@RequestMapping(value="/content/createNews",method=RequestMethod.POST)
+	@RequestMapping(value="/events/createNews",method=RequestMethod.POST)
 	public ModelAndView createNews(@RequestParam String itemJSONString) {
 		
-		logger.info("/content/createNews");
+		logger.info("entering /events/createNews");
 		
 		/* initial settings */
 		ModelAndView mav = new ModelAndView();
@@ -448,10 +490,10 @@ public class NewsAcpController {
 	 * @param itemJSONString news object to update in JSON format
 	 * @return data and target view
 	 */
-	@RequestMapping(value="/content/updateNews",method=RequestMethod.POST)
+	@RequestMapping(value="/events/updateNews",method=RequestMethod.POST)
 	public ModelAndView updateNews(@RequestParam String itemJSONString) {
 		
-		logger.info("entering /content/updateNews");
+		logger.info("entering /events/updateNews");
 		
 		/* initial settings */
 		ModelAndView mav = new ModelAndView();
@@ -486,7 +528,7 @@ public class NewsAcpController {
         String viewName = "events/event_news_list";
 		mav.setViewName(viewName);		
 		
-		logger.info("leaving /content/updateNews");
+		logger.info("leaving /events/updateNews");
 		return mav;		
 	}
 	
@@ -495,14 +537,14 @@ public class NewsAcpController {
 	 * @param itemJSONString news object to update in JSON format
 	 * @return data and target view
 	 */
-	@RequestMapping(value="/content/updateNewsGroup",produces="application/json")
+	@RequestMapping(value="/events/updateNewsGroup",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> updateNewsGroup(
 			@RequestParam String eventUUIDArray,
 			@RequestParam int newsStatus
 			) {
 		
-		logger.info("entering /content/updateNewsGroup");
+		logger.info("entering /events/updateNewsGroup");
 		
 		/* initial settings */
 		ModelAndView mav = new ModelAndView();
@@ -530,7 +572,7 @@ public class NewsAcpController {
         
 		
 		/* assemble model and view */
-		logger.info("leaving /content/updateNewsGroup");
+		logger.info("leaving /events/updateNewsGroup");
 		return model;		
 	}
 	
@@ -540,10 +582,10 @@ public class NewsAcpController {
 	 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
 	 * @return data table of new review objects
 	 */
-	@RequestMapping(value="/content/eventsNewsReviewListData",produces="application/json")
+	@RequestMapping(value="/events/eventsNewsReviewListData",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> getDataNewsReviewList(){
-		logger.info("entering /content/eventsNewsReviewListData");
+		logger.info("entering /events/eventsNewsReviewListData");
 		
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
@@ -594,7 +636,7 @@ public class NewsAcpController {
 			
 			
 			field4 = "<span class='label label-sm label-"+reviewStatusKey+"'>"+reviewStatus+"</span>";
-			field5 = "<a href='/acp/content/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			field5 = "<a href='/acp/events/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
 			
 			data[i][0] = field0;
 			data[i][1] = field1;
@@ -611,7 +653,7 @@ public class NewsAcpController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving /content/eventsNewsReviewListData");
+		logger.info("leaving /events/eventsNewsReviewListData");
 		return model;
 	}
 	
@@ -621,12 +663,12 @@ public class NewsAcpController {
 	 * @param eventUUID the eventUUID of current event
 	 * @return data table of updated media object
 	 */
-	@RequestMapping(value="/content/setCoverMedia",produces="application/json")
+	@RequestMapping(value="/events/setCoverMedia",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> setCoverMedia(
 			@RequestParam long mediaId, 
 			@RequestParam String eventUUID){
-		logger.info("entering /content/setCoverMedia");
+		logger.info("entering /events/setCoverMedia");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -656,7 +698,7 @@ public class NewsAcpController {
 		logger.info("Length of EventReview entries: "+ listEventMedia.size());
 		model.put("eventMediaList", listEventMedia);
 		
-		logger.info("leaving /content/setCoverMedia");
+		logger.info("leaving /events/setCoverMedia");
 //		return mav;
 		return model;
 	}
