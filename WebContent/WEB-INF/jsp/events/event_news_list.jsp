@@ -280,7 +280,7 @@ table tr td{
 									<span class="caption-helper">listing news, search, group operation, editing...</span>
 								</div>
 								<div class="actions">
-									<a href="javascript:;" class="btn btn-circle btn-default">
+									<a href="eventsNewsCreate" class="btn btn-circle btn-default">
 									<i class="fa fa-plus"></i>
 									<span class="hidden-480">
 									New Event </span>
