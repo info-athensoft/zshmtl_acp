@@ -193,8 +193,7 @@ var EventNewsEdit = function (option) {
 
 }();
 
-
-
+/*edit news - tab:images */
 function setCoverMedia(mediaId, eventUUID) {
 	//alert('ENTERING setCoverMedia='+mediaId+"    "+eventUUID);
 //    var businessObject = getBusinessObject();
@@ -252,6 +251,7 @@ function setCoverMedia(mediaId, eventUUID) {
     });   
 }
 
+
 /* event_news_edit.jsp */
 function changeSortNumber(object,mediaId,eventUUID) {
 	//alert(object);
@@ -274,4 +274,9 @@ function changeSortNumber(object,mediaId,eventUUID) {
             //reset to avoid duplication
         }        
     });
+}
+
+/*edit news - button:back */
+function backToNewsList(){
+	location.href = "/acp/events/eventsNewsList";
 }

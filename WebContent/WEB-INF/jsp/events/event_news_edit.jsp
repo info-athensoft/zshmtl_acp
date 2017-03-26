@@ -214,21 +214,21 @@ table tr td{
 				<!-- END STYLE CUSTOMIZER -->
 				<!-- BEGIN PAGE HEADER-->
 				<h3 class="page-title">
-				Product Edit <small>create & edit product</small>
+				Event <small>System</small>
 				</h3>
 				<div class="page-bar">
 					<ul class="page-breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="index.html">Home</a>
+							<a href="#">Home</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">eCommerce</a>
+							<a href="eventsDashboard">Events</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">Product Edit</a>
+							<a href="#">News</a>
 						</li>
 					</ul>
 					<div class="page-toolbar">
@@ -265,11 +265,11 @@ table tr td{
 									<div class="caption">
 										<i class="icon-basket font-green-sharp"></i>
 										<span class="caption-subject font-green-sharp bold uppercase">
-										Edit Product </span>
-										<span class="caption-helper">Man Tops</span>
+										Edit News </span>
+										<span class="caption-helper">editing news details, associated medias, reviews, etc.</span>
 									</div>
 									<div class="actions btn-set">
-										<button type="button" name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Back</button>
+										<button type="button" name="back" class="btn btn-default btn-circle" onclick="backToNewsList(); return false;"><i class="fa fa-angle-left"></i> Back</button>
 										<button class="btn btn-default btn-circle "><i class="fa fa-reply"></i> Reset</button>
 										<button class="btn green-haze btn-circle" onclick="updateNews(); return false;"><i class="fa fa-check"></i> Save Change</button>
 										<button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
@@ -363,8 +363,7 @@ table tr td{
 														</label>
 														<div class="col-md-10">
 															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${newsObject.postDatetime}">
-																
+																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${newsObject.postDatetime}" disabled="disabled">
 															</div>
 															<span class="help-block">
 															availability daterange. </span>
@@ -375,7 +374,7 @@ table tr td{
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder=""  value="${newsObject.viewNum}">
+															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder=""  value="${newsObject.viewNum}" disabled="disabled">
 														</div>
 													</div>
 													<div class="form-group">
@@ -395,28 +394,27 @@ table tr td{
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<textarea class="form-control" id="descLong" name="descLong">${newsObject.descLong}</textarea>
+															<textarea class="form-control" id="descLong" name="descLong" rows="6">${newsObject.descLong}</textarea>
 														</div>
 														
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">Event Class: <span class="required">
+														<label class="col-md-2 control-label">News Class: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="eventClass"  name="eventClass">
-																<option value="">Select...</option>
-																<option value="0">News Class 0</option>
-																<option value="1">News Class 1</option>
-																<option value="2">News Class 2</option>
-																<option value="3">News Class 3</option>
+																<option value="0">Select...</option>
+																<option value="1">Default</option>
+																<option value="2">New</option>
+																<option value="3">Hot</option>
 															</select>
 														</div>
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">Event Status: <span class="required">
+														<label class="col-md-2 control-label">News Status: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -682,14 +680,7 @@ table tr td{
 	</div>
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
-	<div class="page-footer">
-		<div class="page-footer-inner">
-			 2014 &copy; Metronic by keenthemes. <a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
-		</div>
-		<div class="scroll-to-top">
-			<i class="icon-arrow-up"></i>
-		</div>
-	</div>
+		<jsp:include page="${inc_dir}/page-footer.jsp"></jsp:include>
 	<!-- END FOOTER -->
 </div>
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->

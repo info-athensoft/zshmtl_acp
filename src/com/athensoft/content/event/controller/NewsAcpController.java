@@ -135,6 +135,9 @@ public class NewsAcpController {
 			int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
 			String eventClass = "";
 			switch(intEventClass){
+				case News.CLASS_DEFAULT:
+					eventClass = "Default";
+					break;
 				case News.CLASS_NEW:
 					eventClass = "New";
 					break;
@@ -142,7 +145,7 @@ public class NewsAcpController {
 					eventClass = "Hot";
 					break;
 				default: 
-					eventClass = "Default";
+					eventClass = "Unknown";
 					break;
 			}
 			field4 = eventClass;
@@ -339,6 +342,9 @@ public class NewsAcpController {
 			int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
 			String eventClass = "";
 			switch(intEventClass){
+				case News.CLASS_DEFAULT:
+					eventClass = "Default";
+					break;
 				case News.CLASS_NEW:
 					eventClass = "New";
 					break;
@@ -346,7 +352,7 @@ public class NewsAcpController {
 					eventClass = "Hot";
 					break;
 				default: 
-					eventClass = "Default";
+					eventClass = "Unknown";
 					break;
 			}
 			field4 = eventClass;

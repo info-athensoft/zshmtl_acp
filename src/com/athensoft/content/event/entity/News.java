@@ -41,17 +41,17 @@ public class News extends Event {
 	/**
 	 * the category of news, constant value, CLASS_DEFAULT = 0
 	 */
-	public final static int CLASS_DEFAULT = 0;
+	public final static int CLASS_DEFAULT = 1;
 	
 	/**
 	 * the category of news, constant value, CLASS_NEW = 1
 	 */
-	public final static int CLASS_NEW = 1;
+	public final static int CLASS_NEW = 2;
 	
 	/**
 	 * the category of news, constant value, CLASS_HOT = 2
 	 */
-	public final static int CLASS_HOT = 2;
+	public final static int CLASS_HOT = 3;
 	
 	
 	
