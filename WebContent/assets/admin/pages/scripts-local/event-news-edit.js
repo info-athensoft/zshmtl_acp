@@ -193,8 +193,7 @@ var EventNewsEdit = function (option) {
 
 }();
 
-
-
+/*edit news - tab:images */
 function setCoverMedia(mediaId, eventUUID) {
 	//alert('ENTERING setCoverMedia='+mediaId+"    "+eventUUID);
 //    var businessObject = getBusinessObject();
@@ -250,4 +249,9 @@ function setCoverMedia(mediaId, eventUUID) {
         	
         }        
     });   
+}
+
+/*edit news - button:back */
+function backToNewsList(){
+	location.href = "/acp/events/eventsNewsList";
 }

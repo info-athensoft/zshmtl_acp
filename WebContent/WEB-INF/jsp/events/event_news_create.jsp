@@ -292,7 +292,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!-- END STYLE CUSTOMIZER -->
 				<!-- BEGIN PAGE HEADER-->
 				<h3 class="page-title">
-				Event <small>system</small>
+				Event <small>System</small>
 				</h3>
 				<div class="page-bar">
 					<ul class="page-breadcrumb">
@@ -343,12 +343,12 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="caption">
 										<i class="icon-basket font-green-sharp"></i>
 										<span class="caption-subject font-green-sharp bold uppercase">
-										News </span>
-										<span class="caption-helper">Create news</span>
+										Create News </span>
+										<span class="caption-helper">creating news</span>
 									</div>
 									<div class="actions btn-set">
-										<button type="button" name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Back</button>
-										<button class="btn btn-default btn-circle "><i class="fa fa-reply"></i> Reset</button>
+										<button type="button" name="back" class="btn btn-default btn-circle" onclick="backToNewsList(); return false;"><i class="fa fa-angle-left"></i> Back</button>
+										<button class="btn btn-default btn-circle" onclick="resetCreateNews(); return false;"><i class="fa fa-reply"></i> Reset</button>
 <!-- 										<input type="button" class="btn green-haze btn-circle" value="Save" onclick="createNews();"> -->
 										<button class="btn green-haze btn-circle" onclick="createNews(); return false;"><i class="fa fa-check"></i> Save Original</button>
 										<button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
@@ -382,10 +382,12 @@ License: You must have a valid license purchased only from themeforest(the above
 												<a href="#tab_general" data-toggle="tab">
 												General </a>
 											</li>
+											<!-- 
 											<li>
 												<a href="#tab_meta" data-toggle="tab">
 												Meta </a>
 											</li>
+											 
 											<li>
 												<a href="#tab_images" data-toggle="tab">
 												Images </a>
@@ -400,6 +402,7 @@ License: You must have a valid license purchased only from themeforest(the above
 												<a href="#tab_history" data-toggle="tab">
 												History </a>
 											</li>
+											-->
 										</ul>
 										<div class="tab-content no-space">
 											<div class="tab-pane active" id="tab_general">
@@ -409,7 +412,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="">
+															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled">
 														</div>
 													</div>
 													<div class="form-group">
@@ -417,7 +420,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="eventUUID" name="eventUUID" placeholder="">
+															<input type="text" class="form-control" id="eventUUID" name="eventUUID" placeholder="" disabled="disabled">
 														</div>
 													</div>
 													<div class="form-group">
@@ -437,13 +440,12 @@ License: You must have a valid license purchased only from themeforest(the above
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">Post Datetime: <span class="required">
+														<label class="col-md-2 control-label">Create Datetime: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
 															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="postDatetime" name="postDatetime">
-																
+																<input type="text" class="form-control" id="postDatetime" name="postDatetime" disabled="disabled">
 															</div>
 															<span class="help-block">
 															availability daterange. </span>
@@ -454,7 +456,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder="">
+															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder="" disabled="disabled">
 														</div>
 													</div>
 													<div class="form-group">
@@ -474,27 +476,27 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<textarea class="form-control" id="descLong" name="descLong"></textarea>
+															<textarea class="form-control" id="descLong" name="descLong" rows="6"></textarea>
 														</div>
 														
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">Event Class: <span class="required">
+														<label class="col-md-2 control-label">News Class: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" id="eventClass"  name="eventClass">
+															<select class="table-group-action-input form-control input-medium" id="eventClass" name="eventClass">
 																<option value="0">Select...</option>
-																<option value="0">Default</option>
-																<option value="1">New</option>
-																<option value="2">Hot</option>
+																<option value="1">Default</option>
+																<option value="2">New</option>
+																<option value="3">Hot</option>
 															</select>
 														</div>
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">Event Status: <span class="required">
+														<label class="col-md-2 control-label">News Status: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -510,6 +512,7 @@ License: You must have a valid license purchased only from themeforest(the above
 													</div>
 												</div>
 											</div>
+											<!-- 
 											<div class="tab-pane" id="tab_meta">
 												<div class="form-body">
 													<div class="form-group">
@@ -538,6 +541,7 @@ License: You must have a valid license purchased only from themeforest(the above
 													</div>
 												</div>
 											</div>
+											 
 											<div class="tab-pane" id="tab_images">
 												<div class="alert alert-success margin-bottom-10">
 													<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
@@ -747,6 +751,8 @@ License: You must have a valid license purchased only from themeforest(the above
 													</table>
 												</div>
 											</div>
+											-->
+											<!--  
 											<div class="tab-pane" id="tab_history">
 												<div class="table-container">
 													<table class="table table-striped table-bordered table-hover" id="datatable_history">
@@ -803,7 +809,8 @@ License: You must have a valid license purchased only from themeforest(the above
 													</tbody>
 													</table>
 												</div>
-											</div>
+											</div> -->
+											<!-- end of tab-history -->
 										</div>
 									</div>
 								</div>
@@ -821,14 +828,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	</div>
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
-	<div class="page-footer">
-		<div class="page-footer-inner">
-			 2014 &copy; Metronic by keenthemes. <a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
-		</div>
-		<div class="scroll-to-top">
-			<i class="icon-arrow-up"></i>
-		</div>
-	</div>
+		<jsp:include page="${inc_dir}/page-footer.jsp"></jsp:include>
 	<!-- END FOOTER -->
 </div>
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
@@ -866,9 +866,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="${webapp_name}/assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
-<!-- <script src="${webapp_name}/assets/admin/pages/scripts/ecommerce-products-edit.js"></script>
- -->
- <script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
+<script src="${webapp_name}/assets/admin/pages/scripts-local/event-news-create.js"></script>
+<script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 	jQuery(document).ready(function() {    

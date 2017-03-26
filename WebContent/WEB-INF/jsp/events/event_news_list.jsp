@@ -283,7 +283,7 @@ table tr td{
 									<a href="eventsNewsCreate" class="btn btn-circle btn-default">
 									<i class="fa fa-plus"></i>
 									<span class="hidden-480">
-									New Event </span>
+									Create news </span>
 									</a>
 									<div class="btn-group">
 										<a class="btn btn-default btn-circle" href="javascript:;" data-toggle="dropdown">
@@ -315,15 +315,14 @@ table tr td{
 							<div class="portlet-body">
 								<div class="table-container">
 									<div class="table-actions-wrapper">
-										<span>
-										</span>
-										<select class="table-group-action-input form-control input-inline input-small input-sm">
-											<option value="0">Select...</option>
-											<option value="1">Publish</option>
-											<option value="2">Wait to post</option>
-											<option value="3">Delete</option>
-											<option value="4">Out of date</option>
-											<option value="5">Suspend</option>
+										<span></span>
+										<select class="table-group-action-input form-control input-inline input-small input-sm" name="groupOption">
+										<option value="">Select...</option>
+										<option value="1">Publish</option>
+										<option value="2">Wait to post</option>
+										<option value="3">Delete</option>
+										<option value="4">Out of date</option>
+										<option value="5">Suspend</option>											
 										</select>
 										<button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
 									</div>
@@ -374,9 +373,10 @@ table tr td{
 										<td>
 											<select class="form-control form-filter input-sm" name="event_class" id="eventClass">
 												<option value="0">Select...</option>
-												<option value="1">New</option>
-												<option value="2">Hot</option>
-												<option value="3">Default</option>
+												<option value="1">Default</option>
+												<option value="2">New</option>
+												<option value="3">Hot</option>
+												
 											</select>
 										</td>
 										
