@@ -161,4 +161,35 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 		}
 		return x;
 	}
+
+	@Override
+	public void changeSortNumber(String mediaId, String eventUUID, String sortNumber) {
+final String TABLE1 = "event_media";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("update "+TABLE1+" ");
+		sbf.append("set ");
+		sbf.append("sort_number = :sortNumber ");
+		sbf.append("where ");
+		sbf.append("media_id = :media_id");
+		sbf.append("eventUUID = :eventUUID");
+				
+				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
+		
+		String sql = sbf.toString();
+		
+//		final Date dateCreate 			= new Date();
+//		final Date dateLastModified 	= dateCreate;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("global_id", news.getGlobalId());
+		
+		paramSource.addValue("media_id",mediaId);
+		paramSource.addValue("eventUUID", eventUUID);
+		paramSource.addValue("sortNumber", sortNumber);
+		
+		KeyHolder keyholder = new GeneratedKeyHolder();
+		jdbc.update(sql, paramSource, keyholder);
+		return;
+		
+	}
 }

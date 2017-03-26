@@ -703,4 +703,38 @@ public class NewsAcpController {
 		return model;
 	}
 	
+	@RequestMapping(value="/events/changeSortNumber",method=RequestMethod.POST)
+	public ModelAndView changeSortNumber(@RequestParam String itemJSONString) {
+		
+		logger.info("entering /events/updateNews");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+        Map<String, Object> model = mav.getModel();
+        JSONObject ic_job= new JSONObject(itemJSONString);
+   
+        News news = new News();
+//      news.setGlobalId(ic_job.getLong("globalId"));
+        String mediaId = ic_job.getString("mediaId");
+        String eventUUID = ic_job.getString("eventUUID");
+        String sortNumber = ic_job.getString("sortNumber");
+                 
+        logger.info("news = "+news);
+          
+		/* business logic*/
+        //long itemId = itemService.createItem(ic); 
+
+        eventMediaService.changeSortNumber(mediaId, eventUUID, sortNumber);
+		
+		/* assemble model and view */
+//      model.put("news", news);
+        String viewName = "events/changeSortNumber";
+		mav.setViewName(viewName);		
+		
+		logger.info("leaving /events/changeSortNumber");
+		return mav;		
+	}
+	
 }

@@ -514,7 +514,7 @@ table tr td{
 														<input type="text" class="form-control" name="mediaName" value="${eventMedia.mediaName}">
 													</td>
 													<td>
-														<input type="text" class="form-control" name="sortNumber" value="${eventMedia.sortNumber}">
+														<input type="text" class="form-control" name="sortNumber" value="${eventMedia.sortNumber}" onblur="changeSortNumber(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
 													</td>
 													
 													<td>

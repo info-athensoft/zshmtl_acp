@@ -78,4 +78,9 @@ public class EventMediaService {
 	public void updateEventMedia(EventMedia media) {
 		this.eventMediaDao.update(media);
 	}
+
+	public void changeSortNumber(String mediaId, String eventUUID, String sortNumber) {
+		this.eventMediaDao.changeSortNumber(mediaId, eventUUID, sortNumber);
+		
+	}
 }

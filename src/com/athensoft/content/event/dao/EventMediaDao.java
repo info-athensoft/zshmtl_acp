@@ -56,4 +56,6 @@ public interface EventMediaDao {
 	 * @param media an event media object
 	 */
 	public void update(EventMedia media);
+
+	public void changeSortNumber(String mediaId, String eventUUID, String sortNumber);
 }
