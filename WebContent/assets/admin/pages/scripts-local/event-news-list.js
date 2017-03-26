@@ -34,8 +34,8 @@ var EventNewsList = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "/acp/content/eventsNewsListData", // ajax source
-                    //"url": "http://localhost:8080/acp/content/eventsNewsListData?length=3", // ajax source
+                    "url": "/acp/events/eventsNewsListData", // ajax source
+                    //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
                     //"dataSrc": "data"
                 },
                 "order": [
@@ -64,7 +64,7 @@ var EventNewsList = function () {
                 //end-of-modified
                 
                 //grid.getDataTable().ajax.reload();
-                //grid.getDataTable().ajax.url("/acp/content/eventsNewsListData").load();
+                //grid.getDataTable().ajax.url("/acp/events/eventsNewsListData").load();
                 //grid.getDataTable().ajax.reload();
                 grid.clearAjaxParams();
                 

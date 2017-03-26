@@ -9,7 +9,7 @@ var EventNewsEdit = function (option) {
             browse_button : document.getElementById('tab_images_uploader_pickfiles'), // you can pass in id...
             container: document.getElementById('tab_images_uploader_container'), // ... or DOM Element itself
              
-            //url : "http://localhost:8080/acp/content/fileUpload", //TODO: Change to relative url
+            //url : "http://localhost:8080/acp/events/fileUpload", //TODO: Change to relative url
             url : "", //TODO: Change to relative url
              
             filters : {
@@ -77,7 +77,7 @@ var EventNewsEdit = function (option) {
         });
 
         
-        uploader.setOption('url','http://localhost:8080/acp/content/fileUploadAndCreateRecord?eventUUID='+option);
+        uploader.setOption('url','/acp/events/fileUploadAndCreateRecord?eventUUID='+option);
         uploader.init();
 
     }
@@ -108,7 +108,7 @@ var EventNewsEdit = function (option) {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "/acp/content/eventsNewsReviewListData", // ajax source
+                    "url": "/acp/events/eventsNewsReviewListData", // ajax source
                 },
                 "columnDefs": [{ // define columns sorting options(by default all columns are sortable extept the first checkbox column)
                     'orderable': true,

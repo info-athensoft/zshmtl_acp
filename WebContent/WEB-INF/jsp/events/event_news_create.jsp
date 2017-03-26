@@ -292,21 +292,21 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!-- END STYLE CUSTOMIZER -->
 				<!-- BEGIN PAGE HEADER-->
 				<h3 class="page-title">
-				News Create <small>create news</small>
+				Event <small>system</small>
 				</h3>
 				<div class="page-bar">
 					<ul class="page-breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="index.html">Home</a>
+							<a href="#">Home</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">eCommerce</a>
+							<a href="eventsDashboard">Events</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">Product Edit</a>
+							<a href="#">News</a>
 						</li>
 					</ul>
 					<div class="page-toolbar">
@@ -343,8 +343,8 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="caption">
 										<i class="icon-basket font-green-sharp"></i>
 										<span class="caption-subject font-green-sharp bold uppercase">
-										Edit Product </span>
-										<span class="caption-helper">Man Tops</span>
+										News </span>
+										<span class="caption-helper">Create news</span>
 									</div>
 									<div class="actions btn-set">
 										<button type="button" name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Back</button>
@@ -485,18 +485,13 @@ License: You must have a valid license purchased only from themeforest(the above
 														</label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="eventClass"  name="eventClass">
-																<option value="">Select...</option>
-																<option value="0">News Class 0</option>
-																<option value="1">News Class 1</option>
-																<option value="2">News Class 2</option>
-																<option value="3">News Class 3</option>
+																<option value="0">Select...</option>
+																<option value="0">Default</option>
+																<option value="1">New</option>
+																<option value="2">Hot</option>
 															</select>
 														</div>
 													</div>
-													
-											
-													
-													
 													
 													<div class="form-group">
 														<label class="col-md-2 control-label">Event Status: <span class="required">
@@ -504,12 +499,12 @@ License: You must have a valid license purchased only from themeforest(the above
 														</label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
-																<option value="">Select...</option>
-																<option value="0">Undetermined</option>
-																<option value="1">Active</option>
-																<option value="2">Waiting to post</option>
-																<option value="3">Out-of-date</option>
-																<option value="4">Deleted</option>
+																<option value="0">Select...</option>
+																<option value="1">Published</option>
+																<option value="2">Wait to post</option>
+																<option value="3">Deleted</option>
+																<option value="4">Out of date</option>
+																<option value="5">Suspended</option>
 															</select>
 														</div>
 													</div>

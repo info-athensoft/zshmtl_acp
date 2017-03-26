@@ -219,21 +219,21 @@ table tr td{
 				<!-- END STYLE CUSTOMIZER -->
 				<!-- BEGIN PAGE HEADER-->
 				<h3 class="page-title">
-				Event <small>news listing</small>
+				Event <small>System</small>
 				</h3>
 				<div class="page-bar">
 					<ul class="page-breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="index.html">Home</a>
+							<a href="#">Home</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">eCommerce</a>
+							<a href="eventsDashboard">Events</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">Events</a>
+							<a href="#">News</a>
 						</li>
 					</ul>
 					<div class="page-toolbar">
@@ -276,11 +276,11 @@ table tr td{
 							<div class="portlet-title">
 								<div class="caption">
 									<i class="fa fa-gift font-green-sharp"></i>
-									<span class="caption-subject font-green-sharp bold uppercase">Events</span>
-									<span class="caption-helper">manage news...</span>
+									<span class="caption-subject font-green-sharp bold uppercase">News</span>
+									<span class="caption-helper">listing news, search, group operation, editing...</span>
 								</div>
 								<div class="actions">
-									<a href="javascript:;" class="btn btn-circle btn-default">
+									<a href="eventsNewsCreate" class="btn btn-circle btn-default">
 									<i class="fa fa-plus"></i>
 									<span class="hidden-480">
 									New Event </span>
@@ -318,10 +318,12 @@ table tr td{
 										<span>
 										</span>
 										<select class="table-group-action-input form-control input-inline input-small input-sm">
-											<option value="">Select...</option>
+											<option value="0">Select...</option>
 											<option value="1">Publish</option>
-											<option value="2">Un-publish</option>
+											<option value="2">Wait to post</option>
 											<option value="3">Delete</option>
+											<option value="4">Out of date</option>
+											<option value="5">Suspend</option>
 										</select>
 										<button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
 									</div>
@@ -374,6 +376,7 @@ table tr td{
 												<option value="0">Select...</option>
 												<option value="1">New</option>
 												<option value="2">Hot</option>
+												<option value="3">Default</option>
 											</select>
 										</td>
 										
