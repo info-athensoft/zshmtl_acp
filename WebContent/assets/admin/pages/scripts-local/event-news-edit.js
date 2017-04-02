@@ -251,6 +251,37 @@ function setCoverMedia(mediaId, eventUUID) {
     });   
 }
 
+/* event_news_edit.jsp */
+function changeMediaName(object,mediaId,eventUUID) {
+	//alert(object);
+	var mediaName = object.value;
+
+	var mediaObject =
+    {
+			mediaId    :    mediaId,
+			eventUUID  :    eventUUID,
+			mediaName :    mediaName
+    };
+   
+    $.ajax({
+        type    :    "post",
+        url        : "changeMediaName?itemJSONString="+JSON.stringify(mediaObject),
+        dataType:    "html",
+        timeout :     30000,
+        
+        success:function(msg){
+//            location.href="";
+        },
+        error:function(xhr, status, error){
+//            alert("ERROR: Sort Number updating failed."); 
+//        	  alert(xhr.responseText);
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+            //reset to avoid duplication
+        }        
+    });
+}
+
 
 /* event_news_edit.jsp */
 function changeSortNumber(object,mediaId,eventUUID) {

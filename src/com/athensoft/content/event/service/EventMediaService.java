@@ -80,7 +80,10 @@ public class EventMediaService {
 	}
 
 	public void changeSortNumber(String mediaId, String eventUUID, String sortNumber) {
-		this.eventMediaDao.changeSortNumber(mediaId, eventUUID, sortNumber);
-		
+		this.eventMediaDao.changeSortNumber(mediaId, eventUUID, sortNumber);		
+	}
+
+	public void changeMediaName(String mediaId, String eventUUID, String mediaName) {
+		this.eventMediaDao.changeMediaName(mediaId, eventUUID, mediaName);
 	}
 }
