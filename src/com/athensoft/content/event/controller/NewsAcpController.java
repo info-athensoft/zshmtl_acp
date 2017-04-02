@@ -713,6 +713,40 @@ public class NewsAcpController {
 		return model;
 	}
 	
+	@RequestMapping(value="/events/changeMediaName",method=RequestMethod.POST)
+	public ModelAndView changeMediaName(@RequestParam String itemJSONString) {
+		
+		logger.info("entering /events/changeSortNumber");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+        Map<String, Object> model = mav.getModel();
+        JSONObject ic_job= new JSONObject(itemJSONString);
+   
+//        News news = new News();
+//      news.setGlobalId(ic_job.getLong("globalId"));
+        String mediaId = Integer.toString(ic_job.getInt("mediaId"));
+        String eventUUID = ic_job.getString("eventUUID");
+        String mediaName = ic_job.getString("mediaName");
+                 
+//        logger.info("news = "+news);
+          
+		/* business logic*/
+        //long itemId = itemService.createItem(ic); 
+
+        eventMediaService.changeMediaName(mediaId, eventUUID, mediaName);
+		
+		/* assemble model and view */
+//      model.put("news", news);
+        String viewName = "events/changeSortNumber";
+		mav.setViewName(viewName);		
+		
+		logger.info("leaving /events/changeSortNumber");
+		return mav;		
+	}
+	
 	@RequestMapping(value="/events/changeSortNumber",method=RequestMethod.POST)
 	public ModelAndView changeSortNumber(@RequestParam String itemJSONString) {
 		

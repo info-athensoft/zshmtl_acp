@@ -58,4 +58,6 @@ public interface EventMediaDao {
 	public void update(EventMedia media);
 
 	public void changeSortNumber(String mediaId, String eventUUID, String sortNumber);
+
+	public void changeMediaName(String mediaId, String eventUUID, String mediaName);
 }

@@ -61,7 +61,7 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 
 	@Override
 	public List<EventMedia> findByEventUUID(String eventUUID) {
-		String sql = "select * from event_media where event_uuid=:event_uuid";
+		String sql = "select * from event_media where event_uuid=:event_uuid order by sort_number";
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("event_uuid", eventUUID);
 		List<EventMedia> x = new ArrayList<EventMedia>();
@@ -170,9 +170,9 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 		sbf.append("update "+TABLE1+" ");
 		sbf.append("set ");
 		sbf.append("sort_number = :sortNumber ");
-		sbf.append("where ");
-		sbf.append("media_id = :media_id and ");
-		sbf.append("event_uuid = :eventUUID");
+		sbf.append("where 1=1 ");
+		sbf.append("and media_id = :media_id ");
+		sbf.append("and event_uuid = :eventUUID");
 				
 				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
 		
@@ -191,5 +191,35 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 		jdbc.update(sql, paramSource, keyholder);
 		return;
 		
+	}
+
+	@Override
+	public void changeMediaName(String mediaId, String eventUUID, String mediaName) {
+final String TABLE1 = "event_media";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("update "+TABLE1+" ");
+		sbf.append("set ");
+		sbf.append("media_name = :mediaName ");
+		sbf.append("where 1=1 ");
+		sbf.append("and media_id = :media_id ");
+		sbf.append("and event_uuid = :eventUUID");
+				
+				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
+		
+		String sql = sbf.toString();
+		
+//		final Date dateCreate 			= new Date();
+//		final Date dateLastModified 	= dateCreate;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("global_id", news.getGlobalId());
+		
+		paramSource.addValue("media_id",mediaId);
+		paramSource.addValue("eventUUID", eventUUID);
+		paramSource.addValue("mediaName", mediaName);
+		
+		KeyHolder keyholder = new GeneratedKeyHolder();
+		jdbc.update(sql, paramSource, keyholder);
+		return;
 	}
 }
