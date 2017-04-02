@@ -43,6 +43,23 @@ function getBusinessObject(){
 function createNews() {
     //alert(JSON.stringify(businessObject));
     var businessObject = getBusinessObject();
+    
+    /* validating by business rule */
+    //event title
+    var eventTitle = businessObject.title;
+    if(isEmptyString(eventTitle)){
+    	alert("WARNING: event title must not be empty!");
+    	return;
+    }
+    var author = businessObject.author;
+    if(isEmptyString(author)){
+    	alert("WARNING: author must not be empty!");
+    	return;
+    }
+    
+    
+    
+    
 	
     //execute saving
     $.ajax({

@@ -456,7 +456,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder="" disabled="disabled">
+															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder="" disabled="disabled" value="0">
 														</div>
 													</div>
 													<div class="form-group">
@@ -465,8 +465,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														</label>
 														<div class="col-md-10">
 															<textarea class="form-control" id="descShort" name="descShort"></textarea>
-															<span class="help-block">
-															shown in product listing </span>
+															<span class="help-block">shown in abstract section </span>
 														</div>
 														
 													</div>
@@ -477,6 +476,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														</label>
 														<div class="col-md-10">
 															<textarea class="form-control" id="descLong" name="descLong" rows="6"></textarea>
+															<span class="help-block">shown in detail section </span>
 														</div>
 														
 													</div>
@@ -868,6 +868,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
 <script src="${webapp_name}/assets/admin/pages/scripts-local/event-news-create.js"></script>
 <script src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
+<script src="${webapp_name}/assets/admin/pages/scripts-local/global-validate.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 	jQuery(document).ready(function() {    

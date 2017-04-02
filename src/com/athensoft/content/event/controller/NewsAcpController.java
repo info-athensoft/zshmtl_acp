@@ -22,6 +22,7 @@ import com.athensoft.content.event.entity.News;
 import com.athensoft.content.event.service.EventMediaService;
 import com.athensoft.content.event.service.EventReviewService;
 import com.athensoft.content.event.service.NewsService;
+import com.athensoft.util.UUIDHelper;
 
 /**
  * News Controller for ACP
@@ -465,7 +466,10 @@ public class NewsAcpController {
    
         News news = new News();
 //		news.setGlobalId(ic_job.getLong("globalId"));
-        news.setEventUUID(ic_job.getString("eventUUID"));
+//      news.setEventUUID(ic_job.getString("eventUUID"));
+        
+        /* generate event UUID */
+        news.setEventUUID(UUIDHelper.getUUID());
         news.setTitle(ic_job.getString("title"));
         news.setAuthor(ic_job.getString("author"));
           
