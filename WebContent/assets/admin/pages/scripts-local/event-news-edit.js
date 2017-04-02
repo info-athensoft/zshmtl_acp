@@ -72,6 +72,13 @@ var EventNewsEdit = function (option) {
          
                 Error: function(up, err) {
                     Metronic.alert({type: 'danger', message: err.message, closeInSeconds: 10, icon: 'warning'});
+                },
+                
+                UploadComplete: function(){
+                	var eventUUID = option;
+                	//refresh tab_images when uploading done
+                	reloadEventMedia(eventUUID);
+                	
                 }
             }
         });
@@ -193,6 +200,9 @@ var EventNewsEdit = function (option) {
 
 }();
 
+
+
+
 /*edit news - tab:images */
 function setCoverMedia(mediaId, eventUUID) {
 	//alert('ENTERING setCoverMedia='+mediaId+"    "+eventUUID);
@@ -250,6 +260,61 @@ function setCoverMedia(mediaId, eventUUID) {
         }        
     });   
 }
+
+
+function reloadEventMedia(eventUUID){
+	$.ajax({
+        type    :    "post",
+        url        : "reloadEventMedia?eventUUID="+eventUUID,
+        dataType:    "json",
+        timeout :     30000,
+        
+        success:function(msg){
+        	
+        	var t = $("#tabs_event").tabs({active:2});
+        	
+        	//$("#tabs_event").tabs({ active: 2 });
+        	var mydata = msg.eventMediaList;
+        	//alert(data);
+        	
+        	
+        	var str = '<table class="table table-bordered table-hover"><thead>'
+					+ '<tr role="row" class="heading">'
+					+ '<th width="8%">Image</th>'
+					+ '<th width="20%">Label</th>'
+					+ '<th width="8%">Sort Number</th>'
+					+ '<th width="15%">Post Time</th>'
+					+ '<th width="10%">Primary Media</th>'
+					+ '<th width="10%">Action</th></tr>'
+					+ '</thead><tbody>';
+			
+		    for(var index in mydata){
+				var i = index;
+				
+				str = str+ '<tr>'
+				+'<td><a href="/acp/assets/admin/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">'
+				+	'<img class="img-responsive" src="/acp/assets/admin/pages/media/works/img1.jpg" alt=""></a></td>'
+				+'<td><input type="text" class="form-control" name="mediaName" value="'+mydata[i].mediaName+'"></td>'
+				+'<td><input type="text" class="form-control" name="sortNumber" value="'+mydata[i].sortNumber+'"></td>'
+				+'<td><input type="text" class="form-control" name="postTimestamp" value="'+mydata[i].postTimestamp+'"></td>'
+				+'<td><input type="text" class="form-control" name="primaryMedia" value="'+mydata[i].primaryMedia+'" disabled="disabled"><div><a href="javascript:;" onclick="setCoverMedia('+mydata[i].mediaId+',\''+mydata[i].eventUUID+'\');return false;" class="btn default btn-sm"><i class="fa fa-edit"></i> Set Cover </a></div></td>'
+				+'<td><a href="javascript:;" class="btn default btn-sm"><i class="fa fa-times"></i> Remove </a></td>'
+				+'</tr>';
+			}
+			    
+			str = str + '</tbody></table>';
+			$("#event-media-table").html(str);
+			//alert(str);
+        },
+        error:function(){
+            alert("ERROR: Reload Media failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+        	
+        }        
+    });
+}
+
 
 /* event_news_edit.jsp */
 function changeMediaName(object,mediaId,eventUUID) {

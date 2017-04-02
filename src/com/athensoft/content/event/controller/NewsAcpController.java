@@ -713,6 +713,38 @@ public class NewsAcpController {
 		return model;
 	}
 	
+	
+	
+	/**
+	 * @param mediaId
+	 * @param eventUUID
+	 * @return
+	 */
+	@RequestMapping(value="/events/reloadEventMedia",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> reloadEventMedia(
+			@RequestParam String eventUUID){
+		logger.info("entering /events/reloadEventMedia");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//view
+		String viewName = "events/event_news_edit";
+		mav.setViewName(viewName);
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		
+		//data - media
+		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
+		logger.info("Length of EventReview entries: "+ listEventMedia.size());
+		model.put("eventMediaList", listEventMedia);
+		
+		logger.info("leaving /events/reloadEventMedia");
+//		return mav;
+		return model;
+	}
+	
 	@RequestMapping(value="/events/changeMediaName",method=RequestMethod.POST)
 	public ModelAndView changeMediaName(@RequestParam String itemJSONString) {
 		
