@@ -164,15 +164,15 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 
 	@Override
 	public void changeSortNumber(String mediaId, String eventUUID, String sortNumber) {
-final String TABLE1 = "event_media";
+		final String TABLE1 = "event_media";
 		
 		StringBuffer sbf = new StringBuffer();
 		sbf.append("update "+TABLE1+" ");
 		sbf.append("set ");
 		sbf.append("sort_number = :sortNumber ");
 		sbf.append("where ");
-		sbf.append("media_id = :media_id");
-		sbf.append("eventUUID = :eventUUID");
+		sbf.append("media_id = :media_id and ");
+		sbf.append("event_uuid = :eventUUID");
 				
 				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
 		

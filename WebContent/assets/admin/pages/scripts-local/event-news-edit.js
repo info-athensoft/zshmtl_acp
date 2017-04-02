@@ -256,19 +256,27 @@ function setCoverMedia(mediaId, eventUUID) {
 function changeSortNumber(object,mediaId,eventUUID) {
 	//alert(object);
 	var sortNumber = object.value;
-    alert("sortNumber="+sortNumber+", mediaId="+mediaId+", eventUUID="+eventUUID);
+//    alert("sortNumber="+sortNumber+", mediaId="+mediaId+", eventUUID="+eventUUID);
+	var mediaObject =
+    {
+			mediaId    :    mediaId,
+			eventUUID  :    eventUUID,
+			sortNumber :    sortNumber
+    };
    
     $.ajax({
         type    :    "post",
-        url        : "changeSortNumber?mediaId="+mediaId+"&eventUUID="+eventUUID+"&sortNumber="+sortNumber,
+//        url        : "changeSortNumber?mediaId="+mediaId+"&eventUUID="+eventUUID+"&sortNumber="+sortNumber,
+        url        : "changeSortNumber?itemJSONString="+JSON.stringify(mediaObject),
         dataType:    "html",
         timeout :     30000,
         
         success:function(msg){
 //            location.href="";
         },
-        error:function(){
-            alert("ERROR: Sort Number updating failed.");     
+        error:function(xhr, status, error){
+//            alert("ERROR: Sort Number updating failed."); 
+//        	  alert(xhr.responseText);
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
