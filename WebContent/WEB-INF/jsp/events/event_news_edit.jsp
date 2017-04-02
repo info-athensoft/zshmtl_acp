@@ -270,7 +270,7 @@ table tr td{
 									</div>
 									<div class="actions btn-set">
 										<button type="button" name="back" class="btn btn-default btn-circle" onclick="backToNewsList(); return false;"><i class="fa fa-angle-left"></i> Back</button>
-										<button class="btn btn-default btn-circle "><i class="fa fa-reply"></i> Reset</button>
+										<button type="button" name="reset" class="btn btn-default btn-circle" onclick="resetNews(); return false;"><i class="fa fa-reply"></i> Reset</button>
 										<button class="btn green-haze btn-circle" onclick="updateNews(); return false;"><i class="fa fa-check"></i> Save Change</button>
 										<button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
 										<div class="btn-group">
@@ -724,6 +724,7 @@ table tr td{
 
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
+
 jQuery(document).ready(function() {    
 	Metronic.init(); // init metronic core components
 	Layout.init(); // init current layout
@@ -748,8 +749,35 @@ jQuery(document).ready(function() {
 	var eventStatusValue = ${newsObject.eventStatus};
 	$("#eventStatus").val(eventStatusValue);
 	
-
 });
+
+function resetNews(){
+	
+	//alert("resetNews");
+	
+	//object for reset
+	//var p1 = ${newsObject.globalId};
+	//var p2 = '${newsObject.eventUUID}';
+	var p3 = '${newsObject.title}';
+	var p4 = '${newsObject.author}';
+	//var p5 = ${newsObject.postDatetime};
+	var p6 = ${newsObject.viewNum};
+	var p7 = '${newsObject.descShort}';
+	var p8 = '${newsObject.descLong}';
+	var p9 = ${newsObject.eventClass};
+	var p10 = ${newsObject.eventStatus};
+	
+	//$("#globalId").val(p1);
+	//$("#eventUUID").val(p2);
+	$("#title").val(p3);
+	$("#author").val(p4);
+	//$("#postDatetime").val(p5);
+	$("#viewNum").val(p6);
+	$("#descShort").val(p7);
+	$("#descLong").val(p8);
+	$("#eventClass").val(p9);
+	$("#eventStatus").val(p10);
+}
 
 
 
