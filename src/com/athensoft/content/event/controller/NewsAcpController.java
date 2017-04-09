@@ -215,10 +215,10 @@ public class NewsAcpController {
 	 * @param itemJSONString search criteria object in JSON format
 	 * @return a map structure containing data rendered to views
 	 */
-	@RequestMapping(value="/events/eventsNewsSearchFilterData",produces="application/json")
+	@RequestMapping(value="/events/newsSearchFilterData",produces="application/json")
 	@ResponseBody
 	public Map<String, Object> getDataSearchNewsByFilter(@RequestParam String itemJSONString){
-		logger.info("entering /events/eventsNewsSearchFilterData");
+		logger.info("entering /events/newsSearchFilterData");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -244,8 +244,8 @@ public class NewsAcpController {
 		String where5a = strPostDatetimeFrom;
 		String where5b = strPostDatetimeTo;
 		
-		System.out.println("strViewNumFrom="+strPostDatetimeFrom+"##");
-		System.out.println("strViewNumTo="+strPostDatetimeTo+"##");
+		//System.out.println("strViewNumFrom="+strPostDatetimeFrom+"##");
+		//System.out.println("strViewNumTo="+strPostDatetimeTo+"##");
 		
 		/* where6a, where6b */
 		String strViewNumFrom = jobj.getString("viewNumFrom").trim();
@@ -409,10 +409,179 @@ public class NewsAcpController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving /events/eventsNewsSearchFilterData");
+		logger.info("leaving /events/newsSearchFilterData");
 		
 		return model;
 	}
+	
+	
+	/**
+	 * get news review objects in JSON data form, which comply with criteria
+	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
+	 * @param itemJSONString search criteria object in JSON format
+	 * @return a map structure containing data rendered to views
+	 */
+	@RequestMapping(value="/events/newsReviewSearchFilterData",produces="application/json")
+	@ResponseBody
+	public Map<String, Object> getDataSearchNewsReviewByFilter(@RequestParam String itemJSONString){
+		logger.info("entering /events/newsReviewSearchFilterData");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		JSONObject jobj= new JSONObject(itemJSONString);
+		
+		String where1 = jobj.getString("eventReviewNo").trim();
+		
+		/* where2a, where2b */
+		String strEventReviewDateFrom = jobj.getString("eventReviewDateFrom").trim();
+		String strEventReviewDateTo= jobj.getString("eventReviewDateTo").trim();
+		
+		if(strEventReviewDateFrom==null){
+			strEventReviewDateFrom = "";
+		}
+		if(strEventReviewDateTo==null){
+			strEventReviewDateTo = "";
+		}
+		String where2a = strEventReviewDateFrom;
+		String where2b = strEventReviewDateTo;
+		
+		//System.out.println("strViewNumFrom="+strPostDatetimeFrom+"##");
+		//System.out.println("strViewNumTo="+strPostDatetimeTo+"##");
+		
+		String where3 = jobj.getString("eventReviewCustomer").trim();
+		String where4 = jobj.getString("eventReviewContent").trim();
+		int where5 = jobj.getInt("eventReviewStatus");
+		
+		/* construct query string */
+		StringBuffer queryString = new StringBuffer();
+		queryString.append(where1.length()==0?" ":" and review_uuid like '%"+where1+"%' ");
+		
+		
+		String queryString_where2 = "";
+		if(strEventReviewDateFrom.equals("")&&strEventReviewDateTo.equals("")){
+			queryString_where2 = " ";
+		}else if(!strEventReviewDateFrom.equals("")&&strEventReviewDateTo.equals("")){
+			/* select * from event_review where date(post_datetime) >= adddate('2017-01-12', -1); */
+			queryString_where2 = " and date(review_datetime) >= '"+where2a+"' ";
+		}else if(strEventReviewDateFrom.equals("")&&!strEventReviewDateTo.equals("")){
+			/* select * from event_review where date(post_datetime) <= '2017-02-05'; */
+			queryString_where2 = " and date(review_datetime) <= '"+where2b+"' ";
+		}else if(!strEventReviewDateFrom.equals("")&&!strEventReviewDateTo.equals("")){
+			/*
+			select * from event_news where date(post_datetime) between adddate('2017-01-12', -1) and '2017-02-05';
+			*/
+			queryString_where2 = " and (date(review_datetime) between adddate('"+where2a+"', -1) and '"+where2b+"' ) ";
+		}
+		queryString.append(queryString_where2);
+		
+		queryString.append(where3.length()==0?" ":" and customer_id like '%"+where3+"%' ");
+		queryString.append(where4.length()==0?" ":" and review_content like '%"+where4+"%' ");
+				
+		queryString.append(where5==0?" ":" and review_status = "+where5+" ");
+		
+		logger.info("QueryString = "+ queryString.toString());
+		
+		List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
+		logger.info("Length of news entries = "+ listNews.size());
+		
+		
+		int entryLength = listNews.size();
+		final int COLUMN_NUM = 9;
+		String[][] data = new String[entryLength][COLUMN_NUM];
+		
+		String field0 = "";	//check box
+		String field1 = "";	//event UUID
+		String field2 = "";	//event title
+		String field3 = "";	//author
+		String field4 = "";	//event class
+		String field5 = "";	//post datetime
+		String field6 = "";	//view num
+		String field7 = "";	//event status
+		String field8 = "";	//action
+		
+		for(int i=0; i<entryLength ; i++){			
+			field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
+			field1 = listNews.get(i).getEventUUID()+"";
+			field2 = listNews.get(i).getTitle();
+			field3 = listNews.get(i).getAuthor();
+			
+			int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
+			String eventClass = "";
+			switch(intEventClass){
+				case News.CLASS_DEFAULT:
+					eventClass = "Default";
+					break;
+				case News.CLASS_NEW:
+					eventClass = "New";
+					break;
+				case News.CLASS_HOT:
+					eventClass = "Hot";
+					break;
+				default: 
+					eventClass = "Unknown";
+					break;
+			}
+			field4 = eventClass;
+					
+			field5 = listNews.get(i).getPostDatetime()+"";
+			field6 = listNews.get(i).getViewNum()+"";
+			int intEventStatus = listNews.get(i).getEventStatus();
+			String eventStatus = "";
+			String eventStatusKey = "";
+			switch(intEventStatus){
+				case News.PUBLISHED: 
+					eventStatus = "Published";
+					eventStatusKey = "success";
+					break;
+				case News.WAIT_TO_POST: 
+					eventStatus = "Wait to post";
+					eventStatusKey = "warning";
+					break;
+				case News.DELETED: 
+					eventStatus = "Deleted";
+					eventStatusKey = "default";
+					break;
+				case News.OUT_OF_DATE: 
+					eventStatus = "Out of date";
+					eventStatusKey = "info";
+					break;
+				case News.SUSPENDED: 
+					eventStatus = "Suspended";
+					eventStatusKey = "danger";
+					break;
+				default: 
+					break;
+			}
+			
+			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
+			field8 = "<a href='/acp/events/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			
+			data[i][0] = field0;
+			data[i][1] = field1;
+			data[i][2] = field2;
+			data[i][3] = field3;
+			data[i][4] = field4;
+			data[i][5] = field5;
+			data[i][6] = field6;
+			data[i][7] = field7;
+			data[i][8] = field8;
+		}
+		
+		model.put("draw", new Integer(1));
+		model.put("recordsTotal", new Integer(5));
+		model.put("recordsFiltered", new Integer(5));
+		model.put("data", data);
+		model.put("customActionStatus","OK");
+		model.put("customActionMessage","OK");
+		
+		logger.info("leaving /events/newsReviewSearchFilterData");
+		
+		return model;
+	}
+	
+	
 	
 	
 	/**

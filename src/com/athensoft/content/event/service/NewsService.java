@@ -52,6 +52,15 @@ public class NewsService {
 	}
 	
 	/**
+	 * get news objects by search criteria
+	 * @param queryString search criteria for qualified news objects
+	 * @return list of news object
+	 */
+	public List<Event> getNewsByFilter(String queryString){
+		return newsDao.findByFilter(queryString);
+	}
+
+	/**
 	 * get all news objects<p>
 	 * WARNING: DO NOT USE THIS METHOD IN PRODUCT. JUST FOR TEST.
 	 * @return list of news objects
@@ -83,14 +92,5 @@ public class NewsService {
 	 */
 	public void updateNewsGroup(List<News> newsList) {
 		this.newsDao.updateBatch(newsList);
-	}
-	
-	/**
-	 * get news objects by search criteria
-	 * @param queryString search criteria for qualified news objects
-	 * @return list of news object
-	 */
-	public List<Event> getNewsByFilter(String queryString){
-		return newsDao.findByFilter(queryString);
 	}
 }

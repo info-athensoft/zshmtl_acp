@@ -414,3 +414,47 @@ function changeSortNumber(object,mediaId,eventUUID) {
 function backToNewsList(){
 	location.href = "/acp/events/eventsNewsList";
 }
+
+/*edit news - tab:reviews */
+function filterSearchReview(){
+	
+	alert("do filterSearchReview()");
+//	return;
+	
+	
+	
+//	create a json object
+    var p1 = $("#event_review_no").val();
+    var p2a = $("#event_review_date_from").val();
+    var p2b = $("#event_review_date_to").val();
+    var p3 = $("#event_review_customer").val();
+    var p4 = $("#event_review_content").val();
+    var p5 = $("#event_review_status").val();
+
+//	validate
+    /*
+	if(!isNonNegativeInteger(p6a)){
+		p6a = "";
+		$("#viewNumFrom").val("");
+	}
+	if(!isNonNegativeInteger(p6b)){
+		p6b = "";
+		$("#viewNumTo").val("");
+	}*/
+  
+    var eventReviewObject =
+    {
+    		eventReviewNo  		:    p1,
+    		eventReviewDateFrom :    p2a,
+    		eventReviewDateTo	:    p2b,
+    		eventReviewCustomer :    p3,
+    		eventReviewContent 	:    p4,
+    		eventReviewStatus	:    p5
+    };
+
+    var dt = $("#datatable_reviews").DataTable();
+    
+    var x = dt.ajax.url("newsReviewSearchFilterData?itemJSONString="+JSON.stringify(eventReviewObject)).load();
+    
+    
+}

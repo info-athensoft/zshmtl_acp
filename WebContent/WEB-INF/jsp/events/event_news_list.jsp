@@ -412,7 +412,8 @@ table tr td{
 										</td>
 										<td>
 											<div class="margin-bottom-5">
-											<!-- <input type="button" class="btn btn-sm yellow filter-submit margin-bottom" value="Search"> --><button class="btn btn-sm yellow filter-submit1 margin-bottom" onclick="filterSearch();"><i class="fa fa-search"></i> Search</button>
+											<!-- <input type="button" class="btn btn-sm yellow filter-submit margin-bottom" value="Search"> -->
+											<button class="btn btn-sm yellow filter-submit1 margin-bottom" onclick="filterSearch();"><i class="fa fa-search"></i> Search</button>
 											</div>
 											<!--  <button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Reset</button> -->
 											<button class="btn btn-sm red filter-cancel1" onclick="filterReset();"><i class="fa fa-times"></i> Reset</button>

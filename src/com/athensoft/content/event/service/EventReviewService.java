@@ -47,6 +47,15 @@ public class EventReviewService {
 	}
 	
 	/**
+	 * get eventReview objects by its eventUUID
+	 * @param eventUUID the eventUUID of eventReview object
+	 * @return the list of eventReview objects
+	 */
+	public List<EventReview> getEventReviewByFilter(String queryString){
+		return eventReviewDao.findByFilter(queryString);
+	}
+	
+	/**
 	 * get all eventReview objects
 	 * @return the list of eventReview objects
 	 */

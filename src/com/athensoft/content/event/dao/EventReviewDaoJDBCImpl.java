@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.EventReview;
 
 @Component
@@ -45,12 +46,6 @@ private NamedParameterJdbcTemplate jdbc;
 	}
 
 	@Override
-	public List<EventReview> findByFilter(String queryString) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public EventReview findById(long globalId) {
 		// TODO Auto-generated method stub
 		return null;
@@ -60,6 +55,26 @@ private NamedParameterJdbcTemplate jdbc;
 	public EventReview findByReviewUUID(String reviewUUID) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<EventReview> findByFilter(String queryString) {
+		final String TABLE1 = "event_review";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append(" select * from "+TABLE1);
+		sbf.append(" where 1=1 ");
+		sbf.append(queryString);
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		List<EventReview> x = new ArrayList<EventReview>();
+		try{
+			x = jdbc.query(sql, paramSource, new EventReviewRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
 	}
 
 	@Override

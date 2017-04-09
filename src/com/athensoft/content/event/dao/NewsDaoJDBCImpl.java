@@ -51,27 +51,6 @@ public class NewsDaoJDBCImpl implements NewsDao {
 	}
 
 	@Override
-	public List<Event> findByFilter(String queryString) {
-		
-		final String TABLE1 = "event_news";
-		
-		StringBuffer sbf = new StringBuffer();
-		sbf.append(" select * from "+TABLE1);
-		sbf.append(" where 1=1 ");
-		sbf.append(queryString);
-		String sql = sbf.toString();
-		
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		List<Event> x = new ArrayList<Event>();
-		try{
-			x = jdbc.query(sql, paramSource, new NewsRowMapper());
-		}catch(EmptyResultDataAccessException ex){
-			x = null;
-		}
-		return x;
-	}
-
-	@Override
 	public Event findById(long globalId) {
 		String sql = "select * from event_news where global_id =:global_id";
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
@@ -99,7 +78,28 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		return x;
 	}
 
-/*	@Override
+@Override
+	public List<Event> findByFilter(String queryString) {
+		
+		final String TABLE1 = "event_news";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append(" select * from "+TABLE1);
+		sbf.append(" where 1=1 ");
+		sbf.append(queryString);
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		List<Event> x = new ArrayList<Event>();
+		try{
+			x = jdbc.query(sql, paramSource, new NewsRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
+	}
+
+	/*	@Override
 	public void create() {
 		// TODO Auto-generated method stub
 
