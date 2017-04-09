@@ -418,7 +418,7 @@ function backToNewsList(){
 /*edit news - tab:reviews */
 function filterSearchReview(){
 	
-	alert("do filterSearchReview()");
+//	alert("do filterSearchReview()");
 //	return;
 	
 	
@@ -431,6 +431,8 @@ function filterSearchReview(){
     var p4 = $("#event_review_content").val();
     var p5 = $("#event_review_status").val();
 
+    alert(p2a+"---"+p2b+"  p5="+p5);
+    
 //	validate
     /*
 	if(!isNonNegativeInteger(p6a)){
@@ -444,12 +446,12 @@ function filterSearchReview(){
   
     var eventReviewObject =
     {
-    		eventReviewNo  		:    p1,
-    		eventReviewDateFrom :    p2a,
-    		eventReviewDateTo	:    p2b,
-    		eventReviewCustomer :    p3,
-    		eventReviewContent 	:    p4,
-    		eventReviewStatus	:    p5
+    		eventReviewNo		:	p1,
+    		eventReviewDateFrom	:   p2a,
+    		eventReviewDateTo	:   p2b,
+    		eventReviewCustomer	:   p3,
+    		eventReviewContent	:   p4,
+    		eventReviewStatus	:   p5
     };
 
     var dt = $("#datatable_reviews").DataTable();

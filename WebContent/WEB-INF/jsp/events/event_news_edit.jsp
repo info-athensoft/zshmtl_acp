@@ -563,34 +563,34 @@ table tr td{
 													</tr>
 													<tr role="row" class="filter">
 														<td>
-															<input type="text" class="form-control form-filter input-sm" name="event_review_no">
+															<input type="text" class="form-control form-filter input-sm" name="event_review_no" id="event_review_no">
 														</td>
 														<td>
-															<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-																<input type="text" class="form-control form-filter input-sm" readonly name="event_review_date_from" placeholder="From">
+															<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+																<input type="text" class="form-control form-filter input-sm" readonly name="event_review_date_from" placeholder="From" id="event_review_date_from">
 																<span class="input-group-btn">
 																<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 																</span>
 															</div>
-															<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-																<input type="text" class="form-control form-filter input-sm" readonly name="event_review_date_to" placeholder="To">
+															<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+																<input type="text" class="form-control form-filter input-sm" readonly name="event_review_date_to" placeholder="To" id="event_review_date_to">
 																<span class="input-group-btn">
 																<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 																</span>
 															</div>
 														</td>
 														<td>
-															<input type="text" class="form-control form-filter input-sm" name="event_review_customer">
+															<input type="text" class="form-control form-filter input-sm" name="event_review_customer" id="event_review_customer">
 														</td>
 														<td>
-															<input type="text" class="form-control form-filter input-sm" name="event_review_content">
+															<input type="text" class="form-control form-filter input-sm" name="event_review_content" id="event_review_content">
 														</td>
 														<td>
-															<select name="event_review_status" class="form-control form-filter input-sm">
-																<option value="">Select...</option>
-																<option value="pending">Pending</option>
-																<option value="approved">Approved</option>
-																<option value="rejected">Rejected</option>
+															<select name="event_review_status" class="form-control form-filter input-sm" id="event_review_status">
+																<option value="0">Select...</option>
+																<option value="1">Approved</option>
+																<option value="2">Pending</option>
+																<option value="3">Rejected</option>
 															</select>
 														</td>
 														<td>

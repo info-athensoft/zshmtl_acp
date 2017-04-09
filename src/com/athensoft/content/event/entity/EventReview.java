@@ -9,6 +9,7 @@ import java.util.Date;
  * @version 1.0 
  */
 public class EventReview {
+	
 	/**
 	 * the status of review, constant value, APPROVED = 1
 	 */
