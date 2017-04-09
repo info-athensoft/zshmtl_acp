@@ -79,11 +79,30 @@ public class EventMediaService {
 		this.eventMediaDao.update(media);
 	}
 
+	/**
+	 * @param mediaId
+	 * @param eventUUID
+	 * @param sortNumber
+	 */
 	public void changeSortNumber(String mediaId, String eventUUID, String sortNumber) {
 		this.eventMediaDao.changeSortNumber(mediaId, eventUUID, sortNumber);		
 	}
 
+	/**
+	 * @param mediaId
+	 * @param eventUUID
+	 * @param mediaName
+	 */
 	public void changeMediaName(String mediaId, String eventUUID, String mediaName) {
 		this.eventMediaDao.changeMediaName(mediaId, eventUUID, mediaName);
+	}
+	
+	/**
+	 * @param mediaId
+	 * @param eventUUID
+	 * @param mediaLabel
+	 */
+	public void changeMediaLabel(String mediaId, String eventUUID, String mediaLabel) {
+		this.eventMediaDao.changeMediaLabel(mediaId, eventUUID, mediaLabel);
 	}
 }

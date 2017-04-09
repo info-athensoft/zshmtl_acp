@@ -26,9 +26,14 @@ public class EventMedia {
 	private String mediaURL;
 	
 	/**
-	 * the literal label of media object as a title
+	 * the media file name of media object
 	 */
 	private String mediaName;
+	
+	/**
+	 * the label or title of the media object
+	 */
+	private String mediaLabel;
 	
 	/**
 	 * the sort number of media object, ascending
@@ -101,11 +106,17 @@ public class EventMedia {
 	public void setPostTimestamp(Date postTimestamp) {
 		this.postTimestamp = postTimestamp;
 	}
+	public String getMediaLabel() {
+		return mediaLabel;
+	}
+	public void setMediaLabel(String mediaLabel) {
+		this.mediaLabel = mediaLabel;
+	}
 	
 	@Override
 	public String toString() {
 		return "EventMedia [mediaId=" + mediaId + ", eventUUID=" + eventUUID + ", mediaURL=" + mediaURL + ", mediaName="
-				+ mediaName + ", sortNumber=" + sortNumber + ", isPrimaryMedia=" + primaryMedia + ", mediaType="
-				+ mediaType + ", postTimestamp=" + postTimestamp + "]";
+				+ mediaName + ", mediaLabel=" + mediaLabel + ", sortNumber=" + sortNumber + ", primaryMedia="
+				+ primaryMedia + ", mediaType=" + mediaType + ", postTimestamp=" + postTimestamp + "]";
 	}
 }

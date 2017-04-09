@@ -117,15 +117,15 @@ public class NewsAcpController {
 		final int COLUMN_NUM = 9;
 		String[][] data = new String[entryLength][COLUMN_NUM];
 		
-		String field0 = "";
-		String field1 = "";
-		String field2 = "";
-		String field3 = "";
-		String field4 = "";
-		String field5 = "";
-		String field6 = "";
-		String field7 = "";
-		String field8 = "";
+		String field0 = "";	//check box
+		String field1 = "";	//event UUID
+		String field2 = "";	//event title
+		String field3 = "";	//author
+		String field4 = "";	//event class
+		String field5 = "";	//post datetime
+		String field6 = "";	//view num
+		String field7 = "";	//event status
+		String field8 = "";	//action
 		
 		for(int i=0; i<entryLength ; i++){			
 			field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
@@ -324,15 +324,15 @@ public class NewsAcpController {
 		final int COLUMN_NUM = 9;
 		String[][] data = new String[entryLength][COLUMN_NUM];
 		
-		String field0 = "";
-		String field1 = "";
-		String field2 = "";
-		String field3 = "";
-		String field4 = "";
-		String field5 = "";
-		String field6 = "";
-		String field7 = "";
-		String field8 = "";
+		String field0 = "";	//check box
+		String field1 = "";	//event UUID
+		String field2 = "";	//event title
+		String field3 = "";	//author
+		String field4 = "";	//event class
+		String field5 = "";	//post datetime
+		String field6 = "";	//view num
+		String field7 = "";	//event status
+		String field8 = "";	//action
 		
 		for(int i=0; i<entryLength ; i++){			
 			field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
@@ -748,7 +748,7 @@ public class NewsAcpController {
 	@RequestMapping(value="/events/changeMediaName",method=RequestMethod.POST)
 	public ModelAndView changeMediaName(@RequestParam String itemJSONString) {
 		
-		logger.info("entering /events/changeSortNumber");
+		logger.info("entering /events/changeMediaName");
 		
 		/* initial settings */
 		ModelAndView mav = new ModelAndView();
@@ -775,7 +775,41 @@ public class NewsAcpController {
         String viewName = "events/changeSortNumber";
 		mav.setViewName(viewName);		
 		
-		logger.info("leaving /events/changeSortNumber");
+		logger.info("leaving /events/changeMediaName");
+		return mav;		
+	}
+	
+	@RequestMapping(value="/events/changeMediaLabel",method=RequestMethod.POST)
+	public ModelAndView changeMediaLabel(@RequestParam String itemJSONString) {
+		
+		logger.info("entering /events/changeMediaLabel");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+        Map<String, Object> model = mav.getModel();
+        JSONObject ic_job= new JSONObject(itemJSONString);
+   
+//        News news = new News();
+//      news.setGlobalId(ic_job.getLong("globalId"));
+        String mediaId = Integer.toString(ic_job.getInt("mediaId"));
+        String eventUUID = ic_job.getString("eventUUID");
+        String mediaLabel = ic_job.getString("mediaLabel");
+                 
+//        logger.info("news = "+news);
+          
+		/* business logic*/
+        //long itemId = itemService.createItem(ic); 
+
+        eventMediaService.changeMediaLabel(mediaId, eventUUID, mediaLabel);
+		
+		/* assemble model and view */
+//      model.put("news", news);
+        String viewName = "events/changeSortNumber";
+		mav.setViewName(viewName);		
+		
+		logger.info("leaving /events/changeMediaLabel");
 		return mav;		
 	}
 	

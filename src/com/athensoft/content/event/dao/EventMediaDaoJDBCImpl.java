@@ -78,14 +78,15 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 		final String TABLE1 = "event_media";
 		StringBuffer sbf = new StringBuffer();
 		sbf.append("insert into "+TABLE1);
-		sbf.append(" (event_uuid,media_url,media_name,post_timestamp) ");
-		sbf.append(" values(:event_uuid,:media_url,:media_name,:post_timestamp)");
+		sbf.append(" (event_uuid,media_url,media_name,media_label,post_timestamp) ");
+		sbf.append(" values(:event_uuid,:media_url,:media_name,:media_label,:post_timestamp)");
 		String sql =  sbf.toString();
 		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("event_uuid", media.getEventUUID());
 		paramSource.addValue("media_url", media.getMediaURL());
 		paramSource.addValue("media_name", media.getMediaName());
+		paramSource.addValue("media_label", media.getMediaLabel());
 		paramSource.addValue("post_timestamp", media.getPostTimestamp());
 		
 		KeyHolder keyholder = new GeneratedKeyHolder();
@@ -101,6 +102,7 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 			x.setEventUUID(rs.getString("event_uuid"));
 			x.setMediaURL(rs.getString("media_url"));
 			x.setMediaName(rs.getString("media_name"));
+			x.setMediaLabel(rs.getString("media_label"));
 			x.setSortNumber(rs.getInt("sort_number"));
 //				int intIsPrimaryMedia = rs.getInt("sort_number");
 //				boolean isPrimaryMedia = intIsPrimaryMedia==1?true:false;
@@ -195,15 +197,15 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 
 	@Override
 	public void changeMediaName(String mediaId, String eventUUID, String mediaName) {
-final String TABLE1 = "event_media";
+		final String TABLE1 = "event_media";
 		
 		StringBuffer sbf = new StringBuffer();
 		sbf.append("update "+TABLE1+" ");
 		sbf.append("set ");
-		sbf.append("media_name = :mediaName ");
+		sbf.append("media_name = :media_name ");
 		sbf.append("where 1=1 ");
 		sbf.append("and media_id = :media_id ");
-		sbf.append("and event_uuid = :eventUUID");
+		sbf.append("and event_uuid = :event_uuid");
 				
 				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
 		
@@ -215,11 +217,42 @@ final String TABLE1 = "event_media";
 //		paramSource.addValue("global_id", news.getGlobalId());
 		
 		paramSource.addValue("media_id",mediaId);
-		paramSource.addValue("eventUUID", eventUUID);
-		paramSource.addValue("mediaName", mediaName);
+		paramSource.addValue("event_uuid", eventUUID);
+		paramSource.addValue("media_name", mediaName);
 		
 		KeyHolder keyholder = new GeneratedKeyHolder();
 		jdbc.update(sql, paramSource, keyholder);
 		return;
+	}
+
+	@Override
+	public void changeMediaLabel(String mediaId, String eventUUID, String mediaLabel) {
+		final String TABLE1 = "event_media";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("update "+TABLE1+" ");
+		sbf.append("set ");
+		sbf.append("media_label = :media_label ");
+		sbf.append("where 1=1 ");
+		sbf.append("and media_id = :media_id ");
+		sbf.append("and event_uuid = :event_uuid");
+				
+				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
+		
+		String sql = sbf.toString();
+		
+//		final Date dateCreate 			= new Date();
+//		final Date dateLastModified 	= dateCreate;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("global_id", news.getGlobalId());
+		
+		paramSource.addValue("media_id",mediaId);
+		paramSource.addValue("event_uuid", eventUUID);
+		paramSource.addValue("media_label", mediaLabel);
+		
+		KeyHolder keyholder = new GeneratedKeyHolder();
+		jdbc.update(sql, paramSource, keyholder);
+		return;
+		
 	}
 }

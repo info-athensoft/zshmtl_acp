@@ -57,7 +57,29 @@ public interface EventMediaDao {
 	 */
 	public void update(EventMedia media);
 
+	/**
+	 * change and save sort number of media object by media id under specified event UUID
+	 * @param mediaId
+	 * @param eventUUID
+	 * @param sortNumber
+	 */
 	public void changeSortNumber(String mediaId, String eventUUID, String sortNumber);
 
+	/**
+	 * change the label of media object
+	 * @param mediaId
+	 * @param eventUUID
+	 * @param mediaLabel
+	 */
+	public void changeMediaLabel(String mediaId, String eventUUID, String mediaLabel);
+	
+	/**
+	 * change the file name of media object
+	 * @param mediaId
+	 * @param eventUUID
+	 * @param mediaName
+	 */
 	public void changeMediaName(String mediaId, String eventUUID, String mediaName);
+	
+	
 }

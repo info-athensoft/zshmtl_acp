@@ -504,12 +504,12 @@ table tr td{
 												<c:forEach items="${eventMediaList}" var="eventMedia">
 													<tr>
 													<td>
-														<a href="${webapp_name}/assets/admin/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">
-														<img class="img-responsive" src="${webapp_name}/assets/admin/pages/media/works/img1.jpg" alt="">
+														<a href="/eventmedia/${eventMedia.mediaURL}${eventMedia.mediaName}" class="fancybox-button" data-rel="fancybox-button">
+														<img class="img-responsive" src="/eventmedia/${eventMedia.mediaURL}${eventMedia.mediaName}" alt="">
 														</a>
 													</td>
 													<td>
-														<input type="text" class="form-control" name="mediaName" value="${eventMedia.mediaName}" onblur="changeMediaName(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
+														<input type="text" class="form-control" name="mediaLabel" value="${eventMedia.mediaLabel}" onblur="changeMediaLabel(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
 													</td>
 													<td>
 														<input type="text" class="form-control" name="sortNumber" value="${eventMedia.sortNumber}" onblur="changeSortNumber(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">

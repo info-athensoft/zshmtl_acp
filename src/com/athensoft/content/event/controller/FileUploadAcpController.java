@@ -266,7 +266,9 @@ public class FileUploadAcpController {
 				        EventMedia eventMedia = new EventMedia();
 				        eventMedia.setEventUUID(eventUUID);
 				        eventMedia.setMediaName(this.name);
-				        eventMedia.setMediaURL(fileDir);
+				        eventMedia.setMediaLabel(this.name);
+				        String filePath = File.separator+eventUUID+File.separator;
+				        eventMedia.setMediaURL(filePath);
 				        eventMedia.setPostTimestamp(new Date());
 				        
 				        eventMediaService.creatEventMedia(eventMedia);

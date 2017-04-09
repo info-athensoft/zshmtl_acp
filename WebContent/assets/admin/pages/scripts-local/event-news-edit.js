@@ -347,6 +347,36 @@ function changeMediaName(object,mediaId,eventUUID) {
     });
 }
 
+function changeMediaLabel(object,mediaId,eventUUID) {
+	//alert(object);
+	var mediaLabel = object.value;
+
+	var mediaObject =
+    {
+			mediaId    :    mediaId,
+			eventUUID  :    eventUUID,
+			mediaLabel :    mediaLabel
+    };
+   
+    $.ajax({
+        type    :    "post",
+        url        : "changeMediaLabel?itemJSONString="+JSON.stringify(mediaObject),
+        dataType:    "html",
+        timeout :     30000,
+        
+        success:function(msg){
+//            location.href="";
+        },
+        error:function(xhr, status, error){
+//            alert("ERROR: Sort Number updating failed."); 
+//        	  alert(xhr.responseText);
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+            //reset to avoid duplication
+        }        
+    });
+}
+
 
 /* event_news_edit.jsp */
 function changeSortNumber(object,mediaId,eventUUID) {
