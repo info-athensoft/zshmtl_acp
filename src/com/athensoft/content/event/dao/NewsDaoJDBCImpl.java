@@ -218,4 +218,29 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		}		
 	}
 
+	@Override
+	public void markNewsStatusDeleted(String eventUUID) {
+		final String TABLE1 = "event_news";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("update "+TABLE1+" ");
+		sbf.append("set ");
+		sbf.append("event_status = :event_status ");
+		sbf.append("where ");
+		sbf.append("event_uuid = :event_uuid");
+				
+		String sql = sbf.toString();
+		
+//		final Date dateCreate 			= new Date();
+//		final Date dateLastModified 	= dateCreate;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("global_id", news.getGlobalId());
+		paramSource.addValue("event_uuid", eventUUID);
+		paramSource.addValue("event_status",3);
+		
+		KeyHolder keyholder = new GeneratedKeyHolder();
+		jdbc.update(sql, paramSource, keyholder);
+		return;
+	}
+
 }

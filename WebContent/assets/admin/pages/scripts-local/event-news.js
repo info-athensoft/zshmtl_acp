@@ -107,6 +107,30 @@ function updateNews() {
     });
 }
 
+function updateNewsAndContinue() {
+	//alert("Entered updateNewsAndContinue successfully."); 
+    var businessObject = getBusinessObject();
+    //alert(JSON.stringify(businessObject));
+	
+    //execute saving
+    $.ajax({
+        type    :    "post",
+        url        : "updateNews?itemJSONString="+JSON.stringify(businessObject),
+        dataType:    "html",
+        timeout :     30000,
+        
+        success:function(msg){
+        	//alert("News updated successfully."); 
+        },
+        error:function(){
+            alert("ERROR: News updating failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+            //reset to avoid duplication
+        }        
+    });
+}
+
 
 
 

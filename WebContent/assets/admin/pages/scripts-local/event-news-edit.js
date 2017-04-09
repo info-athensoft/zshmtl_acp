@@ -458,3 +458,27 @@ function filterSearchReview(){
     
     
 }
+
+function markNewsStatusDeleted(eventUUID) {
+	//alert('entered markNewsStatusDeleted');
+   
+    $.ajax({
+        type    :    "post",
+        url        : "markNewsStatusDeleted?eventUUID="+eventUUID,
+        dataType:    "html",
+        timeout :     30000,
+        
+        success:function(msg){
+//            //update deleted status
+        	//alert('update deleted status successfully.');
+        },
+        error:function(xhr, status, error){
+//            alert("ERROR: Sort Number updating failed."); 
+//        	  alert(xhr.responseText);
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+        	//alert('update deleted status completed.');
+        	$("#eventStatus").val(3);
+        }        
+    });
+}

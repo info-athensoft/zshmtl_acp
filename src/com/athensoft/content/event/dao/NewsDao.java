@@ -63,5 +63,7 @@ public interface NewsDao {
 	 * @param news list of news objects to persist
 	 */
 	public void updateBatch(List<News> news);
+
+	public void markNewsStatusDeleted(String eventUUID);
 	
 }

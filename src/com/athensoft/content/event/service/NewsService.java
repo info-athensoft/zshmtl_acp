@@ -93,4 +93,8 @@ public class NewsService {
 	public void updateNewsGroup(List<News> newsList) {
 		this.newsDao.updateBatch(newsList);
 	}
+
+	public void markNewsStatusDeleted(String eventUUID) {
+		this.newsDao.markNewsStatusDeleted(eventUUID);
+	}
 }

@@ -1016,4 +1016,33 @@ public class NewsAcpController {
 		return mav;		
 	}
 	
+	/**
+	 * set current media to as a cover media and refresh all media objects 
+	 * @param eventUUID the eventUUID of current event
+	 * @return data table of updated media object
+	 */
+	@RequestMapping(value="/events/markNewsStatusDeleted")
+//	@ResponseBody
+	public Map<String,Object> markNewsStatusDeleted(@RequestParam String eventUUID){
+		logger.info("entering /events/markNewsStatusDeleted");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//view
+		String viewName = "events/event_news_edit";
+		mav.setViewName(viewName);
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		
+		logger.info("eventUUID="+eventUUID);
+		
+		newsService.markNewsStatusDeleted(eventUUID);
+		
+		
+		logger.info("leaving /events/markNewsStatusDeleted");
+//		return mav;
+		return model;
+	}
+	
 }
