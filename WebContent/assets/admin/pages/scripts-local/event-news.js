@@ -156,7 +156,7 @@ function filterSearch(){
 
     var dt = $("#datatable_eventNewsList").DataTable();
     
-    var x = dt.ajax.url("eventsNewsSearchFilterData?itemJSONString="+JSON.stringify(businessObject)).load();
+    var x = dt.ajax.url("newsSearchFilterData?itemJSONString="+JSON.stringify(businessObject)).load();
     
     
 }
