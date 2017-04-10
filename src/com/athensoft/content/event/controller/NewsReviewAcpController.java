@@ -111,7 +111,15 @@ public class NewsReviewAcpController {
 			/*
 			select * from event_news where date(post_datetime) between adddate('2017-01-12', -1) and '2017-02-05';
 			*/
-			queryString_where2 = " and (date(review_datetime) between adddate('"+where2a+"', -1) and '"+where2b+"' ) ";
+			
+			int dateFlag = strEventReviewDateFrom.compareTo(strEventReviewDateTo);
+			if(dateFlag<0){
+				queryString_where2 = " and (date(review_datetime) between adddate('"+where2a+"', -1) and '"+where2b+"' ) ";
+			}else if(dateFlag==0){
+				queryString_where2 = " and (date(review_datetime) =  '"+where2a+"' ) ";
+			}else{
+				queryString_where2 = " and (date(review_datetime) between adddate('"+where2b+"', -1) and '"+where2a+"' ) ";
+			}
 		}
 		queryString.append(queryString_where2);
 		

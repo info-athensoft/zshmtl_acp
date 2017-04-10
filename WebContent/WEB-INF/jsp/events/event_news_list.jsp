@@ -388,7 +388,7 @@ table tr td{
 												</span>
 											</div>
 											<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-												<input type="text" class="form-control form-filter input-sm" readonly name="product_created_to " placeholder="To" id="postDatetimeTo">
+												<input type="text" class="form-control form-filter input-sm" readonly name="product_created_to" placeholder="To" id="postDatetimeTo">
 												<span class="input-group-btn">
 												<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 												</span>

@@ -150,6 +150,9 @@ function filterSearch(){
     var p9 = $("#eventClass").val();
     var p10 = $("#eventStatus").val();
 
+//    alert(p5a+" -- "+p5b);
+    
+    
 //	validate
 	if(!isNonNegativeInteger(p6a)){
 		p6a = "";

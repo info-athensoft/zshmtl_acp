@@ -244,8 +244,8 @@ public class NewsAcpController {
 		String where5a = strPostDatetimeFrom;
 		String where5b = strPostDatetimeTo;
 		
-		//System.out.println("strViewNumFrom="+strPostDatetimeFrom+"##");
-		//System.out.println("strViewNumTo="+strPostDatetimeTo+"##");
+		logger.info("strPostDatetimeFrom="+strPostDatetimeFrom+"##");
+		logger.info("strPostDatetimeTo="+strPostDatetimeTo+"##");
 		
 		/* where6a, where6b */
 		String strViewNumFrom = jobj.getString("viewNumFrom").trim();
@@ -282,17 +282,28 @@ public class NewsAcpController {
 		String queryString_where5 = "";
 		if(strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
 			queryString_where5 = " ";
-		}else if(!strPostDatetimeFrom.equals("")&&strViewNumTo.equals("")){
+		}else if(!strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
 			/* select * from event_news where date(post_datetime) >= adddate('2017-01-12', -1); */
 			queryString_where5 = " and date(post_datetime) >= '"+where5a+"' ";
 		}else if(strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
 			/* select * from event_news where date(post_datetime) <= '2017-02-05'; */
 			queryString_where5 = " and date(post_datetime) <= '"+where5b+"' ";
 		}else if(!strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
+			
 			/*
 			select * from event_news where date(post_datetime) between adddate('2017-01-12', -1) and '2017-02-05';
 			*/
-			queryString_where5 = " and (date(post_datetime) between adddate('"+where5a+"', -1) and '"+where5b+"' ) ";
+			int dateFlag = strPostDatetimeFrom.compareTo(strPostDatetimeTo);
+			if(dateFlag<0){
+				queryString_where5 = " and (date(post_datetime) between adddate('"+where5a+"', -1) and '"+where5b+"' ) ";
+			}else if(dateFlag==0){
+				queryString_where5 = " and (date(post_datetime) =  '"+where5a+"' ) ";
+			}else{
+				queryString_where5 = " and (date(post_datetime) between adddate('"+where5b+"', -1) and '"+where5a+"' ) ";
+			}
+			
+		}else{
+			logger.info("ERROR: not valid date range");
 		}
 		queryString.append(queryString_where5);
 		

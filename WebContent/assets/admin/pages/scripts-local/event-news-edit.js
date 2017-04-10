@@ -431,7 +431,7 @@ function filterSearchReview(){
     var p4 = $("#event_review_content").val();
     var p5 = $("#event_review_status").val();
 
-    alert(p2a+"---"+p2b+"  p5="+p5);
+//    alert(p2a+"---"+p2b+"  p5="+p5);
     
 //	validate
     /*
