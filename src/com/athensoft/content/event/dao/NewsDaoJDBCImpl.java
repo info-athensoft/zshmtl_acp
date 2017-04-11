@@ -196,27 +196,6 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
 	}
 
-	private static class NewsRowMapper implements RowMapper<Event>{
-		public Event mapRow(ResultSet rs, int rowNumber) throws SQLException {
-			Event x = new News();
-			x.setGlobalId(rs.getLong("global_id"));
-			x.setEventUUID(rs.getString("event_uuid"));
-			x.setTitle(rs.getString("title"));
-			x.setAuthor(rs.getString("author"));
-			x.setViewNum(rs.getInt("view_num"));
-			x.setDescShort(rs.getString("desc_short"));
-			x.setDescLong(rs.getString("desc_long"));
-			
-				Timestamp ts = rs.getTimestamp("post_datetime");			
-			x.setPostDatetime(new Date(ts.getTime()));
-			
-			x.setEventClass(rs.getString("event_class"));
-			x.setEventStatus(rs.getInt("event_status"));
-			
-            return x;
-		}		
-	}
-
 	@Override
 	public void markNewsStatusDeleted(String eventUUID) {
 		final String TABLE1 = "event_news";
@@ -240,6 +219,27 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		KeyHolder keyholder = new GeneratedKeyHolder();
 		jdbc.update(sql, paramSource, keyholder);
 		return;
+	}
+
+	private static class NewsRowMapper implements RowMapper<Event>{
+		public Event mapRow(ResultSet rs, int rowNumber) throws SQLException {
+			Event x = new News();
+			x.setGlobalId(rs.getLong("global_id"));
+			x.setEventUUID(rs.getString("event_uuid"));
+			x.setTitle(rs.getString("title"));
+			x.setAuthor(rs.getString("author"));
+			x.setViewNum(rs.getInt("view_num"));
+			x.setDescShort(rs.getString("desc_short"));
+			x.setDescLong(rs.getString("desc_long"));
+			
+				Timestamp ts = rs.getTimestamp("post_datetime");			
+			x.setPostDatetime(new Date(ts.getTime()));
+			
+			x.setEventClass(rs.getString("event_class"));
+			x.setEventStatus(rs.getInt("event_status"));
+			
+	        return x;
+		}		
 	}
 
 }

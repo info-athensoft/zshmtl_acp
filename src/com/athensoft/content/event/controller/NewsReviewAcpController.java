@@ -1,5 +1,6 @@
 package com.athensoft.content.event.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -8,11 +9,13 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.event.entity.EventReview;
+import com.athensoft.content.event.entity.News;
 import com.athensoft.content.event.service.EventReviewService;
 
 /**
@@ -69,12 +72,14 @@ public class NewsReviewAcpController {
 		
 		//data - review
 		EventReview eventReview = eventReviewService.getEventReviewByReviewUUID(reviewUUID);
-		//logger.info("Length of EventReview entries: "+ listEventMedia.size());
+		logger.info("eventReview: "+ eventReview.toString());
 		model.put("newsReviewObject", eventReview);
 		
 		logger.info("leaving /events/eventsNewsReviewEdit");
 		return mav;
 	}
+	
+	
 	
 	
 		/**
@@ -379,6 +384,49 @@ public class NewsReviewAcpController {
 		logger.info("leaving /events/newsReviewSearchFilterData");
 		
 		return model;
+	}
+	
+	
+	/**
+	 * update news review object
+	 * @param itemJSONString news object to update in JSON format
+	 * @return data and target view
+	 */
+	@RequestMapping(value="/events/updateNewsReview",method=RequestMethod.POST)
+	public ModelAndView updateNewsReview(@RequestParam String itemJSONString) {
+		
+		logger.info("entering /events/updateNewsReview");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+//        Map<String, Object> model = mav.getModel();
+        JSONObject ic_job= new JSONObject(itemJSONString);
+   
+        EventReview newsReview = new EventReview();
+//      news.setGlobalId(ic_job.getLong("globalId"));
+        newsReview.setEventUUID(ic_job.getString("eventUUID"));
+        newsReview.setReviewUUID(ic_job.getString("reviewUUID"));
+        newsReview.setReviewContent(ic_job.getString("reviewContent"));
+        newsReview.setCustomerId(ic_job.getLong("customerId"));
+        newsReview.setReviewDatetime(new Date());
+        //newsReview.setReviewStatus(ic_job.getInt("reviewStatus"));
+          
+        logger.info("newsReview = "+newsReview);
+          
+		/* business logic*/
+        //long itemId = itemService.createItem(ic); 
+
+        eventReviewService.updateEventReview(newsReview);
+		
+		/* assemble model and view */
+//      model.put("news", news);
+        String viewName = "events/event_news_list";
+		mav.setViewName(viewName);		
+		
+		logger.info("leaving /events/updateNewsReview");
+		return mav;		
 	}
 	
 }

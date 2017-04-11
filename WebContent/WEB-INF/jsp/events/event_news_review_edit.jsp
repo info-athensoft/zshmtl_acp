@@ -273,10 +273,10 @@ table tr td{
 										<span class="caption-helper">editing review details of news</span>
 									</div>
 									<div class="actions btn-set">
-										<button type="button" name="back" class="btn btn-default btn-circle" onclick="backToNewsList(); return false;"><i class="fa fa-angle-left"></i> Back</button>
-										<button type="button" name="reset" class="btn btn-default btn-circle" onclick="resetNews(); return false;"><i class="fa fa-reply"></i> Reset</button>
-										<button class="btn green-haze btn-circle" onclick="updateNews(); return false;"><i class="fa fa-check"></i> Save Change</button>
-										<button class="btn green-haze btn-circle" onclick="updateNewsAndContinue(); return false;"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
+										<button type="button" name="back" class="btn btn-default btn-circle" onclick="backToNewsEdit(); return false;"><i class="fa fa-angle-left"></i> Back</button>
+										<button type="button" name="reset" class="btn btn-default btn-circle" onclick="resetNewsReview(); return false;"><i class="fa fa-reply"></i> Reset</button>
+										<button class="btn green-haze btn-circle" onclick="updateNewsReview(); return false;"><i class="fa fa-check"></i> Save Change</button>
+										<button class="btn green-haze btn-circle" onclick="updateNewsReviewAndContinue(); return false;"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
 										<div class="btn-group">
 											<a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
 											<i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
@@ -287,7 +287,7 @@ table tr td{
 													Duplicate </a>
 												</li>
 												<li>
-													<a href="javascript:;"  onclick="markNewsStatusDeleted('${newsObject.eventUUID}'); return false;">
+													<a href="javascript:;"  onclick="markNewsStatusDeleted('${newsReviewObject.reviewUUID}'); return false;">
 													Mark Deleted </a>
 												</li>
 												<li class="divider">
@@ -427,7 +427,7 @@ table tr td{
 <script type="text/javascript" src="${webapp_name}/assets/global/scripts/datatable.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news-edit.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/test.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news-review-edit.js"></script>
 
 
 <!-- END PAGE LEVEL SCRIPTS -->
@@ -458,11 +458,6 @@ jQuery(document).ready(function() {
 	//$("#eventStatus").val(eventStatusValue);
 	
 });
-
-function resetNewsReview(){
-	
-
-}
 
 
 
