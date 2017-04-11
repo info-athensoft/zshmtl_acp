@@ -56,6 +56,15 @@ public class EventReviewService {
 	}
 	
 	/**
+	 * get eventReview object by reviewUUID
+	 * @param reviewUUID the reviewUUID of eventReview object
+	 * @return the object of eventReview
+	 */
+	public EventReview getEventReviewByReviewUUID(String reviewUUID){
+		return eventReviewDao.findByReviewUUID(reviewUUID);
+	}
+	
+	/**
 	 * get all eventReview objects
 	 * @return the list of eventReview objects
 	 */

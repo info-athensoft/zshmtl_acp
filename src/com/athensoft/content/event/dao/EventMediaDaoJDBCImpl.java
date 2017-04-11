@@ -74,6 +74,21 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 	}
 	
 	@Override
+	public EventMedia findPrimaryMediaByEventUUID(String eventUUID) {
+		//select the eventmedia which is already the primary media 
+		String sql = "select * from event_media where event_uuid=:event_uuid and is_primary_media = 1";
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("event_uuid", eventUUID);
+		EventMedia x = new EventMedia();
+		try{
+			x = jdbc.queryForObject(sql, paramSource, new EventMediaRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
+	}
+
+	@Override
 	public void create(EventMedia media) {
 		final String TABLE1 = "event_media";
 		StringBuffer sbf = new StringBuffer();
@@ -95,26 +110,6 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 	}
 
 	
-	private static class EventMediaRowMapper implements RowMapper<EventMedia>{
-		public EventMedia mapRow(ResultSet rs, int rowNumber) throws SQLException {
-			EventMedia x = new EventMedia();
-			x.setMediaId(rs.getLong("media_id"));
-			x.setEventUUID(rs.getString("event_uuid"));
-			x.setMediaURL(rs.getString("media_url"));
-			x.setMediaName(rs.getString("media_name"));
-			x.setMediaLabel(rs.getString("media_label"));
-			x.setSortNumber(rs.getInt("sort_number"));
-//				int intIsPrimaryMedia = rs.getInt("sort_number");
-//				boolean isPrimaryMedia = intIsPrimaryMedia==1?true:false;
-			x.setPrimaryMedia(rs.getBoolean("is_primary_media"));
-			x.setMediaType(rs.getInt("media_type"));
-				Timestamp ts = rs.getTimestamp("post_timestamp");			
-//			x.setPostTimestamp(new Date(ts.getTime()));
-            return x;
-		}		
-	}
-
-
 	@Override
 	public void delete() {
 		// TODO Auto-generated method stub
@@ -147,21 +142,6 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 		jdbc.update(sql, paramSource, keyholder);
 		return;
 		
-	}
-
-	@Override
-	public EventMedia findPrimaryMediaByEventUUID(String eventUUID) {
-		//select the eventmedia which is already the primary media 
-		String sql = "select * from event_media where event_uuid=:event_uuid and is_primary_media = 1";
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("event_uuid", eventUUID);
-		EventMedia x = new EventMedia();
-		try{
-			x = jdbc.queryForObject(sql, paramSource, new EventMediaRowMapper());
-		}catch(EmptyResultDataAccessException ex){
-			x = null;
-		}
-		return x;
 	}
 
 	@Override
@@ -255,4 +235,24 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 		return;
 		
 	}
+
+
+	private static class EventMediaRowMapper implements RowMapper<EventMedia>{
+			public EventMedia mapRow(ResultSet rs, int rowNumber) throws SQLException {
+				EventMedia x = new EventMedia();
+				x.setMediaId(rs.getLong("media_id"));
+				x.setEventUUID(rs.getString("event_uuid"));
+				x.setMediaURL(rs.getString("media_url"));
+				x.setMediaName(rs.getString("media_name"));
+				x.setMediaLabel(rs.getString("media_label"));
+				x.setSortNumber(rs.getInt("sort_number"));
+	//				int intIsPrimaryMedia = rs.getInt("sort_number");
+	//				boolean isPrimaryMedia = intIsPrimaryMedia==1?true:false;
+				x.setPrimaryMedia(rs.getBoolean("is_primary_media"));
+				x.setMediaType(rs.getInt("media_type"));
+					Timestamp ts = rs.getTimestamp("post_timestamp");			
+				x.setPostTimestamp(new Date(ts.getTime()));
+	            return x;
+			}		
+		}
 }

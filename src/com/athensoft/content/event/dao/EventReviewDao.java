@@ -3,7 +3,6 @@ package com.athensoft.content.event.dao;
 import java.util.List;
 
 import com.athensoft.content.event.entity.EventReview;
-import com.athensoft.content.event.entity.News;
 
 /**
  * A DAO interface of {@link EventReview}
@@ -35,13 +34,13 @@ public interface EventReviewDao {
 	
 	/**
 	 * get event review object by its gloablId
-	 * @param globalId the globlaId of news media object
-	 * @return a event media object
+	 * @param globalId the globlaId of news review object
+	 * @return a event review object
 	 */
 	public EventReview findById(long globalId);
 	
 	/**
-	 * get event review object by its eventUUID
+	 * get event review object by its reviewUUID
 	 * @param reviewUUID the reviewUUID of review object
 	 * @return an event review object
 	 */

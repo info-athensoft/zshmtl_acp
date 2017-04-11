@@ -1,7 +1,5 @@
 package com.athensoft.content.event.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -10,19 +8,12 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.athensoft.content.event.entity.Event;
-import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.entity.EventReview;
-import com.athensoft.content.event.entity.News;
-import com.athensoft.content.event.service.EventMediaService;
 import com.athensoft.content.event.service.EventReviewService;
-import com.athensoft.content.event.service.NewsService;
-import com.athensoft.util.UUIDHelper;
 
 /**
  * News Review Controller for ACP
@@ -37,12 +28,12 @@ public class NewsReviewAcpController {
 	/**
 	 * News Service instance
 	 */
-	private NewsService newsService;
-	
-	@Autowired
-	public void setNewsService(NewsService newsService) {
-		this.newsService = newsService;
-	}
+//	private NewsService newsService;
+//	
+//	@Autowired
+//	public void setNewsService(NewsService newsService) {
+//		this.newsService = newsService;
+//	}
 	
 	/**
 	 * EventReview Service instance
@@ -54,6 +45,198 @@ public class NewsReviewAcpController {
 		this.eventReviewService = eventReviewService;
 	}
 	
+	/**
+	 * goto event-news review edit page with data for updating
+	 * @param eventUUID the eventUUID of new object selected
+	 * @return data of review objects of news
+	 */
+	@RequestMapping(value="/events/eventsNewsReviewEdit")
+	public ModelAndView gotoNewsReviewEdit(@RequestParam String reviewUUID){
+		logger.info("entering /events/eventsNewsReviewEdit");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//view
+		String viewName = "events/event_news_review_edit";
+		mav.setViewName(viewName);
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		
+		//data - news
+		//News news = newsService.getNewsByEventUUID(eventUUID);	
+		//model.put("newsObject", news);
+		
+		//data - review
+		EventReview eventReview = eventReviewService.getEventReviewByReviewUUID(reviewUUID);
+		//logger.info("Length of EventReview entries: "+ listEventMedia.size());
+		model.put("newsReviewObject", eventReview);
+		
+		logger.info("leaving /events/eventsNewsReviewEdit");
+		return mav;
+	}
+	
+	
+		/**
+		 * get news review objects in JSON data form<p>
+		 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
+		 * @return data table of new review objects
+		 */
+		@RequestMapping(value="/events/eventsNewsReviewListAllData",produces="application/json")
+		@ResponseBody
+		public Map<String,Object> getDataNewsReviewList(){
+			logger.info("entering /events/eventsNewsReviewListData");
+			
+			ModelAndView mav = new ModelAndView();
+			Map<String, Object> model = mav.getModel();
+			
+			//data
+			List<EventReview> listEventReview = eventReviewService.getAllEventReview();
+			logger.info("Length of EventReview entries: "+ listEventReview.size());
+			
+			int entryLength = listEventReview.size();
+			final int COLUMN_NUM = 6;
+			String[][] data = new String[entryLength][COLUMN_NUM];
+			
+			String field0 = "";	//review uuid
+			String field1 = "";	//review datatime
+			String field2 = ""; //customer id
+			String field3 = "";	//review content
+			String field4 = "";	//review status
+			String field5 = "";	//action
+		
+			
+			for(int i=0; i<entryLength ; i++){			
+	//			field0 = "<input type='checkbox' name='id[]' value="+listEventReview.get(i).getEventUUID()+">";
+				field0 = listEventReview.get(i).getReviewUUID()+"";
+				field1 = listEventReview.get(i).getReviewDatetime()+"";
+				field2 = listEventReview.get(i).getCustomerId()+"";
+				field3 = listEventReview.get(i).getReviewContent();
+				
+				
+				int intReviewStatus = listEventReview.get(i).getReviewStatus();
+				String reviewStatus = "";
+				String reviewStatusKey = "";
+				switch(intReviewStatus){
+					case EventReview.APPROVED: 
+						reviewStatus = "Approved";
+						reviewStatusKey = "success";
+						break;
+					case EventReview.PENDING: 
+						reviewStatus = "Pending";
+						reviewStatusKey = "info";
+						break;
+					case EventReview.REJECTED: 
+						reviewStatus = "Rejected";
+						reviewStatusKey = "warning";
+						break;
+					default: 
+						break;
+				}
+				
+				
+				field4 = "<span class='label label-sm label-"+reviewStatusKey+"'>"+reviewStatus+"</span>";
+				field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field0+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+				
+				data[i][0] = field0;
+				data[i][1] = field1;
+				data[i][2] = field2;
+				data[i][3] = field3;
+				data[i][4] = field4;
+				data[i][5] = field5;
+			}
+			
+			model.put("draw", new Integer(1));
+			model.put("recordsTotal", new Integer(5));
+			model.put("recordsFiltered", new Integer(5));
+			model.put("data", data);
+			model.put("customActionStatus","OK");
+			model.put("customActionMessage","OK");
+			
+			logger.info("leaving /events/eventsNewsReviewListData");
+			return model;
+		}
+		
+		/**
+		 * get news review objects in JSON data form<p>
+		 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
+		 * @return data table of new review objects
+		 */
+		@RequestMapping(value="/events/eventsNewsReviewListData",produces="application/json")
+		@ResponseBody
+		public Map<String,Object> getDataNewsReviewListByEventUUID(@RequestParam String eventUUID){
+			logger.info("entering /events/eventsNewsReviewListData");
+			
+			ModelAndView mav = new ModelAndView();
+			Map<String, Object> model = mav.getModel();
+			
+			//data
+			List<EventReview> listEventReview = eventReviewService.getEventReviewByEventUUID(eventUUID);
+			logger.info("Length of EventReview entries: "+ listEventReview.size());
+			
+			int entryLength = listEventReview.size();
+			final int COLUMN_NUM = 6;
+			String[][] data = new String[entryLength][COLUMN_NUM];
+			
+			String field0 = "";	//review uuid
+			String field1 = "";	//review datatime
+			String field2 = ""; //customer id
+			String field3 = "";	//review content
+			String field4 = "";	//review status
+			String field5 = "";	//action
+		
+			
+			for(int i=0; i<entryLength ; i++){			
+	//			field0 = "<input type='checkbox' name='id[]' value="+listEventReview.get(i).getEventUUID()+">";
+				field0 = listEventReview.get(i).getReviewUUID()+"";
+				field1 = listEventReview.get(i).getReviewDatetime()+"";
+				field2 = listEventReview.get(i).getCustomerId()+"";
+				field3 = listEventReview.get(i).getReviewContent();
+				
+				
+				int intReviewStatus = listEventReview.get(i).getReviewStatus();
+				String reviewStatus = "";
+				String reviewStatusKey = "";
+				switch(intReviewStatus){
+					case EventReview.APPROVED: 
+						reviewStatus = "Approved";
+						reviewStatusKey = "success";
+						break;
+					case EventReview.PENDING: 
+						reviewStatus = "Pending";
+						reviewStatusKey = "info";
+						break;
+					case EventReview.REJECTED: 
+						reviewStatus = "Rejected";
+						reviewStatusKey = "warning";
+						break;
+					default: 
+						break;
+				}
+				
+				
+				field4 = "<span class='label label-sm label-"+reviewStatusKey+"'>"+reviewStatus+"</span>";
+				field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field0+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+				
+				data[i][0] = field0;
+				data[i][1] = field1;
+				data[i][2] = field2;
+				data[i][3] = field3;
+				data[i][4] = field4;
+				data[i][5] = field5;
+			}
+			
+			model.put("draw", new Integer(1));
+			model.put("recordsTotal", new Integer(5));
+			model.put("recordsFiltered", new Integer(5));
+			model.put("data", data);
+			model.put("customActionStatus","OK");
+			model.put("customActionMessage","OK");
+			
+			logger.info("leaving /events/eventsNewsReviewListData");
+			return model;
+		}
+
 	/**
 	 * get news review objects in JSON data form, which comply with criteria
 	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
@@ -165,11 +348,11 @@ public class NewsReviewAcpController {
 					break;
 				case EventReview.PENDING: 
 					eventReviewStatus = "Pending";
-					eventReviewStatusKey = "warning";
+					eventReviewStatusKey = "info";
 					break;
 				case EventReview.REJECTED: 
 					eventReviewStatus = "Rejected";
-					eventReviewStatusKey = "default";
+					eventReviewStatusKey = "warning";
 					break;
 				default: 
 					break;
@@ -195,89 +378,6 @@ public class NewsReviewAcpController {
 		
 		logger.info("leaving /events/newsReviewSearchFilterData");
 		
-		return model;
-	}
-	
-	
-	
-	
-	/**
-	 * get news review objects in JSON data form<p>
-	 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
-	 * @return data table of new review objects
-	 */
-	@RequestMapping(value="/events/eventsNewsReviewListData",produces="application/json")
-	@ResponseBody
-	public Map<String,Object> getDataNewsReviewList(){
-		logger.info("entering /events/eventsNewsReviewListData");
-		
-		ModelAndView mav = new ModelAndView();
-		Map<String, Object> model = mav.getModel();
-		
-		//data
-		List<EventReview> listEventReview = eventReviewService.getAllEventReview();
-		logger.info("Length of EventReview entries: "+ listEventReview.size());
-		
-		int entryLength = listEventReview.size();
-		final int COLUMN_NUM = 6;
-		String[][] data = new String[entryLength][COLUMN_NUM];
-		
-		String field0 = "";	//review uuid
-		String field1 = "";	//review datatime
-		String field2 = ""; //customer id
-		String field3 = "";	//review content
-		String field4 = "";	//review status
-		String field5 = "";	//action
-	
-		
-		for(int i=0; i<entryLength ; i++){			
-//			field0 = "<input type='checkbox' name='id[]' value="+listEventReview.get(i).getEventUUID()+">";
-			field0 = listEventReview.get(i).getReviewUUID()+"";
-			field1 = listEventReview.get(i).getReviewDatetime()+"";
-			field2 = listEventReview.get(i).getCustomerId()+"";
-			field3 = listEventReview.get(i).getReviewContent();
-			
-			
-			int intReviewStatus = listEventReview.get(i).getReviewStatus();
-			String reviewStatus = "";
-			String reviewStatusKey = "";
-			switch(intReviewStatus){
-				case EventReview.APPROVED: 
-					reviewStatus = "Approved";
-					reviewStatusKey = "success";
-					break;
-				case EventReview.PENDING: 
-					reviewStatus = "Pending";
-					reviewStatusKey = "info";
-					break;
-				case EventReview.REJECTED: 
-					reviewStatus = "Rejected";
-					reviewStatusKey = "warning";
-					break;
-				default: 
-					break;
-			}
-			
-			
-			field4 = "<span class='label label-sm label-"+reviewStatusKey+"'>"+reviewStatus+"</span>";
-			field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field0+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
-			
-			data[i][0] = field0;
-			data[i][1] = field1;
-			data[i][2] = field2;
-			data[i][3] = field3;
-			data[i][4] = field4;
-			data[i][5] = field5;
-		}
-		
-		model.put("draw", new Integer(1));
-		model.put("recordsTotal", new Integer(5));
-		model.put("recordsFiltered", new Integer(5));
-		model.put("data", data);
-		model.put("customActionStatus","OK");
-		model.put("customActionMessage","OK");
-		
-		logger.info("leaving /events/eventsNewsReviewListData");
 		return model;
 	}
 	

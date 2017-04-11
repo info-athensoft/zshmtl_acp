@@ -17,7 +17,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.EventReview;
 
 @Component
@@ -58,6 +57,20 @@ private NamedParameterJdbcTemplate jdbc;
 	}
 
 	@Override
+	public List<EventReview> findByEventUUID(String eventUUID) {
+		String sql = "select * from event_review where event_uuid = :event_uuid";
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("event_uuid", eventUUID);
+		List<EventReview> x = new ArrayList<EventReview>();
+		try{
+			x = jdbc.query(sql, paramSource, new EventReviewRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
+	}
+
+	@Override
 	public List<EventReview> findByFilter(String queryString) {
 		final String TABLE1 = "event_review";
 		
@@ -95,12 +108,6 @@ private NamedParameterJdbcTemplate jdbc;
 		
 	}
 
-	@Override
-	public List<EventReview> findByEventUUID(String eventUUID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	private static class EventReviewRowMapper implements RowMapper<EventReview>{
 		public EventReview mapRow(ResultSet rs, int rowNumber) throws SQLException {
 			EventReview x = new EventReview();

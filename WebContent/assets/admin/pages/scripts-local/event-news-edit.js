@@ -90,7 +90,10 @@ var EventNewsEdit = function (option) {
     }
 
     var handleReviews = function () {
-
+    	
+    	var eventUUID = $("#eventUUID").val();
+    	console.log("option eventUUID="+eventUUID);
+    	
         var grid = new Datatable();
 
         grid.init({
@@ -115,7 +118,11 @@ var EventNewsEdit = function (option) {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "/acp/events/eventsNewsReviewListData", // ajax source
+                    //"url": "/acp/events/eventsNewsReviewListData?eventUUID="+eventUUID, // ajax source
+                	"url": "/acp/events/eventsNewsReviewListData", // ajax source
+                	"data":{
+                	    "eventUUID": eventUUID
+                	}
                 },
                 "columnDefs": [{ // define columns sorting options(by default all columns are sortable extept the first checkbox column)
                     'orderable': true,
