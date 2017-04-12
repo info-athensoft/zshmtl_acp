@@ -866,10 +866,12 @@ License: You must have a valid license purchased only from themeforest(the above
 <script type="text/javascript" src="${webapp_name}/assets/admin/layout2/scripts/layout.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/admin/layout2/scripts/demo.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/global/scripts/datatable.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news-create.js"></script>
+
 <script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/global-validate.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news-create.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
+
 <script>
 	jQuery(document).ready(function() {    
 	Metronic.init(); // init metronic core components

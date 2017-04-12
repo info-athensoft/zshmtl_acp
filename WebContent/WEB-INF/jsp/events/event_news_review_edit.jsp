@@ -423,11 +423,10 @@ table tr td{
 <script type="text/javascript" src="${webapp_name}/assets/admin/layout2/scripts/layout.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/admin/layout2/scripts/demo.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/global/scripts/datatable.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news-edit.js"></script>
+
 <script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news-edit.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/event-news-review-edit.js"></script>
-
-
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 
@@ -438,13 +437,6 @@ jQuery(document).ready(function() {
 	//EventNewsEdit.init();
 	var eventUUID = $("#eventUUID").val();
 	EventNewsEdit.init(eventUUID);
-	//var eventUUID =  "5f06c334dc1242eb94eeb815541d5d19";
-	//var up = $('#tab_images_uploader_container').plupload('getUploader');
-//    up.settings.url = 'http://localhost:8080/acp/content/fileUpload?eventUUID='+eventUUID;
-   //up.setOption(url,'http://localhost:8080/acp/content/fileUpload?eventUUID='+eventUUID);
-	
-	
-	
 
 //local
 //select object for event class
