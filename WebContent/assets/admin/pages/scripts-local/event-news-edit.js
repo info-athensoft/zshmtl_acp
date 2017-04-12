@@ -1,3 +1,6 @@
+/** event_news_edit.jsp */
+
+/* edit news - init */
 var EventNewsEdit = function (option) {
 
     var handleImages = function(option) {
@@ -208,6 +211,88 @@ var EventNewsEdit = function (option) {
 }();
 
 
+/*edit news - button:back */
+function backToNewsList(){
+	location.href = "/acp/events/eventsNewsList";
+}
+
+
+/* event news - button:save change,update */
+function updateNews() {
+    
+    var businessObject = getBusinessObject();
+    //alert(JSON.stringify(businessObject));
+	
+    //execute saving
+    $.ajax({
+        type    :    "post",
+        url        : "updateNews?itemJSONString="+JSON.stringify(businessObject),
+        dataType:    "html",
+        timeout :     30000,
+        
+        success:function(msg){
+            location.href="eventsNewsList";
+        },
+        error:function(){
+            alert("ERROR: News updating failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+            //reset to avoid duplication
+        }        
+    });
+}
+
+
+/*edit news - button:save and continue */
+function updateNewsAndContinue() {
+	//alert("Entered updateNewsAndContinue successfully."); 
+    var businessObject = getBusinessObject();	//refer to event-news-edit.js
+    //alert(JSON.stringify(businessObject));
+	
+    //execute saving
+    $.ajax({
+        type    :    "post",
+        url        : "updateNews?itemJSONString="+JSON.stringify(businessObject),
+        dataType:    "html",
+        timeout :     30000,
+        
+        success:function(msg){
+        	//alert("News updated successfully."); 
+        },
+        error:function(){
+            alert("ERROR: News updating failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+            //reset to avoid duplication
+        }        
+    });
+}
+
+
+/*edit news - button:mark deleted */
+function markNewsStatusDeleted(eventUUID) {
+	//alert('entered markNewsStatusDeleted');
+   
+    $.ajax({
+        type    :    "post",
+        url        : "markNewsStatusDeleted?eventUUID="+eventUUID,
+        dataType:    "html",
+        timeout :     30000,
+        
+        success:function(msg){
+//            //update deleted status
+        	//alert('update deleted status successfully.');
+        },
+        error:function(xhr, status, error){
+//            alert("ERROR: Sort Number updating failed."); 
+//        	  alert(xhr.responseText);
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+        	//alert('update deleted status completed.');
+        	$("#eventStatus").val(3);
+        }        
+    });
+}
 
 
 /*edit news - tab:images */
@@ -269,6 +354,7 @@ function setCoverMedia(mediaId, eventUUID) {
 }
 
 
+/*edit news - tab:images */
 function reloadEventMedia(eventUUID){
 	$.ajax({
         type    :    "post",
@@ -323,7 +409,7 @@ function reloadEventMedia(eventUUID){
 }
 
 
-/* event_news_edit.jsp */
+/*edit news - tab:images */
 function changeMediaName(object,mediaId,eventUUID) {
 	//alert(object);
 	var mediaName = object.value;
@@ -354,6 +440,8 @@ function changeMediaName(object,mediaId,eventUUID) {
     });
 }
 
+
+/*edit news - tab:images */
 function changeMediaLabel(object,mediaId,eventUUID) {
 	//alert(object);
 	var mediaLabel = object.value;
@@ -385,7 +473,7 @@ function changeMediaLabel(object,mediaId,eventUUID) {
 }
 
 
-/* event_news_edit.jsp */
+/*edit news - tab:images */
 function changeSortNumber(object,mediaId,eventUUID) {
 	//alert(object);
 	var sortNumber = object.value;
@@ -417,20 +505,13 @@ function changeSortNumber(object,mediaId,eventUUID) {
     });
 }
 
-/*edit news - button:back */
-function backToNewsList(){
-	location.href = "/acp/events/eventsNewsList";
-}
 
 /*edit news - tab:reviews */
 function filterSearchReview(){
 	
 //	alert("do filterSearchReview()");
-//	return;
-	
-	
-	
-//	create a json object
+
+	//	create a json object
     var p1 = $("#event_review_no").val();
     var p2a = $("#event_review_date_from").val();
     var p2b = $("#event_review_date_to").val();
@@ -466,28 +547,4 @@ function filterSearchReview(){
     var x = dt.ajax.url("newsReviewSearchFilterData?itemJSONString="+JSON.stringify(eventReviewObject)).load();
     
     
-}
-
-function markNewsStatusDeleted(eventUUID) {
-	//alert('entered markNewsStatusDeleted');
-   
-    $.ajax({
-        type    :    "post",
-        url        : "markNewsStatusDeleted?eventUUID="+eventUUID,
-        dataType:    "html",
-        timeout :     30000,
-        
-        success:function(msg){
-//            //update deleted status
-        	//alert('update deleted status successfully.');
-        },
-        error:function(xhr, status, error){
-//            alert("ERROR: Sort Number updating failed."); 
-//        	  alert(xhr.responseText);
-        },            
-        complete: function(XMLHttpRequest, textStatus){
-        	//alert('update deleted status completed.');
-        	$("#eventStatus").val(3);
-        }        
-    });
 }

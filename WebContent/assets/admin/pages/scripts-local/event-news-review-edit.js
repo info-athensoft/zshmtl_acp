@@ -1,6 +1,6 @@
-/* event-news-review-edit.js */
+/** event-news-review-edit.js */
 
-/* event_news_review_edit.jsp */
+/* event news review - button:save change,update */
 function updateNewsReview() {
     
 	//alert("updateNewsReview()");
@@ -20,8 +20,6 @@ function updateNewsReview() {
     };
     
    //alert(JSON.stringify(reviewObject));
-	
-    
     
     //execute saving
     $.ajax({
@@ -43,17 +41,29 @@ function updateNewsReview() {
     });
 }
 
+
+/* event news review - button:save change and continue ,update */
 function updateNewsReviewAndContinue(){
 	alert("TODO: updateNewsReviewAndContinue()");
 }
 
+
+/* event news review - button:back */
 function backToNewsEdit(){
 	var p1 = $("#eventUUID").val();
 	var tabId = "#tab_reviews";
 	location.href = "/acp/events/eventsNewsEdit?eventUUID="+p1+tabId;
 }
 
-function resetNewsReview(){
-	alert("resetNewsReview()");
-}
 
+/* event news review - button:reset */
+function resetNewsReview(){
+//	alert("resetNewsReview()");
+	
+	var p1 = $("#globalId").val("");
+    var p2 = $("#eventUUID").val("");        
+    var p3 = $("#title").val("");
+    var p4 = $("#author").val("");
+    var p4 = $("#author").val("");
+    
+}

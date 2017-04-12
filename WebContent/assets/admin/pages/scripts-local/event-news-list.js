@@ -1,3 +1,6 @@
+/** event_news_list.jsp */
+
+/* list news - init */
 var EventNewsList = function () {
 
     var initPickers = function () {
@@ -100,3 +103,97 @@ var EventNewsList = function () {
     };
 
 }();
+
+
+/* list news - button:group update status */
+function groupUpdateStatus(eventUUIDArray,newsStatus){
+	//alert("groupUpdateStatus()");
+    //alert(eventUUIDArray+":"+newsStatus);
+	
+    //execute saving
+    $.ajax({
+        type    :    "post",
+        url        : "updateNewsGroup?eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
+        dataType:    "json",
+        timeout :     30000,
+        
+        success:function(msg){
+            location.href="eventsNewsList";
+        	//alert("INFO: News status updated.");
+        },
+        error:function(){
+            alert("ERROR: News updating failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+            //reset to avoid duplication
+        }        
+    });
+}
+
+
+/* list news - datatable:button:filter search */
+function filterSearch(){
+	
+//	alert("do filterSearch()");
+//	create a json object
+    var p2 = $("#eventUUID").val();
+    var p3 = $("#eventTitle").val();
+    var p4 = $("#eventAuthor").val();
+    var p5a = $("#postDatetimeFrom").val();
+    var p5b = $("#postDatetimeTo").val();
+    var p6a = $("#viewNumFrom").val();
+    var p6b = $("#viewNumTo").val();
+    var p9 = $("#eventClass").val();
+    var p10 = $("#eventStatus").val();
+
+//    alert(p5a+" -- "+p5b);
+    
+//	validate
+	if(!isNonNegativeInteger(p6a)){
+		p6a = "";
+		$("#viewNumFrom").val("");
+	}
+	if(!isNonNegativeInteger(p6b)){
+		p6b = "";
+		$("#viewNumTo").val("");
+	}
+//	isNonNegativeInteger(p6b);
+//	alert(p5a+" "+p5b);
+  
+    var businessObject =
+    {
+    //		globalId    :    p1,
+    		eventUUID   :    p2,
+    		title    	:    p3,
+    		author    	:    p4,
+     		postDatetimeFrom:  p5a,            
+     		postDatetimeTo:    p5b,            
+    		viewNumFrom :    p6a,            
+    		viewNumTo 	:    p6b,            
+    //		descShort   :    p7,
+    //		descLong	:    p8,
+      		eventClass  :    p9,
+    		eventStatus	:    p10
+    };
+
+    var dt = $("#datatable_eventNewsList").DataTable();
+    
+    var x = dt.ajax.url("newsSearchFilterData?itemJSONString="+JSON.stringify(businessObject)).load();
+    
+    
+}
+
+
+/* list news - datatable:button:filter reset */
+function filterReset(){
+//	alert("do filterReset()");
+	var p2 = $("#eventUUID").val("");
+    var p3 = $("#eventTitle").val("");        
+    var p4 = $("#eventAuthor").val("");
+    var p5a = $("#postDatetimeFrom").val("");
+    var p5b = $("#postDatetimeTo").val("");
+    var p6a = $("#viewNumFrom").val("");
+    var p6b = $("#viewNumTo").val("");
+    var p9 = $("#eventClass").val(0);
+    var p10 = $("#eventStatus").val(0);
+}
