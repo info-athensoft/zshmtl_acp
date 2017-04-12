@@ -131,6 +131,11 @@
 									<i class="icon-paper-plane"></i>
 									News Create</a>
 								</li>
+								<li>
+									<a href="/acp/events/eventsNewsDelete">
+									<i class="icon-paper-plane"></i>
+									News Remove - Admin</a>
+								</li>
 								</ul>
 							</li>
 						</ul>

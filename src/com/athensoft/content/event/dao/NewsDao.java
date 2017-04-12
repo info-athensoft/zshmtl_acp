@@ -66,4 +66,10 @@ public interface NewsDao {
 	 */
 	public void delete();
 	
+	/**
+	 * remove news objects permanently in batch
+	 * @param news list of news objects to persist
+	 */
+	public void deleteBatch(List<News> news);
+	
 }

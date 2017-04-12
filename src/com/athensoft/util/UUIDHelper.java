@@ -9,11 +9,19 @@ import java.util.UUID;
  */
 public class UUIDHelper {
 	
+	/**
+	 * generate a UUID without '-' symbol
+	 * @return
+	 */
 	public static String getUUID(){
 		final String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 		return uuid;
 	}
 	
+	/**
+	 * generate a UUID of generation 4
+	 * @return
+	 */
 	public static String getUUID4(){
 		//TODO
 		return null;

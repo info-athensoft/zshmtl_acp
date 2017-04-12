@@ -44,6 +44,7 @@ public class Activity extends Event {
 	public void setActivityLocation(String activityLocation) {
 		this.activityLocation = activityLocation;
 	}
+	
 	@Override
 	public String toString() {
 		return "Activity [activityStartDate=" + activityStartDate + ", activityEndDate=" + activityEndDate

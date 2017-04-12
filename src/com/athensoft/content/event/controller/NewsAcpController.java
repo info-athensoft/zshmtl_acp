@@ -125,6 +125,17 @@ public class NewsAcpController {
 		logger.info("leaving /events/eventsNewsEdit");
 		return mav;
 	}
+	
+	
+	/**
+	 * go to the view of news listing
+	 * @return the target view name 
+	 */
+	@RequestMapping(value="/events/eventsNewsDelete")
+	public String gotoNewsDelete(){
+		String viewName = "events/event_news_delete";
+		return viewName;
+	}
 
 
 	/**
@@ -240,126 +251,453 @@ public class NewsAcpController {
 	}
 	
 	/**
-	 * get news objects in JSON data form, which comply with criteria
+		 * get news objects in JSON data form, which comply with criteria
+		 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
+		 * @param itemJSONString search criteria object in JSON format
+		 * @return a map structure containing data rendered to views
+		 */
+		@RequestMapping(value="/events/newsSearchFilterData",produces="application/json")
+		@ResponseBody
+		public Map<String, Object> getDataSearchNewsByFilter(@RequestParam String itemJSONString){
+			logger.info("entering /events/newsSearchFilterData");
+			
+			ModelAndView mav = new ModelAndView();
+			
+			//data
+			Map<String, Object> model = mav.getModel();
+			JSONObject jobj= new JSONObject(itemJSONString);
+			
+			String where1 = jobj.getString("eventUUID").trim();
+			String where2 = jobj.getString("title").trim();
+			String where3 = jobj.getString("author").trim();
+			int where4 = jobj.getInt("eventClass");
+			
+			/* where5a, where5b */
+			String strPostDatetimeFrom = jobj.getString("postDatetimeFrom").trim();
+			String strPostDatetimeTo = jobj.getString("postDatetimeTo").trim();
+			
+			if(strPostDatetimeFrom==null){
+				strPostDatetimeFrom = "";
+			}
+			if(strPostDatetimeTo==null){
+				strPostDatetimeTo = "";
+			}
+			String where5a = strPostDatetimeFrom;
+			String where5b = strPostDatetimeTo;
+			
+			logger.info("strPostDatetimeFrom="+strPostDatetimeFrom+"##");
+			logger.info("strPostDatetimeTo="+strPostDatetimeTo+"##");
+			
+			/* where6a, where6b */
+			String strViewNumFrom = jobj.getString("viewNumFrom").trim();
+			String strViewNumTo = jobj.getString("viewNumTo").trim();
+			int where6a = 0;
+			int where6b = 0;
+			
+	//		System.out.println("strViewNumFrom="+strViewNumFrom+"##");
+	//		System.out.println("strViewNumTo="+strViewNumTo+"##");
+			
+			if(strViewNumFrom==null){
+				strViewNumFrom = "";
+			}
+			if(strViewNumTo==null){
+				strViewNumTo = "";
+			}
+			
+			if(!strViewNumFrom.equals("")){
+				where6a = Integer.parseInt(strViewNumFrom);
+			}
+			if(!strViewNumTo.equals("")){
+				where6b = Integer.parseInt(strViewNumTo);
+			}
+			
+			int where7 = jobj.getInt("eventStatus");
+			
+			/* construct query string */
+			StringBuffer queryString = new StringBuffer();
+			queryString.append(where1.length()==0?" ":" and event_uuid like '%"+where1+"%' ");
+			queryString.append(where2.length()==0?" ":" and title like '%"+where2+"%' ");
+			queryString.append(where3.length()==0?" ":" and author like '%"+where3+"%' ");
+			queryString.append(where4==0?" ":" and event_class = "+where4+" ");
+			
+			String queryString_where5 = "";
+			if(strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
+				queryString_where5 = " ";
+			}else if(!strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
+				/* select * from event_news where date(post_datetime) >= adddate('2017-01-12', -1); */
+				queryString_where5 = " and date(post_datetime) >= '"+where5a+"' ";
+			}else if(strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
+				/* select * from event_news where date(post_datetime) <= '2017-02-05'; */
+				queryString_where5 = " and date(post_datetime) <= '"+where5b+"' ";
+			}else if(!strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
+				
+				/*
+				select * from event_news where date(post_datetime) between adddate('2017-01-12', -1) and '2017-02-05';
+				*/
+				int dateFlag = strPostDatetimeFrom.compareTo(strPostDatetimeTo);
+				if(dateFlag<0){
+					queryString_where5 = " and (date(post_datetime) between adddate('"+where5a+"', -1) and '"+where5b+"' ) ";
+				}else if(dateFlag==0){
+					queryString_where5 = " and (date(post_datetime) =  '"+where5a+"' ) ";
+				}else{
+					queryString_where5 = " and (date(post_datetime) between adddate('"+where5b+"', -1) and '"+where5a+"' ) ";
+				}
+				
+			}else{
+				logger.info("ERROR: not valid date range");
+			}
+			queryString.append(queryString_where5);
+			
+			String queryString_where6 = "";
+			if(strViewNumFrom.equals("")&&strViewNumTo.equals("")){
+				queryString_where6 = " ";
+			}else if(!strViewNumFrom.equals("")&&strViewNumTo.equals("")){
+				queryString_where6 = " and view_num >= "+where6a;
+			}else if(strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
+				queryString_where6 = " and view_num <= "+where6b;
+			}else if(!strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
+				if(where6a<=where6b){
+					queryString_where6 = " and (view_num between "+where6a+" and "+where6b+" ) ";
+				}else{
+					queryString_where6 = " and (view_num between "+where6b+" and "+where6a+" ) ";
+				}
+			}
+			queryString.append(queryString_where6);
+					
+			queryString.append(where7==0?" ":" and event_status = "+where7+" ");
+			
+			logger.info("QueryString = "+ queryString.toString());
+			
+			List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
+			logger.info("Length of news entries = "+ listNews.size());
+			
+			
+			int entryLength = listNews.size();
+			final int COLUMN_NUM = 9;
+			String[][] data = new String[entryLength][COLUMN_NUM];
+			
+			String field0 = "";	//check box
+			String field1 = "";	//event UUID
+			String field2 = "";	//event title
+			String field3 = "";	//author
+			String field4 = "";	//event class
+			String field5 = "";	//post datetime
+			String field6 = "";	//view num
+			String field7 = "";	//event status
+			String field8 = "";	//action
+			
+			for(int i=0; i<entryLength ; i++){			
+				field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
+				field1 = listNews.get(i).getEventUUID()+"";
+				field2 = listNews.get(i).getTitle();
+				field3 = listNews.get(i).getAuthor();
+				
+				int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
+				String eventClass = "";
+				switch(intEventClass){
+					case News.CLASS_DEFAULT:
+						eventClass = "Default";
+						break;
+					case News.CLASS_NEW:
+						eventClass = "New";
+						break;
+					case News.CLASS_HOT:
+						eventClass = "Hot";
+						break;
+					default: 
+						eventClass = "Unknown";
+						break;
+				}
+				field4 = eventClass;
+						
+				field5 = listNews.get(i).getPostDatetime()+"";
+				field6 = listNews.get(i).getViewNum()+"";
+				int intEventStatus = listNews.get(i).getEventStatus();
+				String eventStatus = "";
+				String eventStatusKey = "";
+				switch(intEventStatus){
+					case News.PUBLISHED: 
+						eventStatus = "Published";
+						eventStatusKey = "success";
+						break;
+					case News.WAIT_TO_POST: 
+						eventStatus = "Wait to post";
+						eventStatusKey = "warning";
+						break;
+					case News.DELETED: 
+						eventStatus = "Deleted";
+						eventStatusKey = "default";
+						break;
+					case News.OUT_OF_DATE: 
+						eventStatus = "Out of date";
+						eventStatusKey = "info";
+						break;
+					case News.SUSPENDED: 
+						eventStatus = "Suspended";
+						eventStatusKey = "danger";
+						break;
+					default: 
+						break;
+				}
+				
+				field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
+				field8 = "<a href='/acp/events/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+				
+				data[i][0] = field0;
+				data[i][1] = field1;
+				data[i][2] = field2;
+				data[i][3] = field3;
+				data[i][4] = field4;
+				data[i][5] = field5;
+				data[i][6] = field6;
+				data[i][7] = field7;
+				data[i][8] = field8;
+			}
+			
+			model.put("draw", new Integer(1));
+			model.put("recordsTotal", new Integer(5));
+			model.put("recordsFiltered", new Integer(5));
+			model.put("data", data);
+			model.put("customActionStatus","OK");
+			model.put("customActionMessage","OK");
+			
+			logger.info("leaving /events/newsSearchFilterData");
+			
+			return model;
+		}
+
+	
+		/**
+		 * get news objects in JSON data form, which comply with criteria
+		 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
+		 * @param itemJSONString search criteria object in JSON format
+		 * @return a map structure containing data rendered to views
+		 */
+		@RequestMapping(value="/events/newsDeleteSearchFilterData",produces="application/json")
+		@ResponseBody
+		public Map<String, Object> getDataSearchNewsDeleteByFilter(@RequestParam String itemJSONString){
+			logger.info("entering /events/newsSearchFilterData");
+			
+			ModelAndView mav = new ModelAndView();
+			
+			//data
+			Map<String, Object> model = mav.getModel();
+			JSONObject jobj= new JSONObject(itemJSONString);
+			
+			String where1 = jobj.getString("eventUUID").trim();
+			String where2 = jobj.getString("title").trim();
+			String where3 = jobj.getString("author").trim();
+			int where4 = jobj.getInt("eventClass");
+			
+			/* where5a, where5b */
+			String strPostDatetimeFrom = jobj.getString("postDatetimeFrom").trim();
+			String strPostDatetimeTo = jobj.getString("postDatetimeTo").trim();
+			
+			if(strPostDatetimeFrom==null){
+				strPostDatetimeFrom = "";
+			}
+			if(strPostDatetimeTo==null){
+				strPostDatetimeTo = "";
+			}
+			String where5a = strPostDatetimeFrom;
+			String where5b = strPostDatetimeTo;
+			
+			logger.info("strPostDatetimeFrom="+strPostDatetimeFrom+"##");
+			logger.info("strPostDatetimeTo="+strPostDatetimeTo+"##");
+			
+			/* where6a, where6b */
+			String strViewNumFrom = jobj.getString("viewNumFrom").trim();
+			String strViewNumTo = jobj.getString("viewNumTo").trim();
+			int where6a = 0;
+			int where6b = 0;
+			
+	//		System.out.println("strViewNumFrom="+strViewNumFrom+"##");
+	//		System.out.println("strViewNumTo="+strViewNumTo+"##");
+			
+			if(strViewNumFrom==null){
+				strViewNumFrom = "";
+			}
+			if(strViewNumTo==null){
+				strViewNumTo = "";
+			}
+			
+			if(!strViewNumFrom.equals("")){
+				where6a = Integer.parseInt(strViewNumFrom);
+			}
+			if(!strViewNumTo.equals("")){
+				where6b = Integer.parseInt(strViewNumTo);
+			}
+			
+			int where7 = jobj.getInt("eventStatus");
+			
+			/* construct query string */
+			StringBuffer queryString = new StringBuffer();
+			queryString.append(where1.length()==0?" ":" and event_uuid like '%"+where1+"%' ");
+			queryString.append(where2.length()==0?" ":" and title like '%"+where2+"%' ");
+			queryString.append(where3.length()==0?" ":" and author like '%"+where3+"%' ");
+			queryString.append(where4==0?" ":" and event_class = "+where4+" ");
+			
+			String queryString_where5 = "";
+			if(strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
+				queryString_where5 = " ";
+			}else if(!strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
+				/* select * from event_news where date(post_datetime) >= adddate('2017-01-12', -1); */
+				queryString_where5 = " and date(post_datetime) >= '"+where5a+"' ";
+			}else if(strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
+				/* select * from event_news where date(post_datetime) <= '2017-02-05'; */
+				queryString_where5 = " and date(post_datetime) <= '"+where5b+"' ";
+			}else if(!strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
+				
+				/*
+				select * from event_news where date(post_datetime) between adddate('2017-01-12', -1) and '2017-02-05';
+				*/
+				int dateFlag = strPostDatetimeFrom.compareTo(strPostDatetimeTo);
+				if(dateFlag<0){
+					queryString_where5 = " and (date(post_datetime) between adddate('"+where5a+"', -1) and '"+where5b+"' ) ";
+				}else if(dateFlag==0){
+					queryString_where5 = " and (date(post_datetime) =  '"+where5a+"' ) ";
+				}else{
+					queryString_where5 = " and (date(post_datetime) between adddate('"+where5b+"', -1) and '"+where5a+"' ) ";
+				}
+				
+			}else{
+				logger.info("ERROR: not valid date range");
+			}
+			queryString.append(queryString_where5);
+			
+			String queryString_where6 = "";
+			if(strViewNumFrom.equals("")&&strViewNumTo.equals("")){
+				queryString_where6 = " ";
+			}else if(!strViewNumFrom.equals("")&&strViewNumTo.equals("")){
+				queryString_where6 = " and view_num >= "+where6a;
+			}else if(strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
+				queryString_where6 = " and view_num <= "+where6b;
+			}else if(!strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
+				if(where6a<=where6b){
+					queryString_where6 = " and (view_num between "+where6a+" and "+where6b+" ) ";
+				}else{
+					queryString_where6 = " and (view_num between "+where6b+" and "+where6a+" ) ";
+				}
+			}
+			queryString.append(queryString_where6);
+					
+			queryString.append(where7==0?" ":" and event_status = "+where7+" ");
+			
+			logger.info("QueryString = "+ queryString.toString());
+			
+			List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
+			logger.info("Length of news entries = "+ listNews.size());
+			
+			
+			int entryLength = listNews.size();
+			final int COLUMN_NUM = 9;
+			String[][] data = new String[entryLength][COLUMN_NUM];
+			
+			String field0 = "";	//check box
+			String field1 = "";	//event UUID
+			String field2 = "";	//event title
+			String field3 = "";	//author
+			String field4 = "";	//event class
+			String field5 = "";	//post datetime
+			String field6 = "";	//view num
+			String field7 = "";	//event status
+			String field8 = "";	//action
+			
+			for(int i=0; i<entryLength ; i++){			
+				field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
+				field1 = listNews.get(i).getEventUUID()+"";
+				field2 = listNews.get(i).getTitle();
+				field3 = listNews.get(i).getAuthor();
+				
+				int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
+				String eventClass = "";
+				switch(intEventClass){
+					case News.CLASS_DEFAULT:
+						eventClass = "Default";
+						break;
+					case News.CLASS_NEW:
+						eventClass = "New";
+						break;
+					case News.CLASS_HOT:
+						eventClass = "Hot";
+						break;
+					default: 
+						eventClass = "Unknown";
+						break;
+				}
+				field4 = eventClass;
+						
+				field5 = listNews.get(i).getPostDatetime()+"";
+				field6 = listNews.get(i).getViewNum()+"";
+				int intEventStatus = listNews.get(i).getEventStatus();
+				String eventStatus = "";
+				String eventStatusKey = "";
+				switch(intEventStatus){
+					case News.PUBLISHED: 
+						eventStatus = "Published";
+						eventStatusKey = "success";
+						break;
+					case News.WAIT_TO_POST: 
+						eventStatus = "Wait to post";
+						eventStatusKey = "warning";
+						break;
+					case News.DELETED: 
+						eventStatus = "Deleted";
+						eventStatusKey = "default";
+						break;
+					case News.OUT_OF_DATE: 
+						eventStatus = "Out of date";
+						eventStatusKey = "info";
+						break;
+					case News.SUSPENDED: 
+						eventStatus = "Suspended";
+						eventStatusKey = "danger";
+						break;
+					default: 
+						break;
+				}
+				
+				field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
+				field8 = "<a href='/acp/events/eventsNewsDelete?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Delete</a>";
+				
+				data[i][0] = field0;
+				data[i][1] = field1;
+				data[i][2] = field2;
+				data[i][3] = field3;
+				data[i][4] = field4;
+				data[i][5] = field5;
+				data[i][6] = field6;
+				data[i][7] = field7;
+				data[i][8] = field8;
+			}
+			
+			model.put("draw", new Integer(1));
+			model.put("recordsTotal", new Integer(5));
+			model.put("recordsFiltered", new Integer(5));
+			model.put("data", data);
+			model.put("customActionStatus","OK");
+			model.put("customActionMessage","OK");
+			
+			logger.info("leaving /events/newsSearchFilterData");
+			
+			return model;
+		}
+		
+	/**
+	 * get news objects in JSON data form
 	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
-	 * @param itemJSONString search criteria object in JSON format
-	 * @return a map structure containing data rendered to views
+	 * @return a map structure containing data rendered to view
 	 */
-	@RequestMapping(value="/events/newsSearchFilterData",produces="application/json")
+	@RequestMapping(value="/events/eventsNewsDeleteData",produces="application/json")
 	@ResponseBody
-	public Map<String, Object> getDataSearchNewsByFilter(@RequestParam String itemJSONString){
-		logger.info("entering /events/newsSearchFilterData");
+	public Map<String,Object> getDataNewsDelete(){
+		logger.info("entering /events/eventsNewsDeleteData");
 		
 		ModelAndView mav = new ModelAndView();
 		
 		//data
-		Map<String, Object> model = mav.getModel();
-		JSONObject jobj= new JSONObject(itemJSONString);
-		
-		String where1 = jobj.getString("eventUUID").trim();
-		String where2 = jobj.getString("title").trim();
-		String where3 = jobj.getString("author").trim();
-		int where4 = jobj.getInt("eventClass");
-		
-		/* where5a, where5b */
-		String strPostDatetimeFrom = jobj.getString("postDatetimeFrom").trim();
-		String strPostDatetimeTo = jobj.getString("postDatetimeTo").trim();
-		
-		if(strPostDatetimeFrom==null){
-			strPostDatetimeFrom = "";
-		}
-		if(strPostDatetimeTo==null){
-			strPostDatetimeTo = "";
-		}
-		String where5a = strPostDatetimeFrom;
-		String where5b = strPostDatetimeTo;
-		
-		logger.info("strPostDatetimeFrom="+strPostDatetimeFrom+"##");
-		logger.info("strPostDatetimeTo="+strPostDatetimeTo+"##");
-		
-		/* where6a, where6b */
-		String strViewNumFrom = jobj.getString("viewNumFrom").trim();
-		String strViewNumTo = jobj.getString("viewNumTo").trim();
-		int where6a = 0;
-		int where6b = 0;
-		
-//		System.out.println("strViewNumFrom="+strViewNumFrom+"##");
-//		System.out.println("strViewNumTo="+strViewNumTo+"##");
-		
-		if(strViewNumFrom==null){
-			strViewNumFrom = "";
-		}
-		if(strViewNumTo==null){
-			strViewNumTo = "";
-		}
-		
-		if(!strViewNumFrom.equals("")){
-			where6a = Integer.parseInt(strViewNumFrom);
-		}
-		if(!strViewNumTo.equals("")){
-			where6b = Integer.parseInt(strViewNumTo);
-		}
-		
-		int where7 = jobj.getInt("eventStatus");
-		
-		/* construct query string */
-		StringBuffer queryString = new StringBuffer();
-		queryString.append(where1.length()==0?" ":" and event_uuid like '%"+where1+"%' ");
-		queryString.append(where2.length()==0?" ":" and title like '%"+where2+"%' ");
-		queryString.append(where3.length()==0?" ":" and author like '%"+where3+"%' ");
-		queryString.append(where4==0?" ":" and event_class = "+where4+" ");
-		
-		String queryString_where5 = "";
-		if(strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
-			queryString_where5 = " ";
-		}else if(!strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
-			/* select * from event_news where date(post_datetime) >= adddate('2017-01-12', -1); */
-			queryString_where5 = " and date(post_datetime) >= '"+where5a+"' ";
-		}else if(strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
-			/* select * from event_news where date(post_datetime) <= '2017-02-05'; */
-			queryString_where5 = " and date(post_datetime) <= '"+where5b+"' ";
-		}else if(!strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
-			
-			/*
-			select * from event_news where date(post_datetime) between adddate('2017-01-12', -1) and '2017-02-05';
-			*/
-			int dateFlag = strPostDatetimeFrom.compareTo(strPostDatetimeTo);
-			if(dateFlag<0){
-				queryString_where5 = " and (date(post_datetime) between adddate('"+where5a+"', -1) and '"+where5b+"' ) ";
-			}else if(dateFlag==0){
-				queryString_where5 = " and (date(post_datetime) =  '"+where5a+"' ) ";
-			}else{
-				queryString_where5 = " and (date(post_datetime) between adddate('"+where5b+"', -1) and '"+where5a+"' ) ";
-			}
-			
-		}else{
-			logger.info("ERROR: not valid date range");
-		}
-		queryString.append(queryString_where5);
-		
-		String queryString_where6 = "";
-		if(strViewNumFrom.equals("")&&strViewNumTo.equals("")){
-			queryString_where6 = " ";
-		}else if(!strViewNumFrom.equals("")&&strViewNumTo.equals("")){
-			queryString_where6 = " and view_num >= "+where6a;
-		}else if(strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
-			queryString_where6 = " and view_num <= "+where6b;
-		}else if(!strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
-			if(where6a<=where6b){
-				queryString_where6 = " and (view_num between "+where6a+" and "+where6b+" ) ";
-			}else{
-				queryString_where6 = " and (view_num between "+where6b+" and "+where6a+" ) ";
-			}
-		}
-		queryString.append(queryString_where6);
-				
-		queryString.append(where7==0?" ":" and event_status = "+where7+" ");
-		
-		logger.info("QueryString = "+ queryString.toString());
-		
-		List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
-		logger.info("Length of news entries = "+ listNews.size());
-		
+		List<Event> listNews = newsService.getAllNews();
+		logger.info("Length of news entries: "+ listNews.size());
 		
 		int entryLength = listNews.size();
 		final int COLUMN_NUM = 9;
@@ -398,7 +736,7 @@ public class NewsAcpController {
 					break;
 			}
 			field4 = eventClass;
-					
+			
 			field5 = listNews.get(i).getPostDatetime()+"";
 			field6 = listNews.get(i).getViewNum()+"";
 			int intEventStatus = listNews.get(i).getEventStatus();
@@ -428,9 +766,10 @@ public class NewsAcpController {
 				default: 
 					break;
 			}
-			
 			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-			field8 = "<a href='/acp/events/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			field8 = "<a href='/acp/events/eventsNewsDelete?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Delete</a>";
+			
+			//logger.info("field8="+field8);
 			
 			data[i][0] = field0;
 			data[i][1] = field1;
@@ -443,6 +782,8 @@ public class NewsAcpController {
 			data[i][8] = field8;
 		}
 		
+		Map<String, Object> model = mav.getModel();
+		
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
 		model.put("recordsFiltered", new Integer(5));
@@ -450,11 +791,9 @@ public class NewsAcpController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving /events/newsSearchFilterData");
-		
+		logger.info("leaving /events/eventsNewsDeleteData");
 		return model;
 	}
-	
 	
 	/**
 	 * create news object based on data passed in JSON format
@@ -623,6 +962,52 @@ public class NewsAcpController {
 		logger.info("leaving /events/markNewsStatusDeleted");
 //		return mav;
 		return model;
+	}
+	
+	
+	
+	/**
+	 * update news objects in group
+	 * @param itemJSONString news object to update in JSON format
+	 * @return data and target view
+	 */
+	@RequestMapping(value="/events/deleteNewsGroup",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> deleteNewsGroup(
+			@RequestParam String eventUUIDArray,
+			@RequestParam int newsStatus
+			) {
+		
+		logger.info("entering /events/deleteNewsGroup");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+        Map<String, Object> model = mav.getModel();
+   
+        List<News> newsList = new ArrayList<News>();
+        String[] eventUUIDs = eventUUIDArray.split(",");
+        int eventUUIDLength = eventUUIDs.length;
+        
+        for(int i=0; i<eventUUIDLength; i++){
+        	 News news = new News();
+             news.setEventUUID(eventUUIDs[i]);
+             news.setEventStatus(newsStatus);
+             newsList.add(news);
+             news = null;
+        }
+        
+        logger.info("newsList size="+newsList.size());
+//        logger.info("newsList ="+newsList.toString());
+        
+		/* business logic*/
+        newsService.deleteNewsGroup(newsList);
+        
+		
+		/* assemble model and view */
+		logger.info("leaving /events/deleteNewsGroup");
+		return model;		
 	}
 	
 }

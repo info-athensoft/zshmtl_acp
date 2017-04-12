@@ -220,6 +220,18 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		// TODO Auto-generated method stub
 	
 	}
+	
+	@Override
+	public void deleteBatch(final List<News> newsList) {
+		String sql = "delete from event_news where event_uuid =:eventUUID";
+
+		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();
+		for (News x : newsList) {
+			parameters.add(new BeanPropertySqlParameterSource(x));
+		}
+
+		jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
+	}
 
 	private static class NewsRowMapper implements RowMapper<Event>{
 		public Event mapRow(ResultSet rs, int rowNumber) throws SQLException {

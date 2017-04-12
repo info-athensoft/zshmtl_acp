@@ -94,7 +94,18 @@ public class NewsService {
 		this.newsDao.updateBatch(newsList);
 	}
 
+	/**
+	 * @param eventUUID
+	 */
 	public void markNewsStatusDeleted(String eventUUID) {
 		this.newsDao.markNewsStatusDeleted(eventUUID);
+	}
+	
+	/**
+	 * delete news objects and persist them in batch
+	 * @param newsList
+	 */
+	public void deleteNewsGroup(List<News> newsList) {
+		this.newsDao.deleteBatch(newsList);
 	}
 }
