@@ -26,6 +26,11 @@ import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.service.EventMediaService;
 
 
+/**
+ * The controller of file uploading
+ * @author Athens
+ *
+ */
 @Controller
 public class FileUploadAcpController {
 	
@@ -33,9 +38,11 @@ public class FileUploadAcpController {
 	
 //	public static final String FileDir = "D:\\Shared\\2017_athensoft_website\\fileupload";
 	public static final String FileDir = "C:\\temp\\fileupload";
+	public static final int BUF_SIZE = 2 * 1024;
+	
 	private static final String RESP_SUCCESS = "{\"jsonrpc\" : \"2.0\", \"result\" : \"OK\", \"id\" : \"id\"}";
 	private static final String RESP_ERROR = "{\"jsonrpc\" : \"2.0\", \"error\" : {\"code\": 101, \"message\": \"Failed to open input stream.\"}, \"id\" : \"id\"}";
-	public static final int BUF_SIZE = 2 * 1024;
+	
 	
 	private int chunk;
 	private int chunks;
@@ -46,12 +53,21 @@ public class FileUploadAcpController {
 	
 	private EventMediaService eventMediaService;
 	
+	/**
+	 * set event media service
+	 * @param eventMediaService
+	 */
 	@Autowired
 	public void setEventMediaService(EventMediaService eventMediaService) {
 		this.eventMediaService = eventMediaService;
 	}
 	
 	
+	/**
+	 * upload files
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping(value="/events/fileUpload",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> fileUpload(HttpServletRequest req){
@@ -60,7 +76,6 @@ public class FileUploadAcpController {
 		//parameter
 		String eventUUID = (String)req.getParameter("eventUUID");
 		logger.info("eventUUID="+eventUUID);
-		
 		
 		String responseString = RESP_SUCCESS;
 		
@@ -74,8 +89,6 @@ public class FileUploadAcpController {
 				while (iter.hasNext()) {
 				    FileItemStream item = iter.next();
 				    InputStream input = item.openStream();
-
-				    
 				    
 				    // Handle a form field.
 				    if(item.isFormField()){
@@ -106,12 +119,12 @@ public class FileUploadAcpController {
 //				    	String fileDir = req.getSession().getServletContext().getRealPath("/")+FileDir;
 				    	
 				    	String fileDir = FileDir;
-//						
+						
 				    	File dstFile = new File(fileDir);
 						if (!dstFile.exists()){
 							dstFile.mkdirs();
 						}
-//						
+						
 						File dst = new File(dstFile.getPath()+ "/" + this.name);
 						
 						logger.info("fileDir:" + fileDir);
@@ -143,9 +156,6 @@ public class FileUploadAcpController {
 		//data
 		Map<String, Object> model = mav.getModel();
 		
-		
-		
-		
 		model.put("jsonrpc", "2.0");
 		model.put("result", "OK");
 		model.put("id", "id");
@@ -154,40 +164,12 @@ public class FileUploadAcpController {
 		return model;
 	}
 	
-	private void saveUploadFile(InputStream input, File dst) throws IOException {
-		OutputStream out = null;
-		try {
-			if (dst.exists()) {
-				out = new BufferedOutputStream(new FileOutputStream(dst, true), BUF_SIZE);
-			} else {
-				out = new BufferedOutputStream(new FileOutputStream(dst), BUF_SIZE);
-			}
-
-			byte[] buffer = new byte[BUF_SIZE];
-			int len = 0;
-			while ((len = input.read(buffer)) > 0) {
-				out.write(buffer, 0, len);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (null != input) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if (null != out) {
-				try {
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
 	
+	/**
+	 * upload files and then create corresponding records
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping(value="/events/fileUploadAndCreateRecord",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> fileUploadAndCreateRecord(HttpServletRequest req){
@@ -303,5 +285,45 @@ public class FileUploadAcpController {
 		
 		logger.info("leaving /events/fileUploadAndCreateRecord");
 		return model;
+	}
+
+
+	/**
+	 * @param input
+	 * @param dst
+	 * @throws IOException
+	 */
+	private void saveUploadFile(InputStream input, File dst) throws IOException {
+		OutputStream out = null;
+		try {
+			if (dst.exists()) {
+				out = new BufferedOutputStream(new FileOutputStream(dst, true), BUF_SIZE);
+			} else {
+				out = new BufferedOutputStream(new FileOutputStream(dst), BUF_SIZE);
+			}
+
+			byte[] buffer = new byte[BUF_SIZE];
+			int len = 0;
+			while ((len = input.read(buffer)) > 0) {
+				out.write(buffer, 0, len);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (null != input) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (null != out) {
+				try {
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }

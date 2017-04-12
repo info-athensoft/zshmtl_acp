@@ -17,7 +17,7 @@ import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.service.EventMediaService;
 
 /**
- * News Controller for ACP
+ * The controller of news media
  * @author Athens
  * @version 1.0
  */

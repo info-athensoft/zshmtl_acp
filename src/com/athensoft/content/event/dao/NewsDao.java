@@ -47,12 +47,6 @@ public interface NewsDao {
 	public void create(News news);
 	
 	/**
-	 * remove a news object from data source<p>
-	 * WARNING: THE METHOD HAS NOT COMPLETED.
-	 */
-	public void delete();
-	
-	/**
 	 * update a news object and persist it
 	 * @param news a news object
 	 */
@@ -65,5 +59,11 @@ public interface NewsDao {
 	public void updateBatch(List<News> news);
 
 	public void markNewsStatusDeleted(String eventUUID);
+
+	/**
+	 * remove a news object from data source<p>
+	 * WARNING: THE METHOD HAS NOT COMPLETED.
+	 */
+	public void delete();
 	
 }

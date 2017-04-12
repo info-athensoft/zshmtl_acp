@@ -50,6 +50,40 @@ public class EventReviewDaoJDBCImpl implements EventReviewDao{
 	}
 
 	@Override
+	public List<EventReview> findByFilter(String queryString) {
+		final String TABLE1 = "event_review";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append(" select * from "+TABLE1);
+		sbf.append(" where 1=1 ");
+		sbf.append(queryString);
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		List<EventReview> x = new ArrayList<EventReview>();
+		try{
+			x = jdbc.query(sql, paramSource, new EventReviewRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
+	}
+
+	@Override
+	public List<EventReview> findByEventUUID(String eventUUID) {
+		String sql = "select * from event_review where event_uuid = :event_uuid";
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("event_uuid", eventUUID);
+		List<EventReview> x = new ArrayList<EventReview>();
+		try{
+			x = jdbc.query(sql, paramSource, new EventReviewRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
+	}
+
+	@Override
 	public EventReview findById(long globalId) {
 		String sql = "select * from event_review where global_id = :global_id";
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
@@ -78,47 +112,7 @@ public class EventReviewDaoJDBCImpl implements EventReviewDao{
 	}
 
 	@Override
-	public List<EventReview> findByEventUUID(String eventUUID) {
-		String sql = "select * from event_review where event_uuid = :event_uuid";
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("event_uuid", eventUUID);
-		List<EventReview> x = new ArrayList<EventReview>();
-		try{
-			x = jdbc.query(sql, paramSource, new EventReviewRowMapper());
-		}catch(EmptyResultDataAccessException ex){
-			x = null;
-		}
-		return x;
-	}
-
-	@Override
-	public List<EventReview> findByFilter(String queryString) {
-		final String TABLE1 = "event_review";
-		
-		StringBuffer sbf = new StringBuffer();
-		sbf.append(" select * from "+TABLE1);
-		sbf.append(" where 1=1 ");
-		sbf.append(queryString);
-		String sql = sbf.toString();
-		
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		List<EventReview> x = new ArrayList<EventReview>();
-		try{
-			x = jdbc.query(sql, paramSource, new EventReviewRowMapper());
-		}catch(EmptyResultDataAccessException ex){
-			x = null;
-		}
-		return x;
-	}
-
-	@Override
 	public void create(EventReview review) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -148,6 +142,12 @@ public class EventReviewDaoJDBCImpl implements EventReviewDao{
 		KeyHolder keyholder = new GeneratedKeyHolder();
 		jdbc.update(sql, paramSource, keyholder);
 		return;
+		
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
 		
 	}
 

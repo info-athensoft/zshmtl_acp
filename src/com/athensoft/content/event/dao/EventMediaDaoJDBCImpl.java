@@ -21,6 +21,11 @@ import org.springframework.stereotype.Component;
 
 import com.athensoft.content.event.entity.EventMedia;
 
+/**
+ * The Spring JDBC Implementation of {@link:EventMediaDao}
+ * @author Athens
+ *
+ */
 @Component
 @Qualifier("eventMediaDaoJDBCImpl")
 public class EventMediaDaoJDBCImpl implements EventMediaDao {
