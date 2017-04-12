@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.event.entity.EventReview;
-import com.athensoft.content.event.entity.News;
 import com.athensoft.content.event.service.EventReviewService;
 
 /**

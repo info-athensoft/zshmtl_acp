@@ -351,7 +351,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										<button class="btn btn-default btn-circle" onclick="resetCreateNews(); return false;"><i class="fa fa-reply"></i> Reset</button>
 <!-- 										<input type="button" class="btn green-haze btn-circle" value="Save" onclick="createNews();"> -->
 										<button class="btn green-haze btn-circle" onclick="createNews(); return false;"><i class="fa fa-check"></i> Save Original</button>
-										<button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
+										<button class="btn green-haze btn-circle"><i class="fa fa-check-circle"></i> Save &amp; Continue Edit</button>
 										<div class="btn-group">
 											<a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
 											<i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>

@@ -272,7 +272,7 @@ table tr td{
 										<button type="button" name="back" class="btn btn-default btn-circle" onclick="backToNewsList(); return false;"><i class="fa fa-angle-left"></i> Back</button>
 										<button type="button" name="reset" class="btn btn-default btn-circle" onclick="resetNews(); return false;"><i class="fa fa-reply"></i> Reset</button>
 										<button class="btn green-haze btn-circle" onclick="updateNews(); return false;"><i class="fa fa-check"></i> Save Change</button>
-										<button class="btn green-haze btn-circle" onclick="updateNewsAndContinue(); return false;"><i class="fa fa-check-circle"></i> Save & Continue Edit</button>
+										<button class="btn green-haze btn-circle" onclick="updateNewsAndContinue(); return false;"><i class="fa fa-check-circle"></i> Save &amp; Continue Edit</button>
 										<div class="btn-group">
 											<a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
 											<i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
