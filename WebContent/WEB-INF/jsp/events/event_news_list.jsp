@@ -29,7 +29,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>Athensoft | Events - News List</title>
+<title>Athensoft | Events - News Listing</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -276,7 +276,7 @@ table tr td{
 							<div class="portlet-title">
 								<div class="caption">
 									<i class="fa fa-gift font-green-sharp"></i>
-									<span class="caption-subject font-green-sharp bold uppercase">News</span>
+									<span class="caption-subject font-green-sharp bold uppercase">News Listing</span>
 									<span class="caption-helper">listing news, search, group operation, editing...</span>
 								</div>
 								<div class="actions">
