@@ -54,6 +54,20 @@ public class OrderDaoJDBCImpl implements OrderDao{
 		return x;
 	}
 	
+	@Override
+	public Order findByNo(long orderNo) {
+		String sql = "select * from orders where order_no =:order_no";
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("order_no", orderNo);
+		Order x = null;
+		try{
+			x = jdbc.queryForObject(sql, paramSource, new OrderRowMapper());
+		}catch(Exception ex){
+			x = null;
+		}
+		return x;
+	}
+	
 	private static class OrderRowMapper implements RowMapper<Order>{
 		public Order mapRow(ResultSet rs, int rowNumber) throws SQLException {
 			Order x = new Order();

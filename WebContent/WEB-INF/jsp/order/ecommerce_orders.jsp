@@ -36,12 +36,12 @@ License: You must have a valid license purchased only from themeforest(the above
 <meta content="" name="description"/>
 <meta content="" name="author"/>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css">
-<link href="${webapp_name}/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="${webapp_name}/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css">
-<link href="${webapp_name}/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="${webapp_name}/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
-<link href="${webapp_name}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all">
+<link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/simple-line-icons/simple-line-icons.min.css">
+<link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/uniform/css/uniform.default.css">
+<link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/select2/select2.css"/>
@@ -189,104 +189,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!-- /.modal -->
 				<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 				<!-- BEGIN STYLE CUSTOMIZER -->
-				<div class="theme-panel">
-					<div class="toggler tooltips" data-container="body" data-placement="left" data-html="true" data-original-title="Click to open advance theme customizer panel">
-						<i class="icon-settings"></i>
-					</div>
-					<div class="toggler-close">
-						<i class="icon-close"></i>
-					</div>
-					<div class="theme-options">
-						<div class="theme-option theme-colors clearfix">
-							<span>
-							THEME COLOR </span>
-							<ul>
-								<li class="color-default current tooltips" data-style="default" data-container="body" data-original-title="Default">
-								</li>
-								<li class="color-grey tooltips" data-style="grey" data-container="body" data-original-title="Grey">
-								</li>
-								<li class="color-blue tooltips" data-style="blue" data-container="body" data-original-title="Blue">
-								</li>
-								<li class="color-dark tooltips" data-style="dark" data-container="body" data-original-title="Dark">
-								</li>
-								<li class="color-light tooltips" data-style="light" data-container="body" data-original-title="Light">
-								</li>
-							</ul>
-						</div>
-						<div class="theme-option">
-							<span>
-							Theme Style </span>
-							<select class="layout-style-option form-control input-small">
-								<option value="square" selected="selected">Square corners</option>
-								<option value="rounded">Rounded corners</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Layout </span>
-							<select class="layout-option form-control input-small">
-								<option value="fluid" selected="selected">Fluid</option>
-								<option value="boxed">Boxed</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Header </span>
-							<select class="page-header-option form-control input-small">
-								<option value="fixed" selected="selected">Fixed</option>
-								<option value="default">Default</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Top Dropdown</span>
-							<select class="page-header-top-dropdown-style-option form-control input-small">
-								<option value="light" selected="selected">Light</option>
-								<option value="dark">Dark</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Sidebar Mode</span>
-							<select class="sidebar-option form-control input-small">
-								<option value="fixed">Fixed</option>
-								<option value="default" selected="selected">Default</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Sidebar Style</span>
-							<select class="sidebar-style-option form-control input-small">
-								<option value="default" selected="selected">Default</option>
-								<option value="compact">Compact</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Sidebar Menu </span>
-							<select class="sidebar-menu-option form-control input-small">
-								<option value="accordion" selected="selected">Accordion</option>
-								<option value="hover">Hover</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Sidebar Position </span>
-							<select class="sidebar-pos-option form-control input-small">
-								<option value="left" selected="selected">Left</option>
-								<option value="right">Right</option>
-							</select>
-						</div>
-						<div class="theme-option">
-							<span>
-							Footer </span>
-							<select class="page-footer-option form-control input-small">
-								<option value="fixed">Fixed</option>
-								<option value="default" selected="selected">Default</option>
-							</select>
-						</div>
-					</div>
-				</div>
+				<jsp:include page="${inc_dir}/page-stylecustomizer.jsp"/>
 				<!-- END STYLE CUSTOMIZER -->
 				<!-- BEGIN PAGE HEADER-->
 				<h3 class="page-title">
@@ -393,45 +296,24 @@ License: You must have a valid license purchased only from themeforest(the above
 										</span>
 										<select class="table-group-action-input form-control input-inline input-small input-sm">
 											<option value="">Select...</option>
-											<option value="Cancel">Cancel</option>
-											<option value="Cancel">Hold</option>
-											<option value="Cancel">On Hold</option>
-											<option value="Close">Close</option>
+											<option value="1">Cancel</option>
+											<option value="2">Hold</option>
+											<option value="3">On Hold</option>
+											<option value="4">Close</option>
 										</select>
 										<button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
 									</div>
 									<table class="table table-striped table-bordered table-hover" id="datatable_orders">
 									<thead>
 									<tr role="row" class="heading">
-										<th width="2%">
-											<input type="checkbox" class="group-checkable">
-										</th>
-										<th width="5%">
-											 Order&nbsp;#
-										</th>
-										<th width="15%">
-											 Purchased&nbsp;On
-										</th>
-										<th width="15%">
-											 Customer
-										</th>
-										<th width="10%">
-											 Ship&nbsp;To
-										</th>
-										<th width="10%">
-											 Base&nbsp;Price
-										</th>
-										  
-										<th width="10%">
-											 Purchased&nbsp;Price
-										</th>
-										<th width="10%">
-											 Status
-										</th>
-										<th width="10%">
-											 Actions
-										</th>
-										 
+										<th width="2%"><input type="checkbox" class="group-checkable"></th>
+										<th width="5%">Order&nbsp;#</th>
+										<th width="15%">Purchased&nbsp;On</th>
+										<th width="15%">Customer</th>
+										<th width="10%">Ship&nbsp;To</th>
+										<th width="10%">Grand&nbsp;Total</th>
+										<th width="10%">Status</th>
+										<th width="10%">Actions</th>
 									</tr>
 									<tr role="row" class="filter">
 										<td>
@@ -461,13 +343,6 @@ License: You must have a valid license purchased only from themeforest(the above
 										</td>
 										<td>
 											<div class="margin-bottom-5">
-												<input type="text" class="form-control form-filter input-sm" name="order_base_price_from" placeholder="From"/>
-											</div>
-											<input type="text" class="form-control form-filter input-sm" name="order_base_price_to" placeholder="To"/>
-										</td>
-										  
-										<td>
-											<div class="margin-bottom-5">
 												<input type="text" class="form-control form-filter input-sm margin-bottom-5 clearfix" name="order_purchase_price_from" placeholder="From"/>
 											</div>
 											<input type="text" class="form-control form-filter input-sm" name="order_purchase_price_to" placeholder="To"/>
@@ -475,10 +350,10 @@ License: You must have a valid license purchased only from themeforest(the above
 										<td>
 											<select name="order_status" class="form-control form-filter input-sm">
 												<option value="">Select...</option>
-												<option value="pending">Pending</option>
-												<option value="closed">Closed</option>
-												<option value="hold">On Hold</option>
-												<option value="fraud">Fraud</option>
+												<option value="0">Pending</option>
+												<option value="1">Closed</option>
+												<option value="2">On Hold</option>
+												<option value="3">Fraud</option>
 											</select>
 										</td>
 										<td>
@@ -487,53 +362,12 @@ License: You must have a valid license purchased only from themeforest(the above
 											</div>
 											<button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Reset</button>
 										</td>
-										 
 									</tr>
 									</thead>
 									<tbody>
-									
-									 
-									<c:forEach var="order" items="${orderList}">
-									
-									<tr role="row" class="">
-										<th width="2%">
-											<input type="checkbox" class="group-checkable">
-										</th>
-										<th width="5%">
-											 ${order.orderId}
-										</th>
-										<th width="15%">
-											 ${order.orderDateTime}
-										</th>
-										<th width="15%">
-											 ${order.custNo}
-										</th>
-										<th width="10%">
-											 Ship&nbsp;To
-										</th>
-										<th width="10%">
-											 Base&nbsp;Price
-										</th>
-										<th width="10%">
-											 ${order.grandTotalAmount}
-										</th>
-										<th width="10%">
-											 ${order.orderStatus}
-										</th>
-										<th width="10%">
-											 Actions
-										</th>
-									</tr>
-									</c:forEach>
-									
 									</tbody>
 									</table>
-									
 									<!-- test data for orders -->
-									
-									
-									
-									
 								</div>
 							</div>
 						</div>
@@ -559,17 +393,17 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="${webapp_name}/assets/global/plugins/respond.min.js"></script>
 <script src="${webapp_name}/assets/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
-<script src="${webapp_name}/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/jquery.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/jquery-migrate.min.js"></script>
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-<script src="${webapp_name}/assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/jquery.blockui.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/jquery.cokie.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/uniform/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/select2/select2.min.js"></script>
@@ -578,25 +412,21 @@ License: You must have a valid license purchased only from themeforest(the above
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="${webapp_name}/assets/global/scripts/metronic.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/global/scripts/datatable.js"></script>
-<script src="${webapp_name}/assets/admin/pages/scripts/ecommerce-orders.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/scripts/metronic.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/admin/layout2/scripts/layout.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/admin/layout2/scripts/demo.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/scripts/datatable.js"></script>
+
+<script type="text/javascript" src="${webapp_name}/assets/admin/pages/scripts-local/ecommerce-orders.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-        jQuery(document).ready(function() {    
-          	Metronic.init(); // init metronic core components
-			Layout.init(); // init current layout
-			Demo.init(); // init demo features
-          	//EcommerceOrders.init();
-			EcommerceOrders.init();
-          	//$('#datatable_orders').DataTable( {
-            //    "ajax":'${webapp_name}/orders'
-           //} );
-			
-        });
-    </script>
+    jQuery(document).ready(function() {    
+      	Metronic.init(); // init metronic core components
+	Layout.init(); // init current layout
+	Demo.init(); // init demo features
+	EcommerceOrders.init();
+    });
+</script>
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

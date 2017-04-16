@@ -224,7 +224,6 @@ public class NewsMediaAcpController {
 //      logger.info("news = "+news);
           
 		/* business logic*/
-        //long itemId = itemService.createItem(ic); 
 
         eventMediaService.changeSortNumber(mediaId, eventUUID, sortNumber);
 		

@@ -178,57 +178,7 @@ public class NewsReviewAcpController {
 			List<EventReview> listEventReview = eventReviewService.getEventReviewByEventUUID(eventUUID);
 			logger.info("Length of EventReview entries: "+ listEventReview.size());
 			
-			int entryLength = listEventReview.size();
-			final int COLUMN_NUM = 6;
-			String[][] data = new String[entryLength][COLUMN_NUM];
-			
-			String field0 = "";	//review uuid
-			String field1 = "";	//review datatime
-			String field2 = ""; //customer id
-			String field3 = "";	//review content
-			String field4 = "";	//review status
-			String field5 = "";	//action
-		
-			
-			for(int i=0; i<entryLength ; i++){			
-	//			field0 = "<input type='checkbox' name='id[]' value="+listEventReview.get(i).getEventUUID()+">";
-				field0 = listEventReview.get(i).getReviewUUID()+"";
-				field1 = listEventReview.get(i).getReviewDatetime()+"";
-				field2 = listEventReview.get(i).getCustomerId()+"";
-				field3 = listEventReview.get(i).getReviewContent();
-				
-				
-				int intReviewStatus = listEventReview.get(i).getReviewStatus();
-				String reviewStatus = "";
-				String reviewStatusKey = "";
-				switch(intReviewStatus){
-					case EventReview.APPROVED: 
-						reviewStatus = "Approved";
-						reviewStatusKey = "success";
-						break;
-					case EventReview.PENDING: 
-						reviewStatus = "Pending";
-						reviewStatusKey = "info";
-						break;
-					case EventReview.REJECTED: 
-						reviewStatus = "Rejected";
-						reviewStatusKey = "warning";
-						break;
-					default: 
-						break;
-				}
-				
-				
-				field4 = "<span class='label label-sm label-"+reviewStatusKey+"'>"+reviewStatus+"</span>";
-				field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field0+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
-				
-				data[i][0] = field0;
-				data[i][1] = field1;
-				data[i][2] = field2;
-				data[i][3] = field3;
-				data[i][4] = field4;
-				data[i][5] = field5;
-			}
+			String[][] data = getData(listEventReview);
 			
 			model.put("draw", new Integer(1));
 			model.put("recordsTotal", new Integer(5));
@@ -324,54 +274,9 @@ public class NewsReviewAcpController {
 		logger.info("Length of news review entries = "+ listEventReview.size());
 		
 		
-		int entryLength = listEventReview.size();
-		final int COLUMN_NUM = 6;		//the number of column showing in the data-table at the front web page
-		String[][] data = new String[entryLength][COLUMN_NUM];
+		String[][] data = getData(listEventReview);
 		
-		String field0 = "";	//review UUID, review no.
-		String field1 = "";	//review datetime
-		String field2 = "";	//review customer
-		String field3 = "";	//review content
-		String field4 = "";	//review status
-		String field5 = "";	//action
 		
-		for(int i=0; i<entryLength ; i++){			
-			field0 = listEventReview.get(i).getReviewUUID()+"";
-			field1 = listEventReview.get(i).getReviewDatetime()+"";
-			field2 = listEventReview.get(i).getCustomerId()+"";
-			field3 = listEventReview.get(i).getReviewContent();
-			
-			
-			int intEventReviewStatus = listEventReview.get(i).getReviewStatus();
-			String eventReviewStatus = "";
-			String eventReviewStatusKey = "";
-			switch(intEventReviewStatus){
-				case EventReview.APPROVED: 
-					eventReviewStatus = "Approved";
-					eventReviewStatusKey = "success";
-					break;
-				case EventReview.PENDING: 
-					eventReviewStatus = "Pending";
-					eventReviewStatusKey = "info";
-					break;
-				case EventReview.REJECTED: 
-					eventReviewStatus = "Rejected";
-					eventReviewStatusKey = "warning";
-					break;
-				default: 
-					break;
-			}
-			
-			field4 = "<span class='label label-sm label-"+eventReviewStatusKey+"'>"+eventReviewStatus+"</span>";
-			field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
-			
-			data[i][0] = field0;
-			data[i][1] = field1;
-			data[i][2] = field2;
-			data[i][3] = field3;
-			data[i][4] = field4;
-			data[i][5] = field5;
-		}
 		
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
@@ -426,6 +331,59 @@ public class NewsReviewAcpController {
 		
 		logger.info("leaving /events/updateNewsReview");
 		return mav;		
+	}
+	
+	private String[][] getData(List<EventReview> listEventReview){
+		int entryLength = listEventReview.size();
+		final int COLUMN_NUM = 6;		//the number of column showing in the data-table at the front web page
+		String[][] data = new String[entryLength][COLUMN_NUM];
+		
+		String field0 = "";	//review UUID, review no.
+		String field1 = "";	//review datetime
+		String field2 = "";	//review customer
+		String field3 = "";	//review content
+		String field4 = "";	//review status
+		String field5 = "";	//action
+		
+		for(int i=0; i<entryLength ; i++){			
+			field0 = listEventReview.get(i).getReviewUUID()+"";
+			field1 = listEventReview.get(i).getReviewDatetime()+"";
+			field2 = listEventReview.get(i).getCustomerId()+"";
+			field3 = listEventReview.get(i).getReviewContent();
+			
+			
+			int intEventReviewStatus = listEventReview.get(i).getReviewStatus();
+			String eventReviewStatus = "";
+			String eventReviewStatusKey = "";
+			switch(intEventReviewStatus){
+				case EventReview.APPROVED: 
+					eventReviewStatus = "Approved";
+					eventReviewStatusKey = "success";
+					break;
+				case EventReview.PENDING: 
+					eventReviewStatus = "Pending";
+					eventReviewStatusKey = "info";
+					break;
+				case EventReview.REJECTED: 
+					eventReviewStatus = "Rejected";
+					eventReviewStatusKey = "warning";
+					break;
+				default: 
+					break;
+			}
+			
+			field4 = "<span class='label label-sm label-"+eventReviewStatusKey+"'>"+eventReviewStatus+"</span>";
+			field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			
+			data[i][0] = field0;
+			data[i][1] = field1;
+			data[i][2] = field2;
+			data[i][3] = field3;
+			data[i][4] = field4;
+			data[i][5] = field5;
+		}
+		
+		return data;
 	}
 	
 }

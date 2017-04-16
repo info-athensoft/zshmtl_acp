@@ -2,6 +2,7 @@ package com.athensoft.content.event.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -154,88 +155,7 @@ public class NewsAcpController {
 		List<Event> listNews = newsService.getAllNews();
 		logger.info("Length of news entries: "+ listNews.size());
 		
-		int entryLength = listNews.size();
-		final int COLUMN_NUM = 9;
-		String[][] data = new String[entryLength][COLUMN_NUM];
-		
-		String field0 = "";	//check box
-		String field1 = "";	//event UUID
-		String field2 = "";	//event title
-		String field3 = "";	//author
-		String field4 = "";	//event class
-		String field5 = "";	//post datetime
-		String field6 = "";	//view num
-		String field7 = "";	//event status
-		String field8 = "";	//action
-		
-		for(int i=0; i<entryLength ; i++){			
-			field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
-			field1 = listNews.get(i).getEventUUID()+"";
-			field2 = listNews.get(i).getTitle();
-			field3 = listNews.get(i).getAuthor();
-			
-			int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
-			String eventClass = "";
-			switch(intEventClass){
-				case News.CLASS_DEFAULT:
-					eventClass = "Default";
-					break;
-				case News.CLASS_NEW:
-					eventClass = "New";
-					break;
-				case News.CLASS_HOT:
-					eventClass = "Hot";
-					break;
-				default: 
-					eventClass = "Unknown";
-					break;
-			}
-			field4 = eventClass;
-			
-			field5 = listNews.get(i).getPostDatetime()+"";
-			field6 = listNews.get(i).getViewNum()+"";
-			int intEventStatus = listNews.get(i).getEventStatus();
-			String eventStatus = "";
-			String eventStatusKey = "";
-			switch(intEventStatus){
-				case News.PUBLISHED: 
-					eventStatus = "Published";
-					eventStatusKey = "success";
-					break;
-				case News.WAIT_TO_POST: 
-					eventStatus = "Wait to post";
-					eventStatusKey = "warning";
-					break;
-				case News.DELETED: 
-					eventStatus = "Deleted";
-					eventStatusKey = "default";
-					break;
-				case News.OUT_OF_DATE: 
-					eventStatus = "Out of date";
-					eventStatusKey = "info";
-					break;
-				case News.SUSPENDED: 
-					eventStatus = "Suspended";
-					eventStatusKey = "danger";
-					break;
-				default: 
-					break;
-			}
-			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-			field8 = "<a href='/acp/events/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
-			
-			//logger.info("field8="+field8);
-			
-			data[i][0] = field0;
-			data[i][1] = field1;
-			data[i][2] = field2;
-			data[i][3] = field3;
-			data[i][4] = field4;
-			data[i][5] = field5;
-			data[i][6] = field6;
-			data[i][7] = field7;
-			data[i][8] = field8;
-		}
+		String[][] data = getData(listNews);
 		
 		Map<String, Object> model = mav.getModel();
 		
@@ -365,94 +285,13 @@ public class NewsAcpController {
 			queryString.append(queryString_where6);
 					
 			queryString.append(where7==0?" ":" and event_status = "+where7+" ");
-			
 			logger.info("QueryString = "+ queryString.toString());
 			
 			List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
 			logger.info("Length of news entries = "+ listNews.size());
 			
 			
-			int entryLength = listNews.size();
-			final int COLUMN_NUM = 9;
-			String[][] data = new String[entryLength][COLUMN_NUM];
-			
-			String field0 = "";	//check box
-			String field1 = "";	//event UUID
-			String field2 = "";	//event title
-			String field3 = "";	//author
-			String field4 = "";	//event class
-			String field5 = "";	//post datetime
-			String field6 = "";	//view num
-			String field7 = "";	//event status
-			String field8 = "";	//action
-			
-			for(int i=0; i<entryLength ; i++){			
-				field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
-				field1 = listNews.get(i).getEventUUID()+"";
-				field2 = listNews.get(i).getTitle();
-				field3 = listNews.get(i).getAuthor();
-				
-				int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
-				String eventClass = "";
-				switch(intEventClass){
-					case News.CLASS_DEFAULT:
-						eventClass = "Default";
-						break;
-					case News.CLASS_NEW:
-						eventClass = "New";
-						break;
-					case News.CLASS_HOT:
-						eventClass = "Hot";
-						break;
-					default: 
-						eventClass = "Unknown";
-						break;
-				}
-				field4 = eventClass;
-						
-				field5 = listNews.get(i).getPostDatetime()+"";
-				field6 = listNews.get(i).getViewNum()+"";
-				int intEventStatus = listNews.get(i).getEventStatus();
-				String eventStatus = "";
-				String eventStatusKey = "";
-				switch(intEventStatus){
-					case News.PUBLISHED: 
-						eventStatus = "Published";
-						eventStatusKey = "success";
-						break;
-					case News.WAIT_TO_POST: 
-						eventStatus = "Wait to post";
-						eventStatusKey = "warning";
-						break;
-					case News.DELETED: 
-						eventStatus = "Deleted";
-						eventStatusKey = "default";
-						break;
-					case News.OUT_OF_DATE: 
-						eventStatus = "Out of date";
-						eventStatusKey = "info";
-						break;
-					case News.SUSPENDED: 
-						eventStatus = "Suspended";
-						eventStatusKey = "danger";
-						break;
-					default: 
-						break;
-				}
-				
-				field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-				field8 = "<a href='/acp/events/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
-				
-				data[i][0] = field0;
-				data[i][1] = field1;
-				data[i][2] = field2;
-				data[i][3] = field3;
-				data[i][4] = field4;
-				data[i][5] = field5;
-				data[i][6] = field6;
-				data[i][7] = field7;
-				data[i][8] = field8;
-			}
+			String[][] data = getData(listNews);
 			
 			model.put("draw", new Integer(1));
 			model.put("recordsTotal", new Integer(5));
@@ -1010,4 +849,113 @@ public class NewsAcpController {
 		return model;		
 	}
 	
+	
+	private String[][] getData(List<Event> listNews){
+		int entryLength = listNews.size();
+		final int COLUMN_NUM = 9;
+		String[][] data = new String[entryLength][COLUMN_NUM];
+		
+		String field0 = "";	//check box
+		String field1 = "";	//event UUID
+		String field2 = "";	//event title
+		String field3 = "";	//author
+		String field4 = "";	//event class
+		String field5 = "";	//post datetime
+		String field6 = "";	//view num
+		String field7 = "";	//event status
+		String field8 = "";	//action
+		
+		for(int i=0; i<entryLength ; i++){			
+			field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
+			field1 = listNews.get(i).getEventUUID()+"";
+			field2 = listNews.get(i).getTitle();
+			field3 = listNews.get(i).getAuthor();
+			
+			String strEventClass = (listNews.get(i).getEventClass()).trim();
+			field4 = getEventClass(strEventClass);
+			
+			field5 = listNews.get(i).getPostDatetime()+"";
+			field6 = listNews.get(i).getViewNum()+"";
+			
+			int intEventStatus = listNews.get(i).getEventStatus();
+			String[] eventStatusPair = getEventStatusPair(intEventStatus);
+			String eventStatusKey = eventStatusPair[0];
+			String eventStatus = eventStatusPair[1];
+			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
+			field8 = "<a href='/acp/events/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			
+			//logger.info("field8="+field8);
+			
+			data[i][0] = field0;
+			data[i][1] = field1;
+			data[i][2] = field2;
+			data[i][3] = field3;
+			data[i][4] = field4;
+			data[i][5] = field5;
+			data[i][6] = field6;
+			data[i][7] = field7;
+			data[i][8] = field8;
+		}
+		
+		return data;
+	}
+
+
+	private String getEventClass(String strEventClass){
+		
+		int intEventClass = Integer.parseInt(strEventClass);
+		String eventClass = "";
+		switch(intEventClass){
+			case News.CLASS_DEFAULT:
+				eventClass = "Default";
+				break;
+			case News.CLASS_NEW:
+				eventClass = "New";
+				break;
+			case News.CLASS_HOT:
+				eventClass = "Hot";
+				break;
+			default: 
+				eventClass = "Unknown";
+				break;
+		}
+		
+		return eventClass;
+	}
+	
+	private String[] getEventStatusPair(int intEventStatus){
+		String[] eventStatusPair = new String[2];
+		
+		String eventStatus = "";
+		String eventStatusKey = "";
+		switch(intEventStatus){
+			case News.PUBLISHED: 
+				eventStatus = "Published";
+				eventStatusKey = "success";
+				break;
+			case News.WAIT_TO_POST: 
+				eventStatus = "Wait to post";
+				eventStatusKey = "warning";
+				break;
+			case News.DELETED: 
+				eventStatus = "Deleted";
+				eventStatusKey = "default";
+				break;
+			case News.OUT_OF_DATE: 
+				eventStatus = "Out of date";
+				eventStatusKey = "info";
+				break;
+			case News.SUSPENDED: 
+				eventStatus = "Suspended";
+				eventStatusKey = "danger";
+				break;
+			default: 
+				break;
+		}
+		
+		eventStatusPair[0]=eventStatus;
+		eventStatusPair[1]=eventStatusKey;
+		
+		return eventStatusPair;
+	}
 }

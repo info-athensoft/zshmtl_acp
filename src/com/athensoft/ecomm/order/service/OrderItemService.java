@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 import com.athensoft.ecomm.order.dao.OrderItemDao;
 import com.athensoft.ecomm.order.entity.OrderItem;
 
+/**
+ * @author Athens
+ *
+ */
 @Service
 public class OrderItemService {
 	private OrderItemDao orderItemDao;
@@ -19,7 +23,7 @@ public class OrderItemService {
 		this.orderItemDao = orderItemDao;
 	}
 	
-	public List<OrderItem> getOrderItemsByOrderId(long orderId){
-		return orderItemDao.findByOrderId(orderId);
+	public List<OrderItem> getOrderItemsByOrderNo(long orderNo){
+		return orderItemDao.findByOrderNo(orderNo);
 	}
 }

@@ -35,8 +35,7 @@
 	<!-- Database properties file support -->
 	<context:property-placeholder
 		ignore-unresolvable="true" 
-		location="classpath:com/athensoft/ecomm/config/jdbc-mysql.properties"
-	/>	
+		location="classpath:com/athensoft/ecomm/config/jdbc-mysql.properties"/>	
 	
 	<!-- Database connection -->	 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">

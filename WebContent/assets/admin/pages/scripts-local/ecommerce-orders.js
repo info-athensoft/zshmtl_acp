@@ -33,7 +33,7 @@ var EcommerceOrders = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "demo/ecommerce_orders.php", // ajax source
+                    "url": "/acp/ecomm/orderListData", // ajax source
                 },
                 "order": [
                     [1, "asc"]

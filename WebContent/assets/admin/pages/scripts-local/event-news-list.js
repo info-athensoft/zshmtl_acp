@@ -39,7 +39,6 @@ var EventNewsList = function () {
                 "ajax": {
                     "url": "/acp/events/eventsNewsListData", // ajax source
                     //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
-                    //"dataSrc": "data"
                 },
                 "order": [
                     [1, "asc"]

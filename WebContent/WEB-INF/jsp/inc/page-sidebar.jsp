@@ -21,7 +21,7 @@
 					<li>
 						<a href="javascript:;">
 						<i class="icon-globe"></i>
-						<span class="title">My Orders</span>
+						<span class="title">My eCommerce</span>
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
@@ -30,6 +30,35 @@
 								<i class="icon-home"></i>
 								Dashboard</a>
 							</li>
+							<li>
+								<a href="#">
+								<i class="icon-home"></i>
+								My News<span class="arrow"></a>
+								<ul class="sub-menu">
+								<li>
+									<a href="/acp/events/eventsNewsList">
+									<i class="icon-pencil"></i>
+									News List</a>
+								</li>
+								<li>
+									<a href="/acp/events/eventsNewsList">
+									<i class="icon-paper-plane"></i>
+									News Edit</a>
+								</li>
+								<li>
+									<a href="/acp/events/eventsNewsCreate">
+									<i class="icon-paper-plane"></i>
+									News Create</a>
+								</li>
+								<li>
+									<a href="/acp/events/eventsNewsDelete">
+									<i class="icon-paper-plane"></i>
+									News Remove - Admin</a>
+								</li>
+								</ul>
+							</li>
+							
+							
 							<li>
 								<a href="/acp/orders">
 								<i class="icon-doc"></i>

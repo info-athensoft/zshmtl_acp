@@ -1,14 +1,17 @@
 package com.athensoft.ecomm.order.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
 	
-	public static int TRANS_STATUS_CREATED = 20;
-	public static int TRANS_STATUS_PROCESSING = 21;	
-	public static int TRANS_STATUS_COMPLETE = 22;
-	public static int TRANS_STATUS_PENDING = 23;
-	public static int TRANS_STATUS_CANCLED = 24;
+	public static final int TRANS_STATUS_CREATED = 20;
+	public static final int TRANS_STATUS_PROCESSING = 21;	
+	public static final int TRANS_STATUS_COMPLETED = 22;
+	public static final int TRANS_STATUS_PENDING = 23;
+	public static final int TRANS_STATUS_CANCELED = 24;
+	public static final int TRANS_STATUS_FRAUD = 25;
+	
 	
 	/* general info of order*/
 	private long 	orderId;			//auto-generated using UUID		
@@ -32,6 +35,11 @@ public class Order {
 	
 	private List<OrderItem> orderItems;
 
+	public Order(){
+		this.orderItems = new ArrayList<OrderItem>();
+	}
+	
+	
 	public long getOrderId() {
 		return orderId;
 	}

@@ -9,7 +9,12 @@ import org.springframework.stereotype.Service;
 import com.athensoft.ecomm.order.dao.OrderDao;
 import com.athensoft.ecomm.order.dao.OrderItemDao;
 import com.athensoft.ecomm.order.entity.Order;
+import com.athensoft.ecomm.order.entity.OrderItem;
 
+/**
+ * @author Athens
+ *
+ */
 @Service
 public class OrderService {
 	private OrderDao orderDao;
@@ -28,17 +33,45 @@ public class OrderService {
 		this.orderItemDao = orderItemDao;
 	}
 	
+	/**
+	 * @param orderId
+	 * @return
+	 */
 	public Order getOrderByOrderId(long orderId){
 		Order order = new Order();
-		order = orderDao.findById(orderId);		
-		order.setOrderItems(orderItemDao.findByOrderId(orderId));
+		order = orderDao.findById(orderId);
+		
+		System.out.println("orderId="+orderId);
+		
+//		order.setOrderItems(orderItemDao.findByOrderNo(orderId));
 		return order;
 	}
 	
-	/* Test method, not real business */
+	/**
+	 * @param orderId
+	 * @return
+	 */
+	public Order getOrderByOrderNo(long orderNo){
+		System.out.println("getOrderByOrderNo()");
+		Order order = new Order();
+		order = orderDao.findByNo(orderNo);
+		
+		System.out.println("orderNo="+orderNo);
+		System.out.println("orderItemDao="+orderItemDao);
+		
+		List<OrderItem> list = orderItemDao.findByOrderNo(orderNo);
+		System.out.println("OrderItem size="+list.size());
+		
+		System.out.print("order.getOrderItems()="+order.getOrderItems());
+		order.setOrderItems(list);
+		return order;
+	}
+	
+	/**
+	 * @return
+	 */
 	public List<Order> getAllOrders(){
 		List<Order> orders = orderDao.findAll();
-		//TODO: to populate order items for each later
 		return orders;
 	}
 	

@@ -60,7 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/admin/layout2/css/themes/grey.css" id="style_color" />
 <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/admin/layout2/css/custom.css"/>
 <!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
+<link rel="shortcut icon" href="${webapp_name}/assets/global/plugins/datatables/media/images/favicon.ico"/>
 
 <!-- CSS local -->
 <style type="text/css">

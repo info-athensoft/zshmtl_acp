@@ -29,27 +29,30 @@ public class OrderItemDaoJDBCImpl implements OrderItemDao {
 	}
 	
 	@Override
-	public List<OrderItem> findByOrderId(long orderId) {
-		String sql = "select * from order_item where order_id =:order_id";
+	public List<OrderItem> findByOrderNo(long orderNo) {
+		System.out.println("orderNo="+orderNo);
+		
+		String sql = "select * from orders_item where order_no =:order_no";
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("order_id", orderId);
-		List<OrderItem> x = null;
+		paramSource.addValue("order_no", orderNo);
+		List<OrderItem> x = new ArrayList<OrderItem>();
 		try{
 			x = jdbc.query(sql, paramSource, new OrderItemRowMapper());
 		}catch(Exception ex){
+			ex.printStackTrace();
 			x = null;
 		}
 		return x;
 	}
 
 	@Override
-	public List<OrderItem> findByOrderId(Order order) {
-		long orderId = 0;
+	public List<OrderItem> findByOrderNo(Order order) {
+		long orderNo = 0;
 		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
 				
 		if(order!=null){
-			orderId = order.getOrderId();
-			orderItemList = findByOrderId(orderId);
+			orderNo = order.getOrderId();
+			orderItemList = findByOrderNo(orderNo);
 		}
 		return orderItemList;
 	}
@@ -57,7 +60,7 @@ public class OrderItemDaoJDBCImpl implements OrderItemDao {
 	private static class OrderItemRowMapper implements RowMapper<OrderItem>{
 		public OrderItem mapRow(ResultSet rs, int rowNumber) throws SQLException {
 			OrderItem x = new OrderItem();
-			x.setOrderId(rs.getLong("order_id"));
+			x.setOrderId(rs.getLong("order_no"));
 			x.setOrderItemId(rs.getLong("order_item_id"));
 			x.setSeqNo(rs.getInt("seqno"));
 			x.setItemId(rs.getLong("item_id"));
