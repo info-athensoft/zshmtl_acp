@@ -55,7 +55,7 @@ public class OrderDaoJDBCImpl implements OrderDao{
 	}
 	
 	@Override
-	public Order findByNo(long orderNo) {
+	public Order findByNo(String orderNo) {
 		String sql = "select * from orders where order_no =:order_no";
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("order_no", orderNo);
