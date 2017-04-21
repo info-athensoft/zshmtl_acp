@@ -2406,20 +2406,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {
-	var visitors = [
-	                ['2', 1500],
-	                ['3', 2500],
-	                ['4', 1700],
-	                ['5', 800],
-	                ['6', 1500],
-	                ['7', 2350],
-	                ['8', 1500],
-	                ['9', 1300],
-	                ['10.0', 4600]
-	            ]; 
-	//alert(visitors);
-	//visitors = JSON.stringify(visitors);
-	//alert(visitors);
+   var visitors = ${visitors}; 
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
    Demo.init(); // init demo features 
