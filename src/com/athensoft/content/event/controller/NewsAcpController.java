@@ -164,7 +164,7 @@ public class NewsAcpController {
 		model.put("recordsFiltered", new Integer(5));
 		model.put("data", data);
 		model.put("customActionStatus","OK");
-		model.put("customActionMessage","OK");
+		model.put("customActionMessage","Data loaded");
 		
 		logger.info("leaving /events/eventsNewsListData");
 		return model;

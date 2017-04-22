@@ -27,6 +27,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <html lang="en">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
+
 <head>
 <meta charset="utf-8"/>
 <title>Athensoft | Events - News Listing</title>

@@ -11,7 +11,8 @@ var App = function() {
 
     var resizeHandlers = [];
 
-    var assetsPath = '../assets/';
+//    var assetsPath = '../assets/';
+    var assetsPath = '/acp/assets/';			//modified by Athens on 2017-04-21
 
     var globalImgPath = 'global/img/';
 
@@ -839,7 +840,8 @@ var App = function() {
                 close: true, // make alert closable
                 reset: true, // close all previouse alerts first
                 focus: true, // auto scroll to the alert after shown
-                closeInSeconds: 0, // auto close after defined seconds
+//              closeInSeconds: 0, // auto close after defined seconds
+                closeInSeconds: 2, // auto close after defined seconds   //modified by Athens
                 icon: "" // put icon before the message
             }, options);
 
@@ -974,6 +976,7 @@ var App = function() {
         },
 
         getGlobalImgPath: function() {
+        	
             return assetsPath + globalImgPath;
         },
 
@@ -1013,7 +1016,7 @@ var App = function() {
 
 }();
 
-<!-- END THEME LAYOUT SCRIPTS -->
+
 
 jQuery(document).ready(function() {    
    App.init(); // init metronic core componets

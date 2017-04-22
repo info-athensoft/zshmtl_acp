@@ -6,7 +6,8 @@ var EventNewsList = function () {
     var initPickers = function () {
         //init date pickers
         $('.date-picker').datepicker({
-            rtl: Metronic.isRTL(),
+//            rtl: Metronic.isRTL(),
+            rtl: App.isRTL(),
             autoclose: true
         });
     }
@@ -96,7 +97,7 @@ var EventNewsList = function () {
         //main function to initiate the module
         init: function () {
             handleProducts();
-            initPickers();
+            initPickers(); 
         }
 
     };
