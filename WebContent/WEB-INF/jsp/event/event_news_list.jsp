@@ -29,7 +29,6 @@ License: You must have a valid license purchased only from themeforest(the above
 <html lang="en">
     <!--<![endif]-->
     <!-- BEGIN HEAD -->
-
     <head>
         <meta charset="utf-8" />
         <title>Athensoft | Events - News Listing</title>
@@ -45,28 +44,28 @@ License: You must have a valid license purchased only from themeforest(the above
 		<meta http-equiv="expires" content="0">
         
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-        <link href="${webapp_name}/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link href="${webapp_name}/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="${webapp_name}/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="${webapp_name}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" />
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/simple-line-icons/simple-line-icons.min.css"/>
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css"/>
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <link href="${webapp_name}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-        <link href="${webapp_name}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-        <link href="${webapp_name}/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-        <link href="${webapp_name}/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/datatables/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/plugins/fancybox/source/jquery.fancybox.css"/>
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL STYLES -->
-        <link href="${webapp_name}/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-        <link href="${webapp_name}/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/css/components.min.css" id="style_components"/>
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/global/css/plugins.min.css"/>
         <!-- END THEME GLOBAL STYLES -->
         <!-- BEGIN THEME LAYOUT STYLES -->
-        <link href="${webapp_name}/assets/layouts/layout2/css/layout.min.css" rel="stylesheet" type="text/css" />
-        <link href="${webapp_name}/assets/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="${webapp_name}/assets/layouts/layout2/css/custom.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/layouts/layout2/css/layout.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/layouts/layout2/css/themes/blue.min.css"id="style_color" />
+        <link rel="stylesheet" type="text/css" href="${webapp_name}/assets/layouts/layout2/css/custom.min.css"/>
         <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="${webapp_name}/assets/global/plugins/datatables/media/images/favicon.ico"/> 
+        <link rel="shortcut icon" href="${webapp_name}/assets/global/plugins/datatables/media/images/favicon.ico"/>
     </head>
     <!-- END HEAD -->
 
@@ -130,23 +129,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <i class="fa fa-angle-down"></i>
                                 </button>
                                 <ul class="dropdown-menu pull-right" role="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bell"></i> Action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-shield"></i> Another action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-user"></i> Something else here</a>
-                                    </li>
+                                    <li><a href="#"><i class="icon-bell"></i> Action</a></li>
+                                    <li><a href="#"><i class="icon-shield"></i> Another action</a></li>
+                                    <li><a href="#"><i class="icon-user"></i> Something else here</a></li>
                                     <li class="divider"> </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bag"></i> Separated link</a>
-                                    </li>
+                                    <li><a href="#"><i class="icon-bag"></i> Separated link</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -154,11 +141,6 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- END PAGE HEADER-->
                     <div class="row">
                         <div class="col-md-12">
-                        <!-- 
-                            <div class="note note-danger">
-                                <p> NOTE: The below datatable is not connected to a real database so the filter and sorting is just simulated for demo purposes only. </p>
-                            </div>
-                        --> 
                             <!-- Begin: life time stats -->
                             <div class="portlet light">
                                 <div class="portlet-title">
@@ -175,18 +157,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
                                             <div class="dropdown-menu pull-right">
-                                                <li>
-                                                    <a href="javascript:;"> Export to Excel </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> Export to CSV </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> Export to XML </a>
-                                                </li>
+                                            	<ul>
+                                                <li><a href="javascript:;"> Export to Excel </a></li>
+                                                <li><a href="javascript:;"> Export to CSV </a></li>
+                                                <li><a href="javascript:;"> Export to XML </a></li>
                                                 <li class="divider"></li>
-                                                <a href="javascript:;"> Print Invoices </a>
-                                                </li>
+                                                <li><a href="javascript:;"> Print Invoices </a></li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -215,53 +192,28 @@ License: You must have a valid license purchased only from themeforest(the above
                                                             <span></span>
                                                         </label>
                                                     </th>
-                                                    <th width="8%">
-														 ID
-													</th>
-													<th width="25%">
-														 Title
-													</th>
-													<th width="8%">
-														 Author
-													</th>
-													<th width="8%">
-														 Category
-													</th>
-													<th width="15%">
-														 Date&nbsp;Post
-													</th>
-													<th width="6%">
-														 Views
-													</th>
-													<th width="8%">
-														 Status
-													</th>
-													<th width="8%">
-														 Actions
-													</th>
+                                                    <th width="8%">ID</th>
+													<th width="25%">Title</th>
+													<th width="8%">Author</th>
+													<th width="8%">Category</th>
+													<th width="15%">Date&nbsp;Post</th>
+													<th width="6%">Views</th>
+													<th width="8%">Status</th>
+													<th width="8%">Actions</th>
                                                 </tr>
                                                 <tr role="row" class="filter">
-													<td>
-													</td>
-													<td>
-														<input type="text" class="form-control form-filter input-sm" name="event_uuid" id="eventUUID">
-													</td>
-													<td>
-														<input type="text" class="form-control form-filter input-sm" name="event_title" id="eventTitle">
-													</td>
-													<td>
-														<input type="text" class="form-control form-filter input-sm" name="event_author" id="eventAuthor">
-													</td>
+													<td></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="event_uuid" id="eventUUID"></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="event_title" id="eventTitle"></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="eventAuthor"></td>
 													<td>
 														<select class="form-control form-filter input-sm" name="event_class" id="eventClass">
 															<option value="0">Select...</option>
 															<option value="1">Default</option>
 															<option value="2">New</option>
 															<option value="3">Hot</option>
-															
 														</select>
 													</td>
-													
 													<td>
 														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
 															<input type="text" class="form-control form-filter input-sm" readonly name="product_created_from" placeholder="From" id="postDatetimeFrom">
@@ -294,10 +246,8 @@ License: You must have a valid license purchased only from themeforest(the above
 													</td>
 													<td>
 														<div class="margin-bottom-5">
-														<!-- <input type="button" class="btn btn-sm yellow filter-submit margin-bottom" value="Search"> -->
 														<button class="btn btn-sm yellow filter-submit1 margin-bottom" onclick="filterSearch();"><i class="fa fa-search"></i> Search</button>
 														</div>
-														<!--  <button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Reset</button> -->
 														<button class="btn btn-sm red filter-cancel1" onclick="filterReset();"><i class="fa fa-times"></i> Reset</button>
 													</td>
 												</tr>
@@ -315,14 +265,13 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
             <!-- END CONTENT -->
             <!-- BEGIN ${webapp_name} SIDEBAR -->
-            
+            <!-- Removed to quick_sidebar.html -->
             <!-- END QUICK SIDEBAR -->
         </div>
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
         <jsp:include page="${inc_dir}/page-footer.jsp"></jsp:include>
         <!-- END FOOTER -->
-            
             
 <!--[if lt IE 9]>
 <script src="${webapp_name}/assets/global/plugins/respond.min.js"></script>
@@ -361,8 +310,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-list.js"></script>
 
 <!-- 
-<script src="${webapp_name}/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${webapp_name}/assets/layouts/global/scripts/quick-sidebar.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/layouts/global/scripts/quick-nav.min.js"></script>
  -->
 <!-- END THEME LAYOUT SCRIPTS -->
 <script>
