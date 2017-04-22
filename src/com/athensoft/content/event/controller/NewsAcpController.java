@@ -70,7 +70,7 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/events/eventsDashboard")
 	public String gotoDashboard(){
-		String viewName = "events/event_dashboard";
+		String viewName = "event/event_dashboard";
 		return viewName;
 	}
 	
@@ -81,7 +81,7 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/events/eventsNewsList")
 	public String gotoNewsList(){
-		String viewName = "events/event_news_list";
+		String viewName = "event/event_news_list";
 		return viewName;
 	}
 	
@@ -91,7 +91,7 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/events/eventsNewsCreate")
 	public String gotoNewsCreate(){
-		String viewName = "events/event_news_create";
+		String viewName = "event/event_news_create";
 		return viewName;
 	}
 	
@@ -103,12 +103,12 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/events/eventsNewsEdit")
 	public ModelAndView gotoNewsEdit(@RequestParam String eventUUID){
-		logger.info("entering /events/eventsNewsEdit");
+		logger.info("entering /event/eventsNewsEdit");
 		
 		ModelAndView mav = new ModelAndView();
 		
 		//view
-		String viewName = "events/event_news_edit";
+		String viewName = "event/event_news_edit";
 		mav.setViewName(viewName);
 		
 		//data
@@ -123,7 +123,7 @@ public class NewsAcpController {
 		logger.info("Length of EventReview entries: "+ listEventMedia.size());
 		model.put("eventMediaList", listEventMedia);
 		
-		logger.info("leaving /events/eventsNewsEdit");
+		logger.info("leaving /event/eventsNewsEdit");
 		return mav;
 	}
 	
@@ -134,7 +134,7 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/events/eventsNewsDelete")
 	public String gotoNewsDelete(){
-		String viewName = "events/event_news_delete";
+		String viewName = "event/event_news_delete";
 		return viewName;
 	}
 
@@ -147,7 +147,7 @@ public class NewsAcpController {
 	@RequestMapping(value="/events/eventsNewsListData",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> getDataNewsList(){
-		logger.info("entering /events/eventsNewsListData");
+		logger.info("entering /event/eventsNewsListData");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -676,7 +676,7 @@ public class NewsAcpController {
 		
 		/* assemble model and view */
 //      model.put("news", news);
-        String viewName = "events/event_news_list";
+        String viewName = "event/event_news_list";
         mav.setViewName(viewName);		
 		
 		return mav;		
@@ -690,7 +690,7 @@ public class NewsAcpController {
 	@RequestMapping(value="/events/updateNews",method=RequestMethod.POST)
 	public ModelAndView updateNews(@RequestParam String itemJSONString) {
 		
-		logger.info("entering /events/updateNews");
+		logger.info("entering /event/updateNews");
 		
 		/* initial settings */
 		ModelAndView mav = new ModelAndView();
@@ -722,10 +722,10 @@ public class NewsAcpController {
 		
 		/* assemble model and view */
 //      model.put("news", news);
-        String viewName = "events/event_news_list";
+        String viewName = "event/event_news_list";
 		mav.setViewName(viewName);		
 		
-		logger.info("leaving /events/updateNews");
+		logger.info("leaving /event/updateNews");
 		return mav;		
 	}
 	
@@ -782,7 +782,7 @@ public class NewsAcpController {
 	@RequestMapping(value="/events/markNewsStatusDeleted")
 //	@ResponseBody
 	public Map<String,Object> markNewsStatusDeleted(@RequestParam String eventUUID){
-		logger.info("entering /events/markNewsStatusDeleted");
+		logger.info("entering /event/markNewsStatusDeleted");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -798,7 +798,7 @@ public class NewsAcpController {
 		newsService.markNewsStatusDeleted(eventUUID);
 		
 		
-		logger.info("leaving /events/markNewsStatusDeleted");
+		logger.info("leaving /event/markNewsStatusDeleted");
 //		return mav;
 		return model;
 	}
