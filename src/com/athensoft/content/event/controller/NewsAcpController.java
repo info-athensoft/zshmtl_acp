@@ -953,8 +953,9 @@ public class NewsAcpController {
 				break;
 		}
 		
-		eventStatusPair[0]=eventStatus;
-		eventStatusPair[1]=eventStatusKey;
+		eventStatusPair[0]=eventStatusKey;
+		eventStatusPair[1]=eventStatus;
+		
 		
 		return eventStatusPair;
 	}

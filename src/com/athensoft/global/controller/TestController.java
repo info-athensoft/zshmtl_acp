@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TestController {
 	
 	/**
-	 * go to home page
+	 * test page
 	 * @return
 	 */
 	@RequestMapping("/test")
-	public String gotoHome(){
-		return "events/ecommerce_products";
+	public String doTest(){
+		return "events/test_event_news_list";
 	}
 	
 	

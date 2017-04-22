@@ -14,7 +14,7 @@
 						<a href="/acp/index">
 						<i class="icon-home"></i>
 						<span class="title">Dashboard</span>
-						<span class="selected"></span>
+						<span id="menu-dashborad" class="selected"></span>
 						</a>
 					</li>
 					
@@ -127,11 +127,12 @@
 					<!-- end product system -->
 					
 					<!-- event system -->
-					<li>
+					<li class="start active ">
 						<a href="javascript:;">
 						<i class="icon-user"></i>
 						<span class="title">My Events</span>
 						<span class="arrow "></span>
+						<span id="menu-myevents"></span>
 						</a>
 						<ul class="sub-menu">
 							<li>

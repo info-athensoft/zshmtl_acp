@@ -269,7 +269,7 @@ table tr td{
 							<p>
 								 NOTE: The below datatable is not connected to a real database so the filter and sorting is just simulated for demo purposes only.
 							</p>
-						</div>\
+						</div>
 						 -->
 						<!-- Begin: life time stats -->
 						<div class="portlet light">
