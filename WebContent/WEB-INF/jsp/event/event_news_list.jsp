@@ -299,15 +299,13 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="${webapp_name}/assets/global/scripts/app.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<!--  <script src="${webapp_name}/assets/pages/scripts/ecommerce-products.min.js" type="text/javascript"></script>  -->
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-list.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="${webapp_name}/assets/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/layouts/layout2/scripts/demo.min.js" type="text/javascript"></script>
-
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-list.js"></script>
 
 <!-- 
 <script type="text/javascript" src="${webapp_name}/assets/layouts/global/scripts/quick-sidebar.min.js"></script>

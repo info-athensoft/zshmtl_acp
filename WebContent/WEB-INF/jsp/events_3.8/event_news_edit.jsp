@@ -214,7 +214,7 @@ table tr td{
 				<!-- END STYLE CUSTOMIZER -->
 				<!-- BEGIN PAGE HEADER-->
 				<h3 class="page-title">
-				Event <small>System</small>
+				Event System <small> manage news</small>
 				</h3>
 				<div class="page-bar">
 					<ul class="page-breadcrumb">

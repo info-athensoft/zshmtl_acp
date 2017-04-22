@@ -32,7 +32,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <head>
         <meta charset="utf-8" />
-        <title>Metronic Admin Theme #2 | eCommerce Products Edit</title>
+        <title>Athensoft | Event - News Edit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="Preview page of Metronic Admin Theme #2 for edit product" name="description" />
@@ -103,20 +103,22 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- BEGIN THEME PANEL -->
                     <jsp:include page="${inc_dir}/theme-panel.jsp"></jsp:include>
                     <!-- END THEME PANEL -->
-                    <h1 class="page-title"> eCommerce Products Edit
-                        <small>edit product</small>
-                    </h1>
+                    <h1 class="page-title">Event System <small> manage news</small></h1>
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
-                            <li>
-                                <i class="icon-home"></i>
-                                <a href="index.html">Home</a>
-                                <i class="fa fa-angle-right"></i>
-                            </li>
-                            <li>
-                                <span>eCommerce</span>
-                            </li>
-                        </ul>
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="#">Home</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="eventsDashboard">Events</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="#">News</a>
+						</li>
+					</ul>
                         <div class="page-toolbar">
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
@@ -151,15 +153,15 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="portlet">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            <i class="fa fa-shopping-cart"></i>Test Product </div>
+                                            <i class="fa fa-shopping-cart"></i>Edit News<span class="caption-helper"> editing news details, associated medias, reviews, etc.</span> </div>
                                         <div class="actions btn-set">
-                                            <button type="button" name="back" class="btn btn-secondary-outline">
+                                            <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToNewsList(); return false;">
                                                 <i class="fa fa-angle-left"></i> Back</button>
-                                            <button class="btn btn-secondary-outline">
+                                            <button class="btn btn-secondary-outline" onclick="resetNews(); return false;">
                                                 <i class="fa fa-reply"></i> Reset</button>
-                                            <button class="btn btn-success">
+                                            <button class="btn btn-success" onclick="updateNews(); return false;">
                                                 <i class="fa fa-check"></i> Save</button>
-                                            <button class="btn btn-success">
+                                            <button class="btn btn-success" onclick="updateNewsAndContinue(); return false;">
                                                 <i class="fa fa-check-circle"></i> Save & Continue Edit</button>
                                             <div class="btn-group">
                                                 <a class="btn btn-success dropdown-toggle" href="javascript:;" data-toggle="dropdown">
@@ -205,164 +207,112 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab_general">
                                                     <div class="form-body">
-                                                        <div class="form-group">
-                                                            <label class="col-md-2 control-label">Name:
-                                                                <span class="required"> * </span>
-                                                            </label>
-                                                            <div class="col-md-10">
-                                                                <input type="text" class="form-control" name="product[name]" placeholder=""> </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-md-2 control-label">Description:
-                                                                <span class="required"> * </span>
-                                                            </label>
-                                                            <div class="col-md-10">
-                                                                <textarea class="form-control" name="product[description]"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-md-2 control-label">Short Description:
-                                                                <span class="required"> * </span>
-                                                            </label>
-                                                            <div class="col-md-10">
-                                                                <textarea class="form-control" name="product[short_description]"></textarea>
-                                                                <span class="help-block"> shown in product listing </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-md-2 control-label">Categories:
-                                                                <span class="required"> * </span>
-                                                            </label>
-                                                            <div class="col-md-10">
-                                                                <div class="form-control height-auto">
-                                                                    <div class="scroller" style="height:275px;" data-always-visible="1">
-                                                                        <ul class="list-unstyled">
-                                                                            <li>
-                                                                                <label>
-                                                                                    <input type="checkbox" name="product[categories][]" value="1">Mens</label>
-                                                                                <ul class="list-unstyled">
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Footwear</label>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Clothing</label>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Accessories</label>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Fashion Outlet</label>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </li>
-                                                                            <li>
-                                                                                <label>
-                                                                                    <input type="checkbox" name="product[categories][]" value="1">Football Shirts</label>
-                                                                                <ul class="list-unstyled">
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Premier League</label>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Football League</label>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Serie A</label>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Bundesliga</label>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </li>
-                                                                            <li>
-                                                                                <label>
-                                                                                    <input type="checkbox" name="product[categories][]" value="1">Brands</label>
-                                                                                <ul class="list-unstyled">
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Adidas</label>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Nike</label>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Airwalk</label>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <label>
-                                                                                            <input type="checkbox" name="product[categories][]" value="1">Kangol</label>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <span class="help-block"> select one or more categories </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-md-2 control-label">Available Date:
-                                                                <span class="required"> * </span>
-                                                            </label>
-                                                            <div class="col-md-10">
-                                                                <div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-                                                                    <input type="text" class="form-control" name="product[available_from]">
-                                                                    <span class="input-group-addon"> to </span>
-                                                                    <input type="text" class="form-control" name="product[available_to]"> </div>
-                                                                <span class="help-block"> availability daterange. </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-md-2 control-label">SKU:
-                                                                <span class="required"> * </span>
-                                                            </label>
-                                                            <div class="col-md-10">
-                                                                <input type="text" class="form-control" name="product[sku]" placeholder=""> </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-md-2 control-label">Price:
-                                                                <span class="required"> * </span>
-                                                            </label>
-                                                            <div class="col-md-10">
-                                                                <input type="text" class="form-control" name="product[price]" placeholder=""> </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-md-2 control-label">Tax Class:
-                                                                <span class="required"> * </span>
-                                                            </label>
-                                                            <div class="col-md-10">
-                                                                <select class="table-group-action-input form-control input-medium" name="product[tax_class]">
-                                                                    <option value="">Select...</option>
-                                                                    <option value="1">None</option>
-                                                                    <option value="0">Taxable Goods</option>
-                                                                    <option value="0">Shipping</option>
-                                                                    <option value="0">USA</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-md-2 control-label">Status:
-                                                                <span class="required"> * </span>
-                                                            </label>
-                                                            <div class="col-md-10">
-                                                                <select class="table-group-action-input form-control input-medium" name="product[status]">
-                                                                    <option value="">Select...</option>
-                                                                    <option value="1">Published</option>
-                                                                    <option value="0">Not Published</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">Global ID: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled"  value="${newsObject.globalId}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">Event UUID: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="eventUUID" name="eventUUID"  placeholder="" value="${newsObject.eventUUID}" disabled="disabled">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">Event Title: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="title" name="title" placeholder=""  value="${newsObject.title}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">Author: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="author" name="author" placeholder=""  value="${newsObject.author}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">Post Datetime: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-10">
+															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
+																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${newsObject.postDatetime}" disabled="disabled">
+															</div>
+															<span class="help-block">
+															availability daterange. </span>
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">Number of Views: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder=""  value="${newsObject.viewNum}" disabled="disabled">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">Short Description: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-10">
+															<textarea class="form-control" id="descShort" name="descShort">${newsObject.descShort}</textarea>
+															<span class="help-block">
+															shown in product listing </span>
+														</div>
+														
+													</div>
+													
+															<div class="form-group">
+														<label class="col-md-2 control-label">Long Description: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-10">
+															<textarea class="form-control" id="descLong" name="descLong" rows="6">${newsObject.descLong}</textarea>
+														</div>
+														
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">News Class: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-10">
+															<select class="table-group-action-input form-control input-medium" id="eventClass" name="eventClass">
+																<option value="0" ${newsObject.eventClass == '0' ? 'selected' : ''}>Select...</option>
+																<option value="1" ${newsObject.eventClass == '1' ? 'selected' : ''}>Default</option>
+																<option value="2" ${newsObject.eventClass == '2' ? 'selected' : ''}>New</option>
+																<option value="3" ${newsObject.eventClass == '3' ? 'selected' : ''}>Hot</option>
+															</select>
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">News Status: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-10">
+															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
+																<option value="0" ${newsObject.eventStatus == '0' ? 'selected' : ''}>Select...</option>
+																<option value="1" ${newsObject.eventStatus == '1' ? 'selected' : ''}>Published</option>
+																<option value="2" ${newsObject.eventStatus == '2' ? 'selected' : ''}>Wait to post</option>
+																<option value="3" ${newsObject.eventStatus == '3' ? 'selected' : ''}>Deleted</option>
+																<option value="4" ${newsObject.eventStatus == '4' ? 'selected' : ''}>Out of date</option>
+																<option value="5" ${newsObject.eventStatus == '5' ? 'selected' : ''}>Suspended</option>
+															</select>
+														</div>
+													</div>
+												</div>
                                                 </div>
+                                                
                                                 <div class="tab-pane" id="tab_meta">
                                                     <div class="form-body">
                                                         <div class="form-group">
@@ -656,7 +606,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="${webapp_name}/assets/global/scripts/app.min.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="${webapp_name}/assets/pages/scripts/ecommerce-products-edit.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-edit.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="${webapp_name}/assets/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
@@ -667,7 +618,50 @@ License: You must have a valid license purchased only from themeforest(the above
  -->
 <!-- END THEME LAYOUT SCRIPTS -->
 <script>
-    
+jQuery(document).ready(function() {    
+	//Metronic.init(); // init metronic core components
+	//Layout.init(); // init current layout
+	//Demo.init(); // init demo features
+	//EventNewsEdit.init();
+	var eventUUID = $("#eventUUID").val();
+	EventNewsEdit.init(eventUUID);
+
+//local
+//select object for event class
+	var eventClassValue = ${newsObject.eventClass};
+	$("#eventClass").val(eventClassValue);
+
+//select object for event status
+	var eventStatusValue = ${newsObject.eventStatus};
+	$("#eventStatus").val(eventStatusValue);
+	
+});
+
+function resetNews(){
+	
+	//object for reset
+	//var p1 = ${newsObject.globalId};
+	//var p2 = '${newsObject.eventUUID}';
+	var p3 = '${newsObject.title}';
+	var p4 = '${newsObject.author}';
+	//var p5 = ${newsObject.postDatetime};
+	var p6 = ${newsObject.viewNum};
+	var p7 = '${newsObject.descShort}';
+	var p8 = '${newsObject.descLong}';
+	var p9 = ${newsObject.eventClass};
+	var p10 = ${newsObject.eventStatus};
+	
+	//$("#globalId").val(p1);
+	//$("#eventUUID").val(p2);
+	$("#title").val(p3);
+	$("#author").val(p4);
+	//$("#postDatetime").val(p5);
+	$("#viewNum").val(p6);
+	$("#descShort").val(p7);
+	$("#descLong").val(p8);
+	$("#eventClass").val(p9);
+	$("#eventStatus").val(p10);
+}    
 </script>
 </body>
 
