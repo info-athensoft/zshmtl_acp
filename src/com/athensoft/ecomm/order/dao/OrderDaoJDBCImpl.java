@@ -83,6 +83,8 @@ public class OrderDaoJDBCImpl implements OrderDao{
 			
 			Contact customerContact = new Contact();
 			customerContact.setEntityName(rs.getString("entity_name"));
+			
+			x.setCustomerContact(customerContact);
             return x;
 		}		
 	}
