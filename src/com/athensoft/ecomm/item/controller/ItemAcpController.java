@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ProductAcpController {
+public class ItemAcpController {
 	
 	@RequestMapping(value="/item/productList")
 	public String gotoProductList(){
@@ -18,15 +18,5 @@ public class ProductAcpController {
 		return viewName;
 	}
 	
-	@RequestMapping(value="/item/categoryList")
-	public String gotoCategoryList(){
-		String viewName = "item/item_categories";
-		return viewName;
-	}
 	
-	@RequestMapping(value="/item/categoryEdit")
-	public String gotoCategoryEdit(){
-		String viewName = "item/item_category_edit";
-		return viewName;
-	}
 }

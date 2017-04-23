@@ -103,6 +103,16 @@
 								Dashboard</a>
 							</li>
 							<li>
+								<a href="/acp/item/testcategory">
+								<i class="icon-paper-plane"></i>
+								Category Test</a>
+							</li>
+							<li>
+								<a href="/acp/item/samplecategory">
+								<i class="icon-paper-plane"></i>
+								Category Sample</a>
+							</li>
+							<li>
 								<a href="/acp/item/categoryList">
 								<i class="icon-paper-plane"></i>
 								Category List</a>
