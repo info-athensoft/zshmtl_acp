@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,13 +22,16 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import com.athensoft.content.event.controller.NewsAcpController;
 import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.News;
 
 @Component
 @Qualifier("newsDaoJDBCImpl")
 public class NewsDaoJDBCImpl implements NewsDao {
-
+	
+	private static final Logger logger = Logger.getLogger(NewsDaoJDBCImpl.class);
+	
 	private NamedParameterJdbcTemplate jdbc;
 	
 	@Autowired
@@ -216,9 +220,15 @@ public class NewsDaoJDBCImpl implements NewsDao {
 	}
 
 	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-	
+	public void delete(News news) {
+		
+		String sql = "delete from event_news where event_uuid =:eventUUID";
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("eventUUID", news.getEventUUID());
+		
+		KeyHolder keyholder = new GeneratedKeyHolder();
+		jdbc.update(sql, paramSource, keyholder);
+		return;
 	}
 	
 	@Override

@@ -32,6 +32,9 @@ public class NewsAcpController {
 	
 	private static final Logger logger = Logger.getLogger(NewsAcpController.class);
 	
+	private static final String ACTION_EDIT = "Edit";
+	private static final String ACTION_DELETE = "Delete";
+	
 	/**
 	 * News Service instance
 	 */
@@ -154,7 +157,7 @@ public class NewsAcpController {
 		List<Event> listNews = newsService.getAllNews();
 		logger.info("Length of news entries: "+ listNews.size());
 		
-		String[][] data = getData(listNews);
+		String[][] data = getData(listNews, ACTION_EDIT);
 		
 		Map<String, Object> model = mav.getModel();
 		
@@ -290,7 +293,7 @@ public class NewsAcpController {
 			logger.info("Length of news entries = "+ listNews.size());
 			
 			
-			String[][] data = getData(listNews);
+			String[][] data = getData(listNews, ACTION_EDIT);
 			
 			model.put("draw", new Integer(1));
 			model.put("recordsTotal", new Integer(5));
@@ -306,6 +309,122 @@ public class NewsAcpController {
 
 	
 		/**
+	 * get news objects in JSON data form
+	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
+	 * @return a map structure containing data rendered to view
+	 */
+	@RequestMapping(value="/events/eventsNewsDeleteData",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> getDataNewsDelete(){
+		logger.info("entering /events/eventsNewsDeleteData");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//data
+		List<Event> listNews = newsService.getAllNews();
+		logger.info("Length of news entries: "+ listNews.size());
+		
+		/*
+		int entryLength = listNews.size();
+		final int COLUMN_NUM = 9;
+		String[][] data = new String[entryLength][COLUMN_NUM];
+		
+		String field0 = "";	//check box
+		String field1 = "";	//event UUID
+		String field2 = "";	//event title
+		String field3 = "";	//author
+		String field4 = "";	//event class
+		String field5 = "";	//post datetime
+		String field6 = "";	//view num
+		String field7 = "";	//event status
+		String field8 = "";	//action
+		
+		for(int i=0; i<entryLength ; i++){			
+			field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
+			field1 = listNews.get(i).getEventUUID()+"";
+			field2 = listNews.get(i).getTitle();
+			field3 = listNews.get(i).getAuthor();
+			
+			int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
+			String eventClass = "";
+			switch(intEventClass){
+				case News.CLASS_DEFAULT:
+					eventClass = "Default";
+					break;
+				case News.CLASS_NEW:
+					eventClass = "New";
+					break;
+				case News.CLASS_HOT:
+					eventClass = "Hot";
+					break;
+				default: 
+					eventClass = "Unknown";
+					break;
+			}
+			field4 = eventClass;
+			
+			field5 = listNews.get(i).getPostDatetime()+"";
+			field6 = listNews.get(i).getViewNum()+"";
+			int intEventStatus = listNews.get(i).getEventStatus();
+			String eventStatus = "";
+			String eventStatusKey = "";
+			switch(intEventStatus){
+				case News.PUBLISHED: 
+					eventStatus = "Published";
+					eventStatusKey = "success";
+					break;
+				case News.WAIT_TO_POST: 
+					eventStatus = "Wait to post";
+					eventStatusKey = "warning";
+					break;
+				case News.DELETED: 
+					eventStatus = "Deleted";
+					eventStatusKey = "default";
+					break;
+				case News.OUT_OF_DATE: 
+					eventStatus = "Out of date";
+					eventStatusKey = "info";
+					break;
+				case News.SUSPENDED: 
+					eventStatus = "Suspended";
+					eventStatusKey = "danger";
+					break;
+				default: 
+					break;
+			}
+			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
+			field8 = "<a href='/acp/events/eventsNewsDelete?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Delete</a>";
+			
+			//logger.info("field8="+field8);
+			
+			data[i][0] = field0;
+			data[i][1] = field1;
+			data[i][2] = field2;
+			data[i][3] = field3;
+			data[i][4] = field4;
+			data[i][5] = field5;
+			data[i][6] = field6;
+			data[i][7] = field7;
+			data[i][8] = field8;
+		}
+		*/
+		
+		String[][] data = getData(listNews, ACTION_DELETE);
+		
+		Map<String, Object> model = mav.getModel();
+		
+		model.put("draw", new Integer(1));
+		model.put("recordsTotal", new Integer(5));
+		model.put("recordsFiltered", new Integer(5));
+		model.put("data", data);
+		model.put("customActionStatus","OK");
+		model.put("customActionMessage","OK");
+		
+		logger.info("leaving /events/eventsNewsDeleteData");
+		return model;
+	}
+	
+	/**
 		 * get news objects in JSON data form, which comply with criteria
 		 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
 		 * @param itemJSONString search criteria object in JSON format
@@ -426,7 +545,7 @@ public class NewsAcpController {
 			List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
 			logger.info("Length of news entries = "+ listNews.size());
 			
-			
+			/*
 			int entryLength = listNews.size();
 			final int COLUMN_NUM = 9;
 			String[][] data = new String[entryLength][COLUMN_NUM];
@@ -507,7 +626,9 @@ public class NewsAcpController {
 				data[i][6] = field6;
 				data[i][7] = field7;
 				data[i][8] = field8;
-			}
+			}*/
+			
+			String[][] data = getData(listNews, ACTION_DELETE);
 			
 			model.put("draw", new Integer(1));
 			model.put("recordsTotal", new Integer(5));
@@ -520,119 +641,8 @@ public class NewsAcpController {
 			
 			return model;
 		}
-		
-	/**
-	 * get news objects in JSON data form
-	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
-	 * @return a map structure containing data rendered to view
-	 */
-	@RequestMapping(value="/events/eventsNewsDeleteData",produces="application/json")
-	@ResponseBody
-	public Map<String,Object> getDataNewsDelete(){
-		logger.info("entering /events/eventsNewsDeleteData");
-		
-		ModelAndView mav = new ModelAndView();
-		
-		//data
-		List<Event> listNews = newsService.getAllNews();
-		logger.info("Length of news entries: "+ listNews.size());
-		
-		int entryLength = listNews.size();
-		final int COLUMN_NUM = 9;
-		String[][] data = new String[entryLength][COLUMN_NUM];
-		
-		String field0 = "";	//check box
-		String field1 = "";	//event UUID
-		String field2 = "";	//event title
-		String field3 = "";	//author
-		String field4 = "";	//event class
-		String field5 = "";	//post datetime
-		String field6 = "";	//view num
-		String field7 = "";	//event status
-		String field8 = "";	//action
-		
-		for(int i=0; i<entryLength ; i++){			
-			field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
-			field1 = listNews.get(i).getEventUUID()+"";
-			field2 = listNews.get(i).getTitle();
-			field3 = listNews.get(i).getAuthor();
-			
-			int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
-			String eventClass = "";
-			switch(intEventClass){
-				case News.CLASS_DEFAULT:
-					eventClass = "Default";
-					break;
-				case News.CLASS_NEW:
-					eventClass = "New";
-					break;
-				case News.CLASS_HOT:
-					eventClass = "Hot";
-					break;
-				default: 
-					eventClass = "Unknown";
-					break;
-			}
-			field4 = eventClass;
-			
-			field5 = listNews.get(i).getPostDatetime()+"";
-			field6 = listNews.get(i).getViewNum()+"";
-			int intEventStatus = listNews.get(i).getEventStatus();
-			String eventStatus = "";
-			String eventStatusKey = "";
-			switch(intEventStatus){
-				case News.PUBLISHED: 
-					eventStatus = "Published";
-					eventStatusKey = "success";
-					break;
-				case News.WAIT_TO_POST: 
-					eventStatus = "Wait to post";
-					eventStatusKey = "warning";
-					break;
-				case News.DELETED: 
-					eventStatus = "Deleted";
-					eventStatusKey = "default";
-					break;
-				case News.OUT_OF_DATE: 
-					eventStatus = "Out of date";
-					eventStatusKey = "info";
-					break;
-				case News.SUSPENDED: 
-					eventStatus = "Suspended";
-					eventStatusKey = "danger";
-					break;
-				default: 
-					break;
-			}
-			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-			field8 = "<a href='/acp/events/eventsNewsDelete?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Delete</a>";
-			
-			//logger.info("field8="+field8);
-			
-			data[i][0] = field0;
-			data[i][1] = field1;
-			data[i][2] = field2;
-			data[i][3] = field3;
-			data[i][4] = field4;
-			data[i][5] = field5;
-			data[i][6] = field6;
-			data[i][7] = field7;
-			data[i][8] = field8;
-		}
-		
-		Map<String, Object> model = mav.getModel();
-		
-		model.put("draw", new Integer(1));
-		model.put("recordsTotal", new Integer(5));
-		model.put("recordsFiltered", new Integer(5));
-		model.put("data", data);
-		model.put("customActionStatus","OK");
-		model.put("customActionMessage","OK");
-		
-		logger.info("leaving /events/eventsNewsDeleteData");
-		return model;
-	}
-	
+
+
 	/**
 	 * create news object based on data passed in JSON format
 	 * @param itemJSONString news object in JSON format 
@@ -641,7 +651,7 @@ public class NewsAcpController {
 	@RequestMapping(value="/events/createNews",method=RequestMethod.POST)
 	public ModelAndView createNews(@RequestParam String itemJSONString) {
 		
-		logger.info("entering /events/createNews");
+		logger.info("entering /event/createNews");
 		
 		/* initial settings */
 		ModelAndView mav = new ModelAndView();
@@ -676,8 +686,9 @@ public class NewsAcpController {
 		/* assemble model and view */
 //      model.put("news", news);
         String viewName = "event/event_news_list";
-        mav.setViewName(viewName);		
-		
+        mav.setViewName(viewName);	
+        
+        logger.info("exiting... /event/createNews");
 		return mav;		
 	}
 	
@@ -802,11 +813,49 @@ public class NewsAcpController {
 		return model;
 	}
 	
+
+	/**
+	 * delete a news object
+	 * @param eventUUID eventUUID
+	 * @return data and target view
+	 */
+	@RequestMapping(value="/events/deleteNews",produces="application/json")
+	public ModelAndView deleteNews(@RequestParam String eventUUID) {
+		
+		logger.info("entering /events/eventsNewsDelete");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+        Map<String, Object> model = mav.getModel();
+        
+        //data
+        News news = new News();
+        news.setEventUUID(eventUUID);
+        
+        logger.info("news="+news.toString());
+        
+		/* business logic*/
+        newsService.deleteNews(news);
+        
+		
+		/* assemble model and view */
+        String viewName = "event/event_news_delete";
+		mav.setViewName(viewName);
+		
+        logger.info("leaving /events/eventsNewsDelete");
+		
+		return mav;		
+	}
+	
+	
 	
 	
 	/**
-	 * update news objects in group
-	 * @param itemJSONString news object to update in JSON format
+	 * delete news objects in group
+	 * @param eventUUIDArray eventUUID list
+	 * @param newsStatus the status of news, here it should be 6:permanently delete
 	 * @return data and target view
 	 */
 	@RequestMapping(value="/events/deleteNewsGroup",produces="application/json")
@@ -837,7 +886,6 @@ public class NewsAcpController {
         }
         
         logger.info("newsList size="+newsList.size());
-//        logger.info("newsList ="+newsList.toString());
         
 		/* business logic*/
         newsService.deleteNewsGroup(newsList);
@@ -849,7 +897,7 @@ public class NewsAcpController {
 	}
 	
 	
-	private String[][] getData(List<Event> listNews){
+	private String[][] getData(List<Event> listNews, String actionName){
 		int entryLength = listNews.size();
 		final int COLUMN_NUM = 9;
 		String[][] data = new String[entryLength][COLUMN_NUM];
@@ -881,7 +929,7 @@ public class NewsAcpController {
 			String eventStatusKey = eventStatusPair[0];
 			String eventStatus = eventStatusPair[1];
 			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-			field8 = "<a href='/acp/events/eventsNewsEdit?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			field8 = "<a href='/acp/events/"+getAction(actionName)+"?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> "+actionName+"</a>";
 			
 			//logger.info("field8="+field8);
 			
@@ -957,5 +1005,18 @@ public class NewsAcpController {
 		
 		
 		return eventStatusPair;
+	}
+	
+	private String getAction(String actionName){
+		String action = "";
+		switch(actionName){
+		case ACTION_EDIT:
+			action = "eventsNewsEdit";
+			break;
+		case ACTION_DELETE:
+			action = "deleteNews";
+			break;
+		}
+		return action;
 	}
 }

@@ -33,7 +33,7 @@ function createNews() {
         timeout :     30000,
         
         success:function(msg){
-            //todo
+        	location.href="eventsNewsList";
         },
         error:function(){
             alert("ERROR: News creating failed.");     

@@ -174,16 +174,16 @@ var EventNewsEdit = function (option) {
     var initComponents = function () {
         //init datepickers
         $('.date-picker').datepicker({
-            rtl: Metronic.isRTL(),
+            rtl: App.isRTL(),		//modified by Athens
             autoclose: true
         });
 
         //init datetimepickers
         $(".datetime-picker").datetimepicker({
-            isRTL: Metronic.isRTL(),
+            isRTL: App.isRTL(),		//modified by Athens
             autoclose: true,
             todayBtn: true,
-            pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left"),
+            pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left"),
             minuteStep: 10
         });
 

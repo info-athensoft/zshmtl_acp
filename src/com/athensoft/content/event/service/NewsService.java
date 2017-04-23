@@ -101,6 +101,10 @@ public class NewsService {
 		this.newsDao.markNewsStatusDeleted(eventUUID);
 	}
 	
+	public void deleteNews(News news) {
+		this.newsDao.delete(news);
+	}
+	
 	/**
 	 * delete news objects and persist them in batch
 	 * @param newsList

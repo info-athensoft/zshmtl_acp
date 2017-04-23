@@ -64,7 +64,7 @@ public interface NewsDao {
 	 * remove a news object from data source<p>
 	 * WARNING: THE METHOD HAS NOT COMPLETED.
 	 */
-	public void delete();
+	public void delete(News news);
 	
 	/**
 	 * remove news objects permanently in batch
