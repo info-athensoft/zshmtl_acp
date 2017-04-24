@@ -36,7 +36,7 @@ public class NewsAcpControllerTest {
 		n1.setEventUUID("test-tx-1");
 		
 		News n2 = new News();
-		n1.setEventUUID("test-tx-2");
+		n2.setEventUUID("test-tx-2");
 		
 		List<News> listNews = new ArrayList<News>();
 		listNews.add(n1);

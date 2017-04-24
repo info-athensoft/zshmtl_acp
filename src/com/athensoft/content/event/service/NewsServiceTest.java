@@ -15,10 +15,6 @@ import com.athensoft.content.event.entity.News;
  * @author Athens
  * @version 1.0
  */
-/**
- * @author Athens
- *
- */
 @Service
 public class NewsServiceTest {
 	
@@ -40,9 +36,15 @@ public class NewsServiceTest {
 	public void testTransaction(List<News> listNews){
 		if(listNews!=null){
 			if(listNews.size()>=2){
-				this.newsDao.create(listNews.get(0));
-					if(true){throw new RuntimeException("");}
-				this.newsDao.create(listNews.get(1));
+				//try{ 
+					this.newsDao.create(listNews.get(0)); 
+					if(true)throw new RuntimeException("");
+				//catch(Exception e){System.out.println("my interrupt1");}
+				
+				try{ 
+					this.newsDao.create(listNews.get(1)); 
+					throw new RuntimeException("");}
+				catch(Exception e){System.out.println("my interrupt2");}
 			}
 			
 		}

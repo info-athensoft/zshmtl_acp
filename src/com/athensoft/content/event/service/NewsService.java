@@ -15,10 +15,7 @@ import com.athensoft.content.event.entity.News;
  * @author Athens
  * @version 1.0
  */
-/**
- * @author Athens
- *
- */
+
 @Service
 public class NewsService {
 	
