@@ -102,8 +102,32 @@ var UITree = function () {
             },
             "state" : { "key" : "demo2" },
             "plugins" : [ "contextmenu", "dnd", "state", "types" ]
-        });
-    
+        })
+/*        .on('changed.jstree', function (e, data) {
+//        	alert($("#tree_3").jstree().get_selected(true)[0].text); //ok
+//        	alert(data.instance.get_node(data.selected[0]).text); //ok
+		    var i, j, r = [];
+		    for(i = 0, j = data.selected.length; i < j; i++) {
+		      r.push(data.instance.get_node(data.selected[i]).text);
+		    }
+//		    $('#event_result').html('Selected: ' + r.join(', '));
+		  }) */
+		  .on("move_node.jstree", function (e, data) {
+			   //data.node, data.parent, data.old_parent
+			   var orig = data.node.text ; //.id
+			   var dest = data.instance.get_node(data.node.parent).text;
+			   $.ajax({
+					type:"post",
+					url:"dragAndDropResultSaved",
+					dataType:"json",
+					data: {	"orig" : orig, "dest" : dest},
+					timeout : 5000,
+					success:function(data){	
+						$('#event_result').html('Orig : ' + data.orig + '&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dest : ' + data.dest);
+					}		
+				}); 
+//			   $('#event_result').html('Orig : ' + orig + '      Dest : ' + dest);
+			});
     }
 
      var ajaxTreeSample = function() {

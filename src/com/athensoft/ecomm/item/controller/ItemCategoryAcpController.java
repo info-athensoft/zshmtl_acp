@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,7 +76,7 @@ public class ItemCategoryAcpController {
 	  
 	    Node.addChild(treeRootNode, "Another Node - SFZ");
 	    StringBuffer jsTreeData = Node.buildJSTree(treeRootNode, "  ");
-	    System.out.println(jsTreeData);
+//	    System.out.println(jsTreeData);
 			
 		model.put("jsTreeData", jsTreeData);
 				
@@ -91,6 +92,29 @@ public class ItemCategoryAcpController {
 	public String gotoSampleCategory(){
 		String viewName = "item/sample_item_category";
 		return viewName;
+	}
+	
+	@RequestMapping(value="/item/dragAndDropResultSaved",method=RequestMethod.POST,produces="application/json")
+	@ResponseBody
+	public Map<String, Object> DragAndDropResultSaved(@RequestParam String orig, @RequestParam String dest){
+		logger.info("entering /item/dragAndDropResultSaved");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//view
+		String viewName = "item/testcategory";
+		mav.setViewName(viewName);
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		model.put("orig",orig);
+		model.put("dest", dest);
+		
+		logger.info("Orig : " + orig + "      Dest : " + dest);
+		
+		logger.info("leaving /item/dragAndDropResultSaved");
+//		return mav;
+		return model;
 	}
 	
 	

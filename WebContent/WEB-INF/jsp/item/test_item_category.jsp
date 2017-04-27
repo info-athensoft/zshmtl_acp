@@ -245,6 +245,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <div id="tree_3" class="tree-demo"> </div>
                                     <div class="alert alert-success no-margin margin-top-10"> Note! Opened and selected nodes will be saved in the user's browser, so when returning to the same tree the previous state will be restored. </div>
                                 </div>
+                                <div id="event_result" style="margin-top:2em; text-align:center;"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
