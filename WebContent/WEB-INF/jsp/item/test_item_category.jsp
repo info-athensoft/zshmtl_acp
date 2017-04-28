@@ -297,7 +297,8 @@ License: You must have a valid license purchased only from themeforest(the above
             <script src="${webapp_name}/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
             <!-- END CORE PLUGINS -->
             <!-- BEGIN PAGE LEVEL PLUGINS -->
-            <script src="${webapp_name}/assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>            
+            <!-- <script src="${webapp_name}/assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script> -->
+            <script src="${webapp_name}/assets/pages/scripts-local/jstree.js" type="text/javascript"></script>            
             <!-- END PAGE LEVEL PLUGINS -->
             <!-- BEGIN THEME GLOBAL SCRIPTS -->
             <script src="${webapp_name}/assets/global/scripts/app.min.js" type="text/javascript"></script>
