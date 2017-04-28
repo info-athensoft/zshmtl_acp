@@ -245,6 +245,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <div id="tree_3" class="tree-demo"> </div>
                                     <div class="alert alert-success no-margin margin-top-10"> Note! Opened and selected nodes will be saved in the user's browser, so when returning to the same tree the previous state will be restored. </div>
                                 </div>
+                                <div id="event_result" style="margin-top:2em; text-align:center;"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -296,7 +297,8 @@ License: You must have a valid license purchased only from themeforest(the above
             <script src="${webapp_name}/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
             <!-- END CORE PLUGINS -->
             <!-- BEGIN PAGE LEVEL PLUGINS -->
-            <script src="${webapp_name}/assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>            
+            <!-- <script src="${webapp_name}/assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script> -->
+            <script src="${webapp_name}/assets/pages/scripts-local/jstree.js" type="text/javascript"></script>            
             <!-- END PAGE LEVEL PLUGINS -->
             <!-- BEGIN THEME GLOBAL SCRIPTS -->
             <script src="${webapp_name}/assets/global/scripts/app.min.js" type="text/javascript"></script>
