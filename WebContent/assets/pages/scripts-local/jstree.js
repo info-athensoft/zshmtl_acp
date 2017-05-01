@@ -3813,7 +3813,18 @@
 			 * @param {Object} node
 			 * @param {String} parent the parent's ID
 			 */
-			this.trigger('delete_node', { "node" : obj, "parent" : par.id });
+			this.trigger('delete_node', { "node" : obj, "parent" : par.id }, function(action, data) {
+				$.ajax({
+					type:"post",
+					url:"deleteResultSaved",
+					dataType:"json",
+					data: {	"parent" : this.get_node(data.parent).state.key, "node" : data.node.state.key},
+					timeout : 5000,
+					success:function(data){	
+						$('#event_result').html('Action : ' + action + '&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Parent : ' + data.parent + '&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Deleted Node : ' + data.node);
+					}		
+				});
+			});
 			if(c) {
 				this.trigger('changed', { 'action' : 'delete_node', 'node' : obj, 'selected' : this._data.core.selected, 'parent' : par.id });
 			}

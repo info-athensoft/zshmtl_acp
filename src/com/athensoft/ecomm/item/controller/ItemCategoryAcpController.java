@@ -53,28 +53,28 @@ public class ItemCategoryAcpController {
 		
 		//build jstree data
 		Node treeRootNode = new Node(null);
-		treeRootNode.setText("root");
-	    // add child to root node 
-	    Node parentNode = Node.addChild(treeRootNode, "My Parent Node");
-	    // add child to the child node created above
-	    Node.addChild(parentNode, "Initially selected", new AbstractMap.SimpleEntry<String, Boolean>("selected", true));
-	    Node.addChild(parentNode, "Custom Icon", "fa fa-warning icon-state-danger");
-	    Node initiallyOpen = Node.addChild(parentNode, "Initially open", "fa fa-folder icon-state-success", new AbstractMap.SimpleEntry<String, Boolean>("opened", true)); 
-	    // add child to the child node created above
-	    Node.addChild(initiallyOpen, "Another node", "fa fa-file icon-state-warning");
+	    treeRootNode.setText("root");
+	  // add child to root node 
+	    Node parentNode = Node.addChild(treeRootNode, "My Parent Node", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-1")));
+	  // add child to the child node created above
+	    Node.addChild(parentNode, "Initially selected", Node.buildList(new AbstractMap.SimpleEntry<String, String>("selected", "true"), new AbstractMap.SimpleEntry<String, String>("key", "key-11")));
+	    Node.addChild(parentNode, "Custom Icon", "fa fa-warning icon-state-danger", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-12")));
+	    Node initiallyOpen = Node.addChild(parentNode, "Initially open", "fa fa-folder icon-state-success", Node.buildList(new AbstractMap.SimpleEntry<String, String>("opened", "true"), new AbstractMap.SimpleEntry<String, String>("key", "key-13"))); 
+	  // add child to the child node created above
+	    Node.addChild(initiallyOpen, "Another node", "fa fa-file icon-state-warning", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-131")));
 	  
-	    Node.addChild(parentNode, "Another Custom Icon", "fa fa-warning icon-state-warning");
-	    Node.addChild(parentNode, "Disabled Node", "fa fa-check icon-state-success", new AbstractMap.SimpleEntry<String, Boolean>("disabled", true)); 	  
+	    Node.addChild(parentNode, "Another Custom Icon", "fa fa-warning icon-state-warning", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-14")));
+	    Node.addChild(parentNode, "Disabled Node", "fa fa-check icon-state-success", Node.buildList(new AbstractMap.SimpleEntry<String, String>("disabled", "true"), new AbstractMap.SimpleEntry<String, String>("key", "key-15"))); 	  
 	  
-	    Node subNodes = Node.addChild(parentNode, "Sub Nodes", "fa fa-folder icon-state-danger"); 
-	    // add child to the child node created above
-	    Node.addChild(subNodes, "Item 1", "fa fa-file icon-state-warning");
-	    Node.addChild(subNodes, "Item 2", "fa fa-file icon-state-success");
-	    Node.addChild(subNodes, "Item 3", "fa fa-file icon-state-default");
-	    Node.addChild(subNodes, "Item 4", "fa fa-file icon-state-danger");
-	    Node.addChild(subNodes, "Item 5", "fa fa-file icon-state-info");
+	    Node subNodes = Node.addChild(parentNode, "Sub Nodes", "fa fa-folder icon-state-danger", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-16"))); 
+	  // add child to the child node created above
+	    Node.addChild(subNodes, "Item 1", "fa fa-file icon-state-warning", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-161")));
+	    Node.addChild(subNodes, "Item 2", "fa fa-file icon-state-success", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-162")));
+	    Node.addChild(subNodes, "Item 3", "fa fa-file icon-state-default", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-163")));
+	    Node.addChild(subNodes, "Item 4", "fa fa-file icon-state-danger", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-164")));
+	    Node.addChild(subNodes, "Item 5", "fa fa-file icon-state-info", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-165")));
 	  
-	    Node.addChild(treeRootNode, "Another Node - SFZ");
+	    Node.addChild(treeRootNode, "Another Node", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-2")));
 	    StringBuffer jsTreeData = Node.buildJSTree(treeRootNode, "  ");
 //	    System.out.println(jsTreeData);
 			
@@ -159,6 +159,28 @@ public class ItemCategoryAcpController {
 		
 		logger.info("leaving /item/renameResultSaved");
 //		return mav;
+		return model;
+	}
+	
+	@RequestMapping(value="/item/deleteResultSaved",method=RequestMethod.POST,produces="application/json")
+	@ResponseBody
+	public Map<String, Object> DeleteResultSaved(@RequestParam String parent, @RequestParam String node){
+		logger.info("entering /item/deleteResultSaved");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//view
+		String viewName = "item/testcategory";
+		mav.setViewName(viewName);
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		model.put("parent", parent);
+		model.put("node", node);
+		
+		logger.info("Parent : " + parent + "      Deleted Node : " + node);
+		
+		logger.info("leaving /item/deleteResultSaved");
 		return model;
 	}
 	
