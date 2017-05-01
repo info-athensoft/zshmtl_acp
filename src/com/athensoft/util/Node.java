@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 public class Node {
 	private String text;
 	private String icon;
-	private Map.Entry<String, Boolean> state;
+	private List<Entry<String, String>> state;
 	private final List<Node> children = new ArrayList<>();
 	private final Node parent;
  
@@ -33,11 +33,11 @@ public class Node {
 	 this.icon = icon;
  }
  
- public Entry<String, Boolean> getState() {
+ public List<Entry<String, String>> getState() {
 	return state;
 }
 
-public void setState(Entry<String, Boolean> state) {
+public void setState(List<Entry<String, String>> state) {
 	this.state = state;
 }
  
@@ -64,7 +64,7 @@ public void setState(Entry<String, Boolean> state) {
 	 return node;
  }
  
- public static Node addChild(Node parent, String text, Entry<String, Boolean> state) {
+ public static Node addChild(Node parent, String text, List<Entry<String, String>> state) {
 	 Node node = new Node(parent);
 	 node.setText(text);
 	 node.setState(state);
@@ -72,7 +72,7 @@ public void setState(Entry<String, Boolean> state) {
 	 return node;
  }
  
- public static Node addChild(Node parent, String text, String icon, Entry<String, Boolean> state) {
+ public static Node addChild(Node parent, String text, String icon, List<Entry<String, String>> state) {
 	 Node node = new Node(parent);
 	 node.setText(text);
 	 node.setIcon(icon);
@@ -91,7 +91,17 @@ public void setState(Entry<String, Boolean> state) {
 	 }
 	 
 	 if (node.getState() != null) {
-		 sb.append(",\n" + appender + " \"state\": { \"" + node.getState().getKey() + "\" : " + node.getState().getValue() + " }");
+		 String str = "";
+		 for (Entry<String, String> entry : node.getState()) {
+			 if (str == "") {
+				 str += " \"state\": { \"" + entry.getKey() + "\" : \"" + entry.getValue() + "\"";
+			 }
+			 else {
+				 str += ", \"" + entry.getKey() + "\" : \"" + entry.getValue() + "\"";
+			 }
+		 }
+		 str += " }";
+		 sb.append(",\n" + appender + str);
 	 }
 	 
 	 if (!node.getChildren().isEmpty()) {
@@ -111,33 +121,47 @@ public void setState(Entry<String, Boolean> state) {
 		 
 	 return sb;
  }
+ 
+ public static List<Entry<String, String>> buildList(Entry<String, String> entry) {
+	 List<Entry<String, String>> list = new ArrayList<Entry<String, String>>();
+	 list.add(new AbstractMap.SimpleEntry<String, String>(entry.getKey(), entry.getValue()));
+	 return list;
+ }
+ 
+ public static List<Entry<String, String>> buildList(Entry<String, String> entry1, Entry<String, String> entry2) {
+	 List<Entry<String, String>> list = new ArrayList<Entry<String, String>>();
+	 list.add(new AbstractMap.SimpleEntry<String, String>(entry1.getKey(), entry1.getValue()));
+	 list.add(new AbstractMap.SimpleEntry<String, String>(entry2.getKey(), entry2.getValue()));
+	 return list;
+ }
   
   public static void main(String[] args) {
 	  Node treeRootNode = new Node(null);
 	  treeRootNode.setText("root");
+//	  treeRootNode.setState(Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-root")));
 	  // add child to root node 
-	  Node parentNode = addChild(treeRootNode, "My Parent Node");
+	  Node parentNode = Node.addChild(treeRootNode, "My Parent Node", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-1")));
 	  // add child to the child node created above
-	  addChild(parentNode, "Initially selected", new AbstractMap.SimpleEntry<String, Boolean>("selected", true));
-	  addChild(parentNode, "Custom Icon", "fa fa-warning icon-state-danger");
-	  Node initiallyOpen = addChild(parentNode, "Initially open", "fa fa-folder icon-state-success", new AbstractMap.SimpleEntry<String, Boolean>("opened", true)); 
+	  Node.addChild(parentNode, "Initially selected", Node.buildList(new AbstractMap.SimpleEntry<String, String>("selected", "true"), new AbstractMap.SimpleEntry<String, String>("key", "key-11")));
+	  Node.addChild(parentNode, "Custom Icon", "fa fa-warning icon-state-danger", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-12")));
+	  Node initiallyOpen = Node.addChild(parentNode, "Initially open", "fa fa-folder icon-state-success", Node.buildList(new AbstractMap.SimpleEntry<String, String>("opened", "true"), new AbstractMap.SimpleEntry<String, String>("key", "key-13"))); 
 	  // add child to the child node created above
-	  addChild(initiallyOpen, "Another node", "fa fa-file icon-state-warning");
+	  Node.addChild(initiallyOpen, "Another node", "fa fa-file icon-state-warning", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-131")));
 	  
-	  addChild(parentNode, "Another Custom Icon", "fa fa-warning icon-state-warning");
-	  addChild(parentNode, "Disabled Node", "fa fa-check icon-state-success", new AbstractMap.SimpleEntry<String, Boolean>("disabled", true)); 	  
+	  Node.addChild(parentNode, "Another Custom Icon", "fa fa-warning icon-state-warning", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-14")));
+	  Node.addChild(parentNode, "Disabled Node", "fa fa-check icon-state-success", Node.buildList(new AbstractMap.SimpleEntry<String, String>("disabled", "true"), new AbstractMap.SimpleEntry<String, String>("key", "key-15"))); 	  
 	  
-	  Node subNodes = addChild(parentNode, "Sub Nodes", "fa fa-folder icon-state-danger"); 
+	  Node subNodes = Node.addChild(parentNode, "Sub Nodes", "fa fa-folder icon-state-danger", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-16"))); 
 	  // add child to the child node created above
-	  addChild(subNodes, "Item 1", "fa fa-file icon-state-warning");
-	  addChild(subNodes, "Item 2", "fa fa-file icon-state-success");
-	  addChild(subNodes, "Item 3", "fa fa-file icon-state-default");
-	  addChild(subNodes, "Item 4", "fa fa-file icon-state-danger");
-	  addChild(subNodes, "Item 5", "fa fa-file icon-state-info");
+	  Node.addChild(subNodes, "Item 1", "fa fa-file icon-state-warning", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-161")));
+	  Node.addChild(subNodes, "Item 2", "fa fa-file icon-state-success", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-162")));
+	  Node.addChild(subNodes, "Item 3", "fa fa-file icon-state-default", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-163")));
+	  Node.addChild(subNodes, "Item 4", "fa fa-file icon-state-danger", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-164")));
+	  Node.addChild(subNodes, "Item 5", "fa fa-file icon-state-info", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-165")));
 	  
-	  addChild(treeRootNode, "Another Node");
+	  Node.addChild(treeRootNode, "Another Node", Node.buildList(new AbstractMap.SimpleEntry<String, String>("key", "key-2")));
 		  
-	  System.out.println(buildJSTree(treeRootNode, "  "));
+	  System.out.println(Node.buildJSTree(treeRootNode, "  "));
  
  }
  
