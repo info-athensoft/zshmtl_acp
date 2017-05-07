@@ -1,7 +1,6 @@
 package com.athensoft.ecomm.item.controller;
 
 import java.util.AbstractMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -12,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.athensoft.content.event.controller.NewsAcpController;
-import com.athensoft.content.event.entity.EventMedia;
-import com.athensoft.content.event.entity.News;
 import com.athensoft.util.Node;
 
 /**
@@ -78,7 +74,7 @@ public class ItemCategoryAcpController {
 	    StringBuffer jsTreeData = Node.buildJSTree(treeRootNode, "  ");
 //	    System.out.println(jsTreeData);
 			
-		model.put("jsTreeData", jsTreeData);
+		model.put("jsTreeData", jsTreeData.toString());
 				
 		logger.info("leaving /item/testcategory");
 		return mav;
