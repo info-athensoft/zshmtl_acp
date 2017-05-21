@@ -232,7 +232,7 @@ public class ItemCategoryAcpController {
 	
 	@RequestMapping(value="/item/categoryList")
 	public String gotoCategoryList(){
-		String viewName = "item/item_categories";
+		String viewName = "item/item_catetory_list";
 		return viewName;
 	}
 	
