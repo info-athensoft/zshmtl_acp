@@ -16,6 +16,7 @@
 	<context:component-scan base-package="com.athensoft.ecomm.item.controller"></context:component-scan>
 	<context:component-scan base-package="com.athensoft.ecomm.uaas.controller"></context:component-scan>
 	<context:component-scan base-package="com.athensoft.content.event.controller"></context:component-scan>
+	<context:component-scan base-package="com.athensoft.resource.site.controller"></context:component-scan>
 	
 
 	<!-- View Resolver -->

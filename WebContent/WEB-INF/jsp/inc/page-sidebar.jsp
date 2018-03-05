@@ -137,7 +137,7 @@
 					<!-- end product system -->
 					
 					<!-- event system -->
-					<li class="start active ">
+					<li class="start">
 						<a href="javascript:;">
 						<i class="icon-user"></i>
 						<span class="title">My Events</span>
@@ -181,6 +181,52 @@
 						</ul>
 					</li>
 					<!-- end event system -->
+					
+					<!-- resource system -->
+					<li class="start active ">
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">My Resources</span>
+						<span class="arrow "></span>
+						<span id="menu-myevents"></span>
+						</a>
+						<ul class="sub-menu">
+							<li>
+								<a href="/acp/site/eventsDashboard">
+								<i class="icon-home"></i>
+								Dashboard</a>
+								
+							</li>
+							<li>
+								<a href="#">
+								<i class="icon-home"></i>
+								Website<span class="arrow"></span></a>
+								<ul class="sub-menu">
+									<li>
+										<a href="/acp/site/list">
+										<i class="icon-pencil"></i>
+										Website List</a>
+									</li>
+									<li>
+										<a href="/acp/site/list">
+										<i class="icon-paper-plane"></i>
+										Website Edit</a>
+									</li>
+									<li>
+										<a href="/acp/site/create">
+										<i class="icon-paper-plane"></i>
+										Website Register</a>
+									</li>
+									<li>
+										<a href="/acp/site/delete">
+										<i class="icon-paper-plane"></i>
+										Website Remove</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<!-- end resource system -->
 					
 					<!-- 
 					<li>
