@@ -14,7 +14,7 @@
 		base-package="com.athensoft.ecomm.item.dao">
 	</context:component-scan>
 	<context:component-scan 
-		base-package="com.athensoft.content.event.dao">
+		base-package="com.athensoft.content.*.dao">
 	</context:component-scan>
 	<context:component-scan 
 		base-package="com.athensoft.resource.site.dao">

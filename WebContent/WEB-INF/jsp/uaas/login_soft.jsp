@@ -46,7 +46,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="${webapp_name}/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="${webapp_name}/assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="${webapp_name}/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
-<link id="style_color" href="${webapp_name}/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css"/>
+<link href="${webapp_name}/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color" />
 <link href="${webapp_name}/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
@@ -56,9 +56,9 @@ License: You must have a valid license purchased only from themeforest(the above
 <body class="login">
 <!-- BEGIN LOGO -->
 <div class="logo">
-	<a href="/login">
+	<a href="${webapp_name}/login">
 	<!-- <img src="${webapp_name}/assets/admin/layout2/img/logo-big.png" alt=""/>  -->
-	<img src="/acp/assets/athensoft/img/acp-logo-athensoft-v4.png" alt="logo" class="logo-default"/>
+	<img src="${webapp_name}/assets/athensoft/img/acp-logo-athensoft-v4.png" alt="logo" class="logo-default"/>
 	</a>
 </div>
 <!-- END LOGO -->
@@ -499,7 +499,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="${webapp_name}/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="${webapp_name}/assets/global/plugins/select2/select2.min.js"></script>
+<script src="${webapp_name}/assets/global/plugins/select2/select2.min.js" type="text/javascript" ></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="${webapp_name}/assets/global/scripts/metronic.js" type="text/javascript"></script>
