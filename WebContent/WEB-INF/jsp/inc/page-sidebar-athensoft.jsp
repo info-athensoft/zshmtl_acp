@@ -38,45 +38,10 @@
 						<i class="icon-info"></i>
 						广告列表</a>
 					</li>
-					<li>
-						<a href="${webapp_name}/ad/adpost_create.html">
-						<i class="icon-info"></i>
-						新增广告</a>
-					</li>
 				</ul>
 			</li>
 			
-			<li>
-				<a href="javascript:;">
-				<i class="icon-badge"></i>
-				<span class="title">会员管理</span>
-				<span class="arrow "></span>
-				</a>
-				<ul class="sub-menu">
-					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
-						<i class="icon-info"></i>
-						 会员列表</a>
-					</li>
-				</ul>
-			</li>
 			
-			<li>
-				<a href="javascript:;">
-				<i class="icon-badge"></i>
-				<span class="title">新闻管理</span>
-				<span class="arrow "></span>
-				</a>
-				<ul class="sub-menu">
-					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
-						<i class="icon-info"></i>
-						 新闻列表</a>
-					</li>
-				</ul>
-			</li>
-			
-			<!-- 
 			<li>
 				<a href="javascript:;">
 				<i class="icon-globe"></i>
@@ -128,7 +93,7 @@
 						<i class="icon-doc"></i>
 						Orders View</a>
 					</li>
-					 
+					<!-- 
 					<li>
 						<a href="ecommerce_index.html">
 						<i class="icon-doc"></i>
@@ -144,13 +109,11 @@
 						<i class="icon-wallet"></i>
 						Cashing credits</a>
 					</li>
-					 
+					 -->
 				</ul>
 			</li>
-			-->
 			
 			<!-- product system -->
-			<!-- 
 			<li>
 				<a href="javascript:;">
 				<i class="icon-user"></i>
@@ -195,7 +158,6 @@
 					</li>
 				</ul>
 			</li>
-			 -->
 			<!-- end product system -->
 			
 			<!-- event system -->
@@ -245,7 +207,6 @@
 			<!-- end event system -->
 			
 			<!-- resource system -->
-			<!-- 
 			<li class="start active ">
 				<a href="javascript:;">
 				<i class="icon-user"></i>
@@ -289,7 +250,6 @@
 					</li>
 				</ul>
 			</li>
-			 -->
 			<!-- end resource system -->
 			
 			<!-- 

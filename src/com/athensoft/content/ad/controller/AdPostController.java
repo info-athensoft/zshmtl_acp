@@ -30,6 +30,16 @@ public class AdPostController {
 	@Autowired
 	private  AdPostService adPostService;
 	
+	
+	@RequestMapping(value="/adpost_create.html")
+	public String gotoAdPostCreate(){
+		
+		String viewName = "ad/adpost_create";
+		
+		return viewName;
+	}
+	
+	
 	@RequestMapping(value="/adpost_list.html")
 	public String gotoAdPostList(){
 		
