@@ -20,31 +20,11 @@
 			<li class="start active ">
 				<a href="/acp/index">
 				<i class="icon-home"></i>
-				<span class="title">Dashboard</span>
+				<span class="title">首页</span>
 				<span id="menu-dashborad" class="selected"></span>
 				</a>
 			</li>
 			
-			
-			<li>
-				<a href="javascript:;">
-				<i class="icon-badge"></i>
-				<span class="title">广告管理</span>
-				<span class="arrow "></span>
-				</a>
-				<ul class="sub-menu">
-					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
-						<i class="icon-info"></i>
-						广告列表</a>
-					</li>
-					<li>
-						<a href="${webapp_name}/ad/adpost_create.html">
-						<i class="icon-info"></i>
-						新增广告</a>
-					</li>
-				</ul>
-			</li>
 			
 			<li>
 				<a href="javascript:;">
@@ -55,8 +35,53 @@
 				<ul class="sub-menu">
 					<li>
 						<a href="${webapp_name}/ad/adpost_list.html">
-						<i class="icon-info"></i>
 						 会员列表</a>
+					</li>
+					<li>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						 会员信息</a>
+					</li>
+					<li>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						 会员申请</a>
+					</li>
+					<li>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						 会员续约</a>
+					</li>
+					<li>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						 状态审核</a>
+					</li>
+				</ul>
+			</li>
+			
+			<li>
+				<a href="javascript:;">
+				<i class="icon-badge"></i>
+				<span class="title">广告管理</span>
+				<span class="arrow "></span>
+				</a>
+				<ul class="sub-menu">
+					<li>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						请求受理</a>
+					</li>
+					<li>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						广告列表</a>
+					</li>
+					<li>
+						<a href="${webapp_name}/ad/adpost_create.html">
+						新增广告</a>
+					</li>
+					<li>
+						<a href="${webapp_name}/ad/adpost_create.html">
+						修改广告</a>
+					</li>
+					<li>
+						<a href="${webapp_name}/ad/adpost_create.html">
+						删除广告</a>
 					</li>
 				</ul>
 			</li>
@@ -70,139 +95,51 @@
 				<ul class="sub-menu">
 					<li>
 						<a href="${webapp_name}/ad/adpost_list.html">
-						<i class="icon-info"></i>
 						 新闻列表</a>
 					</li>
+					<li>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						 新增新闻</a>
+					</li>
+					<li>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						 修改新闻</a>
+					</li>
+					<li>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						 删除新闻</a>
+					</li>
 				</ul>
 			</li>
 			
-			<!-- 
 			<li>
 				<a href="javascript:;">
-				<i class="icon-globe"></i>
-				<span class="title">My eCommerce</span>
+				<i class="icon-badge"></i>
+				<span class="title">帮助中心</span>
 				<span class="arrow "></span>
 				</a>
 				<ul class="sub-menu">
 					<li>
-						<a href="ecommerce_index.html">
-						<i class="icon-home"></i>
-						Dashboard</a>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						 关于</a>
 					</li>
 					<li>
-						<a href="#">
-						<i class="icon-home"></i>
-						My News<span class="arrow"></a>
-						<ul class="sub-menu">
-						<li>
-							<a href="/acp/events/eventsNewsList">
-							<i class="icon-pencil"></i>
-							News List</a>
-						</li>
-						<li>
-							<a href="/acp/events/eventsNewsList">
-							<i class="icon-paper-plane"></i>
-							News Edit</a>
-						</li>
-						<li>
-							<a href="/acp/events/eventsNewsCreate">
-							<i class="icon-paper-plane"></i>
-							News Create</a>
-						</li>
-						<li>
-							<a href="/acp/events/eventsNewsDelete">
-							<i class="icon-paper-plane"></i>
-							News Remove - Admin</a>
-						</li>
-						</ul>
-					</li>
-					
-					
-					<li>
-						<a href="/acp/orders">
-						<i class="icon-doc"></i>
-						Orders</a>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						 联系我们</a>
 					</li>
 					<li>
-						<a href="/acp/ecomm/ordersview">
-						<i class="icon-doc"></i>
-						Orders View</a>
-					</li>
-					 
-					<li>
-						<a href="ecommerce_index.html">
-						<i class="icon-doc"></i>
-						Distributor profile</a>
-					</li>
-					<li>
-						<a href="/admin/bizprofile">
-						<i class="icon-users"></i>
-						View my advertisers</a>
-					</li>
-					<li>
-						<a href="page_portfolio.html">
-						<i class="icon-wallet"></i>
-						Cashing credits</a>
-					</li>
-					 
-				</ul>
-			</li>
-			-->
-			
-			<!-- product system -->
-			<!-- 
-			<li>
-				<a href="javascript:;">
-				<i class="icon-user"></i>
-				<span class="title">My Products</span>
-				<span class="arrow "></span>
-				</a>
-				<ul class="sub-menu">
-					<li>
-						<a href="#">
-						<i class="icon-home"></i>
-						Dashboard</a>
-					</li>
-					<li>
-						<a href="/acp/item/testcategory">
-						<i class="icon-paper-plane"></i>
-						Category Test</a>
-					</li>
-					<li>
-						<a href="/acp/item/samplecategory">
-						<i class="icon-paper-plane"></i>
-						Category Sample</a>
-					</li>
-					<li>
-						<a href="/acp/item/categoryList">
-						<i class="icon-paper-plane"></i>
-						Category List</a>
-					</li>
-					<li>
-						<a href="/acp/item/categoryEdit">
-						<i class="icon-pencil"></i>
-						Category Edit</a>
-					</li>
-					<li>
-						<a href="/acp/item/productList">
-						<i class="icon-paper-plane"></i>
-						Product List</a>
-					</li>
-					<li>
-						<a href="/acp/item/productEdit">
-						<i class="icon-pencil"></i>
-						Product Edit</a>
+						<a href="${webapp_name}/ad/adpost_list.html">
+						 用户协议与条款</a>
 					</li>
 				</ul>
 			</li>
-			 -->
-			<!-- end product system -->
+		
 			
 			<!-- event system -->
 			<li class="start">
 				<a href="javascript:;">
 				<i class="icon-user"></i>
-				<span class="title">My Events</span>
+				<span class="title">测试模块</span>
 				<span class="arrow "></span>
 				<span id="menu-myevents"></span>
 				</a>

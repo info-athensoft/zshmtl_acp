@@ -1,22 +1,25 @@
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page pageEncoding="utf-8"%>
+
 <div class="page-actions">
     <div class="btn-group">
         <button type="button" class="btn btn-circle btn-outline red dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-plus"></i>&nbsp;
-            <span class="hidden-sm hidden-xs">New&nbsp;</span>&nbsp;
+            <span class="hidden-sm hidden-xs">常用功能&nbsp;</span>&nbsp;
             <i class="fa fa-angle-down"></i>
         </button>
         <ul class="dropdown-menu" role="menu">
             <li>
                 <a href="javascript:;">
-                    <i class="icon-docs"></i> New Post </a>
+                    <i class="icon-docs"></i> 新建新闻 </a>
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="icon-tag"></i> New Comment </a>
+                    <i class="icon-tag"></i> 新建广告 </a>
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="icon-share"></i> Share </a>
+                    <i class="icon-share"></i> 审核会员 </a>
             </li>
             <li class="divider"> </li>
             <li>
