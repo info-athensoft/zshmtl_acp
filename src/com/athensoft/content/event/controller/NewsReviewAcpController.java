@@ -98,6 +98,9 @@ public class NewsReviewAcpController {
 			List<EventReview> listEventReview = eventReviewService.getAllEventReview();
 			logger.info("Length of EventReview entries: "+ listEventReview.size());
 			
+			String[][] data = getData(listEventReview);
+			
+			/*
 			int entryLength = listEventReview.size();
 			final int COLUMN_NUM = 6;
 			String[][] data = new String[entryLength][COLUMN_NUM];
@@ -109,6 +112,8 @@ public class NewsReviewAcpController {
 			String field4 = "";	//review status
 			String field5 = "";	//action
 		
+			
+			
 			
 			for(int i=0; i<entryLength ; i++){			
 	//			field0 = "<input type='checkbox' name='id[]' value="+listEventReview.get(i).getEventUUID()+">";
@@ -148,7 +153,7 @@ public class NewsReviewAcpController {
 				data[i][3] = field3;
 				data[i][4] = field4;
 				data[i][5] = field5;
-			}
+			} */
 			
 			model.put("draw", new Integer(1));
 			model.put("recordsTotal", new Integer(5));

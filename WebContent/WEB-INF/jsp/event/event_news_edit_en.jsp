@@ -87,22 +87,22 @@
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
                     <!-- BEGIN THEME PANEL -->
-                    
+                    <jsp:include page="${inc_dir}/theme-panel.jsp"></jsp:include>
                     <!-- END THEME PANEL -->
                     <h1 class="page-title">新闻系统 <small> 管理新闻、动态和活动</small></h1>
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="${webapp_name}">首页</a>
+							<a href="#">Home</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="${webapp_name}/events/eventsNewsList">新闻系统</a>
+							<a href="eventsDashboard">Events</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">编辑</a>
+							<a href="#">News</a>
 						</li>
 					</ul>
                         <div class="page-toolbar">
@@ -176,13 +176,13 @@
                                         <div class="tabbable-bordered">
                                             <ul class="nav nav-tabs">
                                                 <li class="active">
-                                                    <a href="#tab_general" data-toggle="tab"> 新闻主体</a>
+                                                    <a href="#tab_general" data-toggle="tab"> General</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#tab_images" data-toggle="tab"> 新闻图片 </a>
+                                                    <a href="#tab_images" data-toggle="tab"> Images </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#tab_reviews" data-toggle="tab"> 评论
+                                                    <a href="#tab_reviews" data-toggle="tab"> Reviews
                                                         <span class="badge badge-success"> 3 </span>
                                                     </a>
                                                 </li>
@@ -191,28 +191,28 @@
                                                 <div class="tab-pane active" id="tab_general">
                                                     <div class="form-body">
 													<div class="form-group">
-														<label class="col-md-2 control-label">全局编号: <span class="required"> * </span>
+														<label class="col-md-2 control-label">Global ID: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
 															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled"  value="${newsObject.globalId}">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻编号: <span class="required"> * </span>
+														<label class="col-md-2 control-label">Event UUID: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
 															<input type="text" class="form-control" id="eventUUID" name="eventUUID"  placeholder="" value="${newsObject.eventUUID}" disabled="disabled">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻标题: <span class="required"> * </span>
+														<label class="col-md-2 control-label">Event Title: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
 															<input type="text" class="form-control" id="title" name="title" placeholder=""  value="${newsObject.title}">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">编辑: <span class="required">
+														<label class="col-md-2 control-label">Author: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -220,7 +220,7 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">发布时间: <span class="required">
+														<label class="col-md-2 control-label">Post Datetime: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -232,7 +232,7 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">浏览数: <span class="required">
+														<label class="col-md-2 control-label">Number of Views: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -240,7 +240,7 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">摘要: <span class="required">
+														<label class="col-md-2 control-label">Short Description: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -252,7 +252,7 @@
 													</div>
 													
 															<div class="form-group">
-														<label class="col-md-2 control-label">新闻正文: <span class="required">
+														<label class="col-md-2 control-label">Long Description: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -262,7 +262,7 @@
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻类别: <span class="required">
+														<label class="col-md-2 control-label">News Class: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -276,7 +276,7 @@
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻状态: <span class="required">
+														<label class="col-md-2 control-label">News Status: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -367,15 +367,15 @@
                                                 </div>
                                                 <div class="tab-pane" id="tab_reviews">
                                                     <div class="table-container">
-                                                        <table class="table table-striped table-bordered table-hover" id="datatable_eventNewsReviews">
+                                                        <table class="table table-striped table-bordered table-hover" id="datatable_reviews">
                                                             <thead>
                                                                 <tr role="row" class="heading">
-                                                                    <th width="5%"> 评论&nbsp;# </th>
-                                                                    <th width="10%"> 评论日期 </th>
-                                                                    <th width="10%"> 评论者 </th>
-                                                                    <th width="20%"> 评论内容 </th>
-                                                                    <th width="10%"> 当前状态 </th>
-                                                                    <th width="10%"> 操作 </th>
+                                                                    <th width="5%"> Review&nbsp;# </th>
+                                                                    <th width="10%"> Review&nbsp;Date </th>
+                                                                    <th width="10%"> Customer </th>
+                                                                    <th width="20%"> Review&nbsp;Content </th>
+                                                                    <th width="10%"> Status </th>
+                                                                    <th width="10%"> Actions </th>
                                                                 </tr>
                                                                 <tr role="row" class="filter">
                                                                     <td>
@@ -476,7 +476,6 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-edit.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-review-list.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="${webapp_name}/assets/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
@@ -488,9 +487,12 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
+	//Metronic.init(); // init metronic core components
+	//Layout.init(); // init current layout
+	//Demo.init(); // init demo features
+	//EventNewsEdit.init();
 	var eventUUID = $("#eventUUID").val();
 	EventNewsEdit.init(eventUUID);
-	EventNewsReviewList.init();
 
 //local
 //select object for event class

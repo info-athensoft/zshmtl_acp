@@ -1,4 +1,11 @@
-/** event_news_edit.jsp */
+/** event_news_edit.jsp 
+ * 
+ *  images upload processing
+ * 
+ * 
+ */
+
+
 
 /* edit news - init */
 var EventNewsEdit = function (option) {

@@ -31,7 +31,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8" />
-        <title>Athensoft | Events - News Listing</title>
+        <title>Athensoft | Events - News Removing</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
         
@@ -105,21 +105,22 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
                     <!-- BEGIN THEME PANEL -->
+                    <jsp:include page="${inc_dir}/theme-panel.jsp"></jsp:include>
                     <!-- END THEME PANEL -->
-                    <h1 class="page-title"> 新闻系统 <small>管理新闻、动态和活动</small></h1>
+                    <h1 class="page-title"> Event System <small>manage news</small></h1>
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
 							<li>
 								<i class="fa fa-home"></i>
-								<a href="#">首页</a>
+								<a href="#">Home</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">新闻系统</a>
+								<a href="eventsDashboard">Events</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">列表</a>
+								<a href="#">News</a>
 							</li>
 						</ul>
                         <div class="page-toolbar">
@@ -144,29 +145,19 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="portlet light">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        	新闻列表 <span class="caption-helper"></span></div>
+                                        <i class="fa fa-shopping-cart"></i>News Removing <span class="caption-helper">Permanently delete news, unrecoverable...</span></div>
                                     <div class="actions">
-                                        <a href="eventsNewsCreate" class="btn btn-circle btn-info">
-                                            <i class="fa fa-plus"></i><span class="hidden-xs"> 新增新闻 </span>
+                                        <a href="eventsNewsList" class="btn btn-circle btn-info">
+                                            <i class="fa fa-plus"></i><span class="hidden-xs"> Goto News Listing </span>
                                         </a>
-                                        <!-- 
                                         <div class="btn-group">
                                             <a class="btn btn-circle btn-default dropdown-toggle" href="javascript:;" data-toggle="dropdown">
                                                 <i class="fa fa-share"></i>
                                                 <span class="hidden-xs"> Tools </span>
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
-                                            <div class="dropdown-menu pull-right">
-                                            	<ul>
-                                                <li><a href="javascript:;"> Export to Excel </a></li>
-                                                <li><a href="javascript:;"> Export to CSV </a></li>
-                                                <li><a href="javascript:;"> Export to XML </a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="javascript:;"> Print Invoices </a></li>
-                                                </ul>
-                                            </div>
+                                            
                                         </div>
-                                         -->
                                     </div>
                                 </div>
                                 <div class="portlet-body">
@@ -175,32 +166,27 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <span> </span>
                                             <select class="table-group-action-input form-control input-inline input-small input-sm" name="groupOption">
                                                 <option value="">Select...</option>
-												<option value="1">Publish</option>
-												<option value="2">Wait to post</option>
-												<option value="3">Delete</option>
-												<option value="4">Out of date</option>
-												<option value="5">Suspend</option>
+												<option value="6">Delete permanently</option>
                                             </select>
-                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> 更改状态</button>
+                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Group Delete</button>
                                         </div>
                                         <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_eventNewsList">
                                             <thead>
                                                 <tr role="row" class="heading">
                                                     <th width="1%">
                                                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                            <!-- <input type="checkbox" class="group-checkable" data-set="#sample_2 .checkboxes" />  -->
                                                             <input type="checkbox" class="group-checkable">
                                                             <span></span>
                                                         </label>
                                                     </th>
-                                                    <th width="8%">新闻编号</th>
-													<th width="25%">新闻标题</th>
-													<th width="8%">作者</th>
-													<th width="8%">类别</th>
-													<th width="15%">发布日期</th>
-													<th width="6%">浏览数</th>
-													<th width="8%">当前状态</th>
-													<th width="8%">操作</th>
+                                                    <th width="8%">ID</th>
+													<th width="25%">Title</th>
+													<th width="8%">Author</th>
+													<th width="8%">Category</th>
+													<th width="15%">Date&nbsp;Post</th>
+													<th width="6%">Views</th>
+													<th width="8%">Status</th>
+													<th width="8%">Actions</th>
                                                 </tr>
                                                 <tr role="row" class="filter">
 													<td></td>
@@ -217,13 +203,13 @@ License: You must have a valid license purchased only from themeforest(the above
 													</td>
 													<td>
 														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="product_created_from" placeholder="From" id="postDatetimeFrom">
+															<input type="text" class="form-control form-filter input-sm" readonly name="postDatetimeFrom" placeholder="From" id="postDatetimeFrom">
 															<span class="input-group-btn">
 															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 															</span>
 														</div>
 														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="product_created_to" placeholder="To" id="postDatetimeTo">
+															<input type="text" class="form-control form-filter input-sm" readonly name="postDatetimeTo" placeholder="To" id="postDatetimeTo">
 															<span class="input-group-btn">
 															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 															</span>
@@ -302,7 +288,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-list.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-delete.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="${webapp_name}/assets/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
@@ -314,7 +300,8 @@ License: You must have a valid license purchased only from themeforest(the above
  -->
 <!-- END THEME LAYOUT SCRIPTS -->
 <script>
-EventNewsList.init();
+EventNewsDelete.init();
+
 </script>
 </body>
 
