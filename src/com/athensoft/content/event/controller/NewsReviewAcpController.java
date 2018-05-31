@@ -378,7 +378,7 @@ public class NewsReviewAcpController {
 			}
 			
 			field4 = "<span class='label label-sm label-"+eventReviewStatusKey+"'>"+eventReviewStatus+"</span>";
-			field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field0+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
 			
 			data[i][0] = field0;
 			data[i][1] = field1;

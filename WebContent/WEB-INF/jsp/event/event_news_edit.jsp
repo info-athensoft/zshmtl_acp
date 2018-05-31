@@ -460,11 +460,7 @@
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="${webapp_name}/assets/global/scripts/app.min.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-edit.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-review-list.js"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
+
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="${webapp_name}/assets/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/layouts/layout2/scripts/demo.min.js" type="text/javascript"></script>
@@ -473,6 +469,13 @@
 <script src="${webapp_name}/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
  -->
 <!-- END THEME LAYOUT SCRIPTS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-edit.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-review-list.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
 <script>
 jQuery(document).ready(function() {    
 	var eventUUID = $("#eventUUID").val();

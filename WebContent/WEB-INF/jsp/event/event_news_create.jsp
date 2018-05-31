@@ -340,11 +340,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="${webapp_name}/assets/global/scripts/app.min.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-create.js"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
+
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="${webapp_name}/assets/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/layouts/layout2/scripts/demo.min.js" type="text/javascript"></script>
@@ -353,6 +349,12 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="${webapp_name}/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
  -->
 <!-- END THEME LAYOUT SCRIPTS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-create.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
 <script>
 
 </script>
