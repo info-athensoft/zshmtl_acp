@@ -7,17 +7,13 @@
 
 
 	<context:annotation-config></context:annotation-config>
-	<context:component-scan 
-		base-package="com.athensoft.ecomm.order.dao">
+	<context:component-scan
+		base-package="com.athensoft.member.service">
 	</context:component-scan>
-	<context:component-scan 
-		base-package="com.athensoft.ecomm.item.dao">
+	<context:component-scan
+		base-package="com.athensoft.content.*.service">
 	</context:component-scan>
-	<context:component-scan 
-		base-package="com.athensoft.content.*.dao">
+	<context:component-scan
+		base-package="com.athensoft.uaas.service">
 	</context:component-scan>
-	<context:component-scan 
-		base-package="com.athensoft.resource.site.dao">
-	</context:component-scan>
-	
 </beans>

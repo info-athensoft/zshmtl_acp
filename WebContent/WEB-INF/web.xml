@@ -9,9 +9,9 @@
   	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-	  		classpath:com/athensoft/ecomm/config/application-context.xml
-	  		classpath:com/athensoft/ecomm/config/dao-context.xml
-	  		classpath:com/athensoft/ecomm/config/service-context.xml
+	  		classpath:com/athensoft/config/application-context.xml
+	  		classpath:com/athensoft/config/dao-context.xml
+	  		classpath:com/athensoft/config/service-context.xml
   		</param-value>
 	</context-param>
 	

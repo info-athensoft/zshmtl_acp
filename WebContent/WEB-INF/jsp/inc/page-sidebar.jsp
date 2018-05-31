@@ -34,23 +34,23 @@
 				</a>
 				<ul class="sub-menu">
 					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
+						<a href="${webapp_name}/member/member_list.html">
 						 会员列表</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
+						<a href="${webapp_name}/member/member_list.html">
 						 会员信息</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
+						<a href="${webapp_name}/member/member_list.html">
 						 会员申请</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
+						<a href="${webapp_name}/member/member_list.html">
 						 会员续约</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
+						<a href="${webapp_name}/member/member_list.html">
 						 状态审核</a>
 					</li>
 				</ul>
