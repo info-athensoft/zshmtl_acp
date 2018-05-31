@@ -87,22 +87,22 @@
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
                     <!-- BEGIN THEME PANEL -->
-                    
+                    <jsp:include page="${inc_dir}/theme-panel.jsp"></jsp:include>
                     <!-- END THEME PANEL -->
                     <h1 class="page-title">新闻系统 <small> 管理新闻、动态和活动</small></h1>
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="${webapp_name}">首页</a>
+							<a href="#">Home</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="${webapp_name}/events/eventsNewsList">新闻系统</a>
+							<a href="eventsDashboard">Events</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">编辑</a>
+							<a href="#">News</a>
 						</li>
 					</ul>
                         <div class="page-toolbar">
@@ -176,13 +176,13 @@
                                         <div class="tabbable-bordered">
                                             <ul class="nav nav-tabs">
                                                 <li class="active">
-                                                    <a href="#tab_general" data-toggle="tab"> 新闻主体</a>
+                                                    <a href="#tab_general" data-toggle="tab"> General</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#tab_images" data-toggle="tab"> 新闻图片 </a>
+                                                    <a href="#tab_images" data-toggle="tab"> Images </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#tab_reviews" data-toggle="tab"> 评论
+                                                    <a href="#tab_reviews" data-toggle="tab"> Reviews
                                                         <span class="badge badge-success"> 3 </span>
                                                     </a>
                                                 </li>
@@ -191,28 +191,28 @@
                                                 <div class="tab-pane active" id="tab_general">
                                                     <div class="form-body">
 													<div class="form-group">
-														<label class="col-md-2 control-label">全局编号: <span class="required"> * </span>
+														<label class="col-md-2 control-label">Global ID: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
 															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled"  value="${newsObject.globalId}">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻编号: <span class="required"> * </span>
+														<label class="col-md-2 control-label">Event UUID: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
 															<input type="text" class="form-control" id="eventUUID" name="eventUUID"  placeholder="" value="${newsObject.eventUUID}" disabled="disabled">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻标题: <span class="required"> * </span>
+														<label class="col-md-2 control-label">Event Title: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
 															<input type="text" class="form-control" id="title" name="title" placeholder=""  value="${newsObject.title}">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">编辑: <span class="required">
+														<label class="col-md-2 control-label">Author: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -220,7 +220,7 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">发布时间: <span class="required">
+														<label class="col-md-2 control-label">Post Datetime: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -232,7 +232,7 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">浏览数: <span class="required">
+														<label class="col-md-2 control-label">Number of Views: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -240,7 +240,7 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">摘要: <span class="required">
+														<label class="col-md-2 control-label">Short Description: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -252,7 +252,7 @@
 													</div>
 													
 															<div class="form-group">
-														<label class="col-md-2 control-label">新闻正文: <span class="required">
+														<label class="col-md-2 control-label">Long Description: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -262,7 +262,7 @@
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻类别: <span class="required">
+														<label class="col-md-2 control-label">News Class: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -276,7 +276,7 @@
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻状态: <span class="required">
+														<label class="col-md-2 control-label">News Status: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -302,67 +302,80 @@
                                                      -->
                                                     <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
                                                         <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success">
-                                                            <i class="fa fa-plus"></i> 选择图片 </a>
+                                                            <i class="fa fa-plus"></i> Select Files </a>
                                                         <a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn btn-primary">
-                                                            <i class="fa fa-share"></i> 上传文件 </a>
+                                                            <i class="fa fa-share"></i> Upload Files </a>
                                                     </div>
                                                     <div class="row">
                                                         <div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12"> </div>
                                                     </div>
-                                                    <table class="table table-bordered table-hover" id="event-media-table">
+                                                    <table class="table table-bordered table-hover">
                                                         <thead>
                                                             <tr role="row" class="heading">
-                                                                <th width="8%">图片</th>
-																<th width="20%">标签</th>
-																<th width="8%">排序号</th>
-																<th width="15%">发布时间</th>
-																<th width="10%">是否为封面</th>
-																<th width="10%">操作</th>
+                                                                <th width="8%">
+																	 Image
+																</th>
+																<th width="20%">
+																	 Label
+																</th>
+																<th width="8%">
+																	 Sort Number
+																</th>
+																<th width="15%">
+																	 Post Time
+																</th>
+																<th width="10%">
+																	 Primary Media
+																</th>
+																<th width="10%">
+																	Action
+																</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <c:forEach items="${eventMediaList}" var="eventMedia">
 															<tr>
-																<td>
-																	<a href="${eventMedia.mediaURL}${eventMedia.mediaName}" class="fancybox-button" data-rel="fancybox-button">
-																	<img class="img-responsive" src="${eventMedia.mediaURL}${eventMedia.mediaName}" alt="">
-																	</a>
-																</td>
-																<td>
-																	<input type="text" class="form-control" name="mediaLabel" value="${eventMedia.mediaLabel}" onchange="changeMediaLabel(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
-																</td>
-																<td>
-																	<input type="text" class="form-control" name="sortNumber" value="${eventMedia.sortNumber}" onchange="changeSortNumber(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
-																</td>
-																
-																<td>
-																	<input type="text" class="form-control" name="postTimestamp" value="${eventMedia.postTimestamp}" disabled="disabled">
-																</td>
-																<td>
-																	<input type="text" class="form-control" name="primaryMedia" value="${eventMedia.primaryMedia}" disabled="disabled">
-																</td>
-																<td>
-																	<a href="javascript:;" onclick="setCoverMedia(${eventMedia.mediaId},'${eventMedia.eventUUID}');return false;" class="btn default btn-sm">
-																	<i class="fa fa-edit"></i> 设为封面 </a>
-																	<a href="javascript:test();" class="btn default btn-sm">
-																	<i class="fa fa-times"></i> 删除 </a>
-																</td>
-															</tr>
+															<td>
+																<a href="/eventmedia/${eventMedia.mediaURL}${eventMedia.mediaName}" class="fancybox-button" data-rel="fancybox-button">
+																<img class="img-responsive" src="/eventmedia/${eventMedia.mediaURL}${eventMedia.mediaName}" alt="">
+																</a>
+															</td>
+															<td>
+																<input type="text" class="form-control" name="mediaLabel" value="${eventMedia.mediaLabel}" onblur="changeMediaLabel(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
+															</td>
+															<td>
+																<input type="text" class="form-control" name="sortNumber" value="${eventMedia.sortNumber}" onblur="changeSortNumber(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
+															</td>
+															
+															<td>
+																<input type="text" class="form-control" name="postTimestamp" value="${eventMedia.postTimestamp}" disabled="disabled">
+															</td>
+															<td>
+																<input type="text" class="form-control" name="primaryMedia" value="${eventMedia.primaryMedia}" disabled="disabled">
+																<!-- <div></div>  -->
+															</td>
+															<td>
+																<a href="javascript:;" onclick="setCoverMedia(${eventMedia.mediaId},'${eventMedia.eventUUID}');return false;" class="btn default btn-sm">
+																<i class="fa fa-edit"></i> Set Cover </a>
+																<a href="javascript:test();" class="btn default btn-sm">
+																<i class="fa fa-times"></i> Remove </a>
+															</td>
+														</tr>
 														</c:forEach>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                                 <div class="tab-pane" id="tab_reviews">
                                                     <div class="table-container">
-                                                        <table class="table table-striped table-bordered table-hover" id="datatable_eventNewsReviews">
+                                                        <table class="table table-striped table-bordered table-hover" id="datatable_reviews">
                                                             <thead>
                                                                 <tr role="row" class="heading">
-                                                                    <th width="5%"> 评论&nbsp;# </th>
-                                                                    <th width="10%"> 评论日期 </th>
-                                                                    <th width="10%"> 评论者 </th>
-                                                                    <th width="20%"> 评论内容 </th>
-                                                                    <th width="10%"> 当前状态 </th>
-                                                                    <th width="10%"> 操作 </th>
+                                                                    <th width="5%"> Review&nbsp;# </th>
+                                                                    <th width="10%"> Review&nbsp;Date </th>
+                                                                    <th width="10%"> Customer </th>
+                                                                    <th width="20%"> Review&nbsp;Content </th>
+                                                                    <th width="10%"> Status </th>
+                                                                    <th width="10%"> Actions </th>
                                                                 </tr>
                                                                 <tr role="row" class="filter">
                                                                     <td>
@@ -463,7 +476,6 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-edit.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-review-list.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="${webapp_name}/assets/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
@@ -475,9 +487,12 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
+	//Metronic.init(); // init metronic core components
+	//Layout.init(); // init current layout
+	//Demo.init(); // init demo features
+	//EventNewsEdit.init();
 	var eventUUID = $("#eventUUID").val();
 	EventNewsEdit.init(eventUUID);
-	EventNewsReviewList.init();
 
 //local
 //select object for event class

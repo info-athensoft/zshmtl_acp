@@ -23,7 +23,7 @@ var EventNewsEdit = function (option) {
             url : "", //TODO: Change to relative url
              
             filters : {
-                max_file_size : '8mb',
+                max_file_size : '10mb',
                 mime_types: [
                     {title : "Image files", extensions : "jpg,gif,png"},
                     {title : "Zip files", extensions : "zip"}
@@ -65,14 +65,14 @@ var EventNewsEdit = function (option) {
                     var response = $.parseJSON(response.response);
 
                     if (response.result && response.result == 'OK') {
-                    	//alert(file.id);
-                    	
+                    	alert(file.id);
                         var id = response.id; // uploaded file's unique name. Here you can collect uploaded file names and submit an jax request to your server side script to process the uploaded files and update the images tabke
 
                         $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-success").html('<i class="fa fa-check"></i> Done'); // set successfull upload
                         
                         //create media record to database
-                        alert("图片已上传");
+                        
+                        
                         
                     } else {
                         $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-danger").html('<i class="fa fa-warning"></i> Failed'); // set failed upload
@@ -315,49 +315,47 @@ function setCoverMedia(mediaId, eventUUID) {
         timeout :     30000,
         
         success:function(msg){
-        	//var t = $("#tabs_event").tabs({active:2});
+        	
+        	var t = $("#tabs_event").tabs({active:2});
+        	
         	//$("#tabs_event").tabs({ active: 2 });
         	var mydata = msg.eventMediaList;
+        	//alert(data);
+        	
         	
         	var str = '<table class="table table-bordered table-hover"><thead>'
 					+ '<tr role="row" class="heading">'
-					+ '<th width="8%">图片</th>'
-					+ '<th width="20%">标签</th>'
-					+ '<th width="8%">序号</th>'
-					+ '<th width="15%">上传时间</th>'
-					+ '<th width="10%">是否为封面</th>'
-					+ '<th width="10%">操作</th></tr>'
+					+ '<th width="8%">Image</th>'
+					+ '<th width="20%">Label</th>'
+					+ '<th width="8%">Sort Number</th>'
+					+ '<th width="15%">Post Time</th>'
+					+ '<th width="10%">Primary Media</th>'
+					+ '<th width="10%">Action</th></tr>'
 					+ '</thead><tbody>';
 			
 		    for(var index in mydata){
 				var i = index;
 				
-				//alert(mydata[i].mediaURL+mydata[i].mediaName);
-				
 				str = str+ '<tr>'
-				+'<td><a href="'+mydata[i].mediaURL+mydata[i].mediaName+'" class="fancybox-button" data-rel="fancybox-button">'
-				+	'<img class="img-responsive" src="'+mydata[i].mediaURL+mydata[i].mediaName+'" alt=""></a></td>'
-				+'<td><input type="text" class="form-control" name="mediaName" value="'+mydata[i].mediaLabel+'"></td>'
+				+'<td><a href="/acp/assets/admin/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">'
+				+	'<img class="img-responsive" src="/acp/assets/admin/pages/media/works/img1.jpg" alt=""></a></td>'
+				+'<td><input type="text" class="form-control" name="mediaName" value="'+mydata[i].mediaName+'"></td>'
 				+'<td><input type="text" class="form-control" name="sortNumber" value="'+mydata[i].sortNumber+'"></td>'
 				+'<td><input type="text" class="form-control" name="postTimestamp" value="'+mydata[i].postTimestamp+'"></td>'
-				+'<td><input type="text" class="form-control" name="primaryMedia" value="'+mydata[i].primaryMedia+'" disabled="disabled"><div><a href="javascript:;" onclick="setCoverMedia('+mydata[i].mediaId+',\''+mydata[i].eventUUID+'\');return false;" class="btn default btn-sm"><i class="fa fa-edit"></i> 设为封片 </a></div></td>'
-				+'<td><a href="javascript:;" class="btn default btn-sm"><i class="fa fa-times"></i> 删除 </a></td>'
+				+'<td><input type="text" class="form-control" name="primaryMedia" value="'+mydata[i].primaryMedia+'" disabled="disabled"><div><a href="javascript:;" onclick="setCoverMedia('+mydata[i].mediaId+',\''+mydata[i].eventUUID+'\');return false;" class="btn default btn-sm"><i class="fa fa-edit"></i> Set Cover </a></div></td>'
+				+'<td><a href="javascript:;" class="btn default btn-sm"><i class="fa fa-times"></i> Remove </a></td>'
 				+'</tr>';
 			}
 			    
 			str = str + '</tbody></table>';
 			$("#event-media-table").html(str);
-			
-			alert("封面图设置成功");
-			
-			//console.log(str);
+			//alert(str);
 			//location.reload();
         },
         error:function(){
             alert("ERROR: Set Cover Media failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
-        	//alert("封面图已设定");
         	//location.reload();
         }        
     });   
@@ -366,13 +364,6 @@ function setCoverMedia(mediaId, eventUUID) {
 
 /*edit news - tab:images */
 function reloadEventMedia(eventUUID){
-	
-	
-	//alert("RELOADING...");
-	location.reload();
-	
-	/*
-	
 	$.ajax({
         type    :    "post",
         url        : "reloadEventMedia?eventUUID="+eventUUID,
@@ -423,7 +414,6 @@ function reloadEventMedia(eventUUID){
         	
         }        
     });
-    */
 }
 
 
@@ -447,10 +437,8 @@ function changeMediaName(object,mediaId,eventUUID) {
         
         success:function(msg){
 //            location.href="";
-        	alert("修改成功");
         },
         error:function(xhr, status, error){
-        	alert("修改失败");
 //            alert("ERROR: Sort Number updating failed."); 
 //        	  alert(xhr.responseText);
         },            
@@ -476,15 +464,13 @@ function changeMediaLabel(object,mediaId,eventUUID) {
     $.ajax({
         type    :    "post",
         url        : "changeMediaLabel?itemJSONString="+JSON.stringify(mediaObject),
-        dataType:    "json",
+        dataType:    "html",
         timeout :     30000,
         
         success:function(msg){
 //            location.href="";
-        	alert("修改成功");
         },
         error:function(xhr, status, error){
-        	alert("修改失败");
 //            alert("ERROR: Sort Number updating failed."); 
 //        	  alert(xhr.responseText);
         },            
@@ -516,12 +502,10 @@ function changeSortNumber(object,mediaId,eventUUID) {
         
         success:function(msg){
 //            location.href="";
-        	alert("修改成功");
         },
         error:function(xhr, status, error){
 //            alert("ERROR: Sort Number updating failed."); 
 //        	  alert(xhr.responseText);
-        	alert("修改失败");
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication

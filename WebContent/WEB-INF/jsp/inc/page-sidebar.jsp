@@ -94,19 +94,19 @@
 				</a>
 				<ul class="sub-menu">
 					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
+						<a href="${webapp_name}/events/eventsNewsList">
 						 新闻列表</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
-						 新增新闻</a>
+						<a href="${webapp_name}/events/eventsNewsCreate">
+						新增新闻</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
+						<a href="${webapp_name}/events/eventsNewsList">
 						 修改新闻</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/ad/adpost_list.html">
+						<a href="${webapp_name}/events/eventsNewsDelete">
 						 删除新闻</a>
 					</li>
 				</ul>

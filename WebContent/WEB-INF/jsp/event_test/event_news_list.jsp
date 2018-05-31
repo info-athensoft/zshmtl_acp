@@ -105,21 +105,22 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
                     <!-- BEGIN THEME PANEL -->
+                    <jsp:include page="${inc_dir}/theme-panel.jsp"></jsp:include>
                     <!-- END THEME PANEL -->
-                    <h1 class="page-title"> 新闻系统 <small>管理新闻、动态和活动</small></h1>
+                    <h1 class="page-title"> Event System <small>manage news</small></h1>
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
 							<li>
 								<i class="fa fa-home"></i>
-								<a href="#">首页</a>
+								<a href="#">Home</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">新闻系统</a>
+								<a href="eventsDashboard">Events</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">列表</a>
+								<a href="#">News</a>
 							</li>
 						</ul>
                         <div class="page-toolbar">
@@ -144,12 +145,11 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="portlet light">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        	新闻列表 <span class="caption-helper"></span></div>
+                                        <i class="fa fa-shopping-cart"></i>News Listing <span class="caption-helper">listing news, search, group action...</span></div>
                                     <div class="actions">
                                         <a href="eventsNewsCreate" class="btn btn-circle btn-info">
-                                            <i class="fa fa-plus"></i><span class="hidden-xs"> 新增新闻 </span>
+                                            <i class="fa fa-plus"></i><span class="hidden-xs"> Create news </span>
                                         </a>
-                                        <!-- 
                                         <div class="btn-group">
                                             <a class="btn btn-circle btn-default dropdown-toggle" href="javascript:;" data-toggle="dropdown">
                                                 <i class="fa fa-share"></i>
@@ -166,7 +166,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 </ul>
                                             </div>
                                         </div>
-                                         -->
                                     </div>
                                 </div>
                                 <div class="portlet-body">
@@ -181,7 +180,7 @@ License: You must have a valid license purchased only from themeforest(the above
 												<option value="4">Out of date</option>
 												<option value="5">Suspend</option>
                                             </select>
-                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> 更改状态</button>
+                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
                                         </div>
                                         <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_eventNewsList">
                                             <thead>
@@ -193,14 +192,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                                             <span></span>
                                                         </label>
                                                     </th>
-                                                    <th width="8%">新闻编号</th>
-													<th width="25%">新闻标题</th>
-													<th width="8%">作者</th>
-													<th width="8%">类别</th>
-													<th width="15%">发布日期</th>
-													<th width="6%">浏览数</th>
-													<th width="8%">当前状态</th>
-													<th width="8%">操作</th>
+                                                    <th width="8%">ID</th>
+													<th width="25%">Title</th>
+													<th width="8%">Author</th>
+													<th width="8%">Category</th>
+													<th width="15%">Date&nbsp;Post</th>
+													<th width="6%">Views</th>
+													<th width="8%">Status</th>
+													<th width="8%">Actions</th>
                                                 </tr>
                                                 <tr role="row" class="filter">
 													<td></td>
@@ -315,6 +314,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END THEME LAYOUT SCRIPTS -->
 <script>
 EventNewsList.init();
+//$("#menu-myevents").addClass("selected");
+
 </script>
 </body>
 

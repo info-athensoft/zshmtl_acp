@@ -42,7 +42,7 @@ public class NewsAcpControllerTest {
 		listNews.add(n1);
 		listNews.add(n2);
 		
-		newsServiceTest.testTransaction(listNews);
+		//newsServiceTest.testTransaction(listNews);
 		
 		logger.info("end of /test/tx1 for testTransaction");
 		return viewName;

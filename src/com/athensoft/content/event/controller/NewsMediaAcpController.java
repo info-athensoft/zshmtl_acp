@@ -170,12 +170,10 @@ public class NewsMediaAcpController {
 	}
 	
 	@RequestMapping(value="/events/changeMediaLabel",method=RequestMethod.POST)
-	public ModelAndView changeMediaLabel(@RequestParam String itemJSONString) {
-		
+	@ResponseBody
+	public Map<String,Object> changeMediaLabel(@RequestParam String itemJSONString) {
 		logger.info("entering /events/changeMediaLabel");
 		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
 		
 		//set model
 //      Map<String, Object> model = mav.getModel();
@@ -194,25 +192,25 @@ public class NewsMediaAcpController {
 
         eventMediaService.changeMediaLabel(mediaId, eventUUID, mediaLabel);
 		
+        /* initial settings */
+		ModelAndView mav = new ModelAndView();
+        
 		/* assemble model and view */
-//      model.put("news", news);
-        String viewName = "events/changeSortNumber";
-		mav.setViewName(viewName);		
+        //String viewName = "events/changeSortNumber";
+		//mav.setViewName(viewName);		
+		
+		Map<String,Object> model = mav.getModel();
 		
 		logger.info("leaving /events/changeMediaLabel");
-		return mav;		
+		return model;		
 	}
 	
 	@RequestMapping(value="/events/changeSortNumber",method=RequestMethod.POST)
-	public ModelAndView changeSortNumber(@RequestParam String itemJSONString) {
-		
+	@ResponseBody
+	public Map<String,Object> changeSortNumber(@RequestParam String itemJSONString) {
 		logger.info("entering /events/changeSortNumber");
 		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
-		
-		//set model
-//      Map<String, Object> model = mav.getModel();
+
         JSONObject ic_job= new JSONObject(itemJSONString);
    
 //      News news = new News();
@@ -221,19 +219,19 @@ public class NewsMediaAcpController {
         String eventUUID = ic_job.getString("eventUUID");
         String sortNumber = ic_job.getString("sortNumber");
                  
-//      logger.info("news = "+news);
-          
 		/* business logic*/
-
         eventMediaService.changeSortNumber(mediaId, eventUUID, sortNumber);
 		
+        /* initial settings */
+		ModelAndView mav = new ModelAndView();
+        
 		/* assemble model and view */
-//      model.put("news", news);
-        String viewName = "events/changeSortNumber";
-		mav.setViewName(viewName);		
+		Map<String,Object> model = mav.getModel();
+        //String viewName = "events/changeSortNumber";
+		//mav.setViewName(viewName);		
 		
 		logger.info("leaving /events/changeSortNumber");
-		return mav;		
+		return model;		
 	}
 	
 }
