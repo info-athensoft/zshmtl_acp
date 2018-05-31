@@ -38,6 +38,9 @@ public class FileUploadAcpController {
 	
 //	public static final String FileDir = "D:\\Shared\\2017_athensoft_website\\fileupload";
 	public static final String FileDir = "C:\\temp\\fileupload";
+	
+	public static final String ImgBaseUrl = "/img-event";
+	
 	public static final int BUF_SIZE = 2 * 1024;
 	
 	private static final String RESP_SUCCESS = "{\"jsonrpc\" : \"2.0\", \"result\" : \"OK\", \"id\" : \"id\"}";
@@ -246,8 +249,9 @@ public class FileUploadAcpController {
 				        eventMedia.setEventUUID(eventUUID);
 				        eventMedia.setMediaName(this.name);
 				        eventMedia.setMediaLabel(this.name);
-				        String filePath = File.separator+eventUUID+File.separator;
+				        String filePath = ImgBaseUrl+"/"+eventUUID+"/";
 				        eventMedia.setMediaURL(filePath);
+				        eventMedia.setPrimaryMedia(false);
 				        eventMedia.setPostTimestamp(new Date());
 				        
 				        eventMediaService.creatEventMedia(eventMedia);

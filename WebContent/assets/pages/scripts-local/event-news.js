@@ -14,6 +14,7 @@ function getBusinessObject(){
     var p6 = $("#viewNum").val();
     var p7 = $("#descShort").val();
     var p8 = $("#descLong").val();
+    	p8 = p8.replace(/\n/g,"<br/>");		//solve manually return and change line
     var p9 = $("#eventClass").val();
     var p10 = $("#eventStatus").val();
     

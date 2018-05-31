@@ -302,65 +302,52 @@
                                                      -->
                                                     <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
                                                         <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success">
-                                                            <i class="fa fa-plus"></i> Select Files </a>
+                                                            <i class="fa fa-plus"></i> 选择图片 </a>
                                                         <a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn btn-primary">
-                                                            <i class="fa fa-share"></i> Upload Files </a>
+                                                            <i class="fa fa-share"></i> 上传文件 </a>
                                                     </div>
                                                     <div class="row">
                                                         <div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12"> </div>
                                                     </div>
-                                                    <table class="table table-bordered table-hover">
+                                                    <table class="table table-bordered table-hover" id="event-media-table">
                                                         <thead>
                                                             <tr role="row" class="heading">
-                                                                <th width="8%">
-																	 Image
-																</th>
-																<th width="20%">
-																	 Label
-																</th>
-																<th width="8%">
-																	 Sort Number
-																</th>
-																<th width="15%">
-																	 Post Time
-																</th>
-																<th width="10%">
-																	 Primary Media
-																</th>
-																<th width="10%">
-																	Action
-																</th>
+                                                                <th width="8%">图片</th>
+																<th width="20%">标签</th>
+																<th width="8%">排序号</th>
+																<th width="15%">发布时间</th>
+																<th width="10%">是否为封面</th>
+																<th width="10%">操作</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <c:forEach items="${eventMediaList}" var="eventMedia">
 															<tr>
-															<td>
-																<a href="/eventmedia/${eventMedia.mediaURL}${eventMedia.mediaName}" class="fancybox-button" data-rel="fancybox-button">
-																<img class="img-responsive" src="/eventmedia/${eventMedia.mediaURL}${eventMedia.mediaName}" alt="">
-																</a>
-															</td>
-															<td>
-																<input type="text" class="form-control" name="mediaLabel" value="${eventMedia.mediaLabel}" onblur="changeMediaLabel(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
-															</td>
-															<td>
-																<input type="text" class="form-control" name="sortNumber" value="${eventMedia.sortNumber}" onblur="changeSortNumber(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
-															</td>
-															
-															<td>
-																<input type="text" class="form-control" name="postTimestamp" value="${eventMedia.postTimestamp}" disabled="disabled">
-															</td>
-															<td>
-																<input type="text" class="form-control" name="primaryMedia" value="${eventMedia.primaryMedia}" disabled="disabled">
-																<!-- <div></div>  -->
-															</td>
-															<td>
-																<a href="javascript:;" onclick="setCoverMedia(${eventMedia.mediaId},'${eventMedia.eventUUID}');return false;" class="btn default btn-sm">
-																<i class="fa fa-edit"></i> Set Cover </a>
-																<a href="javascript:test();" class="btn default btn-sm">
-																<i class="fa fa-times"></i> Remove </a>
-															</td>
-														</tr>
+																<td>
+																	<a href="${eventMedia.mediaURL}${eventMedia.mediaName}" class="fancybox-button" data-rel="fancybox-button">
+																	<img class="img-responsive" src="${eventMedia.mediaURL}${eventMedia.mediaName}" alt="">
+																	</a>
+																</td>
+																<td>
+																	<input type="text" class="form-control" name="mediaLabel" value="${eventMedia.mediaLabel}" onchange="changeMediaLabel(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
+																</td>
+																<td>
+																	<input type="text" class="form-control" name="sortNumber" value="${eventMedia.sortNumber}" onchange="changeSortNumber(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
+																</td>
+																
+																<td>
+																	<input type="text" class="form-control" name="postTimestamp" value="${eventMedia.postTimestamp}" disabled="disabled">
+																</td>
+																<td>
+																	<input type="text" class="form-control" name="primaryMedia" value="${eventMedia.primaryMedia}" disabled="disabled">
+																</td>
+																<td>
+																	<a href="javascript:;" onclick="setCoverMedia(${eventMedia.mediaId},'${eventMedia.eventUUID}');return false;" class="btn default btn-sm">
+																	<i class="fa fa-edit"></i> 设为封面 </a>
+																	<a href="javascript:test();" class="btn default btn-sm">
+																	<i class="fa fa-times"></i> 删除 </a>
+																</td>
+															</tr>
 														</c:forEach>
                                                         </tbody>
                                                     </table>
