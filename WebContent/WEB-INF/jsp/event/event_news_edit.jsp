@@ -183,7 +183,7 @@
                                                 </li>
                                                 <li>
                                                     <a href="#tab_reviews" data-toggle="tab"> 评论
-                                                        <span class="badge badge-success"> 3 </span>
+                                                        <span class="badge badge-success"></span>
                                                     </a>
                                                 </li>
                                             </ul>
