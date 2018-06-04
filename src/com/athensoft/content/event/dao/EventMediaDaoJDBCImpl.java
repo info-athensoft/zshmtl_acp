@@ -30,6 +30,8 @@ import com.athensoft.content.event.entity.EventMedia;
 @Qualifier("eventMediaDaoJDBCImpl")
 public class EventMediaDaoJDBCImpl implements EventMediaDao {
 
+	private static final String TABLE = "event_media";
+	
 	private NamedParameterJdbcTemplate jdbc;
 	
 	@Autowired
@@ -39,7 +41,7 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 	
 	@Override
 	public List<EventMedia> findAll() {
-		String sql = "select * from event_media";
+		String sql = "SELECT * from "+TABLE;
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		List<EventMedia> x = new ArrayList<EventMedia>();		
 		try{
@@ -52,7 +54,7 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 
 	@Override
 	public EventMedia findById(long medialId) {
-		String sql = "select * from event_media where media_id=:media_id";
+		String sql = "select * from "+TABLE+" where media_id=:media_id";
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("media_id", medialId);
 		EventMedia x = new EventMedia();
@@ -66,7 +68,7 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 
 	@Override
 	public List<EventMedia> findByEventUUID(String eventUUID) {
-		String sql = "select * from event_media where event_uuid=:event_uuid order by sort_number";
+		String sql = "select * from "+TABLE+" where event_uuid=:event_uuid order by sort_number";
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("event_uuid", eventUUID);
 		List<EventMedia> x = new ArrayList<EventMedia>();
@@ -81,7 +83,16 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 	@Override
 	public EventMedia findPrimaryMediaByEventUUID(String eventUUID) {
 		//select the eventmedia which is already the primary media 
-		String sql = "select * from event_media where event_uuid=:event_uuid and is_primary_media = 1";
+		//String sql = "SELECT * from "+TABLE+" where event_uuid=:event_uuid and is_primary_media = 1";
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("SELECT * ");
+		sbf.append(" FROM "+TABLE);
+		sbf.append(" WHERE 1=1 ");
+		sbf.append(" AND event_uuid=:event_uuid ");
+		sbf.append(" AND is_primary_media = 1 ");
+		
+		String sql = sbf.toString();
+		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("event_uuid", eventUUID);
 		EventMedia x = new EventMedia();
@@ -95,11 +106,10 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 
 	@Override
 	public void create(EventMedia media) {
-		final String TABLE1 = "event_media";
 		StringBuffer sbf = new StringBuffer();
-		sbf.append("insert into "+TABLE1);
-		sbf.append(" (event_uuid,media_url,media_name,media_label,post_timestamp) ");
-		sbf.append(" values(:event_uuid,:media_url,:media_name,:media_label,:post_timestamp)");
+		sbf.append("INSERT INTO "+TABLE);
+		sbf.append(" (event_uuid,media_url,media_name,media_label,post_timestamp,is_primary_media) ");
+		sbf.append(" VALUES(:event_uuid,:media_url,:media_name,:media_label,:post_timestamp,is_primary_media)");
 		String sql =  sbf.toString();
 		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
@@ -108,6 +118,8 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 		paramSource.addValue("media_name", media.getMediaName());
 		paramSource.addValue("media_label", media.getMediaLabel());
 		paramSource.addValue("post_timestamp", media.getPostTimestamp());
+		paramSource.addValue("is_primary_media", media.isPrimaryMedia()?1:0);
+		
 		
 		KeyHolder keyholder = new GeneratedKeyHolder();
 		jdbc.update(sql, paramSource, keyholder);
@@ -123,13 +135,12 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 
 	@Override
 	public void update(EventMedia media) {
-		final String TABLE1 = "event_media";
 		
 		StringBuffer sbf = new StringBuffer();
-		sbf.append("update "+TABLE1+" ");
-		sbf.append("set ");
+		sbf.append("UPDATE "+TABLE+" ");
+		sbf.append("SET ");
 		sbf.append("is_primary_media = :is_primary_media ");
-		sbf.append("where ");
+		sbf.append("WHERE ");
 		sbf.append("media_id = :media_id");
 				
 				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
@@ -253,7 +264,7 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 				x.setSortNumber(rs.getInt("sort_number"));
 	//				int intIsPrimaryMedia = rs.getInt("sort_number");
 	//				boolean isPrimaryMedia = intIsPrimaryMedia==1?true:false;
-				x.setPrimaryMedia(rs.getBoolean("is_primary_media"));
+				x.setPrimaryMedia(rs.getInt("is_primary_media")==1?true:false);
 				x.setMediaType(rs.getInt("media_type"));
 					Timestamp ts = rs.getTimestamp("post_timestamp");			
 				x.setPostTimestamp(new Date(ts.getTime()));

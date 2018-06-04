@@ -5,7 +5,6 @@
 
 /* event news - global variables and functions*/
 function getBusinessObject(){	
-//	create a json object
     var p1 = $("#globalId").val();
     var p2 = $("#eventUUID").val();        
     var p3 = $("#title").val();
@@ -13,6 +12,7 @@ function getBusinessObject(){
     var p5 = $("#postDatetime").val();
     var p6 = $("#viewNum").val();
     var p7 = $("#descShort").val();
+    	p7 = p7.replace(/\n/g,"<br/>");		//solve manually return and change line
     var p8 = $("#descLong").val();
     	p8 = p8.replace(/\n/g,"<br/>");		//solve manually return and change line
     var p9 = $("#eventClass").val();
