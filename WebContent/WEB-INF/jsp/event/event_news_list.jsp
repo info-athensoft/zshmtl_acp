@@ -109,6 +109,7 @@
 								<a href="#">列表</a>
 							</li>
 						</ul>
+						<!-- 
                         <div class="page-toolbar">
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
@@ -123,6 +124,7 @@
                                 </ul>
                             </div>
                         </div>
+                         -->
                     </div>
                     <!-- END PAGE HEADER-->
                     <div class="row">

@@ -162,12 +162,12 @@
                                             <span> </span>
                                             <select class="table-group-action-input form-control input-inline input-small input-sm" name="groupOption">
                                                 <option value="">请选择...</option>
-												<option value="1">已申请</option>
-												<option value="2">已通过预审</option>
-												<option value="3">已激活</option>
-												<option value="4">未激活</option>
-												<option value="5">已挂起</option>
-												<option value="6">已禁止</option>
+												<option value="1">申请已提交</option>
+												<option value="2">通过预审</option>
+												<option value="3">激活</option>
+												<option value="4">取消激活</option>
+												<option value="5">审查</option>
+												<option value="6">禁止</option>
                                             </select>
                                             <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> 状态修改</button>
                                         </div>
@@ -209,7 +209,7 @@
 															<option value="2">已通过预审</option>
 															<option value="3">已激活</option>
 															<option value="4">未激活</option>
-															<option value="5">已挂起</option>
+															<option value="5">审查中</option>
 															<option value="6">已禁止</option>
 														</select>
 													</td>

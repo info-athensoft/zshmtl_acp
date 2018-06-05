@@ -23,5 +23,9 @@ public class MemberService {
 	public List<Member> getAllMembers() {
 		return memberDao.findAll();
 	}
+
+	public Member getMemberByAcctName(String acctName) {
+		return memberDao.findByAcctName(acctName);
+	}
 	
 }

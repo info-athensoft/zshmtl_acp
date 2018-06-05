@@ -7,10 +7,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.event.controller.NewsAcpController;
+import com.athensoft.content.event.entity.EventMedia;
+import com.athensoft.content.event.entity.News;
 import com.athensoft.member.entity.Member;
 import com.athensoft.member.entity.MemberStatus;
 import com.athensoft.member.service.MemberService;
@@ -22,7 +25,7 @@ public class MemberController {
 	private static final Logger logger = Logger.getLogger(NewsAcpController.class);
 	
 	private static final String ACTION_EDIT = "¹ÜÀí";
-	private static final String ACTION_DELETE = "Delete";
+	private static final String ACTION_DELETE = "É¾³ý";
 	
 	private MemberService memberService;
 	
@@ -60,6 +63,28 @@ public class MemberController {
 		
 		logger.info("leaving /member/memberListData");
 		return model;
+	}
+	
+	@RequestMapping(value="/memberEdit")
+	public ModelAndView gotoMemberEdit(@RequestParam String acctName){
+		logger.info("entering /member/memberEdit");
+		
+		//logic
+		Member member = memberService.getMemberByAcctName(acctName);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		model.put("memberObject", member);
+			
+		//view
+		String viewName = "member/member_edit";
+		mav.setViewName(viewName);
+		
+		logger.info("leaving /member/memberEdit");
+		return mav;
 	}
 	
 	

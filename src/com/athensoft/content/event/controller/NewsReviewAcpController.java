@@ -362,23 +362,23 @@ public class NewsReviewAcpController {
 			String eventReviewStatusKey = "";
 			switch(intEventReviewStatus){
 				case EventReview.APPROVED: 
-					eventReviewStatus = "Approved";
+					eventReviewStatus = "已通过";
 					eventReviewStatusKey = "success";
 					break;
 				case EventReview.PENDING: 
-					eventReviewStatus = "Pending";
-					eventReviewStatusKey = "info";
+					eventReviewStatus = "审查中";
+					eventReviewStatusKey = "warning";
 					break;
 				case EventReview.REJECTED: 
-					eventReviewStatus = "Rejected";
-					eventReviewStatusKey = "warning";
+					eventReviewStatus = "已拒绝";
+					eventReviewStatusKey = "danger";
 					break;
 				default: 
 					break;
 			}
 			
 			field4 = "<span class='label label-sm label-"+eventReviewStatusKey+"'>"+eventReviewStatus+"</span>";
-			field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field0+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
+			field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field0+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> 管理</a>";
 			
 			data[i][0] = field0;
 			data[i][1] = field1;

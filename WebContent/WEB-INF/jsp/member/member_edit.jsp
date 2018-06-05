@@ -19,7 +19,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Athensoft | Event - News Edit</title>
+        <title>Athensoft | Member - Member Edit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="Preview page of Metronic Admin Theme #2 for edit product" name="description" />
@@ -89,7 +89,7 @@
                     <!-- BEGIN THEME PANEL -->
                     
                     <!-- END THEME PANEL -->
-                    <h1 class="page-title">新闻系统 <small> 管理新闻、动态和活动</small></h1>
+                    <h1 class="page-title">会员系统 <small> 管理会员信息与状态</small></h1>
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
 						<li>
@@ -98,13 +98,14 @@
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="${webapp_name}/events/eventsNewsList">新闻系统</a>
+							<a href="${webapp_name}/events/memberList">会员系统</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#">编辑</a>
 						</li>
 					</ul>
+					<!-- 
                         <div class="page-toolbar">
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
@@ -131,6 +132,7 @@
                                 </ul>
                             </div>
                         </div>
+                         -->
                     </div>
                     <!-- END PAGE HEADER-->
                     <div class="row">
@@ -147,6 +149,8 @@
                                                 <i class="fa fa-reply"></i> Reset</button>
                                             <button class="btn btn-success" onclick="updateNews(); return false;">
                                                 <i class="fa fa-check"></i> 保存</button>
+                                             
+                                            <!--    
                                             <button class="btn btn-success" onclick="updateNewsAndContinue(); return false;">
                                                 <i class="fa fa-check-circle"></i> 保存并继续</button>
                                             <div class="btn-group">
@@ -157,20 +161,22 @@
                                                 <div class="dropdown-menu pull-right">
                                                 	<ul>
 	                                                    <li><a href="javascript:;"> Duplicate </a></li>
-	                                                   	<li><a href="javascript:;"  onclick="markNewsStatusDeleted('${newsObject.eventUUID}'); return false;">Mark Deleted </a></li>
+	                                                   	<li><a href="javascript:;"  onclick="markNewsStatusDeleted('${memberObject.acctName}'); return false;">Mark Deleted </a></li>
 	                                                    <li class="dropdown-divider"> </li>
 	                                                    <li><a href="javascript:;"> Print </a></li>
                                                     </ul>
                                                 </div>
                                             </div>
+                                             -->
                                         </div>
                                     </div>
                                     <div class="portlet-body">
                                         <div class="tabbable-bordered">
                                             <ul class="nav nav-tabs">
                                                 <li class="active">
-                                                    <a href="#tab_general" data-toggle="tab"> 新闻主体</a>
+                                                    <a href="#tab_general" data-toggle="tab"> 会员信息</a>
                                                 </li>
+                                                <!-- 
                                                 <li>
                                                     <a href="#tab_images" data-toggle="tab"> 新闻图片 </a>
                                                 </li>
@@ -178,7 +184,7 @@
                                                     <a href="#tab_reviews" data-toggle="tab"> 评论
                                                         <span class="badge badge-success"></span>
                                                     </a>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab_general">
@@ -187,221 +193,178 @@
 														<label class="col-md-2 control-label">全局编号: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled"  value="${newsObject.globalId}">
+															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled"  value="${memberObject.globalId}">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻编号: <span class="required"> * </span>
+														<label class="col-md-2 control-label">会员账户: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="eventUUID" name="eventUUID"  placeholder="" value="${newsObject.eventUUID}" disabled="disabled">
+															<input type="text" class="form-control" id="acctName" name="acctName"  placeholder="" value="${memberObject.acctName}" disabled="disabled">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻标题: <span class="required"> * </span>
+														<label class="col-md-2 control-label">中文姓名: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="title" name="title" placeholder=""  value="${newsObject.title}">
+															<input type="text" class="form-control" id="name1" name="title" placeholder=""  value="${memberObject.name1}">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">编辑: <span class="required">
+														<label class="col-md-2 control-label">英法文名: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="name2" name="title" placeholder=""  value="${memberObject.name2}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">性别: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="author" name="author" placeholder=""  value="${newsObject.author}">
+															<select class="table-group-action-input form-control input-medium" id="gender" name="gender">
+																<option value="0" ${memberObject.eventClass == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${memberObject.eventClass == '1' ? 'selected' : ''}>男</option>
+																<option value="2" ${memberObject.eventClass == '2' ? 'selected' : ''}>女</option>
+																<option value="3" ${memberObject.eventClass == '3' ? 'selected' : ''}>未知</option>
+															</select>
 														</div>
 													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">国籍: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="name1" name="nationality" placeholder=""  value="${memberObject.nationality}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">电话: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="phone1" name="phone1" placeholder=""  value="${memberObject.phone1}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">手机: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="phone2" name="phone2" placeholder=""  value="${memberObject.phone2}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">微信: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="wechat" name="wechat" placeholder=""  value="${memberObject.wechat}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">电子邮件: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="email" name="email" placeholder=""  value="${memberObject.email}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">最高学历: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="degree" name="degree" placeholder=""  value="${memberObject.degree}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">职业: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="occupation" name="occupation" placeholder=""  value="${memberObject.occupation}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">出生日期: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="dob" name="dob" placeholder=""  value="${memberObject.dob}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">出生地（省，州）: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="pobProvince" name="pobProvince" placeholder=""  value="${memberObject.pobProvince}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">住址: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="homeAddress" name="homeAddress" placeholder=""  value="${memberObject.homeAddress}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">邮编: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="postalcode" name="postalcode" placeholder=""  value="${memberObject.postalcode}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">兴趣爱好: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="hobbies" name="hobbies" placeholder=""  value="${memberObject.hobbies}">
+														</div>
+													</div>
+													
+													
 													<div class="form-group">
 														<label class="col-md-2 control-label">发布时间: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
 															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${newsObject.postDatetime}" disabled="disabled">
+																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${memberObject.memberActiveDate}" disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
 													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">浏览数: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder=""  value="${newsObject.viewNum}" disabled="disabled">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">摘要: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<textarea class="form-control" id="descShort" name="descShort">${newsObject.descShort}</textarea>
-															<span class="help-block"> </span>
-														</div>
-														
-													</div>
 													
-															<div class="form-group">
-														<label class="col-md-2 control-label">新闻正文: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<textarea class="form-control" id="descLong" name="descLong" rows="6">${newsObject.descLong}</textarea>
-														</div>
-														
-													</div>
+													
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻类别: <span class="required">
+														<label class="col-md-2 control-label">会员等级: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" id="eventClass" name="eventClass">
-																<option value="0" ${newsObject.eventClass == '0' ? 'selected' : ''}>请选择...</option>
-																<option value="1" ${newsObject.eventClass == '1' ? 'selected' : ''}>普通</option>
-																<option value="2" ${newsObject.eventClass == '2' ? 'selected' : ''}>新</option>
-																<option value="3" ${newsObject.eventClass == '3' ? 'selected' : ''}>热</option>
+															<select class="table-group-action-input form-control input-medium" id="memberLevel" name="memberLevel">
+																<option value="0" ${memberObject.memberLevel == '1' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${memberObject.memberLevel == '2' ? 'selected' : ''}>普通会员</option>
+																<option value="2" ${memberObject.memberLevel == '3' ? 'selected' : ''}>VIP会员</option>
+																<option value="3" ${memberObject.memberLevel == '4' ? 'selected' : ''}>核心会员</option>
 															</select>
 														</div>
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻状态: <span class="required">
+														<label class="col-md-2 control-label">会员状态: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
-																<option value="0" ${newsObject.eventStatus == '0' ? 'selected' : ''}>请选择...</option>
-																<option value="1" ${newsObject.eventStatus == '1' ? 'selected' : ''}>已发布</option>
-																<option value="2" ${newsObject.eventStatus == '2' ? 'selected' : ''}>待发布</option>
-																<option value="3" ${newsObject.eventStatus == '3' ? 'selected' : ''}>已删除</option>
-																<option value="4" ${newsObject.eventStatus == '4' ? 'selected' : ''}>已过期</option>
-																<option value="5" ${newsObject.eventStatus == '5' ? 'selected' : ''}>审查中</option>
+															<select class="table-group-action-input form-control input-medium" id="memberStatus" name="memberStatus">
+																<option value="0" ${memberObject.memberStatus == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${memberObject.memberStatus == '1' ? 'selected' : ''}>已申请</option>
+																<option value="2" ${memberObject.memberStatus == '2' ? 'selected' : ''}>已通过预审</option>
+																<option value="3" ${memberObject.memberStatus == '3' ? 'selected' : ''}>已激活</option>
+																<option value="4" ${memberObject.memberStatus == '4' ? 'selected' : ''}>未激活</option>
+																<option value="5" ${memberObject.memberStatus == '5' ? 'selected' : ''}>审查中</option>
+																<option value="6" ${memberObject.memberStatus == '6' ? 'selected' : ''}>已禁止</option>
 															</select>
 														</div>
 													</div>
 												</div>
                                                 </div>
-                                                <div class="tab-pane" id="tab_images">
-                                                	<!--
-                                                    <div class="alert alert-success margin-bottom-10">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-                                                        <i class="fa fa-warning fa-lg"></i> Image type and information need to be specified. 
-                                                   
-                                                    </div> 
-                                                     -->
-                                                    <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
-                                                        <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success">
-                                                            <i class="fa fa-plus"></i> 选择图片 </a>
-                                                        <a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn btn-primary">
-                                                            <i class="fa fa-share"></i> 上传文件 </a>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12"> </div>
-                                                    </div>
-                                                    <table class="table table-bordered table-hover" id="event-media-table">
-                                                        <thead>
-                                                            <tr role="row" class="heading">
-                                                                <th width="8%">图片</th>
-																<th width="20%">标签</th>
-																<th width="8%">排序号</th>
-																<th width="15%">发布时间</th>
-																<th width="10%">是否为封面</th>
-																<th width="10%">操作</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <c:forEach items="${eventMediaList}" var="eventMedia">
-															<tr>
-																<td>
-																	<a href="${eventMedia.mediaURL}${eventMedia.mediaName}" class="fancybox-button" data-rel="fancybox-button">
-																	<img class="img-responsive" src="${eventMedia.mediaURL}${eventMedia.mediaName}" alt="">
-																	</a>
-																</td>
-																<td>
-																	<input type="text" class="form-control" name="mediaLabel" value="${eventMedia.mediaLabel}" onchange="changeMediaLabel(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
-																</td>
-																<td>
-																	<input type="text" class="form-control" name="sortNumber" value="${eventMedia.sortNumber}" onchange="changeSortNumber(this,${eventMedia.mediaId},'${eventMedia.eventUUID}');">
-																</td>
-																
-																<td>
-																	<input type="text" class="form-control" name="postTimestamp" value="${eventMedia.postTimestamp}" disabled="disabled">
-																</td>
-																<td>
-																	<input type="text" class="form-control" name="primaryMedia" value="${eventMedia.primaryMedia}" disabled="disabled">
-																</td>
-																<td>
-																	<a href="javascript:;" onclick="setCoverMedia(${eventMedia.mediaId},'${eventMedia.eventUUID}');return false;" class="btn default btn-sm">
-																	<i class="fa fa-edit"></i> 设为封面 </a>
-																	<a href="javascript:test();" class="btn default btn-sm">
-																	<i class="fa fa-times"></i> 删除 </a>
-																</td>
-															</tr>
-														</c:forEach>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="tab-pane" id="tab_reviews">
-                                                    <div class="table-container">
-                                                        <table class="table table-striped table-bordered table-hover" id="datatable_eventNewsReviews">
-                                                            <thead>
-                                                                <tr role="row" class="heading">
-                                                                    <th width="5%"> 评论&nbsp;# </th>
-                                                                    <th width="10%"> 评论日期 </th>
-                                                                    <th width="10%"> 评论者 </th>
-                                                                    <th width="20%"> 评论内容 </th>
-                                                                    <th width="10%"> 当前状态 </th>
-                                                                    <th width="10%"> 操作 </th>
-                                                                </tr>
-                                                                <tr role="row" class="filter">
-                                                                    <td>
-                                                                        <input type="text" class="form-control form-filter input-sm" name="event_review_no" id="event_review_no"> </td>
-                                                                    <td>
-                                                                        <div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-                                                                            <input type="text" class="form-control form-filter input-sm" readonly name="event_review_date_from" placeholder="From" id="event_review_date_from">
-                                                                            <span class="input-group-btn">
-                                                                                <button class="btn btn-sm default" type="button">
-                                                                                    <i class="fa fa-calendar"></i>
-                                                                                </button>
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-                                                                            <input type="text" class="form-control form-filter input-sm" readonly name="event_review_date_to" placeholder="To" id="event_review_date_to">
-                                                                            <span class="input-group-btn">
-                                                                                <button class="btn btn-sm default" type="button">
-                                                                                    <i class="fa fa-calendar"></i>
-                                                                                </button>
-                                                                            </span>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="text" class="form-control form-filter input-sm" name="event_review_customer" id="event_review_customer"> </td>
-                                                                    <td>
-                                                                        <input type="text" class="form-control form-filter input-sm" name="event_review_content" id="event_review_content"> </td>
-                                                                    <td>
-                                                                        <select name="product_review_status" class="form-control form-filter input-sm" id="event_review_status">
-                                                                            <option value="0">请选择...</option>
-																			<option value="1">已通过</option>
-																			<option value="2">审查中</option>
-																			<option value="3">已拒绝</option>
-                                                                        </select>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="margin-bottom-5">
-                                                                            <button class="btn btn-sm btn-success filter-submit margin-bottom" onclick="filterSearchReview();">
-                                                                                <i class="fa fa-search"></i> 查找</button>
-                                                                        </div>
-                                                                        <button class="btn btn-sm btn-danger filter-cancel">
-                                                                            <i class="fa fa-times"></i> 清除</button>
-                                                                    </td>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody> </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
+                                                
+                                               
+                                                
                                                
                                             </div>
                                         </div>
@@ -462,41 +425,41 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-edit.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-review-list.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/member/member.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/member/member-edit.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 
 <script>
 jQuery(document).ready(function() {    
-	var eventUUID = $("#eventUUID").val();
-	EventNewsEdit.init(eventUUID);
-	EventNewsReviewList.init();
+	var acctName = $("#acctName").val();
+	//EventNewsEdit.init(eventUUID);
+	//EventNewsReviewList.init();
 
 //local
 //select object for event class
-	var eventClassValue = ${newsObject.eventClass};
-	$("#eventClass").val(eventClassValue);
+	//var eventClassValue = ${memberObject.eventClass};
+	//$("#eventClass").val(eventClassValue);
 
 //select object for event status
-	var eventStatusValue = ${newsObject.eventStatus};
-	$("#eventStatus").val(eventStatusValue);
+	var memberStatusValue = ${memberObject.memberStatus};
+	$("#memberStatus").val(memberStatusValue);
 	
 });
 
-function resetNews(){
+/*
+function resetMember(){
 	
 	//object for reset
-	//var p1 = ${newsObject.globalId};
-	//var p2 = '${newsObject.eventUUID}';
-	var p3 = '${newsObject.title}';
-	var p4 = '${newsObject.author}';
-	//var p5 = ${newsObject.postDatetime};
-	var p6 = ${newsObject.viewNum};
-	var p7 = '${newsObject.descShort}';
-	var p8 = '${newsObject.descLong}';
-	var p9 = ${newsObject.eventClass};
-	var p10 = ${newsObject.eventStatus};
+	//var p1 = ${memberObject.globalId};
+	//var p2 = '${memberObject.eventUUID}';
+	var p3 = '${memberObject.title}';
+	var p4 = '${memberObject.author}';
+	//var p5 = ${memberObject.postDatetime};
+	var p6 = ${memberObject.viewNum};
+	var p7 = '${memberObject.descShort}';
+	var p8 = '${memberObject.descLong}';
+	var p9 = ${memberObject.eventClass};
+	var p10 = ${memberObject.eventStatus};
 	
 	//$("#globalId").val(p1);
 	//$("#eventUUID").val(p2);
@@ -508,7 +471,7 @@ function resetNews(){
 	$("#descLong").val(p8);
 	$("#eventClass").val(p9);
 	$("#eventStatus").val(p10);
-}    
+}  */  
 </script>
 </body>
 

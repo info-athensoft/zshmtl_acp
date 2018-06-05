@@ -137,7 +137,9 @@
                                                 <i class="fa fa-reply"></i> 重置</button>
                                             <button class="btn btn-success" onclick="createNews(); return false;">
                                                 <i class="fa fa-check"></i> 保存</button>
-                                            <button class="btn btn-success" onclick="return false;">
+                                           
+                                            <!-- 
+                                             <button class="btn btn-success" onclick="return false;">
                                                 <i class="fa fa-check-circle"></i> 保存并继续</button>
                                             <div class="btn-group">
                                                 <a class="btn btn-success dropdown-toggle" href="javascript:;" data-toggle="dropdown">
@@ -153,6 +155,7 @@
                                                    	</ul>
                                                 </div>
                                             </div>
+                                             -->
                                         </div>
                                     </div>
                                     <div class="portlet-body">
@@ -243,7 +246,7 @@
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="eventClass" name="eventClass">
 																<option value="0">请选择...</option>
-																<option value="1">普通</option>
+																<option value="1" selected="selected">普通</option>
 																<option value="2">新</option>
 																<option value="3">热</option>
 															</select>
@@ -258,13 +261,31 @@
 															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
 																<option value="0">请选择...</option>
 																<option value="1">已发布</option>
-																<option value="2">待发布</option>
+																<option value="2" selected="selected">待发布</option>
+																<!-- 
 																<option value="3">已删除</option>
 																<option value="4">已过期</option>
-																<option value="5">已挂起</option>
+																<option value="5">已挂起</option>  -->
 															</select>
 														</div>
 													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">
+														</label>
+														<div class="col-md-10">
+															<div class="actions btn-set">
+					                                            <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToNewsList(); return false;">
+					                                                <i class="fa fa-angle-left"></i> 返回</button>
+					                                            <button class="btn btn-secondary-outline" onclick="resetCreateNews(); return false;">
+					                                                <i class="fa fa-reply"></i> 重置</button>
+					                                            <button class="btn btn-success" onclick="createNews(); return false;">
+					                                                <i class="fa fa-check"></i> 保存</button>
+					                                        </div>
+														</div>
+													</div>
+													
+													
 												</div>
 												</div>
                                             </div>

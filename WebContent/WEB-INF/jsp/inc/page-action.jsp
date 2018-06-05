@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="webapp_name" value="/acp"/>
 
 <div class="page-actions">
     <div class="btn-group">
@@ -10,7 +13,7 @@
         </button>
         <ul class="dropdown-menu" role="menu">
             <li>
-                <a href="javascript:;">
+                <a href="${webapp_name}/events/eventsNewsCreate">
                     <i class="icon-docs"></i> 新建新闻 </a>
             </li>
             <li>
@@ -21,6 +24,7 @@
                 <a href="javascript:;">
                     <i class="icon-share"></i> 审核会员 </a>
             </li>
+            <!-- 
             <li class="divider"> </li>
             <li>
                 <a href="javascript:;">
@@ -34,6 +38,7 @@
                     <span class="badge badge-danger">2</span>
                 </a>
             </li>
+             -->
         </ul>
     </div>
 </div>
