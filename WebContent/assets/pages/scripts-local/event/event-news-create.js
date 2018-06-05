@@ -55,6 +55,6 @@ function resetCreateNews(){
     var p6 = $("#viewNum").val(0);
     var p7 = $("#descShort").val("");
     var p8 = $("#descLong").val("");
-    var p9 = $("#eventClass").val(0);
-    var p10 = $("#eventStatus").val(0);
+    var p9 = $("#eventClass").val();
+    var p10 = $("#eventStatus").val();
 }

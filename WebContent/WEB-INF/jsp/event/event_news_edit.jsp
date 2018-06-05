@@ -142,31 +142,24 @@
                                             	编辑新闻<span class="caption-helper"> </span> </div>
                                         <div class="actions btn-set">
                                             <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToNewsList(); return false;">
-                                                <i class="fa fa-angle-left"></i> Back</button>
+                                                <i class="fa fa-angle-left"></i> 返回</button>
                                             <button class="btn btn-secondary-outline" onclick="resetNews(); return false;">
                                                 <i class="fa fa-reply"></i> Reset</button>
                                             <button class="btn btn-success" onclick="updateNews(); return false;">
-                                                <i class="fa fa-check"></i> Save</button>
+                                                <i class="fa fa-check"></i> 保存</button>
                                             <button class="btn btn-success" onclick="updateNewsAndContinue(); return false;">
-                                                <i class="fa fa-check-circle"></i> Save &amp; Continue Edit</button>
+                                                <i class="fa fa-check-circle"></i> 保存并继续</button>
                                             <div class="btn-group">
                                                 <a class="btn btn-success dropdown-toggle" href="javascript:;" data-toggle="dropdown">
-                                                    <i class="fa fa-share"></i> More
+                                                    <i class="fa fa-share"></i> 其它
                                                     <i class="fa fa-angle-down"></i>
                                                 </a>
                                                 <div class="dropdown-menu pull-right">
                                                 	<ul>
-                                                    <li>
-                                                        <a href="javascript:;"> Duplicate </a>
-                                                    </li>
-                                                   	<li>
-														<a href="javascript:;"  onclick="markNewsStatusDeleted('${newsObject.eventUUID}'); return false;">
-														Mark Deleted </a>
-													</li>
-                                                    <li class="dropdown-divider"> </li>
-                                                    <li>
-                                                        <a href="javascript:;"> Print </a>
-                                                    </li>
+	                                                    <li><a href="javascript:;"> Duplicate </a></li>
+	                                                   	<li><a href="javascript:;"  onclick="markNewsStatusDeleted('${newsObject.eventUUID}'); return false;">Mark Deleted </a></li>
+	                                                    <li class="dropdown-divider"> </li>
+	                                                    <li><a href="javascript:;"> Print </a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -227,8 +220,7 @@
 															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
 																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${newsObject.postDatetime}" disabled="disabled">
 															</div>
-															<span class="help-block">
-															availability daterange. </span>
+															<span class="help-block"></span>
 														</div>
 													</div>
 													<div class="form-group">
@@ -245,8 +237,7 @@
 														</label>
 														<div class="col-md-10">
 															<textarea class="form-control" id="descShort" name="descShort">${newsObject.descShort}</textarea>
-															<span class="help-block">
-															shown in product listing </span>
+															<span class="help-block"> </span>
 														</div>
 														
 													</div>
@@ -267,10 +258,10 @@
 														</label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="eventClass" name="eventClass">
-																<option value="0" ${newsObject.eventClass == '0' ? 'selected' : ''}>Select...</option>
-																<option value="1" ${newsObject.eventClass == '1' ? 'selected' : ''}>Default</option>
-																<option value="2" ${newsObject.eventClass == '2' ? 'selected' : ''}>New</option>
-																<option value="3" ${newsObject.eventClass == '3' ? 'selected' : ''}>Hot</option>
+																<option value="0" ${newsObject.eventClass == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${newsObject.eventClass == '1' ? 'selected' : ''}>普通</option>
+																<option value="2" ${newsObject.eventClass == '2' ? 'selected' : ''}>新</option>
+																<option value="3" ${newsObject.eventClass == '3' ? 'selected' : ''}>热</option>
 															</select>
 														</div>
 													</div>
@@ -281,12 +272,12 @@
 														</label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
-																<option value="0" ${newsObject.eventStatus == '0' ? 'selected' : ''}>Select...</option>
-																<option value="1" ${newsObject.eventStatus == '1' ? 'selected' : ''}>Published</option>
-																<option value="2" ${newsObject.eventStatus == '2' ? 'selected' : ''}>Wait to post</option>
-																<option value="3" ${newsObject.eventStatus == '3' ? 'selected' : ''}>Deleted</option>
-																<option value="4" ${newsObject.eventStatus == '4' ? 'selected' : ''}>Out of date</option>
-																<option value="5" ${newsObject.eventStatus == '5' ? 'selected' : ''}>Suspended</option>
+																<option value="0" ${newsObject.eventStatus == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${newsObject.eventStatus == '1' ? 'selected' : ''}>已发布</option>
+																<option value="2" ${newsObject.eventStatus == '2' ? 'selected' : ''}>待发布</option>
+																<option value="3" ${newsObject.eventStatus == '3' ? 'selected' : ''}>已删除</option>
+																<option value="4" ${newsObject.eventStatus == '4' ? 'selected' : ''}>已过期</option>
+																<option value="5" ${newsObject.eventStatus == '5' ? 'selected' : ''}>已挂起</option>
 															</select>
 														</div>
 													</div>
@@ -392,18 +383,18 @@
                                                                     <td>
                                                                         <select name="product_review_status" class="form-control form-filter input-sm" id="event_review_status">
                                                                             <option value="0">Select...</option>
-																			<option value="1">Approved</option>
-																			<option value="2">Pending</option>
-																			<option value="3">Rejected</option>
+																			<option value="1">已通过</option>
+																			<option value="2">挂起中</option>
+																			<option value="3">已拒绝</option>
                                                                         </select>
                                                                     </td>
                                                                     <td>
                                                                         <div class="margin-bottom-5">
                                                                             <button class="btn btn-sm btn-success filter-submit margin-bottom" onclick="filterSearchReview();">
-                                                                                <i class="fa fa-search"></i> Search</button>
+                                                                                <i class="fa fa-search"></i> 查找</button>
                                                                         </div>
                                                                         <button class="btn btn-sm btn-danger filter-cancel">
-                                                                            <i class="fa fa-times"></i> Reset</button>
+                                                                            <i class="fa fa-times"></i> 清除</button>
                                                                     </td>
                                                                 </tr>
                                                             </thead>

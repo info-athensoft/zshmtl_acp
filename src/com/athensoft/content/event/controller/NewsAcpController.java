@@ -32,8 +32,8 @@ public class NewsAcpController {
 	
 	private static final Logger logger = Logger.getLogger(NewsAcpController.class);
 	
-	private static final String ACTION_EDIT = "Edit";
-	private static final String ACTION_DELETE = "Delete";
+	private static final String ACTION_EDIT = "编辑";
+	private static final String ACTION_DELETE = "删除";
 	
 	/**
 	 * News Service instance
@@ -954,16 +954,16 @@ public class NewsAcpController {
 		String eventClass = "";
 		switch(intEventClass){
 			case News.CLASS_DEFAULT:
-				eventClass = "Default";
+				eventClass = "普通";
 				break;
 			case News.CLASS_NEW:
-				eventClass = "New";
+				eventClass = "新";
 				break;
 			case News.CLASS_HOT:
-				eventClass = "Hot";
+				eventClass = "热";
 				break;
 			default: 
-				eventClass = "Unknown";
+				eventClass = "未知";
 				break;
 		}
 		
@@ -977,23 +977,23 @@ public class NewsAcpController {
 		String eventStatusKey = "";
 		switch(intEventStatus){
 			case News.PUBLISHED: 
-				eventStatus = "Published";
+				eventStatus = "已发布";
 				eventStatusKey = "success";
 				break;
 			case News.WAIT_TO_POST: 
-				eventStatus = "Wait to post";
+				eventStatus = "待发布";
 				eventStatusKey = "warning";
 				break;
 			case News.DELETED: 
-				eventStatus = "Deleted";
+				eventStatus = "已删除";
 				eventStatusKey = "default";
 				break;
 			case News.OUT_OF_DATE: 
-				eventStatus = "Out of date";
+				eventStatus = "已过期";
 				eventStatusKey = "info";
 				break;
 			case News.SUSPENDED: 
-				eventStatus = "Suspended";
+				eventStatus = "审查中";
 				eventStatusKey = "danger";
 				break;
 			default: 

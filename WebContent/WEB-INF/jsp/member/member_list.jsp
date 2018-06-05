@@ -161,7 +161,7 @@
                                         <div class="table-actions-wrapper">
                                             <span> </span>
                                             <select class="table-group-action-input form-control input-inline input-small input-sm" name="groupOption">
-                                                <option value="">Select...</option>
+                                                <option value="">请选择...</option>
 												<option value="1">已申请</option>
 												<option value="2">已通过预审</option>
 												<option value="3">已激活</option>
@@ -169,7 +169,7 @@
 												<option value="5">已挂起</option>
 												<option value="6">已禁止</option>
                                             </select>
-                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
+                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> 状态修改</button>
                                         </div>
                                         <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_memberList">
                                             <thead>

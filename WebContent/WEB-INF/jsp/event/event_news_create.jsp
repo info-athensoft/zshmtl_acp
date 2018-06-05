@@ -10,19 +10,7 @@
 <!-- ENDS page variables -->
 
 <!DOCTYPE html>
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
-Version: 4.7.5
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
+
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
@@ -100,50 +88,39 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
                     <!-- BEGIN THEME PANEL -->
-                    <jsp:include page="${inc_dir}/theme-panel.jsp"></jsp:include>
                     <!-- END THEME PANEL -->
-                    <h1 class="page-title">Event System <small> manage news</small></h1>
+                    <h1 class="page-title">新闻系统  <small> 管理新闻、动态和活动</small></h1>
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="#">Home</a>
+							<a href="#">首页</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="eventsDashboard">Events</a>
+							<a href="#">新闻系统</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">News</a>
+							<a href="#">新增</a>
 						</li>
 					</ul>
+						<!-- 
                         <div class="page-toolbar">
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
                                     <i class="fa fa-angle-down"></i>
                                 </button>
                                 <ul class="dropdown-menu pull-right" role="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bell"></i> Action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-shield"></i> Another action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-user"></i> Something else here</a>
-                                    </li>
+                                    <li><a href="#"><i class="icon-bell"></i> Action</a></li>
+                                    <li><a href="#"><i class="icon-shield"></i> Another action</a></li>
+                                    <li><a href="#"><i class="icon-user"></i> Something else here</a></li>
                                     <li class="divider"> </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bag"></i> Separated link</a>
-                                    </li>
+                                    <li><a href="#"><i class="icon-bag"></i> Separated link</a></li>
                                 </ul>
                             </div>
                         </div>
+                         -->
                     </div>
                     <!-- END PAGE HEADER-->
                     <div class="row">
@@ -152,19 +129,19 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="portlet">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            <i class="fa fa-shopping-cart"></i>Edit News<span class="caption-helper"> editing news details, associated medias, reviews, etc.</span> </div>
+                                            	新增新闻<span class="caption-helper"> 添加新闻图片请创建后修改</span> </div>
                                         <div class="actions btn-set">
                                             <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToNewsList(); return false;">
-                                                <i class="fa fa-angle-left"></i> Back</button>
+                                                <i class="fa fa-angle-left"></i> 返回</button>
                                             <button class="btn btn-secondary-outline" onclick="resetCreateNews(); return false;">
-                                                <i class="fa fa-reply"></i> Reset</button>
+                                                <i class="fa fa-reply"></i> 重置</button>
                                             <button class="btn btn-success" onclick="createNews(); return false;">
-                                                <i class="fa fa-check"></i> Save</button>
+                                                <i class="fa fa-check"></i> 保存</button>
                                             <button class="btn btn-success" onclick="return false;">
-                                                <i class="fa fa-check-circle"></i> Save &amp; Continue Edit</button>
+                                                <i class="fa fa-check-circle"></i> 保存并继续</button>
                                             <div class="btn-group">
                                                 <a class="btn btn-success dropdown-toggle" href="javascript:;" data-toggle="dropdown">
-                                                    <i class="fa fa-share"></i> More
+                                                    <i class="fa fa-share"></i> 其它
                                                     <i class="fa fa-angle-down"></i>
                                                 </a>
                                                 <div class="dropdown-menu pull-right">
@@ -181,13 +158,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <div class="portlet-body">
                                         <div class="tabbable-bordered">
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#tab_general" data-toggle="tab"> General </a></li>
+                                                <li class="active"><a href="#tab_general" data-toggle="tab"> 新闻主体 </a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab_general">
 												<div class="form-body">
 													<div class="form-group">
-														<label class="col-md-2 control-label">Global ID: <span class="required">
+														<label class="col-md-2 control-label">全局编号: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -195,7 +172,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">Event UUID: <span class="required">
+														<label class="col-md-2 control-label">新闻编号: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -203,7 +180,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">Event Title: <span class="required">
+														<label class="col-md-2 control-label">新闻标题: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -211,7 +188,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">Author: <span class="required">
+														<label class="col-md-2 control-label">编辑: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -219,19 +196,18 @@ License: You must have a valid license purchased only from themeforest(the above
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">Create Datetime: <span class="required">
+														<label class="col-md-2 control-label">发布时间: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
 															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
 																<input type="text" class="form-control" id="postDatetime" name="postDatetime" disabled="disabled">
 															</div>
-															<span class="help-block">
-															availability daterange. </span>
+															<span class="help-block"></span>
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">Number of Views: <span class="required">
+														<label class="col-md-2 control-label">浏览数: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
@@ -239,53 +215,53 @@ License: You must have a valid license purchased only from themeforest(the above
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">Short Description: <span class="required">
+														<label class="col-md-2 control-label">摘要: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
 															<textarea class="form-control" id="descShort" name="descShort"></textarea>
-															<span class="help-block">shown in abstract section </span>
+															<span class="help-block"> </span>
 														</div>
 														
 													</div>
 													
 															<div class="form-group">
-														<label class="col-md-2 control-label">Long Description: <span class="required">
+														<label class="col-md-2 control-label">正文: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
 															<textarea class="form-control" id="descLong" name="descLong" rows="6"></textarea>
-															<span class="help-block">shown in detail section </span>
+															<span class="help-block"> </span>
 														</div>
 														
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">News Class: <span class="required">
+														<label class="col-md-2 control-label">新闻类别: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="eventClass" name="eventClass">
-																<option value="0">Select...</option>
-																<option value="1">Default</option>
-																<option value="2">New</option>
-																<option value="3">Hot</option>
+																<option value="0">请选择...</option>
+																<option value="1">普通</option>
+																<option value="2">新</option>
+																<option value="3">热</option>
 															</select>
 														</div>
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">News Status: <span class="required">
+														<label class="col-md-2 control-label">新闻状态: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
-																<option value="0">Select...</option>
-																<option value="1">Published</option>
-																<option value="2">Wait to post</option>
-																<option value="3">Deleted</option>
-																<option value="4">Out of date</option>
-																<option value="5">Suspended</option>
+																<option value="0">请选择...</option>
+																<option value="1">已发布</option>
+																<option value="2">待发布</option>
+																<option value="3">已删除</option>
+																<option value="4">已过期</option>
+																<option value="5">已挂起</option>
 															</select>
 														</div>
 													</div>

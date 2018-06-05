@@ -10,7 +10,7 @@
 	<!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
 	<form class="search-form search-form-expanded" action="page_general_search_3.html" method="GET">
 	    <div class="input-group">
-	        <input type="text" class="form-control" placeholder="Search..." name="query">
+	        <input type="text" class="form-control" placeholder="搜索..." name="query">
 	        <span class="input-group-btn">
 	            <a href="javascript:;" class="btn submit">
 	                <i class="icon-magnifier"></i>
@@ -316,7 +316,7 @@
           <li class="dropdown dropdown-user">
               <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                   <img alt="" class="img-circle" src="${webapp_name}/assets/layouts/layout2/img/avatar3_small.jpg" />
-                  <span class="username username-hide-on-mobile"> Nick </span>
+                  <span class="username username-hide-on-mobile"> Admin </span>
                   <i class="fa fa-angle-down"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-default">

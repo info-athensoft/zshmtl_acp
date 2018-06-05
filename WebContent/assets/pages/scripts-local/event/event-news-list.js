@@ -42,8 +42,8 @@ var EventNewsList = function () {
                     //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
                 },
                 "order": [
-                    [1, "asc"]
-                ] // set first column as a default sort by asc
+                    [5, "desc"]		// [5, "asc"]
+                ] // set first column as a default sort by asc  //by Post Date (last modified date)
             }
         });
 

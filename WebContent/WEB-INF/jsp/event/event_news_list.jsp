@@ -161,12 +161,12 @@
                                         <div class="table-actions-wrapper">
                                             <span> </span>
                                             <select class="table-group-action-input form-control input-inline input-small input-sm" name="groupOption">
-                                                <option value="">Select...</option>
-												<option value="1">Publish</option>
-												<option value="2">Wait to post</option>
-												<option value="3">Delete</option>
-												<option value="4">Out of date</option>
-												<option value="5">Suspend</option>
+                                                <option value="">请选择...</option>
+												<option value="1">发布</option>
+												<option value="2">待发布</option>
+												<option value="3">删除</option>
+												<option value="4">过期</option>
+												<option value="5">审查</option>
                                             </select>
                                             <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> 更改状态</button>
                                         </div>
@@ -184,7 +184,7 @@
 													<th width="25%">新闻标题</th>
 													<th width="8%">作者</th>
 													<th width="8%">类别</th>
-													<th width="15%">发布日期</th>
+													<th width="15%">更新日期</th>
 													<th width="6%">浏览数</th>
 													<th width="8%">当前状态</th>
 													<th width="8%">操作</th>
@@ -196,10 +196,10 @@
 													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="eventAuthor"></td>
 													<td>
 														<select class="form-control form-filter input-sm" name="event_class" id="eventClass">
-															<option value="0">Select...</option>
-															<option value="1">Default</option>
-															<option value="2">New</option>
-															<option value="3">Hot</option>
+															<option value="0">选择...</option>
+															<option value="1">普通</option>
+															<option value="2">新</option>
+															<option value="3">热</option>
 														</select>
 													</td>
 													<td>
@@ -224,19 +224,19 @@
 													</td>
 													<td>
 														<select class="form-control form-filter input-sm" name="event_status" id="eventStatus">
-															<option value="0">Select...</option>
-															<option value="1">Published</option>
-															<option value="2">Wait to post</option>
-															<option value="3">Deleted</option>
-															<option value="4">Out of date</option>
-															<option value="5">Suspended</option>
+															<option value="0">选择...</option>
+															<option value="1">已发布</option>
+															<option value="2">待发布</option>
+															<option value="3">已删除</option>
+															<option value="4">已过期</option>
+															<option value="5">审查中</option>
 														</select>
 													</td>
 													<td>
 														<div class="margin-bottom-5">
-														<button class="btn btn-sm yellow filter-submit1 margin-bottom" onclick="filterSearch();"><i class="fa fa-search"></i> Search</button>
+														<button class="btn btn-sm yellow filter-submit1 margin-bottom" onclick="filterSearch();"><i class="fa fa-search"></i> 查找</button>
 														</div>
-														<button class="btn btn-sm red filter-cancel1" onclick="filterReset();"><i class="fa fa-times"></i> Reset</button>
+														<button class="btn btn-sm red filter-cancel1" onclick="filterReset();"><i class="fa fa-times"></i> 重置</button>
 													</td>
 												</tr>
                                             </thead>
