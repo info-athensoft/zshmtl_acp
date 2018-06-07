@@ -38,6 +38,7 @@ public class FileUploadAcpController {
 	
 //	public static final String FileDir = "D:\\Shared\\2017_athensoft_website\\fileupload";
 	public static final String FileDir = "C:\\temp\\fileupload";
+//	public static final String FileDir = "/home/resources/fileupload";
 	
 	public static final String ImgBaseUrl = "/img-event";
 	
