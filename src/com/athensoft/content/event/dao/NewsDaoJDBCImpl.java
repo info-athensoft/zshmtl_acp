@@ -139,8 +139,8 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		final String TABLE1 = "event_news";
 		
 		StringBuffer sbf = new StringBuffer();
-		sbf.append("update "+TABLE1+" ");
-		sbf.append("set ");
+		sbf.append("UPDATE "+TABLE1+" ");
+		sbf.append("SET ");
 		sbf.append("title = :title, ");
 		sbf.append("author = :author, ");
 		sbf.append("post_datetime = :post_datetime, ");
@@ -149,7 +149,7 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		sbf.append("desc_long = :desc_long, ");
 		sbf.append("event_class = :event_class, ");
 		sbf.append("event_status = :event_status ");
-		sbf.append("where ");
+		sbf.append("WHERE ");
 		sbf.append("event_uuid = :event_uuid");
 				
 				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/

@@ -59,9 +59,9 @@ var MemberList = function () {
                 grid.setAjaxParam("id", grid.getSelectedRows());
                 
                 //modified by Athens
-                var eventUUIDArray = grid.getSelectedRows();
-                var newsStatus = action.val();
-                groupUpdateStatus(eventUUIDArray,newsStatus);		//reload
+                var memberArray = grid.getSelectedRows();
+                var memberStatus = action.val();
+                groupUpdateStatus(memberArray,memberStatus);		//reload
                 //end-of-modified
                 
                 //grid.getDataTable().ajax.reload();
@@ -103,19 +103,19 @@ var MemberList = function () {
 
 
 /* list member - button:group update status */
-function groupUpdateStatus(eventUUIDArray,newsStatus){
+function groupUpdateStatus(memberArray,memberStatus){
 	//alert("groupUpdateStatus()");
     //alert(eventUUIDArray+":"+newsStatus);
 	
     //execute saving
     $.ajax({
         type    :    "post",
-        url        : "updateNewsGroup?eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
+        url        : "updateMemberGroup?memberArray="+memberArray+"&memberStatus="+memberStatus,
         dataType:    "json",
         timeout :     30000,
         
         success:function(msg){
-            location.href="eventsNewsList";			//should be specified with your destination url
+            location.href="memberList";			//should be specified with your destination url
         	//alert("INFO: News status updated.");
         },
         error:function(){
@@ -143,38 +143,49 @@ function filterSearch(){
     var p10 = $("#eventStatus").val();
 
 //	validate
-	if(!isNonNegativeInteger(p6a)){
-		p6a = "";
-		$("#viewNumFrom").val("");
-	}
-	if(!isNonNegativeInteger(p6b)){
-		p6b = "";
-		$("#viewNumTo").val("");
-	}
+//	if(!isNonNegativeInteger(p6a)){
+//		p6a = "";
+//		$("#viewNumFrom").val("");
+//	}
+//	if(!isNonNegativeInteger(p6b)){
+//		p6b = "";
+//		$("#viewNumTo").val("");
+//	}
 //	isNonNegativeInteger(p6b);
   
     var businessObject =
     {
-    //		globalId    :    p1,
-    		eventUUID   :    p2,
-    		title    	:    p3,
-    		author    	:    p4,
-     		postDatetimeFrom:  p5a,            
-     		postDatetimeTo:    p5b,            
-    		viewNumFrom :    p6a,            
-    		viewNumTo 	:    p6b,            
-    //		descShort   :    p7,
-    //		descLong	:    p8,
-      		eventClass  :    p9,
-    		eventStatus	:    p10
+    //		globalId    :	p1,
+    		acctName   	:	p2,
+    		name1    	:	p3,
+    		name2    	:	p4,
+    		gender		:	p5,            
+    		nationality	: 	p6,            
+    		phone1		:	p7,
+    		phone2		:	p8,
+    		wechat		:	p9,
+    		email		:	p10,
+    		degree		:	p11,
+    		occupation	:	p12,
+    		dob			:	p13,
+    		pobProvince	:	p14,
+    		pobCity		:	p15,
+    		homeAddress	:	p16,
+    		postalcode	:	p17,
+    		hobbies		:	p18,
+    		memberActiveDate	:	p19,
+    		memberLevel	:	p20,
+    		memberStatus:	p21
     };
 
-    var dt = $("#datatable_memberList").DataTable();										//your code
+    var dt = $("#datatable_memberList").DataTable();					//your code
     
     //mended on 2018-0218 for Tomcat 8.5 stricter request charset
     var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
     
-    var x = dt.ajax.url("newsSearchFilterData?itemJSONString="+encoded_param).load();		//your code
+    //by Athens Temperorily  comment this
+    //var x = dt.ajax.url("newsSearchFilterData?itemJSONString="+encoded_param).load();		//your code
+    
 }
 
 

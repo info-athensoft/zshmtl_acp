@@ -1,12 +1,15 @@
 package com.athensoft.member.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -85,6 +88,54 @@ public class MemberController {
 		
 		logger.info("leaving /member/memberEdit");
 		return mav;
+	}
+	
+	@RequestMapping(value="/updateMember",method=RequestMethod.POST)
+	public ModelAndView updateMember(@RequestParam String itemJSONString) {
+		
+		logger.info("entering /event/updateMember");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+//      Map<String, Object> model = mav.getModel();
+        JSONObject jsonObj= new JSONObject(itemJSONString);
+   
+        Member member = new Member();
+        member.setAcctName(jsonObj.getString("acctName"));
+        member.setName1(jsonObj.getString("name1"));
+        member.setName2(jsonObj.getString("name2"));
+        member.setGender(jsonObj.getInt("gender"));
+        member.setNationality(jsonObj.getString("nationality"));
+        member.setPhone1(jsonObj.getString("phone1"));
+        member.setPhone2(jsonObj.getString("phone2"));
+        member.setWechat(jsonObj.getString("wechat"));
+        member.setEmail(jsonObj.getString("email"));
+        member.setDegree(jsonObj.getString("degree"));
+        member.setOccupation(jsonObj.getString("occupation"));
+        member.setDob(jsonObj.getString("dob"));
+        member.setPobProvince(jsonObj.getString("pobProvince"));
+        member.setPobCity(jsonObj.getString("pobCity"));
+        member.setHomeAddress(jsonObj.getString("homeAddress"));
+        member.setPostalcode(jsonObj.getString("postalcode"));
+        member.setMemberLevel(jsonObj.getInt("memberLevel"));
+        member.setMemberStatus(jsonObj.getInt("memberStatus"));
+        member.setMemberActiveDate(new Date(jsonObj.getString("memberActiveDate")));
+        logger.info("news = "+member);
+          
+		/* business logic*/
+        //long itemId = itemService.createItem(ic); 
+
+        memberService.updateMember(member);
+		
+		/* assemble model and view */
+//      model.put("news", news);
+        String viewName = "member/member_edit";
+		mav.setViewName(viewName);		
+		
+		logger.info("leaving /member/updateMember");
+		return mav;		
 	}
 	
 	
@@ -194,7 +245,7 @@ public class MemberController {
 				break;
 			case MemberStatus.PENDING: 
 //				status = "Pending";
-				status = "ÒÑ¹ÒÆð";
+				status = "ÉóºËÖÐ";
 				statusKey = "danger";
 				break;
 			case MemberStatus.BANNED: 

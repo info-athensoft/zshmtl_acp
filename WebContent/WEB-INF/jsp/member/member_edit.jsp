@@ -47,7 +47,8 @@
         <link href="${webapp_name}/assets/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="${webapp_name}/assets/layouts/layout2/css/custom.min.css" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="favicon.ico" /> </head>
+        <link rel="shortcut icon" href="${webapp_name}/assets/global/plugins/datatables/media/images/favicon.ico"/>
+    </head>
     <!-- END HEAD -->
 
     <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
@@ -143,11 +144,11 @@
                                         <div class="caption">
                                             	编辑新闻<span class="caption-helper"> </span> </div>
                                         <div class="actions btn-set">
-                                            <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToNewsList(); return false;">
+                                            <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToMemberList(); return false;">
                                                 <i class="fa fa-angle-left"></i> 返回</button>
-                                            <button class="btn btn-secondary-outline" onclick="resetNews(); return false;">
-                                                <i class="fa fa-reply"></i> Reset</button>
-                                            <button class="btn btn-success" onclick="updateNews(); return false;">
+                                            <button class="btn btn-secondary-outline" onclick="resetMember(); return false;">
+                                                <i class="fa fa-reply"></i> 重置</button>
+                                            <button class="btn btn-success" onclick="updateMember(); return false;">
                                                 <i class="fa fa-check"></i> 保存</button>
                                              
                                             <!--    
@@ -223,10 +224,10 @@
 														</label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="gender" name="gender">
-																<option value="0" ${memberObject.eventClass == '0' ? 'selected' : ''}>请选择...</option>
-																<option value="1" ${memberObject.eventClass == '1' ? 'selected' : ''}>男</option>
-																<option value="2" ${memberObject.eventClass == '2' ? 'selected' : ''}>女</option>
-																<option value="3" ${memberObject.eventClass == '3' ? 'selected' : ''}>未知</option>
+																<option value="0" ${memberObject.gender == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${memberObject.gender == '1' ? 'selected' : ''}>男</option>
+																<option value="2" ${memberObject.gender == '2' ? 'selected' : ''}>女</option>
+																<option value="3" ${memberObject.gender == '3' ? 'selected' : ''}>未知</option>
 															</select>
 														</div>
 													</div>
@@ -234,7 +235,7 @@
 														<label class="col-md-2 control-label">国籍: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="name1" name="nationality" placeholder=""  value="${memberObject.nationality}">
+															<input type="text" class="form-control" id="nationality" name="nationality" placeholder=""  value="${memberObject.nationality}">
 														</div>
 													</div>
 													<div class="form-group">
@@ -294,6 +295,13 @@
 														</div>
 													</div>
 													<div class="form-group">
+														<label class="col-md-2 control-label">出生地（市，镇，县）: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="pobCity" name="pobCity" placeholder=""  value="${memberObject.pobCity}">
+														</div>
+													</div>
+													<div class="form-group">
 														<label class="col-md-2 control-label">住址: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
@@ -315,20 +323,17 @@
 														</div>
 													</div>
 													
-													
 													<div class="form-group">
-														<label class="col-md-2 control-label">发布时间: <span class="required">
+														<label class="col-md-2 control-label">激活时间: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
 															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${memberObject.memberActiveDate}" disabled="disabled">
+																<input type="text" class="form-control" id="memberActiveDate" name="memberActiveDate"  value="${memberObject.memberActiveDate}" disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
 													</div>
-													
-													
 													
 													<div class="form-group">
 														<label class="col-md-2 control-label">会员等级: <span class="required">
@@ -336,10 +341,10 @@
 														</label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="memberLevel" name="memberLevel">
-																<option value="0" ${memberObject.memberLevel == '1' ? 'selected' : ''}>请选择...</option>
-																<option value="1" ${memberObject.memberLevel == '2' ? 'selected' : ''}>普通会员</option>
-																<option value="2" ${memberObject.memberLevel == '3' ? 'selected' : ''}>VIP会员</option>
-																<option value="3" ${memberObject.memberLevel == '4' ? 'selected' : ''}>核心会员</option>
+																<option value="1" ${memberObject.memberLevel == '1' ? 'selected' : ''}>请选择...</option>
+																<option value="2" ${memberObject.memberLevel == '2' ? 'selected' : ''}>普通会员</option>
+																<option value="3" ${memberObject.memberLevel == '3' ? 'selected' : ''}>VIP会员</option>
+																<option value="4" ${memberObject.memberLevel == '4' ? 'selected' : ''}>核心会员</option>
 															</select>
 														</div>
 													</div>
@@ -362,9 +367,6 @@
 													</div>
 												</div>
                                                 </div>
-                                                
-                                               
-                                                
                                                
                                             </div>
                                         </div>
@@ -437,41 +439,18 @@ jQuery(document).ready(function() {
 
 //local
 //select object for event class
-	//var eventClassValue = ${memberObject.eventClass};
-	//$("#eventClass").val(eventClassValue);
-
+	
+	
 //select object for event status
 	var memberStatusValue = ${memberObject.memberStatus};
 	$("#memberStatus").val(memberStatusValue);
 	
 });
 
-/*
+
 function resetMember(){
 	
-	//object for reset
-	//var p1 = ${memberObject.globalId};
-	//var p2 = '${memberObject.eventUUID}';
-	var p3 = '${memberObject.title}';
-	var p4 = '${memberObject.author}';
-	//var p5 = ${memberObject.postDatetime};
-	var p6 = ${memberObject.viewNum};
-	var p7 = '${memberObject.descShort}';
-	var p8 = '${memberObject.descLong}';
-	var p9 = ${memberObject.eventClass};
-	var p10 = ${memberObject.eventStatus};
-	
-	//$("#globalId").val(p1);
-	//$("#eventUUID").val(p2);
-	$("#title").val(p3);
-	$("#author").val(p4);
-	//$("#postDatetime").val(p5);
-	$("#viewNum").val(p6);
-	$("#descShort").val(p7);
-	$("#descLong").val(p8);
-	$("#eventClass").val(p9);
-	$("#eventStatus").val(p10);
-}  */  
+} 
 </script>
 </body>
 

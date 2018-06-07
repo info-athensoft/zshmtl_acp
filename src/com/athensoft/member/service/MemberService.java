@@ -27,5 +27,9 @@ public class MemberService {
 	public Member getMemberByAcctName(String acctName) {
 		return memberDao.findByAcctName(acctName);
 	}
+
+	public void updateMember(Member member) {
+		memberDao.update(member);
+	}
 	
 }

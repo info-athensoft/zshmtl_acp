@@ -14,6 +14,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.athensoft.member.entity.Member;
@@ -127,7 +129,56 @@ public class MemberDaoJdbcImpl implements MemberDao {
 
 	@Override
 	public int update(Member member) {
-		// TODO Auto-generated method stub
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("UPDATE ").append(TABLE);
+		sbf.append(" SET ");
+		//sbf.append("acct_name=:acct_name,");
+		sbf.append("name1=:name1,");
+		sbf.append("name2=:name2,");
+		sbf.append("gender=:gender,");
+		sbf.append("nationality=:nationality,");
+		sbf.append("phone1=:phone1,");
+		sbf.append("phone2=:phone2,");
+		sbf.append("wechat=:wechat,");
+		sbf.append("email=:email,");
+		sbf.append("degree=:degree,");
+		sbf.append("occupation=:occupation,");
+		sbf.append("dob=:dob,");
+		sbf.append("pob_province=:pob_province,");
+		sbf.append("pob_city=:pob_city,");
+		sbf.append("home_addr=:home_addr,");
+		sbf.append("postal_code=:postal_code,");
+		sbf.append("member_level=:member_level,");
+		sbf.append("member_status=:member_status ");
+		sbf.append(" WHERE acct_name = :acct_name");
+		
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("acct_name", member.getAcctName());
+		paramSource.addValue("name1",member.getName1());
+		paramSource.addValue("name2",member.getName2());
+		paramSource.addValue("gender",member.getGender());
+		paramSource.addValue("nationality",member.getNationality());
+		paramSource.addValue("phone1",member.getPhone1());
+		paramSource.addValue("phone2",member.getPhone2());
+		paramSource.addValue("wechat",member.getWechat());
+		paramSource.addValue("email",member.getEmail());
+		paramSource.addValue("degree",member.getDegree());
+		paramSource.addValue("occupation",member.getOccupation());
+		paramSource.addValue("dob",member.getDob());
+		paramSource.addValue("pob_province",member.getPobProvince());
+		paramSource.addValue("pob_city",member.getPobCity());
+		paramSource.addValue("home_addr",member.getHomeAddress());
+		paramSource.addValue("postal_code",member.getPostalcode());
+		paramSource.addValue("member_level",member.getMemberLevel());
+		paramSource.addValue("member_status",member.getMemberStatus());
+		paramSource.addValue("member_active_date",member.getMemberActiveDate());
+		
+		
+		KeyHolder keyholder = new GeneratedKeyHolder();
+		jdbc.update(sql, paramSource, keyholder);
+		
 		return 0;
 	}
 
