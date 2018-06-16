@@ -4,23 +4,27 @@ import java.util.Date;
 
 public class AdPost {
 	private Long globalId;
+	private String adUUID;
+	private String adTitle;
 	private String adText;
 	private String adLink;
 	private String adImage;
 	private String adUrl;
 	private Integer adType;
 	private Long adOwnerId;
+	private String acctName;
 	private Integer adStatus;
 	private Date createDate;
+	private Date postDate;
+	private Date expireDate;
+	private Date modifyDate;
+	
 	public Integer getAdStatus() {
 		return adStatus;
 	}
 	public void setAdStatus(Integer adStatus) {
 		this.adStatus = adStatus;
 	}
-	private Date postDate;
-	private Date expireDate;
-	private Date modifyDate;
 	
 	public Long getGlobalId() {
 		return globalId;
@@ -90,10 +94,29 @@ public class AdPost {
 	}
 	@Override
 	public String toString() {
-		return "AdPost [globalId=" + globalId + ", adText=" + adText + ", adLink=" + adLink + ", adImage=" + adImage
-				+ ", adUrl=" + adUrl + ", adType=" + adType + ", adOwnerId=" + adOwnerId + ", adStatus=" + adStatus
-				+ ", createDate=" + createDate + ", postDate=" + postDate + ", expireDate=" + expireDate
-				+ ", modifyDate=" + modifyDate + "]";
+		return "AdPost [globalId=" + globalId + ", adUUID=" + adUUID + ", adTitle=" + adTitle + ", adText=" + adText
+				+ ", adLink=" + adLink + ", adImage=" + adImage + ", adUrl=" + adUrl + ", adType=" + adType
+				+ ", adOwnerId=" + adOwnerId + ", acctName=" + acctName + ", adStatus=" + adStatus + ", createDate="
+				+ createDate + ", postDate=" + postDate + ", expireDate=" + expireDate + ", modifyDate=" + modifyDate
+				+ "]";
+	}
+	public String getAcctName() {
+		return acctName;
+	}
+	public void setAcctName(String acctName) {
+		this.acctName = acctName;
+	}
+	public String getAdTitle() {
+		return adTitle;
+	}
+	public void setAdTitle(String adTitle) {
+		this.adTitle = adTitle;
+	}
+	public String getAdUUID() {
+		return adUUID;
+	}
+	public void setAdUUID(String adUUID) {
+		this.adUUID = adUUID;
 	}
 	
 }

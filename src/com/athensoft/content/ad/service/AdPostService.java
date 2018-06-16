@@ -19,4 +19,16 @@ public class AdPostService {
 	public List<AdPost> getAdPostList(){
 		return adPostDao.findAll();
 	}
+	
+	public AdPost getAdPostByAdUUID(String adUUID){
+		return adPostDao.findByUUID(adUUID);
+	}
+	
+	public void createAdPost(AdPost adpost){
+		adPostDao.create(adpost);
+	}
+	
+	public void updateAdPost(AdPost adpost){
+		adPostDao.update(adpost);
+	}
 }

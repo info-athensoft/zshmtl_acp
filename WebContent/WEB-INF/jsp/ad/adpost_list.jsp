@@ -133,7 +133,7 @@
                                     <div class="caption">
                                         	广告列表 <span class="caption-helper">查询，批处理...</span></div>
                                     <div class="actions">
-                                        <a href="eventsNewsCreate" class="btn btn-circle btn-info">
+                                        <a href="${webapp_name}/ad/adpost_create.html" class="btn btn-circle btn-info">
                                             <i class="fa fa-plus"></i><span class="hidden-xs"> 创建广告 </span>
                                         </a>
                                         <div class="btn-group">
@@ -180,9 +180,10 @@
                                                     </th>
                                                     <th width="8%">统一编号</th>
 													<th width="8%">广告文字</th>
+													<!-- 
 													<th width="8%">广告图片</th>
 													<th width="8%">视频链接</th>
-													<th width="8%">外部链接</th>
+													<th width="8%">外部链接</th>  -->
 													<th width="8%">广告主</th>
 													<th width="8%">类别</th>
 													<th width="8%">创建日期</th>
@@ -196,10 +197,11 @@
 													<td></td>
 													<td><input type="text" class="form-control form-filter input-sm" name="event_uuid" id="adPostId"></td>
 													<td><input type="text" class="form-control form-filter input-sm" name="event_title" id="adText"></td>
+													<!-- 
 													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adImage"></td>
 													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adLink"></td>
 													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adUrl"></td>
-													
+													 -->
 													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adOwnerId"></td>
 													<td>
 														<select class="form-control form-filter input-sm" name="event_class" id="adType">

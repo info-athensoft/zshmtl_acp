@@ -37,6 +37,7 @@
         <link href="${webapp_name}/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
         <link href="${webapp_name}/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
         <link href="${webapp_name}/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+        <link href="${webapp_name}/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL STYLES -->
         <link href="${webapp_name}/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
@@ -86,23 +87,22 @@
                 <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
-                    
                     <h1 class="page-title">广告系统 <small> 新增广告</small></h1>
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
-						<li>
-							<i class="fa fa-home"></i>
-							<a href="#">Home</a>
-							<i class="fa fa-angle-right"></i>
-						</li>
-						<li>
-							<a href="eventsDashboard">Ad</a>
-							<i class="fa fa-angle-right"></i>
-						</li>
-						<li>
-							<a href="#">Create</a>
-						</li>
-					</ul>
+							<li>
+								<i class="fa fa-home"></i>
+								<a href="#">首页</a>
+								<i class="fa fa-angle-right"></i>
+							</li>
+							<li>
+								<a href="${webapp_name}/ad/ad_list.html">广告</a>
+								<i class="fa fa-angle-right"></i>
+							</li>
+							<li>
+								<a href="#">新增广告</a>
+							</li>
+						</ul>
                         <div class="page-toolbar">
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
@@ -137,16 +137,19 @@
                                 <div class="portlet">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            Edit News<span class="caption-helper"> editing news details, associated medias, reviews, etc.</span> </div>
+                                           	 新增广告<span class="caption-helper"> </span> </div>
                                         <div class="actions btn-set">
-                                            <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToNewsList(); return false;">
-                                                <i class="fa fa-angle-left"></i> Back</button>
-                                            <button class="btn btn-secondary-outline" onclick="resetCreateNews(); return false;">
+                                            <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToAdPostList();">
+                                                <i class="fa fa-angle-left"></i> 返回</button>
+                                            <button class="btn btn-secondary-outline" onclick="resetCreateAdPost();">
                                                 <i class="fa fa-reply"></i> Reset</button>
-                                            <button class="btn btn-success" onclick="createNews(); return false;">
-                                                <i class="fa fa-check"></i> Save</button>
+                                            <button class="btn btn-success" onclick="createAdPost();">
+                                                <i class="fa fa-check"></i> 保存</button>
+                                                
+                                            <!--    
                                             <button class="btn btn-success" onclick="return false;">
                                                 <i class="fa fa-check-circle"></i> Save &amp; Continue Edit</button>
+                                                 
                                             <div class="btn-group">
                                                 <a class="btn btn-success dropdown-toggle" href="javascript:;" data-toggle="dropdown">
                                                     <i class="fa fa-share"></i> More
@@ -160,7 +163,7 @@
 	                                                    <li><a href="javascript:;"> Print </a></li>
                                                    	</ul>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="portlet-body">
@@ -181,9 +184,7 @@
 													</div> -->
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">广告类型: <span class="required">
-														* </span>
-														</label>
+														<label class="col-md-2 control-label">广告类型: <span class="required">* </span></label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="adType" name="adType">
 																<option value="0">请选择...</option>
@@ -193,66 +194,86 @@
 															</select>
 														</div>
 													</div>
-													
+													<!-- 
 													<div class="form-group">
-														<label class="col-md-2 control-label">会员编号: <span class="required">* </span>
-														</label>
+														<label class="col-md-2 control-label">会员编号: <span class="required">* </span></label>
 														<div class="col-md-4">
 															<input type="text" class="form-control" id="adOwnerId" name="adOwnerId" placeholder="" disabled="disabled">
 														</div>
-													</div>
+													</div> -->
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">到期日: <span class="required">
-														* </span>
-														</label>
+														<label class="col-md-2 control-label">会员账号: <span class="required">* </span></label>
 														<div class="col-md-4">
-																<input type="text" class="form-control" id="expireDate" name="expireDate">
-															<span class="help-block">
-															availability daterange. </span>
+															<input type="text" class="form-control" id="acctName" name="acctName" placeholder="登录邮箱">
+														</div>
+													</div>
+													
+													<div class="row">
+					                                	<label class="col-md-2 control-label">广告图片: <span class="required">* </span></label>
+				                       					<div class="col-md-10">
+				                       						<span class="label label-danger">NOTE!</span>请新增该条广告后再行添加图片
+							                      		</div>
+				                       				</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">广告标题: <span class="required">* </span></label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" id="adTitle" name="adTitle" placeholder="">
+															<span class="help-block">限20字 </span>
 														</div>
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">操作员: <span class="required">
-														* </span>
-														</label>
+														<label class="col-md-2 control-label">广告文字: <span class="required">* </span></label>
+														<div class="col-md-10">
+															<textarea class="form-control" id="adText" name="adText"></textarea>
+															<span class="help-block">限60字 </span>
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">广告链接: <span class="required">* </span></label>
+														<div class="col-md-10">
+															<textarea class="form-control" id="adLink" name="adLink"></textarea>
+															<span class="help-block">其它视频或链接广告 </span>
+														</div>
+													</div>
+													
+													<!-- 
+													<div class="form-group">
+														<label class="col-md-2 control-label">广告图片: <span class="required">* </span></label>
+														<div class="col-md-10">
+															<textarea class="form-control" id="adImage" name="adImage"></textarea>
+															<span class="help-block"> </span>
+														</div>
+													</div> -->
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">到期日: <span class="required">* </span></label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="expireDate" name="expireDate">
+															<span class="help-block"></span>
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">操作员: <span class="required">* </span></label>
 														<div class="col-md-4">
 															<input type="text" class="form-control" id="author" name="author" placeholder="">
 														</div>
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">Event Title: <span class="required">* </span>
-														</label>
+														<label class="col-md-2 control-label">广告状态: <span class="required">* </span></label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="title" name="title" placeholder="">
-														</div>
-													</div>
-													
-													<div class="form-group">
-														<label class="col-md-2 control-label">广告文字: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<textarea class="form-control" id="adText" name="adText"></textarea>
-															<span class="help-block">限30字 </span>
-														</div>
-													</div>
-													
-													
-													<div class="form-group">
-														<label class="col-md-2 control-label">News Status: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
-																<option value="0">Select...</option>
-																<option value="1">Published</option>
-																<option value="2">Wait to post</option>
-																<option value="3">Deleted</option>
-																<option value="4">Out of date</option>
-																<option value="5">Suspended</option>
+															<select class="table-group-action-input form-control input-medium" id="adpostStatus" name="adpostStatus">
+																<option value="0">请选择...</option>
+																<option value="1">已发布</option>
+																<option value="2" selected="selected">待发布</option>
+																<option value="3">已删除</option>
+																<option value="4">已过期</option>
+																<option value="5">审查中</option>
 															</select>
 														</div>
 													</div>
@@ -261,10 +282,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                
+                                
                                 </div>
                             </form>
                         </div>
                     </div>
+                    
                 </div>
                 <!-- END CONTENT BODY -->
             </div>
@@ -303,15 +327,11 @@
 <script src="${webapp_name}/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/plugins/plupload/js/plupload.full.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="${webapp_name}/assets/global/scripts/app.min.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event-news-create.js"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="${webapp_name}/assets/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/layouts/layout2/scripts/demo.min.js" type="text/javascript"></script>
@@ -320,6 +340,11 @@
 <script src="${webapp_name}/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
  -->
 <!-- END THEME LAYOUT SCRIPTS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/ad/adpost-create.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/ad/booth-upload.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
 <script>
 
 </script>

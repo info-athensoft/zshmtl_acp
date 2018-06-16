@@ -9,6 +9,8 @@ public interface AdPostDao {
 	
 	public AdPost findById(Long globalId);
 	
+	public AdPost findByUUID(String adUUID);
+	
 	public int create(AdPost adPostObj);
 	
 	public int update(AdPost adPostObj);
