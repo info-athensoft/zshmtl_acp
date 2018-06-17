@@ -160,6 +160,7 @@ public class AdPostDaoJdbcImpl implements AdPostDao {
 		
 		String sql = sbf.toString();
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		
 		paramSource.addValue("ad_uuid", x.getAdUUID());
 		paramSource.addValue("ad_title", x.getAdTitle());
 		paramSource.addValue("ad_text", x.getAdText());
@@ -183,8 +184,45 @@ public class AdPostDaoJdbcImpl implements AdPostDao {
 	}
 
 	@Override
-	public int update(AdPost adPostObj) {
-		// TODO Auto-generated method stub
+	public int update(AdPost x) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append(" UPDATE ").append(TABLE);
+		sbf.append(" SET ad_title=:ad_title,");
+		sbf.append("  ad_text=:ad_text,");
+		sbf.append("  ad_link=:ad_link,");
+		sbf.append("  ad_image=:ad_image,");
+		sbf.append("  ad_url=:ad_url,");
+		sbf.append("  ad_type=:ad_type,");
+		sbf.append("  acct_name=:acct_name,");
+		sbf.append("  ad_status=:ad_status,");
+//		sbf.append("  create_date=:create_date,");
+		sbf.append("  post_date=:post_date, ");
+		sbf.append("  expire_date=:expire_date, ");
+		sbf.append("  modify_date=:modify_date ");
+		sbf.append(" WHERE ad_uuid=:ad_uuid");
+		
+		String sql = sbf.toString();
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		
+		paramSource.addValue("ad_uuid", x.getAdUUID());
+		paramSource.addValue("ad_title", x.getAdTitle());
+		paramSource.addValue("ad_text", x.getAdText());
+		paramSource.addValue("ad_link", x.getAdLink());
+		paramSource.addValue("ad_image", x.getAdImage());
+		paramSource.addValue("ad_url", x.getAdUrl());
+		paramSource.addValue("ad_type", x.getAdType());
+		paramSource.addValue("acct_name", x.getAcctName());
+		paramSource.addValue("ad_status", x.getAdStatus());
+//		paramSource.addValue("create_date", x.getCreateDate());
+		paramSource.addValue("post_date", x.getPostDate());
+		paramSource.addValue("expire_date", x.getExpireDate());
+		paramSource.addValue("modify_date", x.getModifyDate());
+		try{
+			jdbc.update(sql, paramSource);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
 		return 0;
 	}
 

@@ -150,6 +150,47 @@ public class AdPostController {
 		return model;		
 	}
 	
+	@RequestMapping(value="/adpost/update",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> updateAdPost(@RequestParam String itemJSONString) {
+		
+		logger.info("entering /ad/adpost/update");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+        JSONObject jsonObj= new JSONObject(itemJSONString);
+        
+        AdPost adpost = new AdPost();
+        adpost.setAdType(jsonObj.getInt("adType"));
+        adpost.setAcctName(jsonObj.getString("acctName"));
+        adpost.setAdUUID(jsonObj.getString("adUUID"));
+        adpost.setAdTitle(jsonObj.getString("adTitle"));
+        adpost.setAdText(jsonObj.getString("adText"));
+        adpost.setAdImage(jsonObj.getString("adImage"));						//TODO
+        adpost.setAdLink(jsonObj.getString("adLink"));						//TODO
+        adpost.setAdUrl(jsonObj.getString("adUrl"));							//TODO
+        adpost.setAdStatus(jsonObj.getInt("adpostStatus"));
+        //adpost.setCreateDate(new Date());				//TODO
+        adpost.setPostDate(new Date());					//TODO
+        adpost.setExpireDate(new Date());				//TODO
+        adpost.setModifyDate(new Date());				//TODO
+        //missing author
+          
+        logger.info(adpost);
+          
+		/* business logic*/
+        adPostService.updateAdPost(adpost);
+		
+		/* assemble model and view */
+//      model.put("news", news);
+        Map<String,Object> model = mav.getModel();
+        
+        logger.info("exiting... /ad/adpost/update");
+		return model;		
+	}
+	
 	private String[][] getData(List<AdPost> listObj, String actionName){
 		int entryLength = listObj.size();
 //		final int COLUMN_NUM = 14;

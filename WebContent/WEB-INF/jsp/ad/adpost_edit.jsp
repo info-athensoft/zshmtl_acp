@@ -143,8 +143,8 @@
                                         <div class="actions btn-set">
                                             <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToAdPostList();">
                                                 <i class="fa fa-angle-left"></i> 返回</button>
-                                            <button class="btn btn-secondary-outline" onclick="resetCreateAdPost();">
-                                                <i class="fa fa-reply"></i> Reset</button>
+                                            <button class="btn btn-secondary-outline" onclick="resetUpdateAdPost();">
+                                                <i class="fa fa-reply"></i> 清空</button>
                                             <button class="btn btn-success" onclick="updateAdPost();">
                                                 <i class="fa fa-check"></i> 保存</button>
                                                 
@@ -196,6 +196,21 @@
 															</select>
 														</div>
 													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">广告状态: <span class="required">* </span></label>
+														<div class="col-md-10">
+															<select class="table-group-action-input form-control input-medium" id="adpostStatus" name="adpostStatus">
+																<option value="0" ${adPostObject.adType == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${adPostObject.adType == '1' ? 'selected' : ''}>已发布</option>
+																<option value="2" ${adPostObject.adType == '2' ? 'selected' : ''}>待发布</option>
+																<option value="3" ${adPostObject.adType == '3' ? 'selected' : ''}>已删除</option>
+																<option value="4" ${adPostObject.adType == '4' ? 'selected' : ''}>已过期</option>
+																<option value="5" ${adPostObject.adType == '5' ? 'selected' : ''}>审查中</option>
+															</select>
+														</div>
+													</div>
+													
 													<!-- 
 													<div class="form-group">
 														<label class="col-md-2 control-label">会员编号: <span class="required">* </span></label>
@@ -217,19 +232,19 @@
 				                       					<div class="col-md-10">
 				                       						<div class="fileinput fileinput-new" data-provides="fileinput">
 							                                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-							                                       	<!--  <img id="fileinput-new-img" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/> -->
-							                                       	<img id="fileinput-new-img" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>
+							                                       	<!--  <img id="fileinput-new-img" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>-->
+							                                       	<a href="${adPostObject.adImage}" class="fancybox-button" data-rel="fancybox-button"><img id="fileinput-new-img" src="${adPostObject.adImage}" alt=""/></a>
 																</div>
 							                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
 																</div>
 							                                    <div>
 							                                        <span class="btn btn-sm default btn-file">
-							                                        	<span class="fileinput-new btn-sm"> Select image </span>
-							                                        	<span class="fileinput-exists btn-sm"> Change </span>
+							                                        	<span class="fileinput-new btn-sm"> 选择图片 </span>
+							                                        	<span class="fileinput-exists btn-sm"> 更改 </span>
 							                                        	<input type="file" id="ufile" name="...">
 																	</span>
-							                                        <a href="javascript:;" class="btn btn-sm red fileinput-exists" data-dismiss="fileinput"> Remove </a>
-							                                        <a href="javascript:;" class="btn btn-sm green fileinput-exists" data-dismiss="fileinput" onclick=" clickUpload('${adPostObject.acctName}','${adPostObject.adUUID}')"> Upload </a>
+							                                        <a href="javascript:;" class="btn btn-sm red fileinput-exists" data-dismiss="fileinput"> 移除 </a>
+							                                        <a href="javascript:;" class="btn btn-sm green fileinput-exists" data-dismiss="fileinput" onclick=" clickUpload('${adPostObject.acctName}','${adPostObject.adUUID}')"> 上传 </a>
 							                                    </div>
 							                                </div>
 				                       						
@@ -244,7 +259,8 @@
 							                             	<div class="form-group">
 							                                	<div class="col-md-12">
 							                                		<br/>
-							                                    	<input type="text" id="booth-cover-img-url" class="form-control" placeholder="Image URL" disabled="disabled">
+							                                    	<!-- <input type="text" id="booth-cover-img-url" class="form-control" placeholder="Image URL" disabled="disabled"> -->
+							                                    	<input type="text" id="user-ad-img-url" class="form-control" placeholder="Image URL" disabled="disabled" value="${adPostObject.adImage}">
 							                                	</div>
 							                            	</div>
 							                            	<div class="form-group">
@@ -294,19 +310,9 @@
 														</div>
 													</div>
 													
-													<div class="form-group">
-														<label class="col-md-2 control-label">广告状态: <span class="required">* </span></label>
-														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" id="adpostStatus" name="adpostStatus">
-																<option value="0" ${adPostObject.adType == '0' ? 'selected' : ''}>请选择...</option>
-																<option value="1" ${adPostObject.adType == '1' ? 'selected' : ''}>已发布</option>
-																<option value="2" ${adPostObject.adType == '2' ? 'selected' : ''}>待发布</option>
-																<option value="3" ${adPostObject.adType == '3' ? 'selected' : ''}>已删除</option>
-																<option value="4" ${adPostObject.adType == '4' ? 'selected' : ''}>已过期</option>
-																<option value="5" ${adPostObject.adType == '5' ? 'selected' : ''}>审查中</option>
-															</select>
-														</div>
-													</div>
+													
+													
+													<input type="hidden" class="form-control" id="adUUID" name="adUUID" value="${adPostObject.adUUID}">
 												</div>
 												</div>
                                             </div>
@@ -371,18 +377,13 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/ad/adpost-edit.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/ad/booth-upload.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/ad/adpost-upload.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
 	
 	
-});
-
-function resetAdPost(){
-	
-
-}    
+});    
 </script>
 </body>
 

@@ -49,7 +49,7 @@ function clickUpload(acctName,adUUID) {
 	    					//BlockUI
 					    	App.blockUI({
 					    		target	: '#div_user_ad',
-					    		message	: 'UPLOADING ......  '
+					    		message	: '上传中 ......  '
 					    	});
 	
 					    	//UnblockUI
@@ -58,7 +58,8 @@ function clickUpload(acctName,adUUID) {
 					    	}, 4000);
 	        
 					    	//set image URL value into input element
-					    	$("#booth-cover-img-url").val(data["url"]);
+//					    	$("#booth-cover-img-url").val(data["url"]);
+					    	$("#user-ad-img-url").val(data["url"]);
 					    	$("#fileinput-new-img").attr("src",data["url"]);
 	    				}
 	  });	//end of AJAX

@@ -1,4 +1,4 @@
-/** adpost_create.jsp */
+/** adpost_edit.jsp */
 
 
 /* create adpost - button:back */
@@ -39,7 +39,7 @@ function updateAdPost() {
         	location.href="/acp/ad/adpost_list.html";
         },
         error:function(){
-            alert("ERROR: AdPost creating failed.");     
+            alert("ERROR: AdPost editing failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -48,7 +48,7 @@ function updateAdPost() {
 }
 
 
-/* create adpost - button:reset */
+/* update adpost - button:reset */
 function resetUpdateAdPost(){
 	var p1 = $("#adType").val(0);
 	var p2 = $("#acctName").val("");
@@ -58,6 +58,7 @@ function resetUpdateAdPost(){
 	var p6 = $("#author").val("");
 	var p7 = $("#adpostStatus").val(0);
 	//var p8 = $("#adUUID").val("");
+	var p10 = $("#adLink").val("");
 }
 
 function getAdPostObject(){
@@ -68,7 +69,10 @@ function getAdPostObject(){
 	var p5 = $("#expireDate").val();
 	var p6 = $("#author").val();
 	var p7 = $("#adpostStatus").val();
-	//var p8 = $("#adUUID").val();
+	var p8 = $("#user-ad-img-url").val();
+	var p9 = $("#adUUID").val();
+	var p10 = $("#adLink").val();
+	var p11 = ""; //$("#adUrl").val();
 	
 	var obj = {
 		adType		:p1,
@@ -77,8 +81,12 @@ function getAdPostObject(){
 		adText		:p4,
 		expireDate	:p5,
 		author		:p6,
-		adpostStatus:p7	//,
-		//adUUID		:p8
+		adpostStatus:p7,
+		
+		adImage		:p8,
+		adUUID		:p9,
+		adLink		:p10,
+		adUrl		:p11
 	};
 	
 	return obj;
