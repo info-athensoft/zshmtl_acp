@@ -159,21 +159,20 @@
                                         <div class="table-actions-wrapper">
                                             <span> </span>
                                             <select class="table-group-action-input form-control input-inline input-small input-sm" name="groupOption">
-                                                <option value="">Select...</option>
-												<option value="1">Publish</option>
-												<option value="2">Wait to post</option>
-												<option value="3">Delete</option>
-												<option value="4">Out of date</option>
-												<option value="5">Suspend</option>
+                                                <option value="">请选择...</option>
+												<option value="1">发布</option>
+												<option value="2">待发布</option>
+												<option value="3">删除</option>
+												<option value="4">过期</option>
+												<option value="5">审查</option>
                                             </select>
-                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
+                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> 修改状态</button>
                                         </div>
-                                        <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_eventNewsList">
+                                        <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_adPostList">
                                             <thead>
                                                 <tr role="row" class="heading">
                                                     <th width="1%">
                                                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                            <!-- <input type="checkbox" class="group-checkable" data-set="#sample_2 .checkboxes" />  -->
                                                             <input type="checkbox" class="group-checkable">
                                                             <span></span>
                                                         </label>
@@ -187,24 +186,24 @@
 													<th width="8%">广告主</th>
 													<th width="8%">类别</th>
 													<th width="8%">创建日期</th>
-													<th width="8%">发布日期</th>
-													<th width="8%">过期日期</th>
+													<th width="8%">起始日期</th>
+													<th width="8%">到期日期</th>
 													<th width="8%">修改日期</th>
 													<th width="8%">当前状态</th>
 													<th width="8%">操作</th>
                                                 </tr>
                                                 <tr role="row" class="filter">
 													<td></td>
-													<td><input type="text" class="form-control form-filter input-sm" name="event_uuid" id="adPostId"></td>
-													<td><input type="text" class="form-control form-filter input-sm" name="event_title" id="adText"></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="adUUID" id="adUUID"></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="adTitle" id="adTitle"></td>
 													<!-- 
 													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adImage"></td>
 													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adLink"></td>
 													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adUrl"></td>
 													 -->
-													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adOwnerId"></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="acctName" id="acctName"></td>
 													<td>
-														<select class="form-control form-filter input-sm" name="event_class" id="adType">
+														<select class="form-control form-filter input-sm" name="adType" id="adType">
 															<option value="0">请选择...</option>
 															<option value="1">文字广告</option>
 															<option value="2">图片广告</option>
@@ -214,13 +213,13 @@
 													
 													<td>
 														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="product_created_from" placeholder="From" id="postDatetimeFrom">
+															<input type="text" class="form-control form-filter input-sm" readonly name="createDatetimeFrom" placeholder="From" id="createDatetimeFrom">
 															<span class="input-group-btn">
 															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 															</span>
 														</div>
 														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="product_created_to" placeholder="To" id="postDatetimeTo">
+															<input type="text" class="form-control form-filter input-sm" readonly name="createDatetimeTo" placeholder="To" id="createDatetimeTo">
 															<span class="input-group-btn">
 															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 															</span>
@@ -228,13 +227,13 @@
 													</td>
 													<td>
 														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="product_created_from" placeholder="From" id="postDatetimeFrom">
+															<input type="text" class="form-control form-filter input-sm" readonly name="postDatetimeFrom" placeholder="From" id="postDatetimeFrom">
 															<span class="input-group-btn">
 															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 															</span>
 														</div>
 														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="product_created_to" placeholder="To" id="postDatetimeTo">
+															<input type="text" class="form-control form-filter input-sm" readonly name="postDatetimeTo" placeholder="To" id="postDatetimeTo">
 															<span class="input-group-btn">
 															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 															</span>
@@ -242,13 +241,13 @@
 													</td>
 													<td>
 														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="product_created_from" placeholder="From" id="postDatetimeFrom">
+															<input type="text" class="form-control form-filter input-sm" readonly name="expireDatetimeFrom" placeholder="From" id="expireDatetimeFrom">
 															<span class="input-group-btn">
 															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 															</span>
 														</div>
 														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="product_created_to" placeholder="To" id="postDatetimeTo">
+															<input type="text" class="form-control form-filter input-sm" readonly name="expireDatetimeTo" placeholder="To" id="expireDatetimeTo">
 															<span class="input-group-btn">
 															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 															</span>
@@ -256,26 +255,26 @@
 													</td>
 													<td>
 														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="product_created_from" placeholder="From" id="postDatetimeFrom">
+															<input type="text" class="form-control form-filter input-sm" readonly name="modifyDatetimeFrom" placeholder="From" id="modifyDatetimeFrom">
 															<span class="input-group-btn">
 															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 															</span>
 														</div>
 														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="product_created_to" placeholder="To" id="postDatetimeTo">
+															<input type="text" class="form-control form-filter input-sm" readonly name="modifyDatetimeTo" placeholder="To" id="modifyDatetimeTo">
 															<span class="input-group-btn">
 															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 															</span>
 														</div>
 													</td>
 													<td>
-														<select class="form-control form-filter input-sm" name="event_status" id="adStatus">
+														<select class="form-control form-filter input-sm" name="adStatus" id="adStatus">
 															<option value="0">请选择...</option>
-															<option value="1">Published</option>
-															<option value="2">Wait to post</option>
-															<option value="3">Deleted</option>
-															<option value="4">Out of date</option>
-															<option value="5">Suspended</option>
+															<option value="1">已发布</option>
+															<option value="2">待发布</option>
+															<option value="3">已删除</option>
+															<option value="4">已过期</option>
+															<option value="5">审查中</option>
 														</select>
 													</td>
 													<td>
@@ -349,10 +348,6 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 AdPostList.init();
-
-
-//$("#menu-myevents").addClass("selected");
-
 </script>
 </body>
 

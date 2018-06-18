@@ -140,9 +140,9 @@
                                            	 新增广告<span class="caption-helper"> </span> </div>
                                         <div class="actions btn-set">
                                             <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToAdPostList();">
-                                                <i class="fa fa-angle-left"></i> 返回</button>
+                                                <i class="fa fa-angle-left"></i> 返回列表</button>
                                             <button class="btn btn-secondary-outline" onclick="resetCreateAdPost();">
-                                                <i class="fa fa-reply"></i> Reset</button>
+                                                <i class="fa fa-reply"></i> 重置</button>
                                             <button class="btn btn-success" onclick="createAdPost();">
                                                 <i class="fa fa-check"></i> 保存</button>
                                                 
@@ -212,7 +212,7 @@
 													<div class="row">
 					                                	<label class="col-md-2 control-label">广告图片: <span class="required">* </span></label>
 				                       					<div class="col-md-10">
-				                       						<span class="label label-danger">NOTE!</span>请新增该条广告后再行添加图片
+				                       						<span class="label label-danger"> 提示 </span> &nbsp;&nbsp;&nbsp;&nbsp;请新增该条广告后再行添加图片！
 							                      		</div>
 				                       				</div>
 													
@@ -239,23 +239,22 @@
 															<span class="help-block">其它视频或链接广告 </span>
 														</div>
 													</div>
+												
 													
-													<!-- 
-													<div class="form-group">
-														<label class="col-md-2 control-label">广告图片: <span class="required">* </span></label>
-														<div class="col-md-10">
-															<textarea class="form-control" id="adImage" name="adImage"></textarea>
-															<span class="help-block"> </span>
-														</div>
-													</div> -->
-													
-													<div class="form-group">
+													<div  class="form-group">
 														<label class="col-md-2 control-label">到期日: <span class="required">* </span></label>
 														<div class="col-md-4">
-															<input type="text" class="form-control" id="expireDate" name="expireDate">
-															<span class="help-block"></span>
+															<div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+																<input type="text" class="form-control" id="expireDate" name="expireDate">
+																<span class="input-group-btn">
+		                                                            <button class="btn default" type="button">
+		                                                                <i class="fa fa-calendar"></i>
+		                                                            </button>
+		                                                        </span> 
+	                                                        </div>
 														</div>
-													</div>
+														<span class="help-block"></span>
+                                                    </div>
 													
 													<div class="form-group">
 														<label class="col-md-2 control-label">操作员: <span class="required">* </span></label>
@@ -327,7 +326,7 @@
 <script src="${webapp_name}/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/plugins/plupload/js/plupload.full.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+<script src="${webapp_name}/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript" ></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="${webapp_name}/assets/global/scripts/app.min.js" type="text/javascript"></script>
@@ -341,9 +340,10 @@
  -->
 <!-- END THEME LAYOUT SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/ad/adpost-create.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/ad/booth-upload.js"></script>
+<script src="${webapp_name}/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+<script src="${webapp_name}/assets/pages/scripts-local/global-validate.js" type="text/javascript" ></script>
+<script src="${webapp_name}/assets/pages/scripts-local/ad/adpost-create.js" type="text/javascript" ></script>
+<script src="${webapp_name}/assets/pages/scripts-local/ad/adpost-upload.js" type="text/javascript" ></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 

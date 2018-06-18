@@ -2,6 +2,7 @@ package com.athensoft.content.ad.controller;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.ad.entity.AdPost;
+import com.athensoft.content.ad.entity.AdPostStatus;
 import com.athensoft.content.ad.entity.AdPostType;
 import com.athensoft.content.ad.service.AdPostService;
 import com.athensoft.content.event.controller.NewsAcpController;
-import com.athensoft.content.event.entity.EventMedia;
+import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.News;
 import com.athensoft.util.id.UUIDHelper;
 
@@ -109,6 +111,217 @@ public class AdPostController {
 	}
 	
 	
+	@RequestMapping(value="/adpost/searchFilterData",produces="application/json")
+	@ResponseBody
+	public Map<String, Object> getDataSearchNewsByFilter(@RequestParam String itemJSONString){
+		logger.info("entering /adpost/searchFilterData");
+		
+		
+		JSONObject jobj= new JSONObject(itemJSONString);
+		
+		String where1 = jobj.getString("adUUID");
+		String where2 = jobj.getString("adTitle");
+		String where3 = jobj.getString("acctName");
+		int where4 = jobj.getInt("adType");
+		
+		/* where5a, where5b */
+		String strCreateDatetimeFrom = jobj.getString("createDatetimeFrom").trim();
+		String strCreateDatetimeTo = jobj.getString("createDatetimeTo").trim();
+		
+		if(strCreateDatetimeFrom==null){
+			strCreateDatetimeFrom = "";
+		}
+		if(strCreateDatetimeTo==null){
+			strCreateDatetimeTo = "";
+		}
+		String where5a = strCreateDatetimeFrom;
+		String where5b = strCreateDatetimeTo;
+		
+		logger.info("strCreateDatetimeFrom="+strCreateDatetimeFrom+"##");
+		logger.info("strCreateDatetimeTo="+strCreateDatetimeTo+"##");
+		
+		/* where6a, where6b */
+		String strPostDatetimeFrom = jobj.getString("postDatetimeFrom").trim();
+		String strPostDatetimeTo = jobj.getString("postDatetimeTo").trim();
+		
+		if(strPostDatetimeFrom==null){
+			strPostDatetimeFrom = "";
+		}
+		if(strPostDatetimeTo==null){
+			strPostDatetimeTo = "";
+		}
+		String where6a = strPostDatetimeFrom;
+		String where6b = strPostDatetimeTo;
+		
+		logger.info("strPostDatetimeFrom="+strPostDatetimeFrom+"##");
+		logger.info("strPostDatetimeTo="+strPostDatetimeTo+"##");
+		
+		/* where7a, where7b */
+		String strExpireDatetimeFrom = jobj.getString("expireDatetimeFrom").trim();
+		String strExpireDatetimeTo = jobj.getString("expireDatetimeTo").trim();
+		
+		if(strExpireDatetimeFrom==null){
+			strExpireDatetimeFrom = "";
+		}
+		if(strExpireDatetimeTo==null){
+			strExpireDatetimeTo = "";
+		}
+		String where7a = strExpireDatetimeFrom;
+		String where7b = strExpireDatetimeTo;
+		
+		logger.info("strExpireDatetimeFrom="+strExpireDatetimeFrom+"##");
+		logger.info("strExpireDatetimeTo="+strExpireDatetimeTo+"##");
+		
+		/* where8a, where8b */
+		String strModifyDatetimeFrom = jobj.getString("modifyDatetimeFrom").trim();
+		String strModifyDatetimeTo = jobj.getString("modifyDatetimeTo").trim();
+		
+		if(strModifyDatetimeFrom==null){
+			strModifyDatetimeFrom = "";
+		}
+		if(strModifyDatetimeTo==null){
+			strModifyDatetimeTo = "";
+		}
+		String where8a = strModifyDatetimeFrom;
+		String where8b = strModifyDatetimeTo;
+		
+		logger.info("strExpireDatetimeFrom="+strExpireDatetimeFrom+"##");
+		logger.info("strExpireDatetimeTo="+strExpireDatetimeTo+"##");
+		
+				
+		int where9 = jobj.getInt("adStatus");
+		
+		/* construct query string */
+		StringBuffer queryString = new StringBuffer();
+		queryString.append(where1.length()==0?" ":" and ad_uuid like '%"+where1+"%' ");
+		queryString.append(where2.length()==0?" ":" and title like '%"+where2+"%' ");
+		queryString.append(where3.length()==0?" ":" and acct_name like '%"+where3+"%' ");
+		queryString.append(where4==0?" ":" and ad_type = "+where4+" ");
+		
+		String queryString_where5 = "";
+		if(strCreateDatetimeFrom.equals("")&&strCreateDatetimeTo.equals("")){
+			queryString_where5 = " ";
+		}else if(!strCreateDatetimeFrom.equals("")&&strCreateDatetimeTo.equals("")){
+			/* select * from event_news where date(post_datetime) >= adddate('2017-01-12', -1); */
+			queryString_where5 = " and date(create_date) >= '"+where5a+"' ";
+		}else if(strCreateDatetimeFrom.equals("")&&!strCreateDatetimeTo.equals("")){
+			/* select * from event_news where date(post_datetime) <= '2017-02-05'; */
+			queryString_where5 = " and date(create_date) <= '"+where5b+"' ";
+		}else if(!strCreateDatetimeFrom.equals("")&&!strCreateDatetimeTo.equals("")){
+			/* select * from event_news where date(post_datetime) between adddate('2017-01-12', -1) and '2017-02-05'; */
+			int dateFlag = strCreateDatetimeFrom.compareTo(strCreateDatetimeTo);
+			if(dateFlag<0){
+				queryString_where5 = " and (date(create_date) between adddate('"+where5a+"', -1) and '"+where5b+"' ) ";
+			}else if(dateFlag==0){
+				queryString_where5 = " and (date(create_date) =  '"+where5a+"' ) ";
+			}else{
+				queryString_where5 = " and (date(create_date) between adddate('"+where5b+"', -1) and '"+where5a+"' ) ";
+			}
+			
+		}else{
+			logger.info("ERROR: create_datetime not valid date range");
+		}
+		queryString.append(queryString_where5);
+		
+		
+		String queryString_where6 = "";
+		if(strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
+			queryString_where6 = " ";
+		}else if(!strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
+			queryString_where6 = " and date(post_date) >= '"+where6a+"' ";
+		}else if(strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
+			queryString_where6 = " and date(post_date) <= '"+where6b+"' ";
+		}else if(!strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
+			int dateFlag = strPostDatetimeFrom.compareTo(strPostDatetimeTo);
+			if(dateFlag<0){
+				queryString_where6 = " and (date(post_date) between adddate('"+where6a+"', -1) and '"+where6b+"' ) ";
+			}else if(dateFlag==0){
+				queryString_where6 = " and (date(post_date) =  '"+where6a+"' ) ";
+			}else{
+				queryString_where6 = " and (date(post_date) between adddate('"+where6b+"', -1) and '"+where6a+"' ) ";
+			}
+			
+		}else{
+			logger.info("ERROR: post_date not valid date range");
+		}
+		queryString.append(queryString_where6);
+		
+		
+		String queryString_where7 = "";
+		if(strExpireDatetimeFrom.equals("")&&strExpireDatetimeTo.equals("")){
+			queryString_where7 = " ";
+		}else if(!strExpireDatetimeFrom.equals("")&&strExpireDatetimeTo.equals("")){
+			queryString_where7 = " and date(expire_date) >= '"+where7a+"' ";
+		}else if(strExpireDatetimeFrom.equals("")&&!strExpireDatetimeTo.equals("")){
+			queryString_where7 = " and date(expire_date) <= '"+where7b+"' ";
+		}else if(!strExpireDatetimeFrom.equals("")&&!strExpireDatetimeTo.equals("")){
+			int dateFlag = strExpireDatetimeFrom.compareTo(strExpireDatetimeTo);
+			if(dateFlag<0){
+				queryString_where7 = " and (date(expire_date) between adddate('"+where7a+"', -1) and '"+where7b+"' ) ";
+			}else if(dateFlag==0){
+				queryString_where7 = " and (date(expire_date) =  '"+where7a+"' ) ";
+			}else{
+				queryString_where7 = " and (date(expire_date) between adddate('"+where7b+"', -1) and '"+where7a+"' ) ";
+			}
+			
+		}else{
+			logger.info("ERROR: expire_date not valid date range");
+		}
+		queryString.append(queryString_where7);
+		
+		
+		
+		String queryString_where8 = "";
+		if(strModifyDatetimeFrom.equals("")&&strModifyDatetimeTo.equals("")){
+			queryString_where8 = " ";
+		}else if(!strModifyDatetimeFrom.equals("")&&strModifyDatetimeTo.equals("")){
+			queryString_where8 = " and date(modify_date) >= '"+where8a+"' ";
+		}else if(strModifyDatetimeFrom.equals("")&&!strModifyDatetimeTo.equals("")){
+			queryString_where8 = " and date(modify_date) <= '"+where8b+"' ";
+		}else if(!strModifyDatetimeFrom.equals("")&&!strModifyDatetimeTo.equals("")){
+			int dateFlag = strModifyDatetimeFrom.compareTo(strModifyDatetimeTo);
+			if(dateFlag<0){
+				queryString_where8 = " and (date(modify_date) between adddate('"+where8a+"', -1) and '"+where8b+"' ) ";
+			}else if(dateFlag==0){
+				queryString_where8 = " and (date(modify_date) =  '"+where8a+"' ) ";
+			}else{
+				queryString_where8 = " and (date(modify_date) between adddate('"+where8b+"', -1) and '"+where8a+"' ) ";
+			}
+			
+		}else{
+			logger.info("ERROR: modify_date not valid date range");
+		}
+		queryString.append(queryString_where8);
+		
+				
+		queryString.append(where9==0?" ":" and ad_status = "+where9+" ");
+		logger.info("QueryString = "+ queryString.toString());
+		
+		List<AdPost> listAdPost = adPostService.getAdPostByFilter(queryString.toString());
+		logger.info("Length of listAdPost entries = "+ listAdPost.size());
+		
+		
+		String[][] data = getData(listAdPost, ACTION_EDIT);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		
+		model.put("draw", new Integer(1));
+		model.put("recordsTotal", new Integer(5));
+		model.put("recordsFiltered", new Integer(5));
+		model.put("data", data);
+		model.put("customActionStatus","OK");
+		model.put("customActionMessage","OK");
+		
+		logger.info("leaving /adpost/searchFilterData");
+		
+		return model;
+	}
+	
+	
+	
 	@RequestMapping(value="/adpost/create",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> createAdPost(@RequestParam String itemJSONString) {
@@ -191,6 +404,48 @@ public class AdPostController {
 		return model;		
 	}
 	
+	
+	@RequestMapping(value="/adpost/updateGroup",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> updateAdPostGroup(
+			@RequestParam String adUUIDArray,
+			@RequestParam int adStatus
+			) {
+		
+		logger.info("entering /adpost/updateGroup");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+        Map<String, Object> model = mav.getModel();
+   
+        List<AdPost> adpostList = new ArrayList<AdPost>();
+        String[] adUUIDs = adUUIDArray.split(",");
+        int adUUIDLength = adUUIDs.length;
+        
+        for(int i=0; i<adUUIDLength; i++){
+        	 AdPost adpost = new AdPost();
+        	 adpost.setAdUUID(adUUIDs[i]);
+        	 adpost.setAdStatus(adStatus);
+             adpostList.add(adpost);
+             adpost = null;
+        }
+        
+        logger.info("adpostList size="+adpostList.size());
+        logger.info("adpostList ="+adpostList.toString());
+        
+		/* business logic*/
+        adPostService.updateAdPostGroup(adpostList);
+        
+		
+		/* assemble model and view */
+		logger.info("leaving /adpost/updateGroup");
+		return model;		
+	}
+	
+	
+	
 	private String[][] getData(List<AdPost> listObj, String actionName){
 		int entryLength = listObj.size();
 //		final int COLUMN_NUM = 14;
@@ -216,7 +471,8 @@ public class AdPostController {
 		String field13 = "";	//action
 		
 		for(int i=0; i<entryLength ; i++){			
-			field0 = "<input type='checkbox' name='id[]' value="+listObj.get(i).getGlobalId()+">";
+//			field0 = "<input type='checkbox' name='id[]' value="+listObj.get(i).getGlobalId()+">";
+			field0 = "<input type='checkbox' name='id[]' value="+listObj.get(i).getAdUUID()+">";
 			field1 = listObj.get(i).getAdUUID()+"";
 //			field2 = listObj.get(i).getAdText();
 			field2 = listObj.get(i).getAdTitle();
@@ -308,23 +564,23 @@ public class AdPostController {
 		String status = "";
 		String statusKey = "";
 		switch(intEventStatus){
-			case News.PUBLISHED: 
+			case AdPostStatus.PUBLISHED: 
 				status = "已发布";
 				statusKey = "success";
 				break;
-			case News.WAIT_TO_POST: 
+			case AdPostStatus.WAIT_TO_POST: 
 				status = "待发布";
 				statusKey = "warning";
 				break;
-			case News.DELETED: 
+			case AdPostStatus.DELETED: 
 				status = "已删除";
 				statusKey = "default";
 				break;
-			case News.OUT_OF_DATE: 
+			case AdPostStatus.OUT_OF_DATE: 
 				status = "已过期";
 				statusKey = "info";
 				break;
-			case News.SUSPENDED: 
+			case AdPostStatus.SUSPENDED: 
 				status = "审查中";
 				statusKey = "danger";
 				break;

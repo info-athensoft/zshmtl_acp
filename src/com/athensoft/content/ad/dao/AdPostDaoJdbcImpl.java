@@ -3,6 +3,7 @@ package com.athensoft.content.ad.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,9 +11,12 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.athensoft.content.ad.entity.AdPost;
@@ -50,10 +54,30 @@ public class AdPostDaoJdbcImpl implements AdPostDao {
 		sbf.append("expire_date, ");
 		sbf.append("modify_date ");
 		sbf.append(" FROM "+TABLE);
+		sbf.append(" ORDER BY modify_date DESC");
 		String sql = sbf.toString();
 		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		return jdbc.query(sql,paramSource,new AdPostRowMapper());
+	}
+
+	@Override
+	public List<AdPost> findByFilter(String queryString) {
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append(" select * from "+TABLE);
+		sbf.append(" where 1=1 ");
+		sbf.append(queryString);
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		List<AdPost> x = new ArrayList<AdPost>();
+		try{
+			x = jdbc.query(sql, paramSource, new AdPostRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
 	}
 
 	@Override
@@ -225,6 +249,21 @@ public class AdPostDaoJdbcImpl implements AdPostDao {
 		
 		return 0;
 	}
+
+	@Override
+	public void updateBatch(List<AdPost> adPostList) {
+		System.out.println("##########"+adPostList.size());
+		String sql = "update ad_post set ad_status=:adStatus where ad_uuid =:adUUID";
+
+		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();
+		for (AdPost x : adPostList) {
+			parameters.add(new BeanPropertySqlParameterSource(x));
+		}
+
+		jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
+		
+	}
+	
 
 	@Override
 	public int delete(AdPost adPostObj) {

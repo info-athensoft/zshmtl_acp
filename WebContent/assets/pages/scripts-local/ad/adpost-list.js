@@ -16,7 +16,7 @@ var AdPostList = function () {
         var grid = new Datatable();
 
         grid.init({
-            src: $("#datatable_eventNewsList"),
+            src: $("#datatable_adPostList"),
             onSuccess: function (grid) {
             	//alert("success");
             },
@@ -42,8 +42,8 @@ var AdPostList = function () {
                     //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
                 },
                 "order": [
-                    [1, "asc"]
-                ] // set first column as a default sort by asc
+                    [8, "desc"]	//order by modify date
+                ] // set first column as a default sort by asc 
             }
         });
 
@@ -61,9 +61,9 @@ var AdPostList = function () {
                 grid.setAjaxParam("id", grid.getSelectedRows());
                 
                 //modified by Athens
-                var eventUUIDArray = grid.getSelectedRows();
-                var newsStatus = action.val();
-                groupUpdateStatus(eventUUIDArray,newsStatus);
+                var adUUIDArray = grid.getSelectedRows();
+                var adStatus = action.val();
+                groupUpdateStatus(adUUIDArray,adStatus);
                 //end-of-modified
                 
                 //grid.getDataTable().ajax.reload();
@@ -106,23 +106,23 @@ var AdPostList = function () {
 
 
 /* list news - button:group update status */
-function groupUpdateStatus(eventUUIDArray,newsStatus){
+function groupUpdateStatus(adUUIDArray,adStatus){
 	//alert("groupUpdateStatus()");
     //alert(eventUUIDArray+":"+newsStatus);
 	
     //execute saving
     $.ajax({
         type    :    "post",
-        url        : "updateNewsGroup?eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
+        url        : "/acp/ad/adpost/updateGroup?adUUIDArray="+adUUIDArray+"&adStatus="+adStatus,
         dataType:    "json",
         timeout :     30000,
         
         success:function(msg){
-            location.href="eventsNewsList";
+            location.href="/acp/ad/adpost_list.html";
         	//alert("INFO: News status updated.");
         },
         error:function(){
-            alert("ERROR: News updating failed.");     
+            alert("ERROR: adpost updating failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -135,68 +135,67 @@ function groupUpdateStatus(eventUUIDArray,newsStatus){
 function filterSearch(){
 	
 //	alert("do filterSearch()");
-//	create a json object
-    var p2 = $("#eventUUID").val();
-    var p3 = $("#eventTitle").val();
-    var p4 = $("#eventAuthor").val();
-    var p5a = $("#postDatetimeFrom").val();
-    var p5b = $("#postDatetimeTo").val();
-    var p6a = $("#viewNumFrom").val();
-    var p6b = $("#viewNumTo").val();
-    var p9 = $("#eventClass").val();
-    var p10 = $("#eventStatus").val();
+    var p1 = $("#adUUID").val();
+    var p2 = $("#adTitle").val();
+    var p3 = $("#acctName").val();
+    var p4 = $("#adType").val();
+    var p5a = $("#createDatetimeFrom").val();
+    var p5b = $("#createDatetimeTo").val();
+    var p6a = $("#postDatetimeFrom").val();
+    var p6b = $("#postDatetimeTo").val();
+    var p7a = $("#expireDatetimeFrom").val();
+    var p7b = $("#expireDatetimeTo").val();
+    var p8a = $("#modifyDatetimeFrom").val();
+    var p8b = $("#modifyDatetimeTo").val();
+    var p9 = $("#adStatus").val();
 
-//    alert(p5a+" -- "+p5b);
     
 //	validate
-	if(!isNonNegativeInteger(p6a)){
-		p6a = "";
-		$("#viewNumFrom").val("");
-	}
-	if(!isNonNegativeInteger(p6b)){
-		p6b = "";
-		$("#viewNumTo").val("");
-	}
-//	isNonNegativeInteger(p6b);
-//	alert(p5a+" "+p5b);
-  
     var businessObject =
     {
-    //		globalId    :    p1,
-    		eventUUID   :    p2,
-    		title    	:    p3,
-    		author    	:    p4,
-     		postDatetimeFrom:  p5a,            
-     		postDatetimeTo:    p5b,            
-    		viewNumFrom :    p6a,            
-    		viewNumTo 	:    p6b,            
-    //		descShort   :    p7,
-    //		descLong	:    p8,
-      		eventClass  :    p9,
-    		eventStatus	:    p10
+    		adUUID:p1,
+    		adTitle:p2,
+    		acctName:p3,
+    		adType:p4,
+    		createDatetimeFrom:p5a,            
+     		createDatetimeTo:p5b,
+     		postDatetimeFrom:p6a,            
+     		postDatetimeTo:p6b,
+     		expireDatetimeFrom:p7a,            
+     		expireDatetimeTo:p7b,
+     		modifyDatetimeFrom:p8a,            
+     		modifyDatetimeTo:p8b,
+    		adStatus:p9
     };
+    
+    
 
-    var dt = $("#datatable_eventNewsList").DataTable();
+    var dt = $("#datatable_adPostList").DataTable();
     
     //mended on 2018-0218 for tomcat 8.5 sticter request charset
-    var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
+    //var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
+    var param = JSON.stringify(businessObject); 
     
-    var x = dt.ajax.url("newsSearchFilterData?itemJSONString="+encoded_param).load();
+   // alert(param);
     
-    
+    var x = dt.ajax.url("/acp/ad/adpost/searchFilterData?itemJSONString="+param).load();
 }
 
 
 /* list news - datatable:button:filter reset */
 function filterReset(){
 //	alert("do filterReset()");
-	var p2 = $("#eventUUID").val("");
-    var p3 = $("#eventTitle").val("");        
-    var p4 = $("#eventAuthor").val("");
-    var p5a = $("#postDatetimeFrom").val("");
-    var p5b = $("#postDatetimeTo").val("");
-    var p6a = $("#viewNumFrom").val("");
-    var p6b = $("#viewNumTo").val("");
-    var p9 = $("#eventClass").val(0);
-    var p10 = $("#eventStatus").val(0);
+	var p1 = $("#adUUID").val("");
+    var p2 = $("#adTitle").val("");
+    var p3 = $("#acctName").val("");
+    var p4 = $("#adType").val(0);
+    var p5a = $("#createDatetimeFrom").val("");
+    var p5b = $("#createDatetimeTo").val("");
+    var p6a = $("#postDatetimeFrom").val("");
+    var p6b = $("#postDatetimeTo").val("");
+    var p7a = $("#expireDatetimeFrom").val("");
+    var p7b = $("#expireDatetimeTo").val("");
+    var p8a = $("#modifyDatetimeFrom").val("");
+    var p8b = $("#modifyDatetimeTo").val("");
+    var p9 = $("#adStatus").val(0);
 }

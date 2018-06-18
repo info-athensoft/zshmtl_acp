@@ -61,6 +61,9 @@ function resetCreateAdPost(){
 }
 
 function getAdPostObject(){
+	alert("ok");
+	alert($("#expireDate").val());
+	
 	var p1 = $("#adType").val();
 	var p2 = $("#acctName").val();
 	var p3 = $("#adTitle").val();

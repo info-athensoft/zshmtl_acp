@@ -233,7 +233,16 @@
 				                       						<div class="fileinput fileinput-new" data-provides="fileinput">
 							                                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
 							                                       	<!--  <img id="fileinput-new-img" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>-->
-							                                       	<a href="${adPostObject.adImage}" class="fancybox-button" data-rel="fancybox-button"><img id="fileinput-new-img" src="${adPostObject.adImage}" alt=""/></a>
+							                                       	
+							                                       		<c:if test="${not empty adPostObject.adImage}">
+							                                       			<a href="${adPostObject.adImage}" class="fancybox-button" data-rel="fancybox-button">
+							                                       			<img id="fileinput-new-img" src="${adPostObject.adImage}" alt=""/>
+							                                       			</a>
+							                                       		</c:if>
+							                                       		<c:if test="${empty adPostObject.adImage}">
+							                                       			<img id="fileinput-new-img" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>
+							                                       		</c:if>
+							                                       	
 																</div>
 							                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
 																</div>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.athensoft.content.ad.dao.AdPostDao;
 import com.athensoft.content.ad.entity.AdPost;
+import com.athensoft.content.event.entity.News;
 
 @Service
 public class AdPostService {
@@ -24,6 +25,10 @@ public class AdPostService {
 		return adPostDao.findByUUID(adUUID);
 	}
 	
+	public List<AdPost> getAdPostByFilter(String queryString){
+		return adPostDao.findByFilter(queryString);
+	}
+	
 	public void createAdPost(AdPost adpost){
 		adPostDao.create(adpost);
 	}
@@ -31,4 +36,10 @@ public class AdPostService {
 	public void updateAdPost(AdPost adpost){
 		adPostDao.update(adpost);
 	}
+	
+	public void updateAdPostGroup(List<AdPost> adPostList) {
+		this.adPostDao.updateBatch(adPostList);
+	}
+	
+	
 }
