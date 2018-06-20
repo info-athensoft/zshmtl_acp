@@ -17,7 +17,7 @@
                     <i class="icon-docs"></i> 新建新闻 </a>
             </li>
             <li>
-                <a href="javascript:;">
+                <a href="${webapp_name}/ad/adpost_create.html">
                     <i class="icon-tag"></i> 新建广告 </a>
             </li>
             <li>
