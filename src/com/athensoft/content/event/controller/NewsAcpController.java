@@ -183,10 +183,7 @@ public class NewsAcpController {
 		public Map<String, Object> getDataSearchNewsByFilter(@RequestParam String itemJSONString){
 			logger.info("entering /events/newsSearchFilterData");
 			
-			ModelAndView mav = new ModelAndView();
-			
-			//data
-			Map<String, Object> model = mav.getModel();
+			//get parameters
 			JSONObject jobj= new JSONObject(itemJSONString);
 			
 			String where1 = jobj.getString("eventUUID").trim();
@@ -292,8 +289,12 @@ public class NewsAcpController {
 			List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
 			logger.info("Length of news entries = "+ listNews.size());
 			
-			
+			//data
 			String[][] data = getData(listNews, ACTION_EDIT);
+			
+			//
+			ModelAndView mav = new ModelAndView();
+			Map<String, Object> model = mav.getModel();
 			
 			model.put("draw", new Integer(1));
 			model.put("recordsTotal", new Integer(5));

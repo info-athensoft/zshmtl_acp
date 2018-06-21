@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- global variables settings -->
 <c:set var="webapp_name" value="/acp"/>
@@ -45,7 +46,7 @@
         <!-- BEGIN THEME LAYOUT STYLES -->
         <link href="${webapp_name}/assets/layouts/layout2/css/layout.min.css" rel="stylesheet" type="text/css" />
         <link href="${webapp_name}/assets/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="${webapp_name}/assets/layouts/layout2/css/custom.min.css" rel="stylesheet" type="text/css" />
+        <link href="${webapp_name}/assets/layouts/layout2/css/custom.css" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="${webapp_name}/assets/global/plugins/datatables/media/images/favicon.ico"/>
     </head>
@@ -99,41 +100,14 @@
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="${webapp_name}/events/memberList">会员系统</a>
+							<a href="${webapp_name}/member/member_list.html">会员系统</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">编辑</a>
+							<a href="#">会员信息管理</a>
 						</li>
 					</ul>
-					<!-- 
-                        <div class="page-toolbar">
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
-                                    <i class="fa fa-angle-down"></i>
-                                </button>
-                                <ul class="dropdown-menu pull-right" role="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bell"></i> Action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-shield"></i> Another action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-user"></i> Something else here</a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bag"></i> Separated link</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                         -->
+					
                     </div>
                     <!-- END PAGE HEADER-->
                     <div class="row">
@@ -142,33 +116,15 @@
                                 <div class="portlet">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            	编辑新闻<span class="caption-helper"> </span> </div>
+                                            	会员信息管理<span class="caption-helper"> </span> </div>
                                         <div class="actions btn-set">
-                                            <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToMemberList(); return false;">
+                                            <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToMemberList();">
                                                 <i class="fa fa-angle-left"></i> 返回</button>
-                                            <button class="btn btn-secondary-outline" onclick="resetMember(); return false;">
+                                            <button class="btn btn-secondary-outline" onclick="resetMember();">
                                                 <i class="fa fa-reply"></i> 重置</button>
-                                            <button class="btn btn-success" onclick="updateMember(); return false;">
+                                            <button class="btn btn-success" onclick="updateMember();">
                                                 <i class="fa fa-check"></i> 保存</button>
-                                             
-                                            <!--    
-                                            <button class="btn btn-success" onclick="updateNewsAndContinue(); return false;">
-                                                <i class="fa fa-check-circle"></i> 保存并继续</button>
-                                            <div class="btn-group">
-                                                <a class="btn btn-success dropdown-toggle" href="javascript:;" data-toggle="dropdown">
-                                                    <i class="fa fa-share"></i> 其它
-                                                    <i class="fa fa-angle-down"></i>
-                                                </a>
-                                                <div class="dropdown-menu pull-right">
-                                                	<ul>
-	                                                    <li><a href="javascript:;"> Duplicate </a></li>
-	                                                   	<li><a href="javascript:;"  onclick="markNewsStatusDeleted('${memberObject.acctName}'); return false;">Mark Deleted </a></li>
-	                                                    <li class="dropdown-divider"> </li>
-	                                                    <li><a href="javascript:;"> Print </a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                             -->
+                                            
                                         </div>
                                     </div>
                                     <div class="portlet-body">
@@ -190,172 +146,71 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab_general">
                                                     <div class="form-body">
+                                                    
+                                                    <!-- 
 													<div class="form-group">
 														<label class="col-md-2 control-label">全局编号: <span class="required"> * </span>
 														</label>
-														<div class="col-md-10">
+														<div class="col-md-4">
 															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled"  value="${memberObject.globalId}">
 														</div>
-													</div>
+													</div>  -->
+													
 													<div class="form-group">
-														<label class="col-md-2 control-label">会员账户: <span class="required"> * </span>
+													<label class="col-md-2 control-label">会员账户: <span class="required"> * </span>
 														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="acctName" name="acctName"  placeholder="" value="${memberObject.acctName}" disabled="disabled">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">中文姓名: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="name1" name="title" placeholder=""  value="${memberObject.name1}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">英法文名: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="name2" name="title" placeholder=""  value="${memberObject.name2}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">性别: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" id="gender" name="gender">
-																<option value="0" ${memberObject.gender == '0' ? 'selected' : ''}>请选择...</option>
-																<option value="1" ${memberObject.gender == '1' ? 'selected' : ''}>男</option>
-																<option value="2" ${memberObject.gender == '2' ? 'selected' : ''}>女</option>
-																<option value="3" ${memberObject.gender == '3' ? 'selected' : ''}>未知</option>
-															</select>
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">国籍: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="nationality" name="nationality" placeholder=""  value="${memberObject.nationality}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">电话: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="phone1" name="phone1" placeholder=""  value="${memberObject.phone1}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">手机: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="phone2" name="phone2" placeholder=""  value="${memberObject.phone2}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">微信: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="wechat" name="wechat" placeholder=""  value="${memberObject.wechat}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">电子邮件: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="email" name="email" placeholder=""  value="${memberObject.email}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">最高学历: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="degree" name="degree" placeholder=""  value="${memberObject.degree}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">职业: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="occupation" name="occupation" placeholder=""  value="${memberObject.occupation}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">出生日期: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="dob" name="dob" placeholder=""  value="${memberObject.dob}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">出生地（省，州）: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="pobProvince" name="pobProvince" placeholder=""  value="${memberObject.pobProvince}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">出生地（市，镇，县）: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="pobCity" name="pobCity" placeholder=""  value="${memberObject.pobCity}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">住址: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="homeAddress" name="homeAddress" placeholder=""  value="${memberObject.homeAddress}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">邮编: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="postalcode" name="postalcode" placeholder=""  value="${memberObject.postalcode}">
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">兴趣爱好: <span class="required"> * </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="hobbies" name="hobbies" placeholder=""  value="${memberObject.hobbies}">
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="acctName" name="acctName" value="${memberObject.acctName}" readonly="readonly">
 														</div>
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">激活时间: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="memberActiveDate" name="memberActiveDate"  value="${memberObject.memberActiveDate}" disabled="disabled">
-															</div>
-															<span class="help-block"></span>
-														</div>
-													</div>
 													
-													<div class="form-group">
-														<label class="col-md-2 control-label">会员等级: <span class="required">
+														<label class="col-md-2 control-label"><span class="custom-operation-em">管理会员等级: </span><span class="required">
 														* </span>
 														</label>
-														<div class="col-md-10">
+														<div class="col-md-4">
 															<select class="table-group-action-input form-control input-medium" id="memberLevel" name="memberLevel">
 																<option value="1" ${memberObject.memberLevel == '1' ? 'selected' : ''}>请选择...</option>
-																<option value="2" ${memberObject.memberLevel == '2' ? 'selected' : ''}>普通会员</option>
-																<option value="3" ${memberObject.memberLevel == '3' ? 'selected' : ''}>VIP会员</option>
+																<option value="2" ${memberObject.memberLevel == '2' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;普通会员 </option>
+																<option value="3" ${memberObject.memberLevel == '3' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;VIP会员 </option>
+																<option value="4" ${memberObject.memberLevel == '4' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;核心会员</option>
+															</select>
+														</div>
+														
+														<label class="col-md-2 control-label">当前会员等级: 
+														</label>
+														<div class="col-md-4">
+															<select class="table-group-action-input form-control input-medium" id="memberLevel_2" name="memberLevel_2" disabled="disabled">
+																<option value="1" ${memberObject.memberLevel == '1' ? 'selected' : ''}>请选择...</option>
+																<option value="2" ${memberObject.memberLevel == '2' ? 'selected' : ''}>普通会员 </option>
+																<option value="3" ${memberObject.memberLevel == '3' ? 'selected' : ''}>VIP会员 </option>
 																<option value="4" ${memberObject.memberLevel == '4' ? 'selected' : ''}>核心会员</option>
 															</select>
 														</div>
 													</div>
 													
+													
 													<div class="form-group">
-														<label class="col-md-2 control-label">会员状态: <span class="required">
-														* </span>
+														<label class="col-md-2 control-label"><span class="custom-operation-em">管理状态</span>: <span class="required">* </span>
 														</label>
-														<div class="col-md-10">
+														<div class="col-md-4">
 															<select class="table-group-action-input form-control input-medium" id="memberStatus" name="memberStatus">
 																<option value="0" ${memberObject.memberStatus == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${memberObject.memberStatus == '1' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;已申请</option>
+																<option value="2" ${memberObject.memberStatus == '2' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;已通过预审</option>
+																<option value="3" ${memberObject.memberStatus == '3' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;已激活</option>
+																<option value="4" ${memberObject.memberStatus == '4' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;未激活</option>
+																<option value="5" ${memberObject.memberStatus == '5' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;审查中</option>
+																<option value="6" ${memberObject.memberStatus == '6' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;已禁止</option>
+															</select>
+														</div>
+														
+														<label class="col-md-2 control-label">当前状态: 
+														</label>
+														<div class="col-md-4">
+															<select class="table-group-action-input form-control input-medium" id="memberStatus_2" name="memberStatus_2" disabled="disabled">
+																<option value="0" ${memberObject.memberStatus == '0' ? 'selected' : ''}>未知状态</option>
 																<option value="1" ${memberObject.memberStatus == '1' ? 'selected' : ''}>已申请</option>
 																<option value="2" ${memberObject.memberStatus == '2' ? 'selected' : ''}>已通过预审</option>
 																<option value="3" ${memberObject.memberStatus == '3' ? 'selected' : ''}>已激活</option>
@@ -365,7 +220,174 @@
 															</select>
 														</div>
 													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">会员申请日: <span class="required">* </span>
+														</label>
+														<div class="col-md-4">
+															<div class="input-group input-large date-picker input-daterange" data-date="01/01/2018" data-date-format="mm/dd/yyyy">
+																<input type="text" class="form-control" id="memberApplyDate" name="memberApplyDate"  value='<fmt:formatDate type="date" pattern="yyyy-mm-dd" value="${memberObject.memberApplyDate}"/>' disabled="disabled">
+															</div>
+															<span class="help-block"></span>
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">预审通过日: <span class="required">* </span>
+														</label>
+														<div class="col-md-4">
+															<div class="input-group input-large date-picker input-daterange" data-date="01/01/2018" data-date-format="mm/dd/yyyy">
+																<input type="text" class="form-control" id="memberApprovedDate" name="memberApprovedDate"  value='<fmt:formatDate type="date" pattern="yyyy-mm-dd" value="${memberObject.memberApprovedDate}"/>' disabled="disabled">
+															</div>
+															<span class="help-block"></span>
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">会员激活日: <span class="required">* </span>
+														</label>
+														<div class="col-md-4">
+															<div class="input-group input-large date-picker input-daterange" data-date="01/01/2018" data-date-format="mm/dd/yyyy">
+																<input type="text" class="form-control" id="memberActiveDate" name="memberActiveDate"  value='<fmt:formatDate type="date" pattern="yyyy-mm-dd" value="${memberObject.memberActiveDate}"/>' disabled="disabled">
+															</div>
+															<span class="help-block"></span>
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">会员到期日: <span class="required">* </span>
+														</label>
+														<div class="col-md-4">
+															<div class="input-group input-large date-picker input-daterange" data-date="01/01/2018" data-date-format="mm/dd/yyyy">
+																<input type="text" class="form-control" id="memberInactiveDate" name="memberInactiveDate"  value='<fmt:formatDate type="date" pattern="yyyy-mm-dd" value="${memberObject.memberInactiveDate}"/>' disabled="disabled">
+															</div>
+															<span class="help-block"></span>
+														</div>
+													</div>
+													
+													
+													<div class="form-group">
+														<div class="col-md-12">
+															<hr/>
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">中文姓名: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="name1" name="name1" placeholder=""  value="${memberObject.name1}">
+														</div>
+														
+														<label class="col-md-2 control-label">英法文名: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="name2" name="name2" placeholder=""  value="${memberObject.name2}">
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">性别: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-4">
+															<select class="table-group-action-input form-control input-medium" id="gender" name="gender">
+																<option value="0" ${memberObject.gender == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${memberObject.gender == '1' ? 'selected' : ''}>男</option>
+																<option value="2" ${memberObject.gender == '2' ? 'selected' : ''}>女</option>
+																<option value="3" ${memberObject.gender == '3' ? 'selected' : ''}>未知</option>
+															</select>
+														</div>
+														
+														<label class="col-md-2 control-label">国籍: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="nationality" name="nationality" placeholder=""  value="${memberObject.nationality}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">电话: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="phone1" name="phone1" placeholder=""  value="${memberObject.phone1}">
+														</div>
+														
+														<label class="col-md-2 control-label">手机: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="phone2" name="phone2" placeholder=""  value="${memberObject.phone2}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">微信: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="wechat" name="wechat" placeholder=""  value="${memberObject.wechat}">
+														</div>
+														
+														<label class="col-md-2 control-label">电子邮件: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="email" name="email" placeholder=""  value="${memberObject.email}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">最高学历: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="degree" name="degree" placeholder=""  value="${memberObject.degree}">
+														</div>
+														
+														<label class="col-md-2 control-label">职业: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="occupation" name="occupation" placeholder=""  value="${memberObject.occupation}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">出生日期: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="dob" name="dob" placeholder=""  value="${memberObject.dob}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">出生地（省，州）: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="pobProvince" name="pobProvince" placeholder=""  value="${memberObject.pobProvince}">
+														</div>
+														
+														<label class="col-md-2 control-label">出生地（市，镇，县）: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="pobCity" name="pobCity" placeholder=""  value="${memberObject.pobCity}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">住址: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="homeAddress" name="homeAddress" placeholder=""  value="${memberObject.homeAddress}">
+														</div>
+														
+														<label class="col-md-2 control-label">邮编: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="postalcode" name="postalcode" placeholder=""  value="${memberObject.postalcode}">
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">兴趣爱好: <span class="required"> * </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="hobbies" name="hobbies" placeholder=""  value="${memberObject.hobbies}">
+														</div>
+													</div>
+													
+													
 												</div>
+												
                                                 </div>
                                                
                                             </div>
@@ -427,30 +449,21 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/member/member.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/member/member-edit.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 
 <script>
-jQuery(document).ready(function() {    
+jQuery(document).ready(function() { 
+	/*
 	var acctName = $("#acctName").val();
-	//EventNewsEdit.init(eventUUID);
-	//EventNewsReviewList.init();
 
-//local
-//select object for event class
-	
-	
-//select object for event status
 	var memberStatusValue = ${memberObject.memberStatus};
 	$("#memberStatus").val(memberStatusValue);
-	
+	*/
 });
 
 
-function resetMember(){
-	
-} 
+ 
 </script>
 </body>
 

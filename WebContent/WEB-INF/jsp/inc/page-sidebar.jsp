@@ -72,15 +72,19 @@
 						广告列表</a>
 					</li>
 					<li>
+						<a href="${webapp_name}/ad/adrecommend_list.html">
+						广告推荐</a>
+					</li>
+					<li>
 						<a href="${webapp_name}/ad/adpost_create.html">
 						新增广告</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/ad/adpost_create.html">
+						<a href="${webapp_name}/ad/adpost_list.html">
 						修改广告</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/ad/adpost_create.html">
+						<a href="${webapp_name}/ad/adpost_list.html">
 						删除广告</a>
 					</li>
 				</ul>
@@ -135,51 +139,6 @@
 			</li>
 		
 			
-			<!-- event system -->
-			<li class="start">
-				<a href="javascript:;">
-				<i class="icon-user"></i>
-				<span class="title">测试模块</span>
-				<span class="arrow "></span>
-				<span id="menu-myevents"></span>
-				</a>
-				<ul class="sub-menu">
-					<li>
-						<a href="/acp/events/eventsDashboard">
-						<i class="icon-home"></i>
-						Dashboard</a>
-						
-					</li>
-					<li>
-						<a href="#">
-						<i class="icon-home"></i>
-						My News<span class="arrow"></a>
-						<ul class="sub-menu">
-						<li>
-							<a href="/acp/events/eventsNewsList">
-							<i class="icon-pencil"></i>
-							News List</a>
-						</li>
-						<li>
-							<a href="/acp/events/eventsNewsList">
-							<i class="icon-paper-plane"></i>
-							News Edit</a>
-						</li>
-						<li>
-							<a href="/acp/events/eventsNewsCreate">
-							<i class="icon-paper-plane"></i>
-							News Create</a>
-						</li>
-						<li>
-							<a href="/acp/events/eventsNewsDelete">
-							<i class="icon-paper-plane"></i>
-							News Remove - Admin</a>
-						</li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-			<!-- end event system -->
 			
 		</ul>
 		<!-- END SIDEBAR MENU -->

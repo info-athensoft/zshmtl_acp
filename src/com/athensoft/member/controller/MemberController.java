@@ -1,5 +1,9 @@
 package com.athensoft.member.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.athensoft.content.ad.entity.AdPost;
 import com.athensoft.content.event.controller.NewsAcpController;
+import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.entity.News;
 import com.athensoft.member.entity.Member;
@@ -51,7 +57,7 @@ public class MemberController {
 		
 		//data
 		List<Member> listMembers = memberService.getAllMembers();
-		logger.info("Length of news entries: "+ listMembers.size());
+		logger.info("Length of member entries: "+ listMembers.size());
 		
 		String[][] data = getData(listMembers, ACTION_EDIT);
 		
@@ -68,7 +74,59 @@ public class MemberController {
 		return model;
 	}
 	
-	@RequestMapping(value="/memberEdit")
+	@RequestMapping(value="/searchFilterData",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> getDataSearchMembersByFilter(@RequestParam String itemJSONString){
+		logger.info("entering /member/searchFilterData");
+		
+		//get parameters
+		JSONObject jobj= new JSONObject(itemJSONString);
+		
+		String where1 = jobj.getString("acctName").trim();
+		String where2 = jobj.getString("name1").trim();
+		String where3 = jobj.getString("name2").trim();
+		int where4 = jobj.getInt("gender");
+		String where5 = jobj.getString("phone1").trim();
+		String where6 = jobj.getString("phone2").trim();
+		String where7 = jobj.getString("wechat").trim();
+		String where8 = jobj.getString("email").trim();
+		int where9 = jobj.getInt("memberStatus");
+		
+		/* construct query string */
+		StringBuffer queryString = new StringBuffer();
+		queryString.append(where1.length()==0?" ":" and acct_name like '%"+where1+"%' ");
+		queryString.append(where2.length()==0?" ":" and name1 like '%"+where2+"%' ");
+		queryString.append(where3.length()==0?" ":" and name2 like '%"+where3+"%' ");
+		queryString.append(where4==0?" ":" and gender = "+where4+" ");
+		queryString.append(where5.length()==0?" ":" and phone1 like '%"+where5+"%' ");
+		queryString.append(where6.length()==0?" ":" and phone2 like '%"+where6+"%' ");
+		queryString.append(where7.length()==0?" ":" and wechat like '%"+where7+"%' ");
+		queryString.append(where8.length()==0?" ":" and email like '%"+where8+"%' ");
+		queryString.append(where9==0?" ":" and member_status = "+where9+" ");
+		logger.info("QueryString = "+ queryString.toString());
+		
+		List<Member> listMember = memberService.getMembersByFilter(queryString.toString());
+		logger.info("Length of member entries = "+ listMember.size());
+		
+		//data
+		String[][] data = getData(listMember, ACTION_EDIT);
+		
+		//
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
+		
+		model.put("draw", new Integer(1));
+		model.put("recordsTotal", new Integer(5));
+		model.put("recordsFiltered", new Integer(5));
+		model.put("data", data);
+		model.put("customActionStatus","OK");
+		model.put("customActionMessage","OK");
+		
+		logger.info("leaving /member/searchFilterData");
+		return model;
+	}
+	
+	@RequestMapping(value="/member_edit.html")
 	public ModelAndView gotoMemberEdit(@RequestParam String acctName){
 		logger.info("entering /member/memberEdit");
 		
@@ -90,10 +148,10 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/updateMember",method=RequestMethod.POST)
+	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public ModelAndView updateMember(@RequestParam String itemJSONString) {
 		
-		logger.info("entering /event/updateMember");
+		logger.info("entering /member/update");
 		
 		/* initial settings */
 		ModelAndView mav = new ModelAndView();
@@ -121,8 +179,18 @@ public class MemberController {
         member.setPostalcode(jsonObj.getString("postalcode"));
         member.setMemberLevel(jsonObj.getInt("memberLevel"));
         member.setMemberStatus(jsonObj.getInt("memberStatus"));
-        member.setMemberActiveDate(new Date(jsonObj.getString("memberActiveDate")));
-        logger.info("news = "+member);
+        System.out.println("memberActiveDate="+jsonObj.getString("memberActiveDate"));
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date tmpDate = null;
+		try {
+			tmpDate = dateFormat.parse(jsonObj.getString("memberActiveDate"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+        member.setMemberActiveDate(tmpDate);	//FIXME
+        logger.info("member = "+member);
           
 		/* business logic*/
         //long itemId = itemService.createItem(ic); 
@@ -134,8 +202,48 @@ public class MemberController {
         String viewName = "member/member_edit";
 		mav.setViewName(viewName);		
 		
-		logger.info("leaving /member/updateMember");
+		logger.info("leaving /member/update");
 		return mav;		
+	}
+	
+	
+	@RequestMapping(value="/updateGroup",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> updateMemberGroup(
+			@RequestParam String memberArray,
+			@RequestParam int memberStatus
+			) {
+		
+		logger.info("entering /member/updateGroup");
+		
+		/* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		//set model
+        Map<String, Object> model = mav.getModel();
+   
+        List<Member> memberList = new ArrayList<Member>();
+        String[] members = memberArray.split(",");
+        int memberLength = members.length;
+        
+        for(int i=0; i<memberLength; i++){
+        	 Member member = new Member();
+        	 member.setAcctName(members[i]);
+        	 member.setMemberStatus(memberStatus);
+        	 memberList.add(member);
+             member = null;
+        }
+        
+        logger.info("memberList size="+memberList.size());
+        logger.info("memberList ="+memberList.toString());
+        
+		/* business logic*/
+        memberService.updateMemberGroup(memberList);
+        
+		
+		/* assemble model and view */
+		logger.info("leaving /member/updateGroup");
+		return model;		
 	}
 	
 	
@@ -208,7 +316,7 @@ public class MemberController {
 		String action = "";
 		switch(actionName){
 		case ACTION_EDIT:
-			action = "memberEdit";
+			action = "member_edit.html";
 			break;
 		case ACTION_DELETE:
 			action = "deleteMember";

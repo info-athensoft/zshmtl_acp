@@ -93,9 +93,11 @@
                     <!-- BEGIN PAGE HEADER-->
                     <!-- BEGIN THEME PANEL -->
                     <!-- END THEME PANEL -->
+                    
                     <h1 class="page-title"> 蒙特利尔职商会管理后台
                         <small>版本号 1.0 发布日期 2018-06</small>
                     </h1>
+                    <!-- 
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
                             <li>
@@ -107,33 +109,8 @@
                                 <span>Dashboard</span>
                             </li>
                         </ul>
-                        <div class="page-toolbar">
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
-                                    <i class="fa fa-angle-down"></i>
-                                </button>
-                                <ul class="dropdown-menu pull-right" role="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bell"></i> Action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-shield"></i> Another action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-user"></i> Something else here</a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bag"></i> Separated link</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                        
+                    </div> -->
                     <!-- END PAGE HEADER-->
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">

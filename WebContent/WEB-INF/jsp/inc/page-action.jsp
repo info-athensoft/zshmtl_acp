@@ -21,7 +21,7 @@
                     <i class="icon-tag"></i> 新建广告 </a>
             </li>
             <li>
-                <a href="javascript:;">
+                <a href="${webapp_name}/member/member_list.html">
                     <i class="icon-share"></i> 审核会员 </a>
             </li>
             <!-- 

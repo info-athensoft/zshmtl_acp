@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.athensoft.content.ad.entity.AdPost;
 import com.athensoft.member.dao.MemberDao;
 import com.athensoft.member.entity.Member;
 
@@ -30,6 +31,14 @@ public class MemberService {
 
 	public void updateMember(Member member) {
 		memberDao.update(member);
+	}
+	
+	public List<Member> getMembersByFilter(String queryString){
+		return memberDao.findByFilter(queryString);
+	}
+	
+	public void updateMemberGroup(List<Member> memberList) {
+		this.memberDao.updateBatch(memberList);
 	}
 	
 }

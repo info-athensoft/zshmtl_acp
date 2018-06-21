@@ -22,31 +22,19 @@ import com.athensoft.content.ad.entity.AdPostStatus;
 import com.athensoft.content.ad.entity.AdPostType;
 import com.athensoft.content.ad.service.AdPostService;
 import com.athensoft.content.event.controller.NewsAcpController;
-import com.athensoft.content.event.entity.Event;
-import com.athensoft.content.event.entity.News;
 import com.athensoft.util.id.UUIDHelper;
 
 
 @Controller
 @RequestMapping("/ad")
 public class AdPostController {
-	private static final Logger logger = Logger.getLogger(NewsAcpController.class);
+	private static final Logger logger = Logger.getLogger(AdPostController.class);
 	
 	private static final String ACTION_EDIT = "Edit";
 	private static final String ACTION_DELETE = "Delete";
 	
 	@Autowired
 	private  AdPostService adPostService;
-	
-	
-	@RequestMapping(value="/adpost_create.html")
-	public String gotoAdPostCreate(){
-		
-		String viewName = "ad/adpost_create";
-		
-		return viewName;
-	}
-	
 	
 	@RequestMapping(value="/adpost_list.html")
 	public String gotoAdPostList(){
@@ -56,6 +44,13 @@ public class AdPostController {
 		return viewName;
 	}
 	
+	@RequestMapping(value="/adpost_create.html")
+	public String gotoAdPostCreate(){
+		
+		String viewName = "ad/adpost_create";
+		
+		return viewName;
+	}
 	
 	@RequestMapping(value="/adpost/edit.html")
 	public ModelAndView gotoAdPostEdit(@RequestParam String adUUID){
@@ -428,6 +423,7 @@ public class AdPostController {
         	 AdPost adpost = new AdPost();
         	 adpost.setAdUUID(adUUIDs[i]);
         	 adpost.setAdStatus(adStatus);
+        	 adpost.setModifyDate(new Date());
              adpostList.add(adpost);
              adpost = null;
         }

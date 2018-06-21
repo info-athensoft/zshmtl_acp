@@ -3,6 +3,7 @@ package com.athensoft.member.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,12 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import com.athensoft.content.ad.entity.AdPost;
 import com.athensoft.member.entity.Member;
 
 @Repository
@@ -66,11 +70,60 @@ public class MemberDaoJdbcImpl implements MemberDao {
 		sbf.append("member_pending_date, ");
 		sbf.append("member_banned_date ");
 		sbf.append(" FROM "+TABLE);
+		sbf.append(" ORDER BY name1");
 		String sql = sbf.toString();
 		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		return jdbc.query(sql,paramSource,new MemberRowMapper());
 		
+	}
+
+	@Override
+	public List<Member> findByFilter(String queryString) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("SELECT ");
+		sbf.append("global_id, ");
+		sbf.append("acct_name, ");
+		sbf.append("member_code, ");
+		sbf.append("member_id, ");
+		sbf.append("name1, ");
+		sbf.append("name2, ");
+		sbf.append("gender, ");
+		sbf.append("nationality, ");
+		sbf.append("phone1, ");
+		sbf.append("phone2, ");
+		sbf.append("wechat, ");
+		sbf.append("email, ");
+		sbf.append("degree, ");
+		sbf.append("occupation, ");
+		sbf.append("dob, ");
+		sbf.append("pob_province, ");
+		sbf.append("pob_city, ");
+		sbf.append("home_addr, ");
+		sbf.append("postal_code, ");
+		sbf.append("hobbies, ");
+		sbf.append("member_status, ");
+		sbf.append("member_level, ");
+		sbf.append("member_apply_date, ");
+		sbf.append("member_approved_date, ");
+		sbf.append("member_active_date, ");
+		sbf.append("member_inactive_date, ");
+		sbf.append("member_pending_date, ");
+		sbf.append("member_banned_date ");
+		sbf.append(" FROM "+TABLE);
+		sbf.append(" WHERE 1=1 ");
+		sbf.append(queryString);
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		List<Member> x = new ArrayList<Member>();
+		
+		try{
+			x = jdbc.query(sql,paramSource,new MemberRowMapper());
+		}catch(EmptyResultDataAccessException ex){
+			x = null;
+		}
+		return x;
 	}
 
 	@Override
@@ -181,6 +234,22 @@ public class MemberDaoJdbcImpl implements MemberDao {
 		
 		return 0;
 	}
+	
+	
+	@Override
+	public void updateBatch(List<Member> memberList) {
+		System.out.println("##########"+memberList.size());
+		String sql = "update member_profile set member_status=:memberStatus where acct_name =:acctName";
+
+		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();
+		for (Member x : memberList) {
+			parameters.add(new BeanPropertySqlParameterSource(x));
+		}
+
+		jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
+		
+	}
+	
 
 	@Override
 	public int delete(Member member) {

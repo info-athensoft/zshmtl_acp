@@ -1,12 +1,13 @@
-/** member_list.jsp */
+/** adpost_list.jsp */
 
 /* list news - init */
-var MemberList = function () {
+var AdRecommendList = function () {
 
     var initPickers = function () {
+        //init date pickers
         $('.date-picker').datepicker({
-//          rtl: Metronic.isRTL(),
-            rtl: App.isRTL(),			//edited by Athens 
+//            rtl: Metronic.isRTL(),
+            rtl: App.isRTL(),
             autoclose: true
         });
     }
@@ -15,7 +16,7 @@ var MemberList = function () {
         var grid = new Datatable();
 
         grid.init({
-            src: $("#datatable_memberList"),	//should be the id of div element in member_list.jsp
+            src: $("#datatable_adPostList"),
             onSuccess: function (grid) {
             	//alert("success");
             },
@@ -35,13 +36,14 @@ var MemberList = function () {
                     [2,10, 20, 50, 100, 150, 200],
                     [2,10, 20, 50, 100, 150, 200] // change per page values here 
                 ],
-                "pageLength": 20, 	// default record count per page
+                "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "/acp/member/memberListData", // ajax source
+                    "url": "/acp/ad/adPostListData", // ajax source
+                    //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
                 },
                 "order": [
-                    [1, "asc"]		// set first column as a default sort by asc
-                ] 
+                    [8, "desc"]	//order by modify date
+                ] // set first column as a default sort by asc 
             }
         });
 
@@ -59,9 +61,9 @@ var MemberList = function () {
                 grid.setAjaxParam("id", grid.getSelectedRows());
                 
                 //modified by Athens
-                var memberArray = grid.getSelectedRows();
-                var memberStatus = action.val();
-                groupUpdateStatus(memberArray,memberStatus);		//reload
+                var adUUIDArray = grid.getSelectedRows();
+                var adStatus = action.val();
+                groupUpdateStatus(adUUIDArray,adStatus);
                 //end-of-modified
                 
                 //grid.getDataTable().ajax.reload();
@@ -91,6 +93,7 @@ var MemberList = function () {
     }
 
     return {
+
         //main function to initiate the module
         init: function () {
             handleProducts();
@@ -102,24 +105,24 @@ var MemberList = function () {
 }();
 
 
-/* list member - button:group update status */
-function groupUpdateStatus(memberArray,memberStatus){
+/* list news - button:group update status */
+function groupUpdateStatus(adUUIDArray,adStatus){
 	//alert("groupUpdateStatus()");
     //alert(eventUUIDArray+":"+newsStatus);
 	
     //execute saving
     $.ajax({
         type    :    "post",
-        url        : "/acp/member/updateGroup?memberArray="+memberArray+"&memberStatus="+memberStatus,
+        url        : "/acp/ad/adpost/updateGroup?adUUIDArray="+adUUIDArray+"&adStatus="+adStatus,
         dataType:    "json",
         timeout :     30000,
         
         success:function(msg){
-            location.href="/acp/member/member_list.html";			//should be specified with your destination url
+            location.href="/acp/ad/adpost_list.html";
         	//alert("INFO: News status updated.");
         },
         error:function(){
-            alert("ERROR: Updating failed.");     
+            alert("ERROR: adpost updating failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -128,82 +131,71 @@ function groupUpdateStatus(memberArray,memberStatus){
 }
 
 
-/* list member - datatable:button:filter search */
+/* list news - datatable:button:filter search */
 function filterSearch(){
 	
 //	alert("do filterSearch()");
-	
-    var p1 = $("#acctName").val();
-    var p2 = $("#name1").val();        
-    var p3 = $("#name2").val();
-    var p4 = $("#gender").val();
-    //var p5 = $("#nationality").val();
-    var p6 = $("#phone1").val();
-    var p7 = $("#phone2").val();
-    var p8 = $("#wechat").val();
-    var p9 = $("#email").val();
-    var p10 = $("#memberStatus").val();
-    
-    
+    var p1 = $("#adUUID").val();
+    var p2 = $("#adTitle").val();
+    var p3 = $("#acctName").val();
+    var p4 = $("#adType").val();
+    var p5a = $("#createDatetimeFrom").val();
+    var p5b = $("#createDatetimeTo").val();
+    var p6a = $("#postDatetimeFrom").val();
+    var p6b = $("#postDatetimeTo").val();
+    var p7a = $("#expireDatetimeFrom").val();
+    var p7b = $("#expireDatetimeTo").val();
+    var p8a = $("#modifyDatetimeFrom").val();
+    var p8b = $("#modifyDatetimeTo").val();
+    var p9 = $("#adStatus").val();
 
+    
 //	validate
-//	if(!isNonNegativeInteger(p6a)){
-//		p6a = "";
-//		$("#viewNumFrom").val("");
-//	}
-//	if(!isNonNegativeInteger(p6b)){
-//		p6b = "";
-//		$("#viewNumTo").val("");
-//	}
-//	isNonNegativeInteger(p6b);
-  
     var businessObject =
     {
-    //		globalId    :	p1,
-    		acctName   	:	p1,
-    		name1    	:	p2,
-    		name2    	:	p3,
-    		gender		:	p4,            
-    		//nationality	: 	p5,            
-    		phone1		:	p6,
-    		phone2		:	p7,
-    		wechat		:	p8,
-    		email		:	p9,
-//    		degree		:	p11,
-//    		occupation	:	p12,
-//    		dob			:	p13,
-//    		pobProvince	:	p14,
-//    		pobCity		:	p15,
-//    		homeAddress	:	p16,
-//    		postalcode	:	p17,
-//    		hobbies		:	p18,
-//    		memberActiveDate	:	p19,
-//    		memberLevel	:	p20,
-    		memberStatus:	p10
+    		adUUID:p1,
+    		adTitle:p2,
+    		acctName:p3,
+    		adType:p4,
+    		createDatetimeFrom:p5a,            
+     		createDatetimeTo:p5b,
+     		postDatetimeFrom:p6a,            
+     		postDatetimeTo:p6b,
+     		expireDatetimeFrom:p7a,            
+     		expireDatetimeTo:p7b,
+     		modifyDatetimeFrom:p8a,            
+     		modifyDatetimeTo:p8b,
+    		adStatus:p9
     };
+    
+    
 
-    var dt = $("#datatable_memberList").DataTable();					//your code
+    var dt = $("#datatable_adPostList").DataTable();
     
-    //mended on 2018-0218 for Tomcat 8.5 stricter request charset
-    var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
+    //mended on 2018-0218 for tomcat 8.5 sticter request charset
+    //var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
+    var param = JSON.stringify(businessObject); 
     
-    //by Athens Temperorily  comment this
-    var x = dt.ajax.url("/acp/member/searchFilterData?itemJSONString="+encoded_param).load();		//your code
+   // alert(param);
     
+    var x = dt.ajax.url("/acp/ad/adpost/searchFilterData?itemJSONString="+param).load();
 }
 
 
 /* list news - datatable:button:filter reset */
 function filterReset(){
 //	alert("do filterReset()");
-	$("#acctName").val("");
-    $("#name1").val("");        
-    $("#name2").val("");
-    $("#gender").val(0);
-    $("#nationality").val("");
-    $("#phone1").val("");
-    $("#phone2").val("");
-    $("#wechat").val("");
-    $("#email").val("");
-    $("#memberStatus").val(0);
+	var p1 = $("#adUUID").val("");
+    var p2 = $("#adTitle").val("");
+    var p3 = $("#acctName").val("");
+    var p4 = $("#adType").val(0);
+    var p5a = $("#createDatetimeFrom").val("");
+    var p5b = $("#createDatetimeTo").val("");
+    var p6a = $("#postDatetimeFrom").val("");
+    var p6b = $("#postDatetimeTo").val("");
+    var p7a = $("#expireDatetimeFrom").val("");
+    var p7b = $("#expireDatetimeTo").val("");
+    var p8a = $("#modifyDatetimeFrom").val("");
+    var p8b = $("#modifyDatetimeTo").val("");
+    var p9 = $("#adStatus").val(0);
 }

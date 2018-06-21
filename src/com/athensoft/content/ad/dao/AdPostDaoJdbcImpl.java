@@ -253,7 +253,7 @@ public class AdPostDaoJdbcImpl implements AdPostDao {
 	@Override
 	public void updateBatch(List<AdPost> adPostList) {
 		System.out.println("##########"+adPostList.size());
-		String sql = "update ad_post set ad_status=:adStatus where ad_uuid =:adUUID";
+		String sql = "update ad_post set ad_status=:adStatus, modify_date=:modifyDate where ad_uuid =:adUUID";
 
 		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();
 		for (AdPost x : adPostList) {

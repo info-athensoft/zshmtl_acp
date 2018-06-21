@@ -19,7 +19,7 @@
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8" />
-        <title>ZSHMTL | Member - Member Listing</title>
+        <title>Athensoft | Ad - AdPost Listing</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
         
@@ -93,20 +93,20 @@
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
                     
-                    <h1 class="page-title"> 会员管理 <small></small></h1>
+                    <h1 class="page-title"> 广告系统 <small>管理会员广告</small></h1>
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
 							<li>
 								
-								<a href="${webapp_name}">首页</a>
+								<a href="${webapp_name}/index.html">首页</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="eventsDashboard">会员管理</a>
+								<a href="${webapp_name}/ad/adpost_list.html">广告</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">会员列表</a>
+								<a href="#">广告推荐列表</a>
 							</li>
 						</ul>
                         
@@ -118,7 +118,20 @@
                             <div class="portlet light">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        	会员列表 <span class="caption-helper"></span></div>
+                                        	广告推荐列表 <span class="caption-helper">管理推荐</span></div>
+                                    <div class="actions">
+                                        <a href="${webapp_name}/ad/adpost_create.html" class="btn btn-circle btn-info">
+                                            <i class="fa fa-plus"></i><span class="hidden-xs"> 创建广告 </span>
+                                        </a>
+                                        <div class="btn-group">
+                                            <a class="btn btn-circle btn-default dropdown-toggle" href="javascript:;" data-toggle="dropdown">
+                                                <i class="fa fa-share"></i>
+                                                <span class="hidden-xs"> Tools </span>
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="portlet-body">
                                     <div class="table-container">
@@ -126,62 +139,121 @@
                                             <span> </span>
                                             <select class="table-group-action-input form-control input-inline input-small input-sm" name="groupOption">
                                                 <option value="">请选择...</option>
-												<option value="1">申请已提交</option>
-												<option value="2">通过预审</option>
-												<option value="3">激活</option>
-												<option value="4">取消激活</option>
+												<option value="1">发布</option>
+												<option value="2">待发布</option>
+												<option value="3">删除</option>
+												<option value="4">过期</option>
 												<option value="5">审查</option>
-												<option value="6">禁止</option>
                                             </select>
-                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> 状态修改</button>
+                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> 修改状态</button>
                                         </div>
-                                        <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_memberList">
+                                        <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_adPostList">
                                             <thead>
                                                 <tr role="row" class="heading">
                                                     <th width="1%">
                                                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                            <!-- <input type="checkbox" class="group-checkable" data-set="#sample_2 .checkboxes" />  -->
                                                             <input type="checkbox" class="group-checkable">
                                                             <span></span>
                                                         </label>
                                                     </th>
-													<th width="8%">会员账号</th>
-													<th width="8%">中文姓名</th>
-													<th width="8%">英法姓名</th>
-													<th width="8%">性别</th>
-													<th width="8%">电话1</th>
-													<th width="8%">电话2</th>
-													<th width="8%">微信号</th>
-													<th width="8%">电子邮件</th>
+                                                    <th width="8%">统一编号</th>
+													<th width="8%">广告文字</th>
+													<!-- 
+													<th width="8%">广告图片</th>
+													<th width="8%">视频链接</th>
+													<th width="8%">外部链接</th>  -->
+													<th width="8%">广告主</th>
+													<th width="8%">类别</th>
+													<th width="8%">创建日期</th>
+													<th width="8%">起始日期</th>
+													<th width="8%">到期日期</th>
+													<th width="8%">修改日期</th>
 													<th width="8%">当前状态</th>
 													<th width="8%">操作</th>
                                                 </tr>
                                                 <tr role="row" class="filter">
 													<td></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="adUUID" id="adUUID"></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="adTitle" id="adTitle"></td>
+													<!-- 
+													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adImage"></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adLink"></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adUrl"></td>
+													 -->
 													<td><input type="text" class="form-control form-filter input-sm" name="acctName" id="acctName"></td>
-													<td><input type="text" class="form-control form-filter input-sm" name="name1" id="name1"></td>
-													<td><input type="text" class="form-control form-filter input-sm" name="name2" id="name2"></td>
 													<td>
-														<select class="form-control form-filter input-sm" name="gender" id="gender">
+														<select class="form-control form-filter input-sm" name="adType" id="adType">
 															<option value="0">请选择...</option>
-															<option value="1">男</option>
-															<option value="2">女</option>
-															<option value="3">保密</option>
+															<option value="1">文字广告</option>
+															<option value="2">图片广告</option>
+															<option value="3">视频广告</option>
 														</select>
 													</td>
-													<td><input type="text" class="form-control form-filter input-sm" name="phone1" id="phone1"></td>
-													<td><input type="text" class="form-control form-filter input-sm" name="phone2" id="phone2"></td>
-													<td><input type="text" class="form-control form-filter input-sm" name="wechat" id="wechat"></td>
-													<td><input type="text" class="form-control form-filter input-sm" name="email" id="email"></td>
+													
 													<td>
-														<select class="form-control form-filter input-sm" name="memberStatus" id="memberStatus">
+														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+															<input type="text" class="form-control form-filter input-sm" readonly name="createDatetimeFrom" placeholder="From" id="createDatetimeFrom">
+															<span class="input-group-btn">
+															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+															</span>
+														</div>
+														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+															<input type="text" class="form-control form-filter input-sm" readonly name="createDatetimeTo" placeholder="To" id="createDatetimeTo">
+															<span class="input-group-btn">
+															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+															</span>
+														</div>
+													</td>
+													<td>
+														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+															<input type="text" class="form-control form-filter input-sm" readonly name="postDatetimeFrom" placeholder="From" id="postDatetimeFrom">
+															<span class="input-group-btn">
+															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+															</span>
+														</div>
+														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+															<input type="text" class="form-control form-filter input-sm" readonly name="postDatetimeTo" placeholder="To" id="postDatetimeTo">
+															<span class="input-group-btn">
+															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+															</span>
+														</div>
+													</td>
+													<td>
+														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+															<input type="text" class="form-control form-filter input-sm" readonly name="expireDatetimeFrom" placeholder="From" id="expireDatetimeFrom">
+															<span class="input-group-btn">
+															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+															</span>
+														</div>
+														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+															<input type="text" class="form-control form-filter input-sm" readonly name="expireDatetimeTo" placeholder="To" id="expireDatetimeTo">
+															<span class="input-group-btn">
+															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+															</span>
+														</div>
+													</td>
+													<td>
+														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+															<input type="text" class="form-control form-filter input-sm" readonly name="modifyDatetimeFrom" placeholder="From" id="modifyDatetimeFrom">
+															<span class="input-group-btn">
+															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+															</span>
+														</div>
+														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+															<input type="text" class="form-control form-filter input-sm" readonly name="modifyDatetimeTo" placeholder="To" id="modifyDatetimeTo">
+															<span class="input-group-btn">
+															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+															</span>
+														</div>
+													</td>
+													<td>
+														<select class="form-control form-filter input-sm" name="adStatus" id="adStatus">
 															<option value="0">请选择...</option>
-															<option value="1">已申请</option>
-															<option value="2">已通过预审</option>
-															<option value="3">已激活</option>
-															<option value="4">未激活</option>
+															<option value="1">已发布</option>
+															<option value="2">待发布</option>
+															<option value="3">已删除</option>
+															<option value="4">已过期</option>
 															<option value="5">审查中</option>
-															<option value="6">已禁止</option>
 														</select>
 													</td>
 													<td>
@@ -251,10 +323,10 @@
 
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/member/member-list.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/ad/adrecommend-list.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-MemberList.init();
+AdRecommendList.init();
 </script>
 </body>
 
