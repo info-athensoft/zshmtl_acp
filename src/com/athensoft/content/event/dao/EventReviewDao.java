@@ -47,6 +47,12 @@ public interface EventReviewDao {
 	public EventReview findByReviewUUID(String reviewUUID);	
 	
 	/**
+	 * get total count of all reviews
+	 * @return
+	 */
+	public long count();
+	
+	/**
 	 * create an event review object and persist it
 	 * @param review an event review object
 	 */

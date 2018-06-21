@@ -40,6 +40,13 @@ public interface NewsDao {
 	 */
 	public Event findByEventUUID(String eventUUID);	
 	
+	
+	/**
+	 * count all news
+	 * @return
+	 */
+	public Long count();	
+	
 	/**
 	 * create a news object and persist it
 	 * @param news a news object

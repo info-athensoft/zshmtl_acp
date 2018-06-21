@@ -67,6 +67,14 @@ public class NewsService {
 	}
 	
 	/**
+	 * get total count of all news
+	 * @return
+	 */
+	public long countAllNews(){
+		return newsDao.count();
+	}
+	
+	/**
 	 * create a news object and persist it
 	 * @param news a news object to persist
 	 */

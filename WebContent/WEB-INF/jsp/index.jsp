@@ -118,7 +118,7 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-green-sharp">
-                                            <span data-counter="counterup" data-value="7800">0</span>
+                                            <span data-counter="counterup" data-value="${newsTotalCount}">0</span>
                                         </h3>
                                         <small>总新闻数</small>
                                     </div>
@@ -144,7 +144,7 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-red-haze">
-                                            <span data-counter="counterup" data-value="1349">0</span>
+                                            <span data-counter="counterup" data-value="${reviewsTotalCount}">0</span>
                                         </h3>
                                         <small>总评论数</small>
                                     </div>
@@ -170,7 +170,7 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-blue-sharp">
-                                            <span data-counter="counterup" data-value="567"></span>
+                                            <span data-counter="counterup" data-value="${adpostTotalCount}"></span>
                                         </h3>
                                         <small>总广告数</small>
                                     </div>
@@ -196,7 +196,7 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-purple-soft">
-                                            <span data-counter="counterup" data-value="276"></span>
+                                            <span data-counter="counterup" data-value="${memberTotalCount}"></span>
                                         </h3>
                                         <small>总会员数</small>
                                     </div>
@@ -241,106 +241,36 @@
                                         <div class="tab-pane active" id="portlet_member_1">
                                             <!-- BEGIN: Comments -->
                                             <div class="mt-comments">
-                                                <div class="mt-comment">
-                                                    <div class="mt-comment-img">
-                                                        <img src="${webapp_name}/assets/pages/media/users/avatar1.jpg" /> </div>
-                                                    <div class="mt-comment-body">
-                                                        <div class="mt-comment-info">
-                                                            <span class="mt-comment-author">Michael Baker</span>
-                                                            <span class="mt-comment-date">26 Feb, 10:30AM</span>
-                                                        </div>
-                                                        <div class="mt-comment-text"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </div>
-                                                        <div class="mt-comment-details">
-                                                            <span class="mt-comment-status mt-comment-status-pending">Pending</span>
-                                                            <ul class="mt-comment-actions">
-                                                                <li>
-                                                                    <a href="#">Quick Edit</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">View</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-comment">
-                                                    <div class="mt-comment-img">
-                                                        <img src="${webapp_name}/assets/pages/media/users/avatar6.jpg" /> </div>
-                                                    <div class="mt-comment-body">
-                                                        <div class="mt-comment-info">
-                                                            <span class="mt-comment-author">Larisa Maskalyova</span>
-                                                            <span class="mt-comment-date">12 Feb, 08:30AM</span>
-                                                        </div>
-                                                        <div class="mt-comment-text"> It is a long established fact that a reader will be distracted. </div>
-                                                        <div class="mt-comment-details">
-                                                            <span class="mt-comment-status mt-comment-status-rejected">Rejected</span>
-                                                            <ul class="mt-comment-actions">
-                                                                <li>
-                                                                    <a href="#">Quick Edit</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">View</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-comment">
-                                                    <div class="mt-comment-img">
-                                                        <img src="${webapp_name}/assets/pages/media/users/avatar8.jpg" /> </div>
-                                                    <div class="mt-comment-body">
-                                                        <div class="mt-comment-info">
-                                                            <span class="mt-comment-author">Natasha Kim</span>
-                                                            <span class="mt-comment-date">19 Dec,09:50 AM</span>
-                                                        </div>
-                                                        <div class="mt-comment-text"> The generated Lorem or non-characteristic Ipsum is therefore or non-characteristic. </div>
-                                                        <div class="mt-comment-details">
-                                                            <span class="mt-comment-status mt-comment-status-pending">Pending</span>
-                                                            <ul class="mt-comment-actions">
-                                                                <li>
-                                                                    <a href="#">Quick Edit</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">View</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-comment">
-                                                    <div class="mt-comment-img">
-                                                        <img src="${webapp_name}/assets/pages/media/users/avatar4.jpg" /> </div>
-                                                    <div class="mt-comment-body">
-                                                        <div class="mt-comment-info">
-                                                            <span class="mt-comment-author">Sebastian Davidson</span>
-                                                            <span class="mt-comment-date">10 Dec, 09:20 AM</span>
-                                                        </div>
-                                                        <div class="mt-comment-text"> The standard chunk of Lorem or non-characteristic Ipsum used since the 1500s or non-characteristic. </div>
-                                                        <div class="mt-comment-details">
-                                                            <span class="mt-comment-status mt-comment-status-rejected">Rejected</span>
-                                                            <ul class="mt-comment-actions">
-                                                                <li>
-                                                                    <a href="#">Quick Edit</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">View</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            
+                                            	<c:forEach var="member" items="${listMember}">
+                                            		<div class="mt-comment">
+	                                                    <div class="mt-comment-img">
+	                                                        <img src="${webapp_name}/assets/pages/media/users/avatar1.jpg" /> </div>
+	                                                    <div class="mt-comment-body">
+	                                                        <div class="mt-comment-info">
+	                                                            <span class="mt-comment-author">${member.name1}&nbsp;&nbsp;${member.name2}</span>
+	                                                            <span class="mt-comment-date">${member.memberApplyDate}</span>
+	                                                        </div>
+	                                                        
+	                                                        <div class="mt-comment-text" id="member-desc"> ${member.gender} ${member.acctName} ${member.occupation} </div>
+	                                                        <div class="mt-comment-details">
+	                                                            <span class="mt-comment-status mt-comment-status-rejected">已提交申请</span>
+	                                                            <ul class="mt-comment-actions">
+	                                                                <li>
+	                                                                    <a href="#">Quick Edit</a>
+	                                                                </li>
+	                                                                <li>
+	                                                                    <a href="#">View</a>
+	                                                                </li>
+	                                                                <li>
+	                                                                    <a href="#">Delete</a>
+	                                                                </li>
+	                                                            </ul>
+	                                                        </div>
+	                                                    </div>
+	                                                </div>
+                                            	</c:forEach>
+                                            
                                             </div>
                                             <!-- END: Comments -->
                                         </div>
@@ -986,7 +916,13 @@
    <script src="${webapp_name}/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
    <!-- END THEME LAYOUT SCRIPTS -->
    <script>
-       
+       $(document).ready(function(){
+    	  var gender = ${member.gender};
+    	  var acctName = ${member.acctName};
+    	  var occupation = ${member.occupation};
+    	  
+    	  $("#member-desc").html(gender+","+acctName,+" "+occupation);
+       });
    </script>
 </body>
 

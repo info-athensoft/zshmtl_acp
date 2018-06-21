@@ -11,7 +11,7 @@ public interface MemberDao {
 	
 	public Member findByAcctName(String acctName);
 	
-	
+	public Long count();
 	
 	public int create(Member member);
 	public int update(Member member);

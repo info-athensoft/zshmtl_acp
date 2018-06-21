@@ -31,6 +31,8 @@ public class NewsDaoJDBCImpl implements NewsDao {
 	
 	private static final Logger logger = Logger.getLogger(NewsDaoJDBCImpl.class);
 	
+	private static final String TABLE = "event_news";
+	
 	private NamedParameterJdbcTemplate jdbc;
 	
 	@Autowired
@@ -101,6 +103,14 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		return x;
 	}
 
+
+	@Override
+	public Long count() {
+		String sql = "SELECT COUNT(*) from "+TABLE;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		Long res = (Long)jdbc.queryForObject(sql,paramSource, Long.class);
+		return res;
+	}
 
 	@Override
 	public void create(News news) {

@@ -41,5 +41,8 @@ public class AdPostService {
 		this.adPostDao.updateBatch(adPostList);
 	}
 	
+	public long countAllAdpost(){
+		return adPostDao.count();
+	}
 	
 }

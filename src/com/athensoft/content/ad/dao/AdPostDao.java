@@ -13,6 +13,8 @@ public interface AdPostDao {
 	
 	public AdPost findByUUID(String adUUID);
 	
+	public long count();
+	
 	public int create(AdPost adPostObj);
 	
 	public int update(AdPost adPostObj);

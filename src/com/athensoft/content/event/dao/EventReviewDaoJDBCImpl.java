@@ -28,6 +28,8 @@ public class EventReviewDaoJDBCImpl implements EventReviewDao{
 	
 	private static final Logger logger = Logger.getLogger(EventReviewDaoJDBCImpl.class);
 	
+	private static final String TABLE = "event_review";
+	
 	private NamedParameterJdbcTemplate jdbc;
 	
 	@Autowired
@@ -109,6 +111,14 @@ public class EventReviewDaoJDBCImpl implements EventReviewDao{
 			x = null;
 		}
 		return x;
+	}
+
+	@Override
+	public long count() {
+		String sql = "SELECT COUNT(*) from "+TABLE;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		Long res = (Long)jdbc.queryForObject(sql,paramSource, Long.class);
+		return res;
 	}
 
 	@Override

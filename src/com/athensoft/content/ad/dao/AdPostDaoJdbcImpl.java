@@ -149,6 +149,14 @@ public class AdPostDaoJdbcImpl implements AdPostDao {
 	}
 
 	@Override
+	public long count() {
+		String sql = "SELECT COUNT(*) from "+TABLE;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		Long res = (Long)jdbc.queryForObject(sql,paramSource, Long.class);
+		return res;
+	}
+
+	@Override
 	public int create(AdPost x) {
 		StringBuffer sbf = new StringBuffer();
 		sbf.append(" INSERT INTO ").append(TABLE);

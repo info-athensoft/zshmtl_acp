@@ -21,7 +21,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.athensoft.content.ad.entity.AdPost;
 import com.athensoft.member.entity.Member;
 
 @Repository
@@ -172,6 +171,14 @@ public class MemberDaoJdbcImpl implements MemberDao {
 			x = null;
 		}
 		return x;
+	}
+
+	@Override
+	public Long count() {
+		String sql = "SELECT COUNT(*) from "+TABLE;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		Long res = (Long)jdbc.queryForObject(sql,paramSource, Long.class);
+		return res;
 	}
 
 	@Override

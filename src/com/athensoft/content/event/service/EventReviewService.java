@@ -73,6 +73,14 @@ public class EventReviewService {
 	}
 	
 	/**
+	 * get total count of all news
+	 * @return
+	 */
+	public long countAllReviews(){
+		return eventReviewDao.count();
+	}
+	
+	/**
 	 * create eventReview and persist it
 	 * @param review the eventReview object to persist
 	 */
