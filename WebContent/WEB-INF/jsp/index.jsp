@@ -241,20 +241,48 @@
                                         <div class="tab-pane active" id="portlet_member_1">
                                             <!-- BEGIN: Comments -->
                                             <div class="mt-comments">
-                                            
+                                            	
+                                            	
                                             	<c:forEach var="member" items="${listMember}">
                                             		<div class="mt-comment">
 	                                                    <div class="mt-comment-img">
-	                                                        <img src="${webapp_name}/assets/pages/media/users/avatar1.jpg" /> </div>
+	                                                        <img src="${webapp_name}/assets/layouts/layout2/img/avatar.png" /> </div>
 	                                                    <div class="mt-comment-body">
 	                                                        <div class="mt-comment-info">
 	                                                            <span class="mt-comment-author">${member.name1}&nbsp;&nbsp;${member.name2}</span>
 	                                                            <span class="mt-comment-date">${member.memberApplyDate}</span>
 	                                                        </div>
 	                                                        
-	                                                        <div class="mt-comment-text" id="member-desc"> ${member.gender} ${member.acctName} ${member.occupation} </div>
+	                                                        <div class="mt-comment-text">
+		                                                        <c:choose>
+														         <c:when test = "${member.gender eq 1}">
+														            <c:set var="strGender" value="先生,"/>
+														         </c:when>
+														         <c:when test = "${member.gender eq 2}">
+														            <c:set var="strGender" value="女士,"/>
+														         </c:when>
+														         <c:otherwise>
+														         	<c:set var="strGender" value=""/> 
+														         </c:otherwise>
+														      	</c:choose>
+														      	${strGender}&nbsp;&nbsp;&nbsp;${member.occupation},&nbsp;&nbsp;&nbsp;${member.acctName},&nbsp;&nbsp;&nbsp;电话${member.phone1},&nbsp;&nbsp;&nbsp;微信${member.wechat}
+														    </div>
+	                                                        
 	                                                        <div class="mt-comment-details">
-	                                                            <span class="mt-comment-status mt-comment-status-rejected">已提交申请</span>
+	                                                            <span class="mt-comment-status mt-comment-status-rejected">
+	                                                            	<c:choose>
+															         <c:when test = "${member.memberLevel eq 2}">
+															            <c:set var="strMemberLevel" value="普通会员"/>
+															         </c:when>
+															         <c:when test = "${member.memberLevel eq 3}">
+															            <c:set var="strMemberLevel" value="VIP会员"/>
+															         </c:when>
+															         <c:otherwise>
+															         	<c:set var="strMemberLevel" value=""/> 
+															         </c:otherwise>
+															      	</c:choose>
+															      	已提交申请&nbsp;&nbsp;&nbsp;${strMemberLevel}
+	                                                            </span>
 	                                                            <ul class="mt-comment-actions">
 	                                                                <li>
 	                                                                    <a href="#">Quick Edit</a>
@@ -917,12 +945,28 @@
    <!-- END THEME LAYOUT SCRIPTS -->
    <script>
        $(document).ready(function(){
-    	  var gender = ${member.gender};
-    	  var acctName = ${member.acctName};
-    	  var occupation = ${member.occupation};
-    	  
-    	  $("#member-desc").html(gender+","+acctName,+" "+occupation);
+    	   
+    	 
        });
+       
+       function showMemberDesc(index,gender,acctName,occupation){
+    	   
+    	   alert(index+","+gender+","+acctName+", "+occupation);
+    	   switch(gender){
+	   	  	case "1":
+	   		  gender = "先生,"; break;
+	   	  	case "2":
+	     		  gender = "女士"; break;
+	   	  	default:
+	     		  gender = ""; break;
+	   		  
+	   	  }    	  
+	   	  if(occupation.trim()==""){
+	   		  occupation="职业不详";
+	   	  }
+	   	  
+	   	  $("#member-desc_"+index).html(gender+acctName+", "+occupation);
+       }
    </script>
 </body>
 
