@@ -60,8 +60,8 @@ public class NewsDaoJDBCImpl implements NewsDao {
 		final String TABLE1 = "event_news";
 		
 		StringBuffer sbf = new StringBuffer();
-		sbf.append(" select * from "+TABLE1);
-		sbf.append(" where 1=1 ");
+		sbf.append(" SELECT * from "+TABLE1);
+		sbf.append(" WHERE 1=1 ");
 		sbf.append(queryString);
 		String sql = sbf.toString();
 		

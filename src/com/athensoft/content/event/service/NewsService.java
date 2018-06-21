@@ -56,6 +56,26 @@ public class NewsService {
 	public List<Event> getNewsByFilter(String queryString){
 		return newsDao.findByFilter(queryString);
 	}
+	
+	/**
+	 * get latest news for shortcut control panel, shows 8 entries by default
+	 * @param queryString
+	 * @return
+	 */
+	public List<Event> getLatestNews(){
+		final int DEFAULT_COUNT = 8;
+		return getLatestNews(DEFAULT_COUNT);
+	}
+	
+	/**
+	 * get latest news for shortcut control panel by specified number
+	 * @param count
+	 * @return
+	 */
+	public List<Event> getLatestNews(int count){
+		String queryString = " ORDER BY post_datetime DESC LIMIT "+count;
+		return newsDao.findByFilter(queryString);
+	}
 
 	/**
 	 * get all news objects<p>

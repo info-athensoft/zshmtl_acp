@@ -34,6 +34,17 @@ public class MemberService {
 		String queryString = " AND member_status = "+MemberStatus.APPLIED+" LIMIT "+count;
 		return memberDao.findByFilter(queryString);
 	}
+	
+	public List<Member> getLatestOtherRequest() {
+		final int DEFAULT_COUNT = 4;
+		return getLatestOtherRequest(DEFAULT_COUNT);
+	}
+	
+	public List<Member> getLatestOtherRequest(int count) {
+		String queryString = " AND member_status in ("+MemberStatus.PENDING+","+MemberStatus.INACTIVE+","+MemberStatus.APPROVED+")"+" LIMIT "+count;
+		return memberDao.findByFilter(queryString);
+	}
+	
 
 	public Member getMemberByAcctName(String acctName) {
 		return memberDao.findByAcctName(acctName);

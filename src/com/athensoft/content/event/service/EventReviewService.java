@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.athensoft.content.event.dao.EventReviewDao;
+import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.EventReview;
 
 /**
@@ -70,6 +71,27 @@ public class EventReviewService {
 	 */
 	public List<EventReview> getAllEventReview() {
 		return eventReviewDao.findAll();
+	}
+	
+	
+	/**
+	 * get latest reviews of news for shortcut control panel, shows 8 entries by default
+	 * @param queryString
+	 * @return
+	 */
+	public List<EventReview> getLatestReview(){
+		final int DEFAULT_COUNT = 8;
+		return getLatestReview(DEFAULT_COUNT);
+	}
+	
+	/**
+	 * get latest reviews of news for shortcut control panel by specified number
+	 * @param count
+	 * @return
+	 */
+	public List<EventReview> getLatestReview(int count){
+		String queryString = " ORDER BY review_datetime DESC LIMIT "+count;
+		return eventReviewDao.findByFilter(queryString);
 	}
 	
 	/**

@@ -243,7 +243,7 @@
                                             <div class="mt-comments">
                                             	
                                             	
-                                            	<c:forEach var="member" items="${listMember}">
+                                            	<c:forEach var="member" items="${listMemberRequest}">
                                             		<div class="mt-comment">
 	                                                    <div class="mt-comment-img">
 	                                                        <img src="${webapp_name}/assets/layouts/layout2/img/avatar.png" /> </div>
@@ -269,7 +269,7 @@
 														    </div>
 	                                                        
 	                                                        <div class="mt-comment-details">
-	                                                            <span class="mt-comment-status mt-comment-status-rejected">
+	                                                            <span class="mt-comment-status mt-comment-status-approved">
 	                                                            	<c:choose>
 															         <c:when test = "${member.memberLevel eq 2}">
 															            <c:set var="strMemberLevel" value="普通会员"/>
@@ -305,106 +305,86 @@
                                         <div class="tab-pane" id="portlet_member_2">
                                             <!-- BEGIN: Comments -->
                                             <div class="mt-comments">
-                                                <div class="mt-comment">
-                                                    <div class="mt-comment-img">
-                                                        <img src="${webapp_name}/assets/pages/media/users/avatar4.jpg" /> </div>
-                                                    <div class="mt-comment-body">
-                                                        <div class="mt-comment-info">
-                                                            <span class="mt-comment-author">Michael Baker</span>
-                                                            <span class="mt-comment-date">26 Feb, 10:30AM</span>
-                                                        </div>
-                                                        <div class="mt-comment-text"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy. </div>
-                                                        <div class="mt-comment-details">
-                                                            <span class="mt-comment-status mt-comment-status-approved">Approved</span>
-                                                            <ul class="mt-comment-actions">
-                                                                <li>
-                                                                    <a href="#">Quick Edit</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">View</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-comment">
-                                                    <div class="mt-comment-img">
-                                                        <img src="${webapp_name}/assets/pages/media/users/avatar8.jpg" /> </div>
-                                                    <div class="mt-comment-body">
-                                                        <div class="mt-comment-info">
-                                                            <span class="mt-comment-author">Larisa Maskalyova</span>
-                                                            <span class="mt-comment-date">12 Feb, 08:30AM</span>
-                                                        </div>
-                                                        <div class="mt-comment-text"> It is a long established fact that a reader will be distracted by. </div>
-                                                        <div class="mt-comment-details">
-                                                            <span class="mt-comment-status mt-comment-status-approved">Approved</span>
-                                                            <ul class="mt-comment-actions">
-                                                                <li>
-                                                                    <a href="#">Quick Edit</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">View</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-comment">
-                                                    <div class="mt-comment-img">
-                                                        <img src="${webapp_name}/assets/pages/media/users/avatar6.jpg" /> </div>
-                                                    <div class="mt-comment-body">
-                                                        <div class="mt-comment-info">
-                                                            <span class="mt-comment-author">Natasha Kim</span>
-                                                            <span class="mt-comment-date">19 Dec,09:50 AM</span>
-                                                        </div>
-                                                        <div class="mt-comment-text"> The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc. </div>
-                                                        <div class="mt-comment-details">
-                                                            <span class="mt-comment-status mt-comment-status-approved">Approved</span>
-                                                            <ul class="mt-comment-actions">
-                                                                <li>
-                                                                    <a href="#">Quick Edit</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">View</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-comment">
-                                                    <div class="mt-comment-img">
-                                                        <img src="${webapp_name}/assets/pages/media/users/avatar1.jpg" /> </div>
-                                                    <div class="mt-comment-body">
-                                                        <div class="mt-comment-info">
-                                                            <span class="mt-comment-author">Sebastian Davidson</span>
-                                                            <span class="mt-comment-date">10 Dec, 09:20 AM</span>
-                                                        </div>
-                                                        <div class="mt-comment-text"> The standard chunk of Lorem Ipsum used since the 1500s </div>
-                                                        <div class="mt-comment-details">
-                                                            <span class="mt-comment-status mt-comment-status-approved">Approved</span>
-                                                            <ul class="mt-comment-actions">
-                                                                <li>
-                                                                    <a href="#">Quick Edit</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">View</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            
+                                            	<c:forEach var="member" items="${listMemberOtherRequest}">
+                                            		<div class="mt-comment">
+	                                                    <div class="mt-comment-img">
+	                                                        <img src="${webapp_name}/assets/layouts/layout2/img/avatar.png" /> </div>
+	                                                    <div class="mt-comment-body">
+	                                                        <div class="mt-comment-info">
+	                                                            <span class="mt-comment-author">${member.name1}&nbsp;&nbsp;${member.name2}</span>
+	                                                            
+	                                                            <c:choose>
+															         <c:when test = "${member.memberStatus eq 2}">
+															            <c:set var="strMemberStatus" value="缴纳会费"/>
+															            <span class="mt-comment-date">${member.memberApprovedDate}</span>
+															         </c:when>
+															         <c:when test = "${member.memberLevel eq 4}">
+															            <c:set var="strMemberStatus" value="过期续约"/>
+															            <span class="mt-comment-date">${member.memberInactiveDate}</span>
+															         </c:when>
+															         <c:when test = "${member.memberLevel eq 5}">
+															            <c:set var="strMemberStatus" value="异常或违规"/>
+															            <span class="mt-comment-date">${member.memberPendingDate}</span>
+															         </c:when>
+															         <c:otherwise>
+															         	<span class="mt-comment-date">${member.memberApplyDate}</span>
+															         </c:otherwise>
+															    </c:choose>
+	                                                            
+	                                                        </div>
+	                                                        
+	                                                        <div class="mt-comment-text">
+		                                                        <c:choose>
+														         <c:when test = "${member.gender eq 1}">
+														            <c:set var="strGender" value="先生,"/>
+														         </c:when>
+														         <c:when test = "${member.gender eq 2}">
+														            <c:set var="strGender" value="女士,"/>
+														         </c:when>
+														         <c:otherwise>
+														         	<c:set var="strGender" value=""/> 
+														         </c:otherwise>
+														      	</c:choose>
+														      	${strGender}&nbsp;&nbsp;&nbsp;${member.occupation},&nbsp;&nbsp;&nbsp;${member.acctName},&nbsp;&nbsp;&nbsp;电话${member.phone1},&nbsp;&nbsp;&nbsp;微信${member.wechat}
+														    </div>
+	                                                        
+	                                                        <div class="mt-comment-details">
+	                                                            <span class="mt-comment-status mt-comment-status-rejected">
+	                                                            	<c:choose>
+															         <c:when test = "${member.memberStatus eq 2}">
+															            <c:set var="strMemberStatus" value="缴纳会费"/>
+															         </c:when>
+															         <c:when test = "${member.memberStatus eq 4}">
+															            <c:set var="strMemberStatus" value="过期续约，缴纳会费"/>
+															         </c:when>
+															         <c:when test = "${member.memberStatus eq 5}">
+															            <c:set var="strMemberStatus" value="异常或违规"/>
+															         </c:when>
+															         <c:otherwise>
+															         	<c:set var="strMemberStatus" value="其它事宜"/>
+															         </c:otherwise>
+															    	</c:choose>
+															      	待处理&nbsp;&nbsp;&nbsp;${strMemberStatus}
+	                                                            </span>
+	                                                            <ul class="mt-comment-actions">
+	                                                                <li>
+	                                                                    <a href="#">Quick Edit</a>
+	                                                                </li>
+	                                                                <li>
+	                                                                    <a href="#">View</a>
+	                                                                </li>
+	                                                                <li>
+	                                                                    <a href="#">Delete</a>
+	                                                                </li>
+	                                                            </ul>
+	                                                        </div>
+	                                                    </div>
+	                                                </div>
+                                            	</c:forEach>
+                                            
+                                                
+                                                
                                             </div>
                                             <!-- END: Comments -->
                                         </div>
@@ -656,218 +636,139 @@
                                 <div class="portlet-title">
                                     <div class="caption caption-md">
                                         <i class="icon-bar-chart font-dark hide"></i>
-                                        <span class="caption-subject font-dark bold uppercase">本日最新评论</span>
-                                        <span class="caption-helper"></span>
-                                    </div>
-                                    <div class="inputs">
-                                        <div class="portlet-input input-inline input-small ">
-                                            <div class="input-icon right">
-                                                <i class="icon-magnifier"></i>
-                                                <input type="text" class="form-control form-control-solid input-circle" placeholder="search..."> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <div class="scroller" style="height: 338px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
-                                        <div class="general-item-list">
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar4.jpg">
-                                                        <a href="" class="item-name primary-link">Nick Larson</a>
-                                                        <span class="item-label">3 hrs ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-success"></span> Open</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar3.jpg">
-                                                        <a href="" class="item-name primary-link">Mark</a>
-                                                        <span class="item-label">5 hrs ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-warning"></span> Pending</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat tincidunt ut laoreet. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar6.jpg">
-                                                        <a href="" class="item-name primary-link">Nick Larson</a>
-                                                        <span class="item-label">8 hrs ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-primary"></span> Closed</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar7.jpg">
-                                                        <a href="" class="item-name primary-link">Nick Larson</a>
-                                                        <span class="item-label">12 hrs ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-danger"></span> Pending</span>
-                                                </div>
-                                                <div class="item-body"> Consectetuer adipiscing elit Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar9.jpg">
-                                                        <a href="" class="item-name primary-link">Richard Stone</a>
-                                                        <span class="item-label">2 days ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-danger"></span> Open</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, ut laoreet dolore magna aliquam erat volutpat. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar8.jpg">
-                                                        <a href="" class="item-name primary-link">Dan</a>
-                                                        <span class="item-label">3 days ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-warning"></span> Pending</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar2.jpg">
-                                                        <a href="" class="item-name primary-link">Larry</a>
-                                                        <span class="item-label">4 hrs ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-success"></span> Open</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    	
-                        <div class="col-lg-6 col-xs-12 col-sm-12">
-                            <div class="portlet light ">
-                                <div class="portlet-title">
-                                    <div class="caption caption-md">
-                                        <i class="icon-bar-chart font-dark hide"></i>
                                         <span class="caption-subject font-dark bold uppercase">新闻与活动</span>
                                         <span class="caption-helper"></span>
                                     </div>
                                     <div class="inputs">
                                         <div class="portlet-input input-inline input-small ">
                                             <div class="input-icon right">
+                                            	<!-- 
                                                 <i class="icon-magnifier"></i>
-                                                <input type="text" class="form-control form-control-solid input-circle" placeholder="search..."> </div>
+                                                <input type="text" class="form-control form-control-solid input-circle" placeholder="search..."> -->
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <div class="scroller" style="height: 338px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                                    <div class="scroller" style="height: 538px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
                                         <div class="general-item-list">
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar4.jpg">
-                                                        <a href="" class="item-name primary-link">Nick Larson</a>
-                                                        <span class="item-label">3 hrs ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-success"></span> Open</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar3.jpg">
-                                                        <a href="" class="item-name primary-link">Mark</a>
-                                                        <span class="item-label">5 hrs ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-warning"></span> Pending</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat tincidunt ut laoreet. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar6.jpg">
-                                                        <a href="" class="item-name primary-link">Nick Larson</a>
-                                                        <span class="item-label">8 hrs ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-primary"></span> Closed</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar7.jpg">
-                                                        <a href="" class="item-name primary-link">Nick Larson</a>
-                                                        <span class="item-label">12 hrs ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-danger"></span> Pending</span>
-                                                </div>
-                                                <div class="item-body"> Consectetuer adipiscing elit Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar9.jpg">
-                                                        <a href="" class="item-name primary-link">Richard Stone</a>
-                                                        <span class="item-label">2 days ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-danger"></span> Open</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, ut laoreet dolore magna aliquam erat volutpat. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar8.jpg">
-                                                        <a href="" class="item-name primary-link">Dan</a>
-                                                        <span class="item-label">3 days ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-warning"></span> Pending</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="item-head">
-                                                    <div class="item-details">
-                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar2.jpg">
-                                                        <a href="" class="item-name primary-link">Larry</a>
-                                                        <span class="item-label">4 hrs ago</span>
-                                                    </div>
-                                                    <span class="item-status">
-                                                        <span class="badge badge-empty badge-success"></span> Open</span>
-                                                </div>
-                                                <div class="item-body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </div>
-                                            </div>
+                                        
+                                        	<c:forEach var="news" items="${listNews}">
+                                        		<div class="item">
+	                                                <div class="item-head">
+	                                                    <div class="item-details">
+	                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar4.jpg">
+	                                                        <a href="" class="item-name primary-link">${news.title}</a><br/>
+	                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                                                        <span class="item-label">${news.author}, ${news.postDatetime}</span>
+	                                                    </div>
+	                                                    <span class="item-status">
+		                                                    <c:choose>
+													         <c:when test = "${news.eventStatus eq 1}">
+													            <c:set var="strEventStatus" value="已发布"/>
+													            <span class="badge badge-empty badge-success"></span> ${strEventStatus}
+													         </c:when>
+													         <c:when test = "${news.eventStatus eq 2}">
+													            <c:set var="strEventStatus" value="待发布"/>
+													            <span class="badge badge-empty badge-warning"></span> ${strEventStatus}
+													         </c:when>
+													         <c:when test = "${news.eventStatus eq 3}">
+													            <c:set var="strEventStatus" value="已删除"/>
+													            <span class="badge badge-empty badge-primary"></span> ${strEventStatus}
+													         </c:when>
+													          <c:when test = "${news.eventStatus eq 4}">
+													            <c:set var="strEventStatus" value="已过期"/>
+													            <span class="badge badge-empty badge-primary"></span> ${strEventStatus}
+													         </c:when>
+													          <c:when test = "${news.eventStatus eq 5}">
+													            <c:set var="strEventStatus" value="审查中"/>
+													            <span class="badge badge-empty badge-danger"></span> ${strEventStatus}
+													         </c:when>
+													         <c:otherwise>
+													         	<c:set var="strEventStatus" value="未知状态"/>
+													         	<span class="badge badge-empty badge-primary"></span> ${strEventStatus}
+													         </c:otherwise>
+													    	</c:choose>
+	                                                    </span>    
+	                                                        
+	                                                </div>
+	                                                <div class="item-body"> ${news.descShort} </div>
+	                                            </div>
+                                        	</c:forEach>
+                                        	
+                                        
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
+                        
+                        <div class="col-lg-6 col-xs-12 col-sm-12">
+                            <div class="portlet light ">
+                                <div class="portlet-title">
+                                    <div class="caption caption-md">
+                                        <i class="icon-bar-chart font-dark hide"></i>
+                                        <span class="caption-subject font-dark bold uppercase">管理新闻评论</span>
+                                        <span class="caption-helper"></span>
+                                    </div>
+                                    <div class="inputs">
+                                        <div class="portlet-input input-inline input-small ">
+                                            <div class="input-icon right">
+                                            	<!-- 
+                                                <i class="icon-magnifier"></i>
+                                                <input type="text" class="form-control form-control-solid input-circle" placeholder="search...">  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="scroller" style="height: 538px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                                        <div class="general-item-list">
+                                        	
+                                        	<c:forEach var="review" items="${listReviews}">
+                                        		<div class="item">
+	                                                <div class="item-head">
+	                                                    <div class="item-details">
+	                                                        <img class="item-pic rounded" src="${webapp_name}/assets/layouts/layout2/img/avatar.png">
+	                                                        <a href="${webapp_name}/events/eventsNewsEdit?eventUUID=${review.eventUUID}" class="item-name primary-link">管理该评论</a><br/>
+	                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                                                        <span class="item-label">${review.reviewDatetime}</span>
+	                                                    </div>
+	                                                    <span class="item-status">
+		                                                    <c:choose>
+													         <c:when test = "${review.reviewStatus eq 1}">
+													            <c:set var="strReviewStatus" value="已发布"/>
+													            <span class="badge badge-empty badge-success"></span> ${strReviewStatus}
+													         </c:when>
+													         <c:when test = "${review.reviewStatus eq 2}">
+													            <c:set var="strReviewStatus" value="审查中"/>
+													            <span class="badge badge-empty badge-warning"></span> ${strReviewStatus}
+													         </c:when>
+													         <c:when test = "${review.reviewStatus eq 3}">
+													            <c:set var="strReviewStatus" value="已禁止"/>
+													            <span class="badge badge-empty badge-danger"></span> ${strReviewStatus}
+													         </c:when>
+													         <c:otherwise>
+													         	<c:set var="strEventStatus" value="未知状态"/>
+													         	<span class="badge badge-empty badge-primary"></span> ${strReviewStatus}
+													         </c:otherwise>
+													    	</c:choose>
+	                                                    </span>    
+	                                                        
+	                                                </div>
+	                                                <div class="item-body"> ${review.reviewContent} </div>
+	                                            </div>
+                                        	</c:forEach>
+                                        
+                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    	
+                        
                     	
                     
                     </div>
