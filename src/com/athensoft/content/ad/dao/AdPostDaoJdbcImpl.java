@@ -206,13 +206,15 @@ public class AdPostDaoJdbcImpl implements AdPostDao {
 		paramSource.addValue("post_date", x.getPostDate());
 		paramSource.addValue("expire_date", x.getExpireDate());
 		paramSource.addValue("modify_date", x.getModifyDate());
+		
+		int res = 0;
 		try{
-			jdbc.update(sql, paramSource);
+			res = jdbc.update(sql, paramSource);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
 		
-		return 0;
+		return res;
 	}
 
 	@Override

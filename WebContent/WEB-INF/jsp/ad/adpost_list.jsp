@@ -109,6 +109,7 @@
 								<a href="#">广告列表</a>
 							</li>
 						</ul>
+						<!-- 
                         <div class="page-toolbar">
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
@@ -123,6 +124,7 @@
                                 </ul>
                             </div>
                         </div>
+                         -->
                     </div>
                     <!-- END PAGE HEADER-->
                     <div class="row">
@@ -133,15 +135,17 @@
                                     <div class="caption">
                                         	广告列表 <span class="caption-helper">查询，批处理...</span></div>
                                     <div class="actions">
-                                        <a href="${webapp_name}/ad/adpost_create.html" class="btn btn-circle btn-info">
+                                        <a href="${webapp_name}/ad/adpost/create.html" class="btn btn-circle btn-info">
                                             <i class="fa fa-plus"></i><span class="hidden-xs"> 创建广告 </span>
                                         </a>
+                                        <!--  
                                         <div class="btn-group">
                                             <a class="btn btn-circle btn-default dropdown-toggle" href="javascript:;" data-toggle="dropdown">
                                                 <i class="fa fa-share"></i>
                                                 <span class="hidden-xs"> Tools </span>
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
+                                             
                                             <div class="dropdown-menu pull-right">
                                             	<ul>
                                                 <li><a href="javascript:;"> Export to Excel </a></li>
@@ -150,8 +154,8 @@
                                                 <li class="divider"></li>
                                                 <li><a href="javascript:;"> Print  </a></li>
                                                 </ul>
-                                            </div>
-                                        </div>
+                                            </div> 
+                                        </div>-->
                                     </div>
                                 </div>
                                 <div class="portlet-body">
@@ -205,8 +209,8 @@
 													<td>
 														<select class="form-control form-filter input-sm" name="adType" id="adType">
 															<option value="0">请选择...</option>
-															<option value="1">文字广告</option>
-															<option value="2">图片广告</option>
+															<option value="1">图片广告</option>
+															<option value="2">文字广告</option>
 															<option value="3">视频广告</option>
 														</select>
 													</td>

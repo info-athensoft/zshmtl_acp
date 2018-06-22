@@ -102,11 +102,11 @@
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="${webapp_name}/ad/adpost_list.html">广告</a>
+								<a href="${webapp_name}/ad/adrcmd/list.html">广告推荐列表</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">广告推荐列表</a>
+								<a href="#">广告推荐</a>
 							</li>
 						</ul>
                         
@@ -118,19 +118,11 @@
                             <div class="portlet light">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        	广告推荐列表 <span class="caption-helper">管理推荐</span></div>
+                                        	广告推荐 <span class="caption-helper">管理推荐</span></div>
                                     <div class="actions">
-                                        <a href="${webapp_name}/ad/adpost_create.html" class="btn btn-circle btn-info">
-                                            <i class="fa fa-plus"></i><span class="hidden-xs"> 创建广告 </span>
+                                        <a href="${webapp_name}/ad/adrcmd/create.html" class="btn btn-circle btn-info">
+                                            <i class="fa fa-plus"></i><span class="hidden-xs"> 创建广告推荐 </span>
                                         </a>
-                                        <div class="btn-group">
-                                            <a class="btn btn-circle btn-default dropdown-toggle" href="javascript:;" data-toggle="dropdown">
-                                                <i class="fa fa-share"></i>
-                                                <span class="hidden-xs"> Tools </span>
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="portlet-body">
@@ -139,11 +131,8 @@
                                             <span> </span>
                                             <select class="table-group-action-input form-control input-inline input-small input-sm" name="groupOption">
                                                 <option value="">请选择...</option>
-												<option value="1">发布</option>
-												<option value="2">待发布</option>
-												<option value="3">删除</option>
-												<option value="4">过期</option>
-												<option value="5">审查</option>
+												<option value="1">显示</option>
+												<option value="2">不显示</option>
                                             </select>
                                             <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> 修改状态</button>
                                         </div>
@@ -156,111 +145,32 @@
                                                             <span></span>
                                                         </label>
                                                     </th>
-                                                    <th width="8%">统一编号</th>
-													<th width="8%">广告文字</th>
-													<!-- 
-													<th width="8%">广告图片</th>
-													<th width="8%">视频链接</th>
-													<th width="8%">外部链接</th>  -->
-													<th width="8%">广告主</th>
-													<th width="8%">类别</th>
-													<th width="8%">创建日期</th>
-													<th width="8%">起始日期</th>
-													<th width="8%">到期日期</th>
-													<th width="8%">修改日期</th>
+                                                    <th width="8%">广告编号</th>
+													<th width="8%">投放网页编号</th>
+													<th width="8%">投放网页名称</th>
+													<th width="8%">显示序号</th>
 													<th width="8%">当前状态</th>
 													<th width="8%">操作</th>
                                                 </tr>
                                                 <tr role="row" class="filter">
 													<td></td>
 													<td><input type="text" class="form-control form-filter input-sm" name="adUUID" id="adUUID"></td>
-													<td><input type="text" class="form-control form-filter input-sm" name="adTitle" id="adTitle"></td>
-													<!-- 
-													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adImage"></td>
-													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adLink"></td>
-													<td><input type="text" class="form-control form-filter input-sm" name="event_author" id="adUrl"></td>
-													 -->
-													<td><input type="text" class="form-control form-filter input-sm" name="acctName" id="acctName"></td>
-													<td>
-														<select class="form-control form-filter input-sm" name="adType" id="adType">
-															<option value="0">请选择...</option>
-															<option value="1">文字广告</option>
-															<option value="2">图片广告</option>
-															<option value="3">视频广告</option>
-														</select>
-													</td>
+													<td><input type="text" class="form-control form-filter input-sm" name="pageId" id="pageId"></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="pageName" id="pageName"></td>
+													<td><input type="text" class="form-control form-filter input-sm" name="rcmdRank" id="rcmdRank"></td>
 													
 													<td>
-														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="createDatetimeFrom" placeholder="From" id="createDatetimeFrom">
-															<span class="input-group-btn">
-															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-															</span>
-														</div>
-														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="createDatetimeTo" placeholder="To" id="createDatetimeTo">
-															<span class="input-group-btn">
-															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-															</span>
-														</div>
-													</td>
-													<td>
-														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="postDatetimeFrom" placeholder="From" id="postDatetimeFrom">
-															<span class="input-group-btn">
-															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-															</span>
-														</div>
-														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="postDatetimeTo" placeholder="To" id="postDatetimeTo">
-															<span class="input-group-btn">
-															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-															</span>
-														</div>
-													</td>
-													<td>
-														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="expireDatetimeFrom" placeholder="From" id="expireDatetimeFrom">
-															<span class="input-group-btn">
-															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-															</span>
-														</div>
-														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="expireDatetimeTo" placeholder="To" id="expireDatetimeTo">
-															<span class="input-group-btn">
-															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-															</span>
-														</div>
-													</td>
-													<td>
-														<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="modifyDatetimeFrom" placeholder="From" id="modifyDatetimeFrom">
-															<span class="input-group-btn">
-															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-															</span>
-														</div>
-														<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-															<input type="text" class="form-control form-filter input-sm" readonly name="modifyDatetimeTo" placeholder="To" id="modifyDatetimeTo">
-															<span class="input-group-btn">
-															<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-															</span>
-														</div>
-													</td>
-													<td>
-														<select class="form-control form-filter input-sm" name="adStatus" id="adStatus">
+														<select class="form-control form-filter input-sm" name="rcmdStatus" id="rcmdStatus">
 															<option value="0">请选择...</option>
-															<option value="1">已发布</option>
-															<option value="2">待发布</option>
-															<option value="3">已删除</option>
-															<option value="4">已过期</option>
-															<option value="5">审查中</option>
+															<option value="1">显示</option>
+															<option value="2">不显示</option>
 														</select>
 													</td>
 													<td>
 														<div class="margin-bottom-5">
 														<button class="btn btn-sm yellow filter-submit1 margin-bottom" onclick="filterSearch();"><i class="fa fa-search"></i> 查找</button>
-														</div>
 														<button class="btn btn-sm red filter-cancel1" onclick="filterReset();"><i class="fa fa-times"></i> 清除</button>
+														</div>
 													</td>
 												</tr>
                                             </thead>

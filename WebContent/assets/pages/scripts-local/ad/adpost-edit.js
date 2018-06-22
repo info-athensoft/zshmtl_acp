@@ -4,7 +4,7 @@
 /* create adpost - button:back */
 function backToAdPostList(){
 	//alert("backToAdPostList");
-	location.href = "/acp/ad/adpost_list.html";
+	location.href = "/acp/ad/adpost/list.html";
 }
 
 

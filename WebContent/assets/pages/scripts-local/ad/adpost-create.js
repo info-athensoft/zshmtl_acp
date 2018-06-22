@@ -36,7 +36,7 @@ function createAdPost() {
         timeout :     30000,
         
         success:function(msg){
-        	location.href="/acp/ad/adpost_list.html";
+        	location.href="/acp/ad/adpost/list.html";
         },
         error:function(){
             alert("ERROR: AdPost creating failed.");     

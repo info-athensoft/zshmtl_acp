@@ -38,7 +38,7 @@ var AdPostList = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "/acp/ad/adPostListData", // ajax source
+                    "url": "/acp/ad/adpost/list", // ajax source
                     //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
                 },
                 "order": [
@@ -118,7 +118,7 @@ function groupUpdateStatus(adUUIDArray,adStatus){
         timeout :     30000,
         
         success:function(msg){
-            location.href="/acp/ad/adpost_list.html";
+            location.href="/acp/ad/adpost/list.html";
         	//alert("INFO: News status updated.");
         },
         error:function(){
@@ -178,7 +178,7 @@ function filterSearch(){
     
    // alert(param);
     
-    var x = dt.ajax.url("/acp/ad/adpost/searchFilterData?itemJSONString="+param).load();
+    var x = dt.ajax.url("/acp/ad/adpost/searchbyfilter?itemJSONString="+param).load();
 }
 
 

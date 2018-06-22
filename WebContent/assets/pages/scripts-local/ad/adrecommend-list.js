@@ -36,13 +36,13 @@ var AdRecommendList = function () {
                     [2,10, 20, 50, 100, 150, 200],
                     [2,10, 20, 50, 100, 150, 200] // change per page values here 
                 ],
-                "pageLength": 10, // default record count per page
+                "pageLength": 50, // default record count per page
                 "ajax": {
-                    "url": "/acp/ad/adPostListData", // ajax source
+                    "url": "/acp/ad/adrcmd/list", // ajax source
                     //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
                 },
                 "order": [
-                    [8, "desc"]	//order by modify date
+                    [2, "asc"]	//order by modify date
                 ] // set first column as a default sort by asc 
             }
         });
@@ -118,8 +118,7 @@ function groupUpdateStatus(adUUIDArray,adStatus){
         timeout :     30000,
         
         success:function(msg){
-            location.href="/acp/ad/adpost_list.html";
-        	//alert("INFO: News status updated.");
+            location.href="/acp/ad/adpost/list.html";
         },
         error:function(){
             alert("ERROR: adpost updating failed.");     
@@ -167,8 +166,6 @@ function filterSearch(){
      		modifyDatetimeTo:p8b,
     		adStatus:p9
     };
-    
-    
 
     var dt = $("#datatable_adPostList").DataTable();
     
@@ -176,9 +173,7 @@ function filterSearch(){
     //var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
     var param = JSON.stringify(businessObject); 
     
-   // alert(param);
-    
-    var x = dt.ajax.url("/acp/ad/adpost/searchFilterData?itemJSONString="+param).load();
+    var x = dt.ajax.url("/acp/ad/adpost/searchbyfilter?itemJSONString="+param).load();
 }
 
 
