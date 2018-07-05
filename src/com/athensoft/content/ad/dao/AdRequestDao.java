@@ -13,6 +13,8 @@ public interface AdRequestDao {
 	
 	public List<AdRequest> findByAcctName(String acctName);
 	
+	public List<AdRequest> findByType(int requestType);
+	
 	public int create(AdRequest adRequest);
 	
 	public int update(AdRequest adRequest);

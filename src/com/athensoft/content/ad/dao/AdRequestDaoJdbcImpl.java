@@ -290,5 +290,36 @@ public class AdRequestDaoJdbcImpl implements AdRequestDao{
 	        return x;
 		}
 	}
+
+	@Override
+	public List<AdRequest> findByType(int requestType) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("SELECT ");
+		sbf.append("global_id,");
+		sbf.append("acct_name,");
+		sbf.append("request_name,");
+		sbf.append("request_phone,");
+		sbf.append("request_subject,");
+		sbf.append("request_msg,");
+		sbf.append("request_date,");
+		sbf.append("request_type,");
+		sbf.append("request_status");
+		sbf.append(" FROM ").append(TABLE);
+		sbf.append(" WHERE 1=1 ");
+		sbf.append(" AND request_type =:request_type");
+		
+		String sql = sbf.toString();
+		List<AdRequest> x = new ArrayList<AdRequest>();
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("request_type", new Integer(requestType));
+		
+		try{
+			x = jdbc.query(sql, paramSource, new AdRequestRowMapper());
+		}catch(Exception ex){
+			x = null;
+		}
+		
+		return x;
+	}
 	
 }

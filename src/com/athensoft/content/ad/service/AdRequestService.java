@@ -28,6 +28,20 @@ public class AdRequestService {
 		return adRequestDao.findByStatus(requestStatus);
 	}
 	
+	public List<AdRequest> getAdRequestByType(int requestType){
+		return adRequestDao.findByStatus(requestType);
+	}
+	
+	public List<AdRequest> getLastestApplyRequest(){
+		return adRequestDao.findByType(AdRequestType.CREATE);
+	}
+	
+	public List<AdRequest> getLastestOtherRequest(){
+		String queryString = " AND request_type IN (1,3,4,5)";
+		return adRequestDao.findByQuery(queryString);
+	}
+	
+	
 	public List<AdRequest> getAdRequestByAcctName(String acctName){
 		return adRequestDao.findByAcctName(acctName);
 	}

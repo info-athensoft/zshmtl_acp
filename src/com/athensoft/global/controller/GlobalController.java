@@ -8,7 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.athensoft.content.ad.entity.AdRequest;
+import com.athensoft.content.ad.entity.AdRequestType;
 import com.athensoft.content.ad.service.AdPostService;
+import com.athensoft.content.ad.service.AdRequestService;
 import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.EventReview;
 import com.athensoft.content.event.service.EventReviewService;
@@ -24,33 +27,42 @@ import com.athensoft.member.service.MemberService;
 @Controller
 public class GlobalController {
 	
+	@Autowired
 	private NewsService newsService;
 	
-	@Autowired
-	public void setNewsService(NewsService newsService) {
-		this.newsService = newsService;
-	}
+//	@Autowired
+//	public void setNewsService(NewsService newsService) {
+//		this.newsService = newsService;
+//	}
 	
+	@Autowired
 	private EventReviewService eventReviewService;
 	
-	@Autowired
-	public void setEventReviewService(EventReviewService eventReviewService) {
-		this.eventReviewService = eventReviewService;
-	}
+//	@Autowired
+//	public void setEventReviewService(EventReviewService eventReviewService) {
+//		this.eventReviewService = eventReviewService;
+//	}
 	
+	@Autowired
 	private AdPostService adPostService;
 	
 	@Autowired
-	public void setAdPostService(AdPostService adPostService) {
-		this.adPostService = adPostService;
-	}
+	private AdRequestService adRequestService;
 	
-	private MemberService memberService;
+//	@Autowired
+//	public void setAdPostService(AdPostService adPostService) {
+//		this.adPostService = adPostService;
+//	}
 	
 	@Autowired
-	public void setMemberService(MemberService memberService) {
-		this.memberService = memberService;
-	}
+	private MemberService memberService;
+	
+//	@Autowired
+//	public void setMemberService(MemberService memberService) {
+//		this.memberService = memberService;
+//	}
+	
+	
 	
 	/**
 	 * go to home page
@@ -80,6 +92,10 @@ public class GlobalController {
 		List<Member> listMember = memberService.getLatestApplyRequest();
 		List<Member> listMember2 = memberService.getLatestOtherRequest();
 		
+		//ad request
+		List<AdRequest> listAdRequest = adRequestService.getLastestApplyRequest();
+		List<AdRequest> listAdRequest2 = adRequestService.getLastestOtherRequest();
+		
 		//latest news
 		List<Event> listNews = newsService.getLatestNews();
 		
@@ -94,6 +110,9 @@ public class GlobalController {
 		model.put("reviewsTotalCount", reviewsTotalCount);
 		model.put("adpostTotalCount", adpostTotalCount);
 		model.put("memberTotalCount", memberTotalCount);
+		
+		model.put("listAdRequest", listAdRequest);
+		model.put("listAdOtherRequest", listAdRequest2);
 		
 		model.put("listMemberRequest", listMember);
 		model.put("listMemberOtherRequest", listMember2);
