@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.athensoft.content.ad.entity.AdRequest;
@@ -23,8 +24,12 @@ public class AdRequestDaoJdbcImpl implements AdRequestDao{
 
 	private static String TABLE = "ad_request";
 	
-	@Autowired
 	private NamedParameterJdbcTemplate jdbc;
+	
+	@Autowired
+	public void setDataSource(DataSource dataSource){
+		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+	}
 	
 	@Override
 	public List<AdRequest> findAll() {
