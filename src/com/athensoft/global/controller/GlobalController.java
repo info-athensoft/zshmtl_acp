@@ -58,6 +58,7 @@ public class GlobalController {
 	 */
 	@RequestMapping("/")
 	public ModelAndView gotoHome(){
+		System.out.println("gotoHome()");
 		return gotoHome2();
 	}
 	
