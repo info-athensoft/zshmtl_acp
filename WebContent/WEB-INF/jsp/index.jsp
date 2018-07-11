@@ -451,7 +451,7 @@
                                         <div class="tab-pane" id="portlet_ad_2">
                                             <!-- BEGIN: Comments -->
                                             <div class="mt-comments">
-                                                <c:forEach var="adRequest" items="${listAdRequest2}">
+                                                <c:forEach var="adRequest" items="${listAdOtherRequest}">
                                             
                                                 <div class="mt-comment">
                                                     <div class="mt-comment-img">
@@ -463,8 +463,22 @@
                                                         </div>
                                                         <div class="mt-comment-text"> ${adRequest.acctName} </div>
                                                         <div class="mt-comment-details">
-                                                            <span class="mt-comment-status mt-comment-status-approved">
-																已申请发布广告
+                                                            <span class="mt-comment-status mt-comment-status-rejected">
+																<c:choose>
+															         <c:when test = "${adRequest.requestType eq 1}">
+															            <c:set var="strRequestType" value="广告咨询"/>
+															         </c:when>
+															         <c:when test = "${adRequest.requestType eq 3}">
+															            <c:set var="strRequestType" value="广告修改申请"/>
+															         </c:when>
+															         <c:when test = "${adRequest.requestType eq 4}">
+															            <c:set var="strRequestType" value="广告撤回申请"/>
+															         </c:when>
+															         <c:otherwise>
+															         	<c:set var="strRequestType" value="其它事宜"/>
+															         </c:otherwise>
+															    	</c:choose>
+															      	待处理&nbsp;&nbsp;&nbsp;${strRequestType}
 															</span>
                                                             <ul class="mt-comment-actions">
                                                                 <li>
