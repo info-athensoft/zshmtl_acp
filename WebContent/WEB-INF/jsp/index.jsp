@@ -265,8 +265,8 @@
 														         	<c:set var="strGender" value=""/> 
 														         </c:otherwise>
 														      	</c:choose>
-														      	${strGender}&nbsp;&nbsp;&nbsp;${member.occupation},&nbsp;&nbsp;&nbsp;<br/>
-														      	${member.acctName},&nbsp;&nbsp;&nbsp;电话${member.phone1},&nbsp;&nbsp;&nbsp;微信${member.wechat}
+														      	${strGender}&nbsp;&nbsp;&nbsp;${member.occupation}&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+														      	${member.acctName}&nbsp;&nbsp;&nbsp;&nbsp;电话${member.phone1}&nbsp;&nbsp;&nbsp;&nbsp;微信${member.wechat}
 														    </div>
 	                                                        
 	                                                        <div class="mt-comment-details">
@@ -286,14 +286,15 @@
 	                                                            </span>
 	                                                            <ul class="mt-comment-actions">
 	                                                                <li>
-	                                                                    <a href="#">Quick Edit</a>
+	                                                                    <a href="${webapp_name}/member/member_edit.html?acctName=${member.acctName}"><strong>处理</strong></a>
 	                                                                </li>
+	                                                                <!-- 
 	                                                                <li>
 	                                                                    <a href="#">View</a>
 	                                                                </li>
 	                                                                <li>
 	                                                                    <a href="#">Delete</a>
-	                                                                </li>
+	                                                                </li> -->
 	                                                            </ul>
 	                                                        </div>
 	                                                    </div>
@@ -370,14 +371,15 @@
 	                                                            </span>
 	                                                            <ul class="mt-comment-actions">
 	                                                                <li>
-	                                                                    <a href="#">Quick Edit</a>
+	                                                                    <a href="${webapp_name}/member/member_edit.html?acctName=${member.acctName}"><strong>处理</strong></a>
 	                                                                </li>
+	                                                                <!-- 
 	                                                                <li>
 	                                                                    <a href="#">View</a>
 	                                                                </li>
 	                                                                <li>
 	                                                                    <a href="#">Delete</a>
-	                                                                </li>
+	                                                                </li> -->
 	                                                            </ul>
 	                                                        </div>
 	                                                    </div>

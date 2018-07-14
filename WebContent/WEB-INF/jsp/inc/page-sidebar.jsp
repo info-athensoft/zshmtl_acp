@@ -33,14 +33,16 @@
 				<span class="arrow "></span>
 				</a>
 				<ul class="sub-menu">
+					
 					<li>
 						<a href="${webapp_name}/member/member_list.html">
 						 会员列表</a>
 					</li>
+					<!--
 					<li>
 						<a href="${webapp_name}/member/member_list.html">
 						 会员信息</a>
-					</li>
+					</li> 
 					<li>
 						<a href="${webapp_name}/member/member_list.html">
 						 会员申请</a>
@@ -52,7 +54,7 @@
 					<li>
 						<a href="${webapp_name}/member/member_list.html">
 						 状态审核</a>
-					</li>
+					</li> -->
 				</ul>
 			</li>
 			

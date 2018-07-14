@@ -165,7 +165,17 @@
 													</div>
 													
 													<div class="form-group">
-													
+														<label class="col-md-2 control-label">当前会员等级:
+														</label>
+														<div class="col-md-4">
+															<select class="table-group-action-input form-control input-medium" id="memberLevel_2" name="memberLevel_2" disabled="disabled">
+																<option value="1" ${memberObject.memberLevel == '1' ? 'selected' : ''}>请选择...</option>
+																<option value="2" ${memberObject.memberLevel == '2' ? 'selected' : ''}>普通会员 </option>
+																<option value="3" ${memberObject.memberLevel == '3' ? 'selected' : ''}>VIP会员 </option>
+																<option value="4" ${memberObject.memberLevel == '4' ? 'selected' : ''}>核心会员</option>
+															</select>
+														</div>
+														
 														<label class="col-md-2 control-label"><span class="custom-operation-em">管理会员等级: </span><span class="required">
 														* </span>
 														</label>
@@ -177,21 +187,25 @@
 																<option value="4" ${memberObject.memberLevel == '4' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;核心会员</option>
 															</select>
 														</div>
-														
-														<label class="col-md-2 control-label">当前会员等级: 
-														</label>
-														<div class="col-md-4">
-															<select class="table-group-action-input form-control input-medium" id="memberLevel_2" name="memberLevel_2" disabled="disabled">
-																<option value="1" ${memberObject.memberLevel == '1' ? 'selected' : ''}>请选择...</option>
-																<option value="2" ${memberObject.memberLevel == '2' ? 'selected' : ''}>普通会员 </option>
-																<option value="3" ${memberObject.memberLevel == '3' ? 'selected' : ''}>VIP会员 </option>
-																<option value="4" ${memberObject.memberLevel == '4' ? 'selected' : ''}>核心会员</option>
-															</select>
-														</div>
 													</div>
 													
 													
 													<div class="form-group">
+													
+														<label class="col-md-2 control-label">当前状态: 
+														</label>
+														<div class="col-md-4">
+															<select class="table-group-action-input form-control input-medium" id="memberStatus_2" name="memberStatus_2" disabled="disabled">
+																<option value="0" ${memberObject.memberStatus == '0' ? 'selected' : ''}>未知状态</option>
+																<option value="1" ${memberObject.memberStatus == '1' ? 'selected' : ''}>已申请</option>
+																<option value="2" ${memberObject.memberStatus == '2' ? 'selected' : ''}>已通过预审</option>
+																<option value="3" ${memberObject.memberStatus == '3' ? 'selected' : ''}>已激活</option>
+																<option value="4" ${memberObject.memberStatus == '4' ? 'selected' : ''}>未激活</option>
+																<option value="5" ${memberObject.memberStatus == '5' ? 'selected' : ''}>审查中</option>
+																<option value="6" ${memberObject.memberStatus == '6' ? 'selected' : ''}>已禁止</option>
+															</select>
+														</div>
+														
 														<label class="col-md-2 control-label"><span class="custom-operation-em">管理状态</span>: <span class="required">* </span>
 														</label>
 														<div class="col-md-4">
@@ -206,19 +220,7 @@
 															</select>
 														</div>
 														
-														<label class="col-md-2 control-label">当前状态: 
-														</label>
-														<div class="col-md-4">
-															<select class="table-group-action-input form-control input-medium" id="memberStatus_2" name="memberStatus_2" disabled="disabled">
-																<option value="0" ${memberObject.memberStatus == '0' ? 'selected' : ''}>未知状态</option>
-																<option value="1" ${memberObject.memberStatus == '1' ? 'selected' : ''}>已申请</option>
-																<option value="2" ${memberObject.memberStatus == '2' ? 'selected' : ''}>已通过预审</option>
-																<option value="3" ${memberObject.memberStatus == '3' ? 'selected' : ''}>已激活</option>
-																<option value="4" ${memberObject.memberStatus == '4' ? 'selected' : ''}>未激活</option>
-																<option value="5" ${memberObject.memberStatus == '5' ? 'selected' : ''}>审查中</option>
-																<option value="6" ${memberObject.memberStatus == '6' ? 'selected' : ''}>已禁止</option>
-															</select>
-														</div>
+														
 													</div>
 													
 													<div class="form-group">
