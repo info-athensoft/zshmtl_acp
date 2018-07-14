@@ -226,7 +226,7 @@
 														</label>
 														<div class="col-md-4">
 															<div class="input-group input-large date-picker input-daterange" data-date="2018-01-01" data-date-format="yyyy-mm-dd">
-																<input type="text" class="form-control" id="memberApplyDate" name="memberApplyDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd" value="${memberObject.memberApplyDate}"/>' disabled="disabled">
+																<input type="text" class="form-control" id="memberApplyDate" name="memberApplyDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd HH:mm:ss" value="${memberObject.memberApplyDate}"/>' disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
@@ -237,7 +237,7 @@
 														</label>
 														<div class="col-md-4">
 															<div class="input-group input-large date-picker input-daterange" data-date="2018-01-01" data-date-format="yyyy-mm-dd">
-																<input type="text" class="form-control" id="memberApprovedDate" name="memberApprovedDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd" value="${memberObject.memberApprovedDate}"/>' disabled="disabled">
+																<input type="text" class="form-control" id="memberApprovedDate" name="memberApprovedDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd HH:mm:ss" value="${memberObject.memberApprovedDate}"/>' disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
@@ -248,7 +248,7 @@
 														</label>
 														<div class="col-md-4">
 															<div class="input-group input-large date-picker input-daterange" data-date="2018-01-01" data-date-format="yyyy-mm-dd">
-																<input type="text" class="form-control" id="memberActiveDate" name="memberActiveDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd" value="${memberObject.memberActiveDate}"/>' disabled="disabled">
+																<input type="text" class="form-control" id="memberActiveDate" name="memberActiveDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd HH:mm:ss" value="${memberObject.memberActiveDate}"/>' disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
@@ -259,7 +259,7 @@
 														</label>
 														<div class="col-md-4">
 															<div class="input-group input-large date-picker input-daterange" data-date="2018-01-01" data-date-format="yyyy-mm-dd">
-																<input type="text" class="form-control" id="memberInactiveDate" name="memberInactiveDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd" value="${memberObject.memberInactiveDate}"/>' disabled="disabled">
+																<input type="text" class="form-control" id="memberInactiveDate" name="memberInactiveDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd HH:mm:ss" value="${memberObject.memberInactiveDate}"/>' disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
@@ -453,14 +453,14 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 
 <script>
-jQuery(document).ready(function() { 
+//jQuery(document).ready(function() { 
 	/*
 	var acctName = $("#acctName").val();
 
 	var memberStatusValue = ${memberObject.memberStatus};
 	$("#memberStatus").val(memberStatusValue);
 	*/
-});
+//});
 
 
  

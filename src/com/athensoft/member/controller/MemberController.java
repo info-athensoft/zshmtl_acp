@@ -1,8 +1,5 @@
 package com.athensoft.member.controller;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,20 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.athensoft.content.ad.entity.AdPost;
-import com.athensoft.content.event.controller.NewsAcpController;
-import com.athensoft.content.event.entity.Event;
-import com.athensoft.content.event.entity.EventMedia;
-import com.athensoft.content.event.entity.News;
 import com.athensoft.member.entity.Member;
 import com.athensoft.member.entity.MemberStatus;
 import com.athensoft.member.service.MemberService;
+
+import com.athensoft.util.time.DatetimeHelper;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 	
-	private static final Logger logger = Logger.getLogger(NewsAcpController.class);
+	private static final Logger logger = Logger.getLogger(MemberController.class);
 	
 	private static final String ACTION_EDIT = "¹ÜÀí";
 	private static final String ACTION_DELETE = "É¾³ý";
@@ -133,6 +127,7 @@ public class MemberController {
 		//logic
 		Member member = memberService.getMemberByAcctName(acctName);
 		
+		logger.info("current member profile:"+member.toString());
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -148,13 +143,10 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public ModelAndView updateMember(@RequestParam String itemJSONString) {
-		
+	@RequestMapping(value="/update",method=RequestMethod.POST, produces="application/json")
+	@ResponseBody
+	public Map<String,Object> updateMember(@RequestParam String itemJSONString) {
 		logger.info("entering /member/update");
-		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
 		
 		//set model
 //      Map<String, Object> model = mav.getModel();
@@ -178,18 +170,45 @@ public class MemberController {
         member.setHomeAddress(jsonObj.getString("homeAddress"));
         member.setPostalcode(jsonObj.getString("postalcode"));
         member.setMemberLevel(jsonObj.getInt("memberLevel"));
-        member.setMemberStatus(jsonObj.getInt("memberStatus"));
-        System.out.println("memberActiveDate="+jsonObj.getString("memberActiveDate"));
+        int intMemberStatus = jsonObj.getInt("memberStatus");
+        member.setMemberStatus(intMemberStatus);
         
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date tmpDate = null;
-		try {
-			tmpDate = dateFormat.parse(jsonObj.getString("memberActiveDate"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-        member.setMemberActiveDate(tmpDate);	//FIXME
+        switch(intMemberStatus){
+	        case MemberStatus.APPLIED:
+	        	member.setMemberApplyDate(new Date());
+	        	break;
+	        case MemberStatus.APPROVED:
+	        	member.setMemberApprovedDate(new Date());
+	        	break;
+	        case MemberStatus.ACTIVE:
+	        	member.setMemberActiveDate(new Date());
+	        	member.setMemberInactiveDate(DatetimeHelper.addOneYear(new Date()));
+	        	break;
+	        case MemberStatus.INACTIVE:
+	        	member.setMemberInactiveDate(new Date());
+	        	break;
+	        case MemberStatus.BANNED:
+	        	member.setMemberBannedDate(new Date());
+	        	break;
+	        case MemberStatus.PENDING:
+	        	member.setMemberPendingDate(new Date());
+	        	break;
+	        default:
+	        	break;
+        }
+       
+        
+//        System.out.println("memberActiveDate="+jsonObj.getString("memberActiveDate"));
+//        
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		Date tmpDate = null;
+//		try {
+//			tmpDate = dateFormat.parse(jsonObj.getString("memberActiveDate"));
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		
+//        member.setMemberActiveDate(tmpDate);	//FIXME
         logger.info("member = "+member);
           
 		/* business logic*/
@@ -197,13 +216,17 @@ public class MemberController {
 
         memberService.updateMember(member);
 		
+        /* initial settings */
+		ModelAndView mav = new ModelAndView();
+        
 		/* assemble model and view */
-//      model.put("news", news);
-        String viewName = "member/member_edit";
-		mav.setViewName(viewName);		
+        //String viewName = "member/member_edit";
+		//mav.setViewName(viewName);		
+		Map<String,Object> model = mav.getModel();
+		model.put("updateState", "ok");
 		
 		logger.info("leaving /member/update");
-		return mav;		
+		return model;		
 	}
 	
 	

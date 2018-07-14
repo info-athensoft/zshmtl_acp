@@ -262,10 +262,13 @@ function updateMember() {
         timeout :     30000,
         
         success:function(msg){
+//        	alert("INFO: Updated successfully!");
+        	alert("提示: 修改成功!");
             location.href="/acp/member/member_list.html";
         },
         error:function(){
-            alert("ERROR: News updating failed.");     
+//            alert("ERROR: Member updating failed.");     
+            alert("错误: 修改失败，请返回到列表页面，重新尝试");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -346,6 +349,8 @@ function getBusinessObject(){
     var p19 = $("#memberActiveDate").val();
     var p20 = $("#memberLevel").val();
     var p21 = $("#memberStatus").val();
+    
+   
 
 //	validate
     var businessObject =

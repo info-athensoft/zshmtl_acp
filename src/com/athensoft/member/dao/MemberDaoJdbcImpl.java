@@ -190,6 +190,9 @@ public class MemberDaoJdbcImpl implements MemberDao {
 	@Override
 	public int update(Member member) {
 		StringBuffer sbf = new StringBuffer();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		
 		sbf.append("UPDATE ").append(TABLE);
 		sbf.append(" SET ");
 		//sbf.append("acct_name=:acct_name,");
@@ -209,12 +212,40 @@ public class MemberDaoJdbcImpl implements MemberDao {
 		sbf.append("home_addr=:home_addr,");
 		sbf.append("postal_code=:postal_code,");
 		sbf.append("member_level=:member_level,");
+		
+		if(member.getMemberApprovedDate()!=null){
+			sbf.append("member_approved_date=:member_approved_date, ");
+			paramSource.addValue("member_approved_date",member.getMemberApprovedDate());
+		}
+		if(member.getMemberActiveDate()!=null){
+			sbf.append("member_active_date=:member_active_date, ");
+			paramSource.addValue("member_active_date",member.getMemberActiveDate());
+		}
+		if(member.getMemberInactiveDate()!=null){
+			sbf.append("member_inactive_date=:member_inactive_date, ");
+			paramSource.addValue("member_inactive_date",member.getMemberInactiveDate());
+		}
+		if(member.getMemberApplyDate()!=null){
+			sbf.append("member_apply_date=:member_apply_date, ");
+			paramSource.addValue("member_apply_date",member.getMemberApplyDate());
+		}
+		if(member.getMemberPendingDate()!=null){
+			sbf.append("member_pending_date=:member_pending_date, ");
+			paramSource.addValue("member_pending_date",member.getMemberPendingDate());
+		}
+		if(member.getMemberBannedDate()!=null){
+			sbf.append("member_banned_date=:member_banned_date, ");
+			paramSource.addValue("member_banned_date",member.getMemberBannedDate());
+		}
+		
+		
+		
 		sbf.append("member_status=:member_status ");
 		sbf.append(" WHERE acct_name = :acct_name");
 		
 		String sql = sbf.toString();
 		
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		
 		paramSource.addValue("acct_name", member.getAcctName());
 		paramSource.addValue("name1",member.getName1());
 		paramSource.addValue("name2",member.getName2());
@@ -233,7 +264,7 @@ public class MemberDaoJdbcImpl implements MemberDao {
 		paramSource.addValue("postal_code",member.getPostalcode());
 		paramSource.addValue("member_level",member.getMemberLevel());
 		paramSource.addValue("member_status",member.getMemberStatus());
-		paramSource.addValue("member_active_date",member.getMemberActiveDate());
+		
 		
 		
 		KeyHolder keyholder = new GeneratedKeyHolder();
@@ -307,11 +338,11 @@ public class MemberDaoJdbcImpl implements MemberDao {
 			mid = null;
 			
 			Timestamp med = rs.getTimestamp("member_pending_date");			
-			x.setMemberApprovedDate(med==null?null:new Date(med.getTime()));
+			x.setMemberPendingDate(med==null?null:new Date(med.getTime()));
 			med = null;
 			
 			Timestamp mbd = rs.getTimestamp("member_banned_date");			
-			x.setMemberApprovedDate(mbd==null?null:new Date(mbd.getTime()));
+			x.setMemberBannedDate(mbd==null?null:new Date(mbd.getTime()));
 			mbd = null;
 				
 	        return x;
