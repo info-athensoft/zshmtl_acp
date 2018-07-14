@@ -11,6 +11,8 @@ public interface AdRecommendDao {
 	
 	public List<AdRecommend> findByPageId(int pageId);
 	
+	public AdRecommend findById(int globalId);
+	
 	public int create(AdRecommend adRecommend);
 	
 	public void update(AdRecommend adRecommend);

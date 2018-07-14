@@ -261,9 +261,9 @@
  -->
 <!-- END THEME LAYOUT SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="${webapp_name}/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/pages/scripts-local/global-validate.js" type="text/javascript" ></script>
-<script src="${webapp_name}/assets/pages/scripts-local/ad/adrecommend-create.js" type="text/javascript" ></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts/components-date-time-pickers.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/ad/adrecommend-create.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 	function setPageName(){

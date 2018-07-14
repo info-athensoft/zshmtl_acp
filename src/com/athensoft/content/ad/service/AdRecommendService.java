@@ -26,6 +26,10 @@ public class AdRecommendService {
 		adRecommenDao.create(adRecommend);
 	}
 	
+	public AdRecommend getAdRecommendByGlobalId(int globalId){
+		return adRecommenDao.findById(globalId);
+	}
+	
 	public String[][] getData(List<AdRecommend> listObj, String action){
 		int entryLength = listObj.size();
 		final int COLUMN_NUM = 7;
@@ -51,7 +55,7 @@ public class AdRecommendService {
 			String adStatusKey = adStatusPair[0];
 			String adStatus = adStatusPair[1];
 			field5 = "<span class='label label-sm label-"+adStatusKey+"'>"+adStatus+"</span>";
-			field6 = "<a href='"+getActionUrl(action)+"?adUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> "+getActionName(action)+"</a>";
+			field6 = "<a href='"+getActionUrl(action)+"?globalId="+listObj.get(i).getGlobalId()+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> "+getActionName(action)+"</a>";
 			
 			data[i][0] = field0;
 			data[i][1] = field1;

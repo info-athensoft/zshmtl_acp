@@ -1,6 +1,5 @@
 package com.athensoft.content.ad.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.ad.entity.AdAction;
-import com.athensoft.content.ad.entity.AdPost;
 import com.athensoft.content.ad.entity.AdRecommend;
 import com.athensoft.content.ad.service.AdPostService;
 import com.athensoft.content.ad.service.AdRecommendService;
-import com.athensoft.util.id.UUIDHelper;
 
 
 @Controller
@@ -81,10 +78,6 @@ public class AdRecommendController {
 	public Map<String,Object> createAdRecommend(@RequestParam String itemJSONString) {
 		
 		logger.info("entering /ad/adrcmd/create");
-		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
-		
 		//set model
         JSONObject jsonObj= new JSONObject(itemJSONString);
         
@@ -102,11 +95,38 @@ public class AdRecommendController {
 		/* business logic*/
         adRecommendService.createAdRecommend(adrcmd);
 		
+        
+        /* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
 		/* assemble model and view */
         Map<String,Object> model = mav.getModel();
         model.put("adRecommend", adrcmd);
         
         logger.info("exiting... /ad/adrcmd/create");
 		return model;		
+	}
+	
+	@RequestMapping(value="/edit.html")
+	public ModelAndView gotoAdRecommendEdit(@RequestParam int globalId){
+		logger.info("entering /ad/adrcmd/edit.html");
+		
+		AdRecommend adrcmd = new AdRecommend();
+		adrcmd = adRecommendService.getAdRecommendByGlobalId(globalId);
+		
+		logger.info("adrcmd = "+adrcmd.toString());
+		
+		 /* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		/* assemble model and view */
+        Map<String,Object> model = mav.getModel();
+        model.put("adRecommend", adrcmd);
+        
+        String viewName = "ad/adrecommend_edit";
+        mav.setViewName(viewName);
+        
+        logger.info("exiting... /ad/adrcmd/edit.html");
+		return mav;
 	}
 }

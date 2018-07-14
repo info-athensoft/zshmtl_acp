@@ -68,6 +68,32 @@ public class AdRecommendDaoJdbcImpl implements AdRecommendDao{
 	}
 
 	@Override
+	public AdRecommend findById(int globalId) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("SELECT ");
+		sbf.append("global_id, ");
+		sbf.append("ad_uuid, ");
+		sbf.append("page_id, ");
+		sbf.append("page_name, ");
+		sbf.append("rcmd_score, ");
+		sbf.append("rcmd_rank, ");
+		sbf.append("rcmd_status ");
+		sbf.append(" FROM "+TABLE);
+		sbf.append(" WHERE global_id = :globalId");
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("globalId", globalId);
+		AdRecommend x = new AdRecommend();
+		try{
+			x= jdbc.queryForObject(sql,paramSource,new AdRecommendRowMapper());
+		}catch(Exception ex){
+			x = null;
+		}
+		return x;
+	}
+
+	@Override
 	public int create(AdRecommend x) {
 		StringBuffer sbf = new StringBuffer();
 		sbf.append(" INSERT INTO ").append(TABLE);

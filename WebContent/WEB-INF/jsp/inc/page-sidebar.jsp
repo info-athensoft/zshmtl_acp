@@ -36,7 +36,7 @@
 					
 					<li>
 						<a href="${webapp_name}/member/member_list.html">
-						 会员列表</a>
+						 会员管理</a>
 					</li>
 					<!--
 					<li>
@@ -65,22 +65,24 @@
 				<span class="arrow "></span>
 				</a>
 				<ul class="sub-menu">
+					<!-- 
 					<li>
 						<a href="${webapp_name}/ad/adpost/list.html">
 						请求受理</a>
-					</li>
+					</li> -->
 					<li>
 						<a href="${webapp_name}/ad/adpost/list.html">
-						广告列表</a>
-					</li>
-					<li>
-						<a href="${webapp_name}/ad/adrcmd/list.html">
-						广告推荐</a>
+						广告管理</a>
 					</li>
 					<li>
 						<a href="${webapp_name}/ad/adpost/create.html">
 						新增广告</a>
 					</li>
+					<li>
+						<a href="${webapp_name}/ad/adrcmd/list.html">
+						广告推荐</a>
+					</li>
+					<!-- 
 					<li>
 						<a href="${webapp_name}/ad/adpost/list.html">
 						修改广告</a>
@@ -88,7 +90,7 @@
 					<li>
 						<a href="${webapp_name}/ad/adpost/list.html">
 						删除广告</a>
-					</li>
+					</li> -->
 				</ul>
 			</li>
 			

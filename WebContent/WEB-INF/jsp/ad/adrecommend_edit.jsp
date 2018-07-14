@@ -46,7 +46,7 @@
         <!-- BEGIN THEME LAYOUT STYLES -->
         <link href="${webapp_name}/assets/layouts/layout2/css/layout.min.css" rel="stylesheet" type="text/css" />
         <link href="${webapp_name}/assets/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="${webapp_name}/assets/layouts/layout2/css/custom.min.css" rel="stylesheet" type="text/css" />
+        <link href="${webapp_name}/assets/layouts/layout2/css/custom.css" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="favicon.ico" /> </head>
     <!-- END HEAD -->
@@ -105,32 +105,7 @@
 								<a href="#">推荐广告</a>
 							</li>
 						</ul>
-                        <div class="page-toolbar">
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
-                                    <i class="fa fa-angle-down"></i>
-                                </button>
-                                <ul class="dropdown-menu pull-right" role="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bell"></i> Action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-shield"></i> Another action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-user"></i> Something else here</a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bag"></i> Separated link</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        
                     </div>
                     <!-- END PAGE HEADER-->
                     <div class="row">
@@ -139,13 +114,13 @@
                                 <div class="portlet">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                           	 修改广告<span class="caption-helper"> </span> </div>
+                                           	 设置广告推荐<span class="caption-helper"> </span> </div>
                                         <div class="actions btn-set">
-                                            <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToAdPostList();">
+                                            <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToAdRecommendList();">
                                                 <i class="fa fa-angle-left"></i> 返回</button>
-                                            <button class="btn btn-secondary-outline" onclick="resetUpdateAdPost();">
-                                                <i class="fa fa-reply"></i> 清空</button>
-                                            <button class="btn btn-success" onclick="updateAdPost();">
+                                            <button class="btn btn-secondary-outline" onclick="resetUpdateAdRecommend();">
+                                                <i class="fa fa-reply"></i> 重置</button>
+                                            <button class="btn btn-success" onclick="updateAdRecommend();">
                                                 <i class="fa fa-check"></i> 保存</button>
                                                 
                                             <!--    
@@ -171,158 +146,62 @@
                                     <div class="portlet-body">
                                         <div class="tabbable-bordered">
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#tab_general" data-toggle="tab"> 广告信息 </a></li>
+                                                <li class="active"><a href="#tab_general" data-toggle="tab"> 广告推荐设置 </a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab_general">
 												<div class="form-body">
-													<!-- 
-													<div class="form-group">
-														<label class="col-md-2 control-label">Global ID: <span class="required">* </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled">
-														</div>
-													</div> -->
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">广告类型: <span class="required">* </span></label>
-														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" id="adType" name="adType">
-																<option value="0" ${adPostObject.adType == '0' ? 'selected' : ''}>请选择...</option>
-																<option value="1" ${adPostObject.adType == '1' ? 'selected' : ''}>图片广告</option>
-																<option value="2" ${adPostObject.adType == '2' ? 'selected' : ''}>文字广告</option>
-																<option value="3" ${adPostObject.adType == '3' ? 'selected' : ''}>链接广告</option>
+														<label class="col-md-2 control-label">广告编号: <span class="required">* </span></label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="adUUID" name="adUUID" value="${adRecommend.adUUID}">
+															<span class="help-block">请复制粘贴目标广告统一编号 UUID 到此</span>
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label"><span class="custom-operation-em">设置广告投放位置:</span> <span class="required">* </span></label>
+														<div class="col-md-4">
+															<select class="table-group-action-input form-control input-medium" id="pageId" name="pageId" onchange="setPageName();" value="${adRecommend.pageId}">
+																<option value="0">请选择...</option>
+																<option value="101">网站首页 </option>
+																<option value="401">新闻列表页</option>
+																<option value="402">新闻详细页</option>
+															</select>
+															
+														</div>
+													</div>
+													
+													 
+													<div class="form-group">
+														<label class="col-md-2 control-label">页面名称: <span class="required">* </span></label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="pageName" name="pageName" readonly="readonly" value="${adRecommend.pageName}">
+														</div>
+													</div> 
+												
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">显示顺序: <span class="required">* </span></label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="rcmdRank" name="rcmdRank" value="${adRecommend.rcmdRank}">
+															<span class="help-block">请输入正整数，越大越靠前</span>
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">推荐显示状态: <span class="required">* </span></label>
+														<div class="col-md-4">
+															<select class="table-group-action-input form-control input-medium" id="rcmdStatus" name="rcmdStatus">
+																<option value="0">请选择...</option>
+																<option value="1" ${adRecommend.rcmdStatus==1 ? "selected" : ''}>显示</option>
+																<option value="2" ${adRecommend.rcmdStatus==2 ? "selected" : ''}>不显示</option>
 															</select>
 														</div>
 													</div>
-													
-													<div class="form-group">
-														<label class="col-md-2 control-label">广告状态: <span class="required">* </span></label>
-														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" id="adpostStatus" name="adpostStatus">
-																<option value="0" ${adPostObject.adType == '0' ? 'selected' : ''}>请选择...</option>
-																<option value="1" ${adPostObject.adType == '1' ? 'selected' : ''}>已发布</option>
-																<option value="2" ${adPostObject.adType == '2' ? 'selected' : ''}>待发布</option>
-																<option value="3" ${adPostObject.adType == '3' ? 'selected' : ''}>已删除</option>
-																<option value="4" ${adPostObject.adType == '4' ? 'selected' : ''}>已过期</option>
-																<option value="5" ${adPostObject.adType == '5' ? 'selected' : ''}>审查中</option>
-															</select>
-														</div>
-													</div>
-													
-													<!-- 
-													<div class="form-group">
-														<label class="col-md-2 control-label">会员编号: <span class="required">* </span></label>
-														<div class="col-md-4">
-															<input type="text" class="form-control" id="adOwnerId" name="adOwnerId" placeholder="" disabled="disabled">
-														</div>
-													</div> -->
-													
-													<div class="form-group">
-														<label class="col-md-2 control-label">会员账号: <span class="required">* </span></label>
-														<div class="col-md-4">
-															<input type="text" class="form-control" id="acctName" name="acctName" placeholder="登录邮箱" value="${adPostObject.acctName}">
-														</div>
-													</div>
-													
-													<div class="row" id="div_user_ad">
-					                                	<label class="col-md-2 control-label">广告图片: <span class="required">* </span></label>
-							                                
-				                       					<div class="col-md-10">
-				                       						<div class="fileinput fileinput-new" data-provides="fileinput">
-							                                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-							                                       	<!--  <img id="fileinput-new-img" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>-->
-							                                       	
-							                                       		<c:if test="${not empty adPostObject.adImage}">
-							                                       			<a href="${adPostObject.adImage}" class="fancybox-button" data-rel="fancybox-button">
-							                                       			<img id="fileinput-new-img" src="${adPostObject.adImage}" alt=""/>
-							                                       			</a>
-							                                       		</c:if>
-							                                       		<c:if test="${empty adPostObject.adImage}">
-							                                       			<img id="fileinput-new-img" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>
-							                                       		</c:if>
-							                                       	
-																</div>
-							                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
-																</div>
-							                                    <div>
-							                                        <span class="btn btn-sm default btn-file">
-							                                        	<span class="fileinput-new btn-sm"> 选择图片 </span>
-							                                        	<span class="fileinput-exists btn-sm"> 更改 </span>
-							                                        	<input type="file" id="ufile" name="...">
-																	</span>
-							                                        <a href="javascript:;" class="btn btn-sm red fileinput-exists" data-dismiss="fileinput"> 移除 </a>
-							                                        <a href="javascript:;" class="btn btn-sm green fileinput-exists" data-dismiss="fileinput" onclick=" clickUpload('${adPostObject.acctName}','${adPostObject.adUUID}')"> 上传 </a>
-							                                    </div>
-							                                </div>
-				                       						
-				                       						<!-- 
-							                    		  	<div class="form-group">
-							                              		<div class="col-md-12">
-							                              			<br/>
-							                                  		<input type="text" id="adPost-cover-img-title" class="form-control" placeholder="Image Title">
-							                              		</div>
-							                              	</div> -->
-							                            
-							                             	<div class="form-group">
-							                                	<div class="col-md-12">
-							                                		<br/>
-							                                    	<!-- <input type="text" id="booth-cover-img-url" class="form-control" placeholder="Image URL" disabled="disabled"> -->
-							                                    	<input type="text" id="user-ad-img-url" class="form-control" placeholder="Image URL" disabled="disabled" value="${adPostObject.adImage}">
-							                                	</div>
-							                            	</div>
-							                            	<div class="form-group">
-							                                	<div class="col-md-12">
-							                                    	<span class="label label-danger">NOTE!</span> Image dimension must be in ratio of 4:3 at least by 400 x 300
-							                                	</div>
-							                            	</div> 
-							                      		</div>
-				                       				</div>
-													
-													<div class="form-group">
-														<label class="col-md-2 control-label">广告标题: <span class="required">* </span></label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="adTitle" name="adTitle" value="${adPostObject.adTitle}">
-															<span class="help-block">限20字 </span>
-														</div>
-													</div>
-													
-													<div class="form-group">
-														<label class="col-md-2 control-label">广告文字: <span class="required">* </span></label>
-														<div class="col-md-10">
-															<textarea class="form-control" id="adText" name="adText">${adPostObject.adTitle}</textarea>
-															<span class="help-block">限60字 </span>
-														</div>
-													</div>
-													
-													<div class="form-group">
-														<label class="col-md-2 control-label">广告链接: <span class="required">* </span></label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="adLink" name="adLink" value="${adPostObject.adLink}">
-															<span class="help-block">其它视频或链接广告 </span>
-														</div>
-													</div>
-													
-													<div class="form-group">
-														<label class="col-md-2 control-label">到期日: <span class="required">* </span></label>
-														<div class="col-md-4">
-															<input type="text" class="form-control" id="expireDate" name="expireDate" value="${adPostObject.expireDate}">
-															<span class="help-block"></span>
-														</div>
-													</div>
-													
-													<div class="form-group">
-														<label class="col-md-2 control-label">操作员: <span class="required">* </span></label>
-														<div class="col-md-4">
-															<input type="text" class="form-control" id="author" name="author">
-														</div>
-													</div>
-													
-													
-													
-													<input type="hidden" class="form-control" id="adUUID" name="adUUID" value="${adPostObject.adUUID}">
 												</div>
+												
 												</div>
                                             </div>
                                         </div>
@@ -373,11 +252,11 @@
 <script type="text/javascript" src="${webapp_name}/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
-<script src="${webapp_name}/assets/global/scripts/app.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${webapp_name}/assets/global/scripts/app.min.js"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
-<script src="${webapp_name}/assets/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
-<script src="${webapp_name}/assets/layouts/layout2/scripts/demo.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${webapp_name}/assets/layouts/layout2/scripts/layout.min.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/layouts/layout2/scripts/demo.min.js"></script>
 <!-- 
 <script src="${webapp_name}/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
@@ -385,14 +264,9 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/ad/adpost-edit.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/ad/adpost-upload.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-jQuery(document).ready(function() {    
-	
-	
-});    
+    
 </script>
 </body>
 
