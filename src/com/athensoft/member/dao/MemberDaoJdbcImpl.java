@@ -158,11 +158,11 @@ public class MemberDaoJdbcImpl implements MemberDao {
 		sbf.append("member_pending_date, ");
 		sbf.append("member_banned_date ");
 		sbf.append(" FROM "+TABLE);
-		sbf.append(" WHERE acct_name=:acct_name");
+		sbf.append(" WHERE acct_name=:acctName");
 		String sql = sbf.toString();
 		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("acct_name", acctName);
+		paramSource.addValue("acctName", acctName);
 		Member x = new Member();
 		
 		try{
@@ -289,28 +289,29 @@ public class MemberDaoJdbcImpl implements MemberDao {
 			x.setHobbies(rs.getString("hobbies"));
 			x.setMemberStatus(rs.getInt("member_status"));
 			x.setMemberLevel(rs.getInt("member_level"));
+			
 			Timestamp mad = rs.getTimestamp("member_apply_date");			
-			x.setMemberApplyDate(new Date(mad.getTime()));
+			x.setMemberApplyDate(mad==null?null:new Date(mad.getTime()));
 			mad = null;
 			
-			Timestamp mpd = rs.getTimestamp("member_approved_date");			
-			x.setMemberApprovedDate(new Date(mpd.getTime()));
+			Timestamp mpd = rs.getTimestamp("member_approved_date");
+			x.setMemberApprovedDate(mpd==null?null:new Date(mpd.getTime()));
 			mpd = null;
 			
 			Timestamp mcd = rs.getTimestamp("member_active_date");			
-			x.setMemberActiveDate(new Date(mcd.getTime()));
+			x.setMemberActiveDate(mcd==null?null:new Date(mcd.getTime()));
 			mcd = null;
 			
 			Timestamp mid = rs.getTimestamp("member_inactive_date");			
-			x.setMemberInactiveDate(new Date(mid.getTime()));
+			x.setMemberInactiveDate(mid==null?null:new Date(mid.getTime()));
 			mid = null;
 			
 			Timestamp med = rs.getTimestamp("member_pending_date");			
-			x.setMemberApprovedDate(new Date(med.getTime()));
+			x.setMemberApprovedDate(med==null?null:new Date(med.getTime()));
 			med = null;
 			
 			Timestamp mbd = rs.getTimestamp("member_banned_date");			
-			x.setMemberApprovedDate(new Date(mbd.getTime()));
+			x.setMemberApprovedDate(mbd==null?null:new Date(mbd.getTime()));
 			mbd = null;
 				
 	        return x;

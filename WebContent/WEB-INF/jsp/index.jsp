@@ -265,7 +265,8 @@
 														         	<c:set var="strGender" value=""/> 
 														         </c:otherwise>
 														      	</c:choose>
-														      	${strGender}&nbsp;&nbsp;&nbsp;${member.occupation},&nbsp;&nbsp;&nbsp;${member.acctName},&nbsp;&nbsp;&nbsp;电话${member.phone1},&nbsp;&nbsp;&nbsp;微信${member.wechat}
+														      	${strGender}&nbsp;&nbsp;&nbsp;${member.occupation},&nbsp;&nbsp;&nbsp;<br/>
+														      	${member.acctName},&nbsp;&nbsp;&nbsp;电话${member.phone1},&nbsp;&nbsp;&nbsp;微信${member.wechat}
 														    </div>
 	                                                        
 	                                                        <div class="mt-comment-details">

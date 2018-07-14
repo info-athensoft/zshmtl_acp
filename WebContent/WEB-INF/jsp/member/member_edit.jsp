@@ -225,8 +225,8 @@
 														<label class="col-md-2 control-label">会员申请日: <span class="required">* </span>
 														</label>
 														<div class="col-md-4">
-															<div class="input-group input-large date-picker input-daterange" data-date="01/01/2018" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="memberApplyDate" name="memberApplyDate"  value='<fmt:formatDate type="date" pattern="yyyy-mm-dd" value="${memberObject.memberApplyDate}"/>' disabled="disabled">
+															<div class="input-group input-large date-picker input-daterange" data-date="2018-01-01" data-date-format="yyyy-mm-dd">
+																<input type="text" class="form-control" id="memberApplyDate" name="memberApplyDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd" value="${memberObject.memberApplyDate}"/>' disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
@@ -236,8 +236,8 @@
 														<label class="col-md-2 control-label">预审通过日: <span class="required">* </span>
 														</label>
 														<div class="col-md-4">
-															<div class="input-group input-large date-picker input-daterange" data-date="01/01/2018" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="memberApprovedDate" name="memberApprovedDate"  value='<fmt:formatDate type="date" pattern="yyyy-mm-dd" value="${memberObject.memberApprovedDate}"/>' disabled="disabled">
+															<div class="input-group input-large date-picker input-daterange" data-date="2018-01-01" data-date-format="yyyy-mm-dd">
+																<input type="text" class="form-control" id="memberApprovedDate" name="memberApprovedDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd" value="${memberObject.memberApprovedDate}"/>' disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
@@ -247,8 +247,8 @@
 														<label class="col-md-2 control-label">会员激活日: <span class="required">* </span>
 														</label>
 														<div class="col-md-4">
-															<div class="input-group input-large date-picker input-daterange" data-date="01/01/2018" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="memberActiveDate" name="memberActiveDate"  value='<fmt:formatDate type="date" pattern="yyyy-mm-dd" value="${memberObject.memberActiveDate}"/>' disabled="disabled">
+															<div class="input-group input-large date-picker input-daterange" data-date="2018-01-01" data-date-format="yyyy-mm-dd">
+																<input type="text" class="form-control" id="memberActiveDate" name="memberActiveDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd" value="${memberObject.memberActiveDate}"/>' disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
@@ -258,8 +258,8 @@
 														<label class="col-md-2 control-label">会员到期日: <span class="required">* </span>
 														</label>
 														<div class="col-md-4">
-															<div class="input-group input-large date-picker input-daterange" data-date="01/01/2018" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="memberInactiveDate" name="memberInactiveDate"  value='<fmt:formatDate type="date" pattern="yyyy-mm-dd" value="${memberObject.memberInactiveDate}"/>' disabled="disabled">
+															<div class="input-group input-large date-picker input-daterange" data-date="2018-01-01" data-date-format="yyyy-mm-dd">
+																<input type="text" class="form-control" id="memberInactiveDate" name="memberInactiveDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd" value="${memberObject.memberInactiveDate}"/>' disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
