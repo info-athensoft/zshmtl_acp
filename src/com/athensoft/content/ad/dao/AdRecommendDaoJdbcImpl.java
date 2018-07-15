@@ -2,6 +2,7 @@ package com.athensoft.content.ad.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -156,8 +157,28 @@ public class AdRecommendDaoJdbcImpl implements AdRecommendDao{
 
 	@Override
 	public List<AdRecommend> findByFilter(String queryString) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("SELECT ");
+		sbf.append("global_id, ");
+		sbf.append("ad_uuid, ");
+		sbf.append("page_id, ");
+		sbf.append("page_name, ");
+		sbf.append("rcmd_score, ");
+		sbf.append("rcmd_rank, ");
+		sbf.append("rcmd_status ");
+		sbf.append(" FROM "+TABLE);
+		sbf.append(" WHERE 1=1 ");
+		sbf.append(queryString);
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		List<AdRecommend> x = new ArrayList<AdRecommend>();
+		try{
+			x = jdbc.query(sql,paramSource,new AdRecommendRowMapper());
+		}catch(Exception ex){
+			x = null;
+		}
+		return x;
 	}
 
 }

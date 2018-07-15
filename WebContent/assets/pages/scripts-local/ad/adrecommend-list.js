@@ -16,7 +16,7 @@ var AdRecommendList = function () {
         var grid = new Datatable();
 
         grid.init({
-            src: $("#datatable_adPostList"),
+            src: $("#datatable_adRecommendList"),
             onSuccess: function (grid) {
             	//alert("success");
             },
@@ -135,45 +135,51 @@ function filterSearch(){
 	
 //	alert("do filterSearch()");
     var p1 = $("#adUUID").val();
-    var p2 = $("#adTitle").val();
-    var p3 = $("#acctName").val();
-    var p4 = $("#adType").val();
-    var p5a = $("#createDatetimeFrom").val();
-    var p5b = $("#createDatetimeTo").val();
-    var p6a = $("#postDatetimeFrom").val();
-    var p6b = $("#postDatetimeTo").val();
-    var p7a = $("#expireDatetimeFrom").val();
-    var p7b = $("#expireDatetimeTo").val();
-    var p8a = $("#modifyDatetimeFrom").val();
-    var p8b = $("#modifyDatetimeTo").val();
-    var p9 = $("#adStatus").val();
+    var p2 = $("#pageId").val();
+    var p3 = $("#pageName").val();
+    var p4 = $("#rcmdRank").val();
+    var p5 = $("#rcmdStatus").val();
 
+    //validate
+    if(p2!="" && (!isNonNegativeInteger(p2))){
+    	filterReset();
+    	return ;
+    }
+    
+    if(p4!="" && (!isNonNegativeInteger(p4))){
+    	filterReset();
+    	return ;
+    }
+    
+    if(p2==""){
+    	p2=0;
+    }
+    
+    if(p4==""){
+    	p4=0;
+    }
+    
+    
+    
+    
     
 //	validate
     var businessObject =
     {
     		adUUID:p1,
-    		adTitle:p2,
-    		acctName:p3,
-    		adType:p4,
-    		createDatetimeFrom:p5a,            
-     		createDatetimeTo:p5b,
-     		postDatetimeFrom:p6a,            
-     		postDatetimeTo:p6b,
-     		expireDatetimeFrom:p7a,            
-     		expireDatetimeTo:p7b,
-     		modifyDatetimeFrom:p8a,            
-     		modifyDatetimeTo:p8b,
-    		adStatus:p9
+    		pageId:p2,
+    		pageName:p3,
+    		rcmdRank:p4,
+    		rcmdStatus:p5
     };
 
-    var dt = $("#datatable_adPostList").DataTable();
+    var dt = $("#datatable_adRecommendList").DataTable();
     
     //mended on 2018-0218 for tomcat 8.5 sticter request charset
     //var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
     var param = JSON.stringify(businessObject); 
     
-    var x = dt.ajax.url("/acp/ad/adpost/searchbyfilter?itemJSONString="+param).load();
+    var x = dt.ajax.url("/acp/ad/adrcmd/searchbyfilter?itemJSONString="+param).load();
 }
 
 
@@ -181,16 +187,8 @@ function filterSearch(){
 function filterReset(){
 //	alert("do filterReset()");
 	var p1 = $("#adUUID").val("");
-    var p2 = $("#adTitle").val("");
-    var p3 = $("#acctName").val("");
-    var p4 = $("#adType").val(0);
-    var p5a = $("#createDatetimeFrom").val("");
-    var p5b = $("#createDatetimeTo").val("");
-    var p6a = $("#postDatetimeFrom").val("");
-    var p6b = $("#postDatetimeTo").val("");
-    var p7a = $("#expireDatetimeFrom").val("");
-    var p7b = $("#expireDatetimeTo").val("");
-    var p8a = $("#modifyDatetimeFrom").val("");
-    var p8b = $("#modifyDatetimeTo").val("");
-    var p9 = $("#adStatus").val(0);
+    var p2 = $("#pageId").val("");
+    var p3 = $("#pageName").val("");
+    var p4 = $("#rcmdRank").val("");
+    var p5 = $("#rcmdStatus").val(0);
 }

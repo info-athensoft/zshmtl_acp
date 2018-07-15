@@ -180,7 +180,7 @@ public class NewsAcpController {
 		 */
 		@RequestMapping(value="/events/newsSearchFilterData",produces="application/json")
 		@ResponseBody
-		public Map<String, Object> getDataSearchNewsByFilter(@RequestParam String itemJSONString){
+		public Map<String, Object> getDataSearchByFilter(@RequestParam String itemJSONString){
 			logger.info("entering /events/newsSearchFilterData");
 			
 			//get parameters

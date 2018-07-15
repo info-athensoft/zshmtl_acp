@@ -1,5 +1,6 @@
 package com.athensoft.content.ad.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -128,5 +129,57 @@ public class AdRecommendController {
         
         logger.info("exiting... /ad/adrcmd/edit.html");
 		return mav;
+	}
+	
+	@RequestMapping(value="/searchbyfilter",produces="application/json")
+	@ResponseBody
+	public Map<String, Object> getDataSearchByFilter(@RequestParam String itemJSONString){
+		logger.info("entering... /ad/adrcmd/searchbyfilter");
+		
+		
+		JSONObject jobj= new JSONObject(itemJSONString);
+		
+		String where1 = jobj.getString("adUUID");
+		int where2 = jobj.getInt("pageId");
+		String where3 = jobj.getString("pageName");
+		int where4 	= jobj.getInt("rcmdRank");			//display seq no.
+		int where5 	= jobj.getInt("rcmdStatus");		//show or off
+		
+		
+		/* construct query string */
+		StringBuffer queryString = new StringBuffer();
+		queryString.append(where1.length()==0?" ":" and ad_uuid like '%"+where1+"%' ");
+		queryString.append(where2==0?" ":" and page_id = "+where2+" ");
+		queryString.append(where3.length()==0?" ":" and page_name like '%"+where3+"%' ");
+		queryString.append(where4==0?" ":" and rcmd_rank = "+where4+" ");
+		queryString.append(where5==0?" ":" and rcmd_status = "+where5+" ");
+		
+		logger.info("QueryString = "+ queryString.toString());
+		
+		List<AdRecommend> listAdRecommend = adRecommendService.getAdRecommendByFilter(queryString.toString());
+		if(null!=listAdRecommend){
+			logger.info("Length of listAdRecommend entries = "+ listAdRecommend.size());
+		}else{
+			listAdRecommend = new ArrayList<AdRecommend>();
+		}
+		
+		
+		String[][] data = adRecommendService.getData(listAdRecommend, AdAction.EDIT);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//data
+		Map<String, Object> model = mav.getModel();
+		
+		model.put("draw", new Integer(1));
+		model.put("recordsTotal", new Integer(5));
+		model.put("recordsFiltered", new Integer(5));
+		model.put("data", data);
+		model.put("customActionStatus","OK");
+		model.put("customActionMessage","OK");
+		
+		logger.info("leaving... /ad/adrcmd/searchbyfilter");
+		
+		return model;
 	}
 }

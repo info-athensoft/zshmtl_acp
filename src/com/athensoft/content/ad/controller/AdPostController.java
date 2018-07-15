@@ -309,7 +309,6 @@ public class AdPostController {
 	}
 	
 	
-	
 	@RequestMapping(value="/create",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> createAdPost(@RequestParam String itemJSONString) {
@@ -350,6 +349,7 @@ public class AdPostController {
         logger.info("exiting... /ad/adpost/create");
 		return model;		
 	}
+	
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	@ResponseBody

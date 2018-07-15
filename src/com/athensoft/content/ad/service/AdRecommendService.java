@@ -30,6 +30,13 @@ public class AdRecommendService {
 		return adRecommenDao.findById(globalId);
 	}
 	
+	
+	public List<AdRecommend> getAdRecommendByFilter(String queryString){
+		return adRecommenDao.findByFilter(queryString);
+	}
+	
+	
+	
 	public String[][] getData(List<AdRecommend> listObj, String action){
 		int entryLength = listObj.size();
 		final int COLUMN_NUM = 7;
