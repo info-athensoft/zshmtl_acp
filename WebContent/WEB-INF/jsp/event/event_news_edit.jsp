@@ -105,32 +105,7 @@
 							<a href="#">编辑</a>
 						</li>
 					</ul>
-                        <div class="page-toolbar">
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
-                                    <i class="fa fa-angle-down"></i>
-                                </button>
-                                <ul class="dropdown-menu pull-right" role="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bell"></i> Action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-shield"></i> Another action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-user"></i> Something else here</a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bag"></i> Separated link</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        
                     </div>
                     <!-- END PAGE HEADER-->
                     <div class="row">
@@ -144,9 +119,11 @@
                                             <button type="button" name="back" class="btn btn-secondary-outline" onclick="backToNewsList(); return false;">
                                                 <i class="fa fa-angle-left"></i> 返回</button>
                                             <button class="btn btn-secondary-outline" onclick="resetNews(); return false;">
-                                                <i class="fa fa-reply"></i> Reset</button>
+                                                <i class="fa fa-reply"></i> 重置</button>
                                             <button class="btn btn-success" onclick="updateNews(); return false;">
                                                 <i class="fa fa-check"></i> 保存</button>
+                                            
+                                            <!-- 
                                             <button class="btn btn-success" onclick="updateNewsAndContinue(); return false;">
                                                 <i class="fa fa-check-circle"></i> 保存并继续</button>
                                             <div class="btn-group">
@@ -163,6 +140,8 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                             -->
+                                            
                                         </div>
                                     </div>
                                     <div class="portlet-body">
