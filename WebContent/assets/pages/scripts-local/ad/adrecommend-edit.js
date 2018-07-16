@@ -227,19 +227,22 @@ function resetAdRecommend(){
 /* adrecommend - button:save change,update */
 function updateAdRecommend() {
     var businessObject = getBusinessObject();
-    //alert(JSON.stringify(businessObject));
 	
+    var param = JSON.stringify(businessObject);
+    
     //execute saving
     $.ajax({
         type    :    "post",
-        url        : "/acp/member/update?itemJSONString="+JSON.stringify(businessObject),
-        dataType:    "html",
+        url        : "/acp/ad/adrcmd/update",
+        contentType	:	"application/json;charset=UTF-8",
+        //dataType:    "html",		//DO NOT specify this!
+        data : 	param,
         timeout :     30000,
         
         success:function(msg){
 //        	alert("INFO: Updated successfully!");
         	alert("提示: 修改成功!");
-            location.href="/acp/member/member_list.html";
+            location.href="/acp/ad/adrcmd/list.html";
         },
         error:function(){
 //            alert("ERROR: Member updating failed.");     
@@ -283,16 +286,46 @@ function markAdRecommendStatusDeleted(globalId) {
 
 function getBusinessObject(){
 	var p1 = $("#globalId").val();
+	var p2 = $("#adUUID").val();
+	var p3 = $("#pageId").val();
+	var p4 = $("#pageName").val();
+	var p5 = $("#rcmdRank").val();
+	var p6 = $("#rcmdStatus").val();
     
    
 
 //	validate
     var businessObject =
     {
-    		globalId    :	p1
+    		globalId  :	p1,
+    		adUUID    :	p2,
+    		pageId    :	p3,
+    		pageName  :	p4,
+    		rcmdRank  :	p5,
+    		rcmdStatus:	p6
     };
     
     return businessObject;
 }
 
+function setPageName(){
+	//var pageId = $("#pageId option:selected").val();
+	//alert(pageId);
+	
+//	var pageName ="";
+//	switch(pageId){
+//		case 101:
+//			pageName = "网站首页"; break;
+//		case 401:
+//			pageName = "新闻列表页"; break;
+//		case 402:
+//			pageName = "新闻详细页"; break;
+//		default:
+//			pageName = "未定义";
+//	}
+	var pageName = $("#pageId option:selected").text();
+	//alert(pageName);
+	$("#pageName").val(pageName);
+	return;
+}
 

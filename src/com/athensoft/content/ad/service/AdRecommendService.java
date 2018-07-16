@@ -26,6 +26,10 @@ public class AdRecommendService {
 		adRecommenDao.create(adRecommend);
 	}
 	
+	public void updateAdRecommend(AdRecommend adRecommend){
+		adRecommenDao.update(adRecommend);
+	}
+	
 	public AdRecommend getAdRecommendByGlobalId(int globalId){
 		return adRecommenDao.findById(globalId);
 	}

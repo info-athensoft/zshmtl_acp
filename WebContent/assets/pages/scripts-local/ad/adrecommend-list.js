@@ -113,15 +113,15 @@ function groupUpdateStatus(adUUIDArray,adStatus){
     //execute saving
     $.ajax({
         type    :    "post",
-        url        : "/acp/ad/adpost/updateGroup?adUUIDArray="+adUUIDArray+"&adStatus="+adStatus,
+        url        : "/acp/ad/adrcmd/updateGroup?adUUIDArray="+adUUIDArray+"&adStatus="+adStatus,		//FIXME //TODO
         dataType:    "json",
         timeout :     30000,
         
         success:function(msg){
-            location.href="/acp/ad/adpost/list.html";
+            location.href="/acp/ad/adrcmd/list.html";
         },
         error:function(){
-            alert("ERROR: adpost updating failed.");     
+            alert("ERROR: adrcommend updating failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication

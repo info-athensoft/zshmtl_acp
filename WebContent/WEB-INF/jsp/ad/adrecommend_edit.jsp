@@ -152,10 +152,12 @@
                                                 <div class="tab-pane active" id="tab_general">
 												<div class="form-body">
 													
+													<input type="hidden" class="form-control" id="globalId" name="globalId" value="${adRecommend.globalId}" readonly="readonly">
+													
 													<div class="form-group">
 														<label class="col-md-2 control-label">广告编号: <span class="required">* </span></label>
 														<div class="col-md-4">
-															<input type="text" class="form-control" id="adUUID" name="adUUID" value="${adRecommend.adUUID}">
+															<input type="text" class="form-control" id="adUUID" name="adUUID" value="${adRecommend.adUUID}" readonly="readonly">
 															<span class="help-block">请复制粘贴目标广告统一编号 UUID 到此</span>
 														</div>
 													</div>
@@ -163,11 +165,11 @@
 													<div class="form-group">
 														<label class="col-md-2 control-label"><span class="custom-operation-em">设置广告投放位置:</span> <span class="required">* </span></label>
 														<div class="col-md-4">
-															<select class="table-group-action-input form-control input-medium" id="pageId" name="pageId" onchange="setPageName();" value="${adRecommend.pageId}">
-																<option value="0">请选择...</option>
-																<option value="101">网站首页 </option>
-																<option value="401">新闻列表页</option>
-																<option value="402">新闻详细页</option>
+															<select class="table-group-action-input form-control input-medium" id="pageId" name="pageId" onchange="setPageName();">
+																<option value="0" ${adRecommend.pageId==0?"selected":""}>请选择...</option>
+																<option value="101" ${adRecommend.pageId==101?"selected":""}>网站首页 </option>
+																<option value="401" ${adRecommend.pageId==401?"selected":""}>新闻列表页</option>
+																<option value="402" ${adRecommend.pageId==402?"selected":""}>新闻详细页</option>
 															</select>
 															
 														</div>

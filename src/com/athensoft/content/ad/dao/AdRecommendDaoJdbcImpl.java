@@ -136,8 +136,34 @@ public class AdRecommendDaoJdbcImpl implements AdRecommendDao{
 	}
 
 	@Override
-	public void update(AdRecommend adRecommend) {
-		// TODO Auto-generated method stub
+	public void update(AdRecommend x) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append(" UPDATE ").append(TABLE);
+		sbf.append(" SET ad_uuid=:ad_uuid,");
+		sbf.append("  page_id=:page_id,");
+		sbf.append("  page_name=:page_name,");
+		sbf.append("  rcmd_rank=:rcmd_rank,");
+		//sbf.append("  rcmd_score=:rcmd_score,");
+		sbf.append("  rcmd_status=:rcmd_status ");
+		sbf.append(" WHERE global_id=:global_id");
+		
+		String sql = sbf.toString();
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		
+		paramSource.addValue("ad_uuid", x.getAdUUID());
+		paramSource.addValue("page_id", x.getPageId());
+		paramSource.addValue("page_name", x.getPageName());
+		paramSource.addValue("rcmd_rank", x.getRcmdRank());
+		paramSource.addValue("rcmd_status", x.getRcmdStatus());
+		paramSource.addValue("global_id", x.getGlobalId());
+		
+		try{
+			jdbc.update(sql, paramSource);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return ;
 		
 	}
 	
