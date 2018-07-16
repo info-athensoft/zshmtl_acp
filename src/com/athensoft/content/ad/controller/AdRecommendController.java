@@ -50,7 +50,8 @@ public class AdRecommendController {
 		List<AdRecommend> listAdRecommend = adRecommendService.getAll();
 		logger.info("Length of listAdRecommend entries: "+ listAdRecommend.size());
 		
-		String[][] data = adRecommendService.getData(listAdRecommend, AdAction.EDIT);
+		String[] actions = {AdAction.EDIT, AdAction.DELETE};
+		String[][] data = adRecommendService.getData(listAdRecommend, actions);
 		
 		//
 		ModelAndView mav = new ModelAndView();
@@ -142,6 +143,40 @@ public class AdRecommendController {
 	}
 	
 	
+	@RequestMapping(value="/delete.html")
+	public ModelAndView gotoAdRecommendDelete(@RequestParam int globalId){
+		logger.info("entering /ad/adrcmd/delete.html");
+		
+		AdRecommend adrcmd = new AdRecommend();
+		adrcmd = adRecommendService.getAdRecommendByGlobalId(globalId);
+		
+		logger.info("adrcmd = "+adrcmd.toString());
+		
+		 /* initial settings */
+		ModelAndView mav = new ModelAndView();
+		
+		/* assemble model and view */
+        Map<String,Object> model = mav.getModel();
+        model.put("adRecommend", adrcmd);
+        
+        String viewName = "ad/adrecommend_delete";
+        mav.setViewName(viewName);
+        
+        logger.info("exiting... /ad/adrcmd/delete.html");
+		return mav;
+	}
+	
+	
+	@RequestMapping(value="/delete",method=RequestMethod.POST)
+	@ResponseBody
+	public void deleteAdRecommend(@RequestBody AdRecommend adrcmd){
+		logger.info("entering... /ad/adrcmd/delete");
+		adRecommendService.deleteAdRecommend(adrcmd);
+		logger.info("exiting... /ad/adrcmd/delete");
+		return ;
+	}
+	
+	
 	
 	@RequestMapping(value="/searchbyfilter",produces="application/json")
 	@ResponseBody
@@ -175,8 +210,8 @@ public class AdRecommendController {
 			listAdRecommend = new ArrayList<AdRecommend>();
 		}
 		
-		
-		String[][] data = adRecommendService.getData(listAdRecommend, AdAction.EDIT);
+		String[] actions = {AdAction.EDIT, AdAction.DELETE};
+		String[][] data = adRecommendService.getData(listAdRecommend, actions);
 		
 		ModelAndView mav = new ModelAndView();
 		

@@ -30,6 +30,10 @@ public class AdRecommendService {
 		adRecommenDao.update(adRecommend);
 	}
 	
+	public void deleteAdRecommend(AdRecommend adRecommend){
+		adRecommenDao.delete(adRecommend);
+	}
+	
 	public AdRecommend getAdRecommendByGlobalId(int globalId){
 		return adRecommenDao.findById(globalId);
 	}
@@ -41,7 +45,7 @@ public class AdRecommendService {
 	
 	
 	
-	public String[][] getData(List<AdRecommend> listObj, String action){
+	public String[][] getData(List<AdRecommend> listObj, String[] action){
 		int entryLength = listObj.size();
 		final int COLUMN_NUM = 7;
 		String[][] data = new String[entryLength][COLUMN_NUM];
@@ -66,7 +70,8 @@ public class AdRecommendService {
 			String adStatusKey = adStatusPair[0];
 			String adStatus = adStatusPair[1];
 			field5 = "<span class='label label-sm label-"+adStatusKey+"'>"+adStatus+"</span>";
-			field6 = "<a href='"+getActionUrl(action)+"?globalId="+listObj.get(i).getGlobalId()+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> "+getActionName(action)+"</a>";
+			field6 = "<a href='"+getActionUrl(action[0])+"?globalId="+listObj.get(i).getGlobalId()+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> "+getActionName(action[0])+"</a>";
+			field6+= "<a href='"+getActionUrl(action[1])+"?globalId="+listObj.get(i).getGlobalId()+"' class='btn btn-xs default btn-editable'><i class='fa fa-trash-o'></i> "+getActionName(action[1])+"</a>";
 			
 			data[i][0] = field0;
 			data[i][1] = field1;

@@ -177,7 +177,7 @@
 													
 													 
 													<div class="form-group">
-														<label class="col-md-2 control-label">页面名称: <span class="required">* </span></label>
+														<label class="col-md-2 control-label">当前页面名称: <span class="required">* </span></label>
 														<div class="col-md-4">
 															<input type="text" class="form-control" id="pageName" name="pageName" readonly="readonly" value="${adRecommend.pageName}">
 														</div>

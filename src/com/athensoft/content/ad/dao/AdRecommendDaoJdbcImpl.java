@@ -167,6 +167,27 @@ public class AdRecommendDaoJdbcImpl implements AdRecommendDao{
 		
 	}
 	
+	@Override
+	public void delete(AdRecommend x) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append(" DELETE FROM ").append(TABLE);
+		sbf.append(" WHERE global_id=:global_id");
+		
+		String sql = sbf.toString();
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		
+		paramSource.addValue("global_id", x.getGlobalId());
+		
+		try{
+			jdbc.update(sql, paramSource);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return ;
+		
+	}
+
 	private static class AdRecommendRowMapper implements RowMapper<AdRecommend>{
 		public AdRecommend mapRow(ResultSet rs, int rowNumber) throws SQLException {
 			AdRecommend x = new AdRecommend();

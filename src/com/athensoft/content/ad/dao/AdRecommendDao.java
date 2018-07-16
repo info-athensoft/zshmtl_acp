@@ -17,4 +17,6 @@ public interface AdRecommendDao {
 	
 	public void update(AdRecommend adRecommend);
 	
+	public void delete(AdRecommend adRecommend);
+	
 }
