@@ -10,4 +10,9 @@ public class UaasAcpController {
 	public String gotoLogin(){
 		return "uaas/login_soft";
 	}
+	
+	@RequestMapping("logout")
+	public String gotoLogout(){
+		return "uaas/login_soft";
+	}
 }

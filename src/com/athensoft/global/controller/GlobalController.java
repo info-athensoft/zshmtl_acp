@@ -69,9 +69,8 @@ public class GlobalController {
 	 * @return
 	 */
 	@RequestMapping("/")
-	public ModelAndView gotoHome(){
-		System.out.println("gotoHome()");
-		return gotoHome2();
+	public String gotoHome(){
+		return "uaas/login_soft";
 	}
 	
 	/**
