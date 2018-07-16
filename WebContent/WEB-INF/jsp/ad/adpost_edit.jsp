@@ -266,7 +266,7 @@
 													<div class="form-group">
 														<label class="col-md-2 control-label">广告文字: <span class="required">* </span></label>
 														<div class="col-md-10">
-															<textarea class="form-control" id="adText" name="adText">${adPostObject.adTitle}</textarea>
+															<textarea class="form-control" id="adText" name="adText">${adPostObject.adText}</textarea>
 															<span class="help-block">限60字 </span>
 														</div>
 													</div>
@@ -287,13 +287,15 @@
 														</div>
 													</div>
 													
+													
+													<!-- 
 													<div class="form-group">
 														<label class="col-md-2 control-label">操作员: <span class="required">* </span></label>
 														<div class="col-md-4">
 															<input type="text" class="form-control" id="author" name="author">
 														</div>
 													</div>
-													
+													 -->
 													
 													
 													<input type="hidden" class="form-control" id="adUUID" name="adUUID" value="${adPostObject.adUUID}">
