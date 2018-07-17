@@ -10,6 +10,8 @@ import java.util.Date;
  */
 public class EventReview {
 	
+	public static final int UNKNOWN = 0;
+	
 	/**
 	 * the status of review, constant value, APPROVED = 1
 	 */
@@ -49,6 +51,11 @@ public class EventReview {
 	 * the id of customer who post the review
 	 */
 	private long customerId;
+	
+	/**
+	 * 
+	 */
+	private String acctName;
 	
 	/**
 	 * the content of the review
@@ -106,13 +113,17 @@ public class EventReview {
 	public void setReviewStatus(int reviewStatus) {
 		this.reviewStatus = reviewStatus;
 	}
+	public String getAcctName() {
+		return acctName;
+	}
+	public void setAcctName(String acctName) {
+		this.acctName = acctName;
+	}
 	@Override
 	public String toString() {
-		return "EventReview [globalId=" + globalId + ", eventUUID=" + eventUUID
-				+ ", reviewUUID=" + reviewUUID + ", reviewDatetime="
-				+ reviewDatetime + ", customerId=" + customerId
-				+ ", reviewContent=" + reviewContent + ", reviewStatus="
-				+ reviewStatus + "]";
+		return "EventReview [globalId=" + globalId + ", eventUUID=" + eventUUID + ", reviewUUID=" + reviewUUID
+				+ ", reviewDatetime=" + reviewDatetime + ", customerId=" + customerId + ", acctName=" + acctName
+				+ ", reviewContent=" + reviewContent + ", reviewStatus=" + reviewStatus + "]";
 	}
 
 }

@@ -70,8 +70,9 @@ public class AdRecommendService {
 			String adStatusKey = adStatusPair[0];
 			String adStatus = adStatusPair[1];
 			field5 = "<span class='label label-sm label-"+adStatusKey+"'>"+adStatus+"</span>";
-			field6 = "<a href='"+getActionUrl(action[0])+"?globalId="+listObj.get(i).getGlobalId()+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> "+getActionName(action[0])+"</a>";
-			field6+= "<a href='"+getActionUrl(action[1])+"?globalId="+listObj.get(i).getGlobalId()+"' class='btn btn-xs default btn-editable'><i class='fa fa-trash-o'></i> "+getActionName(action[1])+"</a>";
+			field6 = "<a href='"+getActionUrl(action[0])+"?adUUID="+listObj.get(i).getAdUUID()+"' class='btn btn-xs default btn-editable'><i class='fa fa-eye'></i> "+getActionName(action[0])+"</a>";
+			field6+= "<a href='"+getActionUrl(action[1])+"?globalId="+listObj.get(i).getGlobalId()+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> "+getActionName(action[1])+"</a>";
+			field6+= "<a href='"+getActionUrl(action[2])+"?globalId="+listObj.get(i).getGlobalId()+"' class='btn btn-xs default btn-editable'><i class='fa fa-trash-o'></i> "+getActionName(action[2])+"</a>";
 			
 			data[i][0] = field0;
 			data[i][1] = field1;
@@ -88,6 +89,9 @@ public class AdRecommendService {
 	public String getActionUrl(String action){
 		String actionUrl = "";
 		switch(action){
+			case AdAction.VIEW:
+			actionUrl = "/acp/ad/adpost/edit.html";	//adPost Edit
+			break;
 			case AdAction.EDIT:
 				actionUrl = "/acp/ad/adrcmd/edit.html";	//adRecommend Edit
 				break;

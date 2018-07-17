@@ -1,6 +1,5 @@
 package com.athensoft.content.event.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +22,7 @@ import com.athensoft.content.event.service.EventReviewService;
  * @version 1.0
  */
 @Controller
+@RequestMapping("/events")
 public class NewsReviewAcpController {
 	
 	private static final Logger logger = Logger.getLogger(NewsReviewAcpController.class);
@@ -40,53 +40,20 @@ public class NewsReviewAcpController {
 	/**
 	 * EventReview Service instance
 	 */
+	@Autowired
 	private EventReviewService eventReviewService;
 		
-	@Autowired
-	public void setEventReviewService(EventReviewService eventReviewService) {
-		this.eventReviewService = eventReviewService;
-	}
+//	@Autowired
+//	public void setEventReviewService(EventReviewService eventReviewService) {
+//		this.eventReviewService = eventReviewService;
+//	}
 	
 	/**
-	 * goto event-news review edit page with data for updating
-	 * @param eventUUID the eventUUID of new object selected
-	 * @return data of review objects of news
-	 */
-	@RequestMapping(value="/events/eventsNewsReviewEdit")
-	public ModelAndView gotoNewsReviewEdit(@RequestParam String reviewUUID){
-		logger.info("entering /events/eventsNewsReviewEdit");
-		
-		ModelAndView mav = new ModelAndView();
-		
-		//view
-		String viewName = "events/event_news_review_edit";
-		mav.setViewName(viewName);
-		
-		//data
-		Map<String, Object> model = mav.getModel();
-		
-		//data - news
-		//News news = newsService.getNewsByEventUUID(eventUUID);	
-		//model.put("newsObject", news);
-		
-		//data - review
-		EventReview eventReview = eventReviewService.getEventReviewByReviewUUID(reviewUUID);
-		logger.info("eventReview: "+ eventReview.toString());
-		model.put("newsReviewObject", eventReview);
-		
-		logger.info("leaving /events/eventsNewsReviewEdit");
-		return mav;
-	}
-	
-	
-	
-	
-		/**
 		 * get news review objects in JSON data form<p>
 		 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
 		 * @return data table of new review objects
 		 */
-		@RequestMapping(value="/events/eventsNewsReviewListAllData",produces="application/json")
+		@RequestMapping(value="/eventsNewsReviewListAllData",produces="application/json")
 		@ResponseBody
 		public Map<String,Object> getDataNewsReviewList(){
 			logger.info("entering /events/eventsNewsReviewListData");
@@ -171,7 +138,7 @@ public class NewsReviewAcpController {
 		 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
 		 * @return data table of new review objects
 		 */
-		@RequestMapping(value="/events/eventsNewsReviewListData",produces="application/json")
+		@RequestMapping(value="/eventsNewsReviewListData",produces="application/json")
 		@ResponseBody
 		public Map<String,Object> getDataNewsReviewListByEventUUID(@RequestParam String eventUUID){
 			logger.info("entering /events/eventsNewsReviewListData");
@@ -202,7 +169,7 @@ public class NewsReviewAcpController {
 	 * @param itemJSONString search criteria object in JSON format
 	 * @return a map structure containing data rendered to views
 	 */
-	@RequestMapping(value="/events/newsReviewSearchFilterData",produces="application/json")
+	@RequestMapping(value="/newsReviewSearchFilterData",produces="application/json")
 	@ResponseBody
 	public Map<String, Object> getDataSearchNewsReviewByFilter(@RequestParam String itemJSONString){
 		logger.info("entering /events/newsReviewSearchFilterData");
@@ -296,15 +263,56 @@ public class NewsReviewAcpController {
 	}
 	
 	
+	//	@Autowired
+	//	public void setEventReviewService(EventReviewService eventReviewService) {
+	//		this.eventReviewService = eventReviewService;
+	//	}
+		
+		/**
+		 * goto event-news review edit page with data for updating
+		 * @param eventUUID the eventUUID of new object selected
+		 * @return data of review objects of news
+		 */
+	//	@RequestMapping(value="/events/eventsNewsReviewEdit")
+		@RequestMapping(value="/review/edit.html")
+		public ModelAndView gotoEventReviewEdit(@RequestParam String reviewUUID){
+			logger.info("entering... /events/review/edit.html");
+			
+			ModelAndView mav = new ModelAndView();
+			
+			//view
+			String viewName = "event/review_edit";
+			mav.setViewName(viewName);
+			
+			//data
+			Map<String, Object> model = mav.getModel();
+			
+			//data - news
+			//News news = newsService.getNewsByEventUUID(eventUUID);	
+			//model.put("newsObject", news);
+			
+			//data - review
+			EventReview eventReview = eventReviewService.getEventReviewByReviewUUID(reviewUUID);
+			logger.info("eventReview: "+ eventReview.toString());
+			model.put("eventReview", eventReview);
+			
+			logger.info("leaving... /events/review/edit.html");
+			return mav;
+		}
+
+
+
+
 	/**
 	 * update news review object
 	 * @param itemJSONString news object to update in JSON format
 	 * @return data and target view
 	 */
-	@RequestMapping(value="/events/updateNewsReview",method=RequestMethod.POST)
-	public ModelAndView updateNewsReview(@RequestParam String itemJSONString) {
+	@RequestMapping(value="/review/update",method=RequestMethod.POST)
+	@ResponseBody
+	public void updateNewsReview(@RequestParam String itemJSONString) {
 		
-		logger.info("entering /events/updateNewsReview");
+		logger.info("entering /events/review/update");
 		
 		/* initial settings */
 		ModelAndView mav = new ModelAndView();
@@ -314,28 +322,27 @@ public class NewsReviewAcpController {
         JSONObject ic_job= new JSONObject(itemJSONString);
    
         EventReview newsReview = new EventReview();
-//      news.setGlobalId(ic_job.getLong("globalId"));
-        newsReview.setEventUUID(ic_job.getString("eventUUID"));
+//        newsReview.setGlobalId(ic_job.getLong("globalId"));
+//        newsReview.setEventUUID(ic_job.getString("eventUUID"));
         newsReview.setReviewUUID(ic_job.getString("reviewUUID"));
-        newsReview.setReviewContent(ic_job.getString("reviewContent"));
-        newsReview.setCustomerId(ic_job.getLong("customerId"));
-        newsReview.setReviewDatetime(new Date());
-        //newsReview.setReviewStatus(ic_job.getInt("reviewStatus"));
+//        newsReview.setReviewContent(ic_job.getString("reviewContent"));
+//        newsReview.setCustomerId(ic_job.getLong("customerId"));
+//        newsReview.setReviewDatetime(new Date());
+        newsReview.setReviewStatus(ic_job.getInt("reviewStatus"));
           
         logger.info("newsReview = "+newsReview);
           
 		/* business logic*/
         //long itemId = itemService.createItem(ic); 
 
-        eventReviewService.updateEventReview(newsReview);
+        eventReviewService.updateEventReviewStatus(newsReview);
 		
 		/* assemble model and view */
-//      model.put("news", news);
-        String viewName = "events/event_news_list";
-		mav.setViewName(viewName);		
+//      String viewName = "events/event_news_list";
+//		mav.setViewName(viewName);		
 		
-		logger.info("leaving /events/updateNewsReview");
-		return mav;		
+		logger.info("leaving /events/review/update");
+		return ;		
 	}
 	
 	private String[][] getData(List<EventReview> listEventReview){
@@ -353,7 +360,8 @@ public class NewsReviewAcpController {
 		for(int i=0; i<entryLength ; i++){			
 			field0 = listEventReview.get(i).getReviewUUID()+"";
 			field1 = listEventReview.get(i).getReviewDatetime()+"";
-			field2 = listEventReview.get(i).getCustomerId()+"";
+//			field2 = listEventReview.get(i).getCustomerId()+"";
+			field2 = listEventReview.get(i).getAcctName();
 			field3 = listEventReview.get(i).getReviewContent();
 			
 			
@@ -374,11 +382,13 @@ public class NewsReviewAcpController {
 					eventReviewStatusKey = "danger";
 					break;
 				default: 
+					eventReviewStatus = "未知";
+					eventReviewStatusKey = "default";
 					break;
 			}
 			
 			field4 = "<span class='label label-sm label-"+eventReviewStatusKey+"'>"+eventReviewStatus+"</span>";
-			field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field0+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> 管理</a>";
+			field5 = "<a href='/acp/events/review/edit.html?reviewUUID="+field0+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> 管理</a>";
 			
 			data[i][0] = field0;
 			data[i][1] = field1;

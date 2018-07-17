@@ -50,7 +50,7 @@ public class AdRecommendController {
 		List<AdRecommend> listAdRecommend = adRecommendService.getAll();
 		logger.info("Length of listAdRecommend entries: "+ listAdRecommend.size());
 		
-		String[] actions = {AdAction.EDIT, AdAction.DELETE};
+		String[] actions = {AdAction.VIEW, AdAction.EDIT, AdAction.DELETE};
 		String[][] data = adRecommendService.getData(listAdRecommend, actions);
 		
 		//
@@ -210,7 +210,7 @@ public class AdRecommendController {
 			listAdRecommend = new ArrayList<AdRecommend>();
 		}
 		
-		String[] actions = {AdAction.EDIT, AdAction.DELETE};
+		String[] actions = {AdAction.VIEW, AdAction.EDIT, AdAction.DELETE};
 		String[][] data = adRecommendService.getData(listAdRecommend, actions);
 		
 		ModelAndView mav = new ModelAndView();

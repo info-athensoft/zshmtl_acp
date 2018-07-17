@@ -148,9 +148,9 @@
                                                     <th width="8%">广告编号</th>
 													<th width="8%">投放网页编号</th>
 													<th width="8%">投放网页名称</th>
-													<th width="8%">显示序号</th>
-													<th width="8%">当前状态</th>
-													<th width="8%">操作</th>
+													<th width="5%">显示序号</th>
+													<th width="6%">当前状态</th>
+													<th width="10%">操作</th>
                                                 </tr>
                                                 <tr role="row" class="filter">
 													<td></td>

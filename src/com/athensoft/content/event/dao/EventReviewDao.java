@@ -63,7 +63,13 @@ public interface EventReviewDao {
 	 * @param review an event review object
 	 */
 	public void update(EventReview review);
-
+	
+	
+	/**
+	 * @param review
+	 */
+	public void updateStatus(EventReview review);
+	
 	/**
 	 * remove an event review object from data source<p>
 	 * WARNING: THE METHOD HAS NOT COMPLETED.

@@ -117,4 +117,8 @@ public class EventReviewService {
 	public void updateEventReview(EventReview review) {
 		this.eventReviewDao.update(review);
 	}
+	
+	public void updateEventReviewStatus(EventReview review) {
+		this.eventReviewDao.updateStatus(review);
+	}
 }

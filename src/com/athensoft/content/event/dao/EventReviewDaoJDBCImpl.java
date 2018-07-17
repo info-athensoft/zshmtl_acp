@@ -156,6 +156,30 @@ public class EventReviewDaoJDBCImpl implements EventReviewDao{
 	}
 
 	@Override
+	public void updateStatus(EventReview x) {
+		final String TABLE1 = "event_review";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("UPDATE "+TABLE1+" ");
+		sbf.append("SET ");
+		sbf.append("review_status = :review_status ");
+		sbf.append(" WHERE ");
+		sbf.append(" review_uuid = :review_uuid");
+				
+		String sql = sbf.toString();
+		logger.info("sql ="+sql);
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("review_uuid",x.getReviewUUID());
+		paramSource.addValue("review_status",x.getReviewStatus());
+		
+		KeyHolder keyholder = new GeneratedKeyHolder();
+		jdbc.update(sql, paramSource, keyholder);
+		return;
+		
+	}
+
+	@Override
 	public void delete() {
 		// TODO Auto-generated method stub
 		
@@ -169,9 +193,9 @@ public class EventReviewDaoJDBCImpl implements EventReviewDao{
 			x.setReviewUUID(rs.getString("review_uuid"));
 			x.setCustomerId(rs.getLong("customer_id"));
 			x.setReviewContent(rs.getString("review_content"));
-
+			x.setAcctName(rs.getString("acct_name"));
 			Timestamp ts = rs.getTimestamp("review_datetime");			
-			x.setReviewDatetime(new Date(ts.getTime()));
+			x.setReviewDatetime(ts==null?null:new Date(ts.getTime()));
 
 			x.setReviewStatus(rs.getInt("review_status"));
 			
