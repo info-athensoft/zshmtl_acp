@@ -128,15 +128,15 @@
 				</a>
 				<ul class="sub-menu">
 					<li>
-						<a href="${webapp_name}/ad/adpost/list.html">
-						 关于</a>
+						<a href="${webapp_name}/support/contactus.html">
+						 用户手册</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/ad/adpost/list.html">
+						<a href="${webapp_name}/support/contactus.html">
 						 联系我们</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/ad/adpost/list.html">
+						<a href="${webapp_name}/support/contactus.html">
 						 用户协议与条款</a>
 					</li>
 				</ul>
