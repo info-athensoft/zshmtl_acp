@@ -4,14 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/")
 public class UaasAcpController {
 
-	@RequestMapping("login")
+	@RequestMapping("/login")
 	public String gotoLogin(){
 		return "uaas/login_soft";
 	}
 	
-	@RequestMapping("logout")
+	@RequestMapping("/logout")
 	public String gotoLogout(){
 		return "uaas/login_soft";
 	}
