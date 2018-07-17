@@ -158,6 +158,16 @@
                                     <i class="fa fa-check icon-info"></i> 联系我们</h4>
                                 <p class="margin-top-20"> 欢迎咨询任何有关技术、项目合作等事宜 </p>
                                 <div class="row">
+                                	<div class="col-xs-1">
+                                	
+                                	</div>
+                                	<div class="col-xs-11">
+                                	<img class="login-logo" src="${webapp_name}/assets/pages/img/login/athensoft-logo.png" width="30%"/>
+                                	</div>
+                                	
+                                	<div><br/></div>
+                                </div>
+                                <div class="row">
                                     <div class="col-xs-6">
                                         <ul class="list-unstyled margin-top-10 margin-bottom-10">
                                             <li>
@@ -177,6 +187,7 @@
                                            
                                         </ul>
                                     </div>
+                                    
                                 </div>
                                 
                             </div>
@@ -235,7 +246,7 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-MemberList.init();
+
 </script>
 </body>
 
