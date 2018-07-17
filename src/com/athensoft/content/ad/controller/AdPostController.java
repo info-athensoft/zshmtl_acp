@@ -393,6 +393,24 @@ public class AdPostController {
         adpost.setAdStatus(jsonObj.getInt("adpostStatus"));
         //adpost.setCreateDate(new Date());				//TODO
         adpost.setPostDate(new Date());					//TODO
+        
+        String strExpireDate = jsonObj.getString("expireDate");
+        
+        Date expireDate = null;
+        
+        if(strExpireDate == null || strExpireDate.length()==0){
+        	strExpireDate = "3000-01-01";		//set to not expired
+        }else{
+        	SimpleDateFormat ft = new SimpleDateFormat ("yyyy-mm-dd");
+        	try{
+            	expireDate = ft.parse(strExpireDate);
+            }catch(Exception ex){
+            	ex.printStackTrace();
+            }
+        }
+        
+        adpost.setExpireDate(expireDate);
+        
         adpost.setExpireDate(new Date());				//TODO
         adpost.setModifyDate(new Date());				//TODO
         //missing author
