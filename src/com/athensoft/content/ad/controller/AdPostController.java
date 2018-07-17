@@ -1,5 +1,6 @@
 package com.athensoft.content.ad.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -311,12 +312,12 @@ public class AdPostController {
 	
 	@RequestMapping(value="/create",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> createAdPost(@RequestParam String itemJSONString) {
+	public void createAdPost(@RequestParam String itemJSONString) {
 		
 		logger.info("entering /ad/adpost/create");
 		
 		/* initial settings */
-		ModelAndView mav = new ModelAndView();
+		//ModelAndView mav = new ModelAndView();
 		
 		//set model
         JSONObject jsonObj= new JSONObject(itemJSONString);
@@ -328,11 +329,28 @@ public class AdPostController {
         adpost.setAdTitle(jsonObj.getString("adTitle"));
         adpost.setAdText(jsonObj.getString("adText"));
         adpost.setAdImage("image");						//TODO
-        adpost.setAdLink("link");						//TODO
+        adpost.setAdLink(jsonObj.getString("adLink"));
         adpost.setAdUrl("url");							//TODO
         adpost.setCreateDate(new Date());				//TODO
         adpost.setPostDate(new Date());					//TODO
-        adpost.setExpireDate(new Date());				//TODO
+        adpost.setAdOwnerId(1L);	//FIXME //TODO 
+        
+        String strExpireDate = jsonObj.getString("expireDate");
+        
+        Date expireDate = null;
+        
+        if(strExpireDate == null || strExpireDate.length()==0){
+        	strExpireDate = "3000-01-01";		//set to not expired
+        }else{
+        	SimpleDateFormat ft = new SimpleDateFormat ("yyyy-mm-dd");
+        	try{
+            	expireDate = ft.parse(strExpireDate);
+            }catch(Exception ex){
+            	ex.printStackTrace();
+            }
+        }
+        
+        adpost.setExpireDate(expireDate);				
         adpost.setModifyDate(new Date());				//TODO
         //missing author
         adpost.setAdStatus(jsonObj.getInt("adpostStatus"));
@@ -344,10 +362,10 @@ public class AdPostController {
 		
 		/* assemble model and view */
 //      model.put("news", news);
-        Map<String,Object> model = mav.getModel();
+       // Map<String,Object> model = mav.getModel();
         
         logger.info("exiting... /ad/adpost/create");
-		return model;		
+		return ;		
 	}
 	
 	

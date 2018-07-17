@@ -4,7 +4,7 @@
 /* create adpost - button:back */
 function backToAdPostList(){
 	//alert("backToAdPostList");
-	location.href = "/acp/ad/adpost_list.html";
+	location.href = "/acp/ad/adpost/list.html";
 }
 
 
@@ -39,7 +39,8 @@ function createAdPost() {
         	location.href="/acp/ad/adpost/list.html";
         },
         error:function(){
-            alert("ERROR: AdPost creating failed.");     
+        	alert("错误: 广告新增失败，请检查输入重新尝试!");
+//            alert("ERROR: AdPost creating failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -58,11 +59,12 @@ function resetCreateAdPost(){
 	var p6 = $("#author").val("");
 	var p7 = $("#adpostStatus").val(0);
 	//var p8 = $("#adUUID").val("");
+	var p8 = $("#adLink").val("");
 }
 
 function getAdPostObject(){
-	alert("ok");
-	alert($("#expireDate").val());
+	//alert("ok");
+	//alert($("#expireDate").val());
 	
 	var p1 = $("#adType").val();
 	var p2 = $("#acctName").val();
@@ -71,6 +73,7 @@ function getAdPostObject(){
 	var p5 = $("#expireDate").val();
 	var p6 = $("#author").val();
 	var p7 = $("#adpostStatus").val();
+	var p8 = $("#adLink").val();
 	//var p8 = $("#adUUID").val();
 	
 	var obj = {
@@ -80,7 +83,8 @@ function getAdPostObject(){
 		adText		:p4,
 		expireDate	:p5,
 		author		:p6,
-		adpostStatus:p7	//,
+		adpostStatus:p7,
+		adLink		:p8//,
 		//adUUID		:p8
 	};
 	

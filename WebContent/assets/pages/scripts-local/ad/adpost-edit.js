@@ -39,7 +39,8 @@ function updateAdPost() {
         	location.href="/acp/ad/adpost/list.html";
         },
         error:function(){
-            alert("ERROR: AdPost editing failed.");     
+        	alert("错误: 广告修改失败，请检查输入重新尝试!");     
+//            alert("ERROR: AdPost editing failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
