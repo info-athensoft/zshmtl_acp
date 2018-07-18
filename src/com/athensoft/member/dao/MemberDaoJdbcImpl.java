@@ -18,7 +18,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.athensoft.base.BaseDaoJdbcImpl;
+import com.athensoft.base.dao.BaseDaoJdbcImpl;
 import com.athensoft.member.entity.Member;
 
 @Repository

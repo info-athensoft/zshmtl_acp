@@ -1,4 +1,4 @@
-package com.athensoft.base;
+package com.athensoft.base.dao;
 
 import javax.sql.DataSource;
 

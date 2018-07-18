@@ -19,7 +19,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
-import com.athensoft.base.BaseDaoJdbcImpl;
+import com.athensoft.base.dao.BaseDaoJdbcImpl;
 import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.News;
 

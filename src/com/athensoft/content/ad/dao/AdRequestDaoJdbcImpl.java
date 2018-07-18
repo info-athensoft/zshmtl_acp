@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import com.athensoft.base.BaseDaoJdbcImpl;
+import com.athensoft.base.dao.BaseDaoJdbcImpl;
 import com.athensoft.content.ad.entity.AdRequest;
 
 @Repository
