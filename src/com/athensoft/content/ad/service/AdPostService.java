@@ -16,10 +16,6 @@ import com.athensoft.content.ad.entity.AdPostType;
 @Service
 public class AdPostService {
 	
-//	private static final String ACTION_EDIT = "Edit";
-//	private static final String ACTION_DELETE = "Delete";
-	
-	
 	@Autowired
 	@Qualifier("adPostDaoJdbcImpl")
 	private AdPostDao adPostDao; 

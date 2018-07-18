@@ -24,7 +24,6 @@ import com.athensoft.util.time.DatetimeHelper;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	
 	private static final Logger logger = Logger.getLogger(MemberController.class);
 	
 	private static final String ACTION_EDIT = "№ЬАн";
@@ -47,16 +46,15 @@ public class MemberController {
 	public Map<String,Object> getDataMemberList(){
 		logger.info("entering /member/memberListData");
 		
-		ModelAndView mav = new ModelAndView();
-		
 		//data
 		List<Member> listMembers = memberService.getAllMembers();
 		logger.info("Length of member entries: "+ listMembers.size());
 		
 		String[][] data = getData(listMembers, ACTION_EDIT);
 		
-		Map<String, Object> model = mav.getModel();
 		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
 		model.put("recordsFiltered", new Integer(5));
@@ -108,7 +106,6 @@ public class MemberController {
 		//
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
-		
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
 		model.put("recordsFiltered", new Integer(5));
@@ -126,15 +123,12 @@ public class MemberController {
 		
 		//logic
 		Member member = memberService.getMemberByAcctName(acctName);
-		
 		logger.info("current member profile:"+member.toString());
 		
-		ModelAndView mav = new ModelAndView();
 		
-		//data
+		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
 		model.put("memberObject", member);
-			
 		//view
 		String viewName = "member/member_edit";
 		mav.setViewName(viewName);
@@ -148,8 +142,6 @@ public class MemberController {
 	public Map<String,Object> updateMember(@RequestParam String itemJSONString) {
 		logger.info("entering /member/update");
 		
-		//set model
-//      Map<String, Object> model = mav.getModel();
         JSONObject jsonObj= new JSONObject(itemJSONString);
    
         Member member = new Member();
@@ -200,7 +192,7 @@ public class MemberController {
         
 //        System.out.println("memberActiveDate="+jsonObj.getString("memberActiveDate"));
 //        
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //		Date tmpDate = null;
 //		try {
 //			tmpDate = dateFormat.parse(jsonObj.getString("memberActiveDate"));
@@ -218,10 +210,6 @@ public class MemberController {
 		
         /* initial settings */
 		ModelAndView mav = new ModelAndView();
-        
-		/* assemble model and view */
-        //String viewName = "member/member_edit";
-		//mav.setViewName(viewName);		
 		Map<String,Object> model = mav.getModel();
 		model.put("updateState", "ok");
 		
@@ -236,14 +224,7 @@ public class MemberController {
 			@RequestParam String memberArray,
 			@RequestParam int memberStatus
 			) {
-		
 		logger.info("entering /member/updateGroup");
-		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
-		
-		//set model
-        Map<String, Object> model = mav.getModel();
    
         List<Member> memberList = new ArrayList<Member>();
         String[] members = memberArray.split(",");
@@ -256,15 +237,15 @@ public class MemberController {
         	 memberList.add(member);
              member = null;
         }
-        
-        logger.info("memberList size="+memberList.size());
-        logger.info("memberList ="+memberList.toString());
+        logger.info("memberList size="+memberList==null?"NULL":memberList.size());
         
 		/* business logic*/
         memberService.updateMemberGroup(memberList);
         
-		
-		/* assemble model and view */
+        /* initial settings */
+		ModelAndView mav = new ModelAndView();
+        Map<String, Object> model = mav.getModel();
+        
 		logger.info("leaving /member/updateGroup");
 		return model;		
 	}

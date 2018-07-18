@@ -29,8 +29,6 @@ import com.athensoft.content.event.entity.EventMedia;
 @Component
 @Qualifier("eventMediaDaoJDBCImpl")
 public class EventMediaDaoJDBCImpl implements EventMediaDao {
-
-	private static final String TABLE = "event_media";
 	
 	private NamedParameterJdbcTemplate jdbc;
 	
@@ -38,6 +36,8 @@ public class EventMediaDaoJDBCImpl implements EventMediaDao {
 	public void setDataSource(DataSource dataSource){
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
+	
+	private static final String TABLE = "event_media";
 	
 	@Override
 	public List<EventMedia> findAll() {

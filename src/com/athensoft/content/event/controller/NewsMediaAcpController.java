@@ -23,38 +23,13 @@ import com.athensoft.content.event.service.EventMediaService;
  */
 @Controller
 public class NewsMediaAcpController {
-	
 	private static final Logger logger = Logger.getLogger(NewsMediaAcpController.class);
-	
-	/**
-	 * News Service instance
-	 */
-//	private NewsService newsService;
-//	
-//	@Autowired
-//	public void setNewsService(NewsService newsService) {
-//		this.newsService = newsService;
-//	}
-	
-	/**
-	 * EventReview Service instance
-	 */
-//	private EventReviewService eventReviewService;
-//		
-//	@Autowired
-//	public void setEventReviewService(EventReviewService eventReviewService) {
-//		this.eventReviewService = eventReviewService;
-//	}
 	
 	/**
 	 * EventMedia Service instance
 	 */
-	private EventMediaService eventMediaService;
-	
 	@Autowired
-	public void setEventMediaService(EventMediaService eventMediaService) {
-		this.eventMediaService = eventMediaService;
-	}
+	private EventMediaService eventMediaService;
 	
 	
 	/**
@@ -70,14 +45,7 @@ public class NewsMediaAcpController {
 			@RequestParam String eventUUID){
 		logger.info("entering /events/setCoverMedia");
 		
-		ModelAndView mav = new ModelAndView();
 		
-		//view
-		String viewName = "events/event_news_edit";
-		mav.setViewName(viewName);
-		
-		//data
-		Map<String, Object> model = mav.getModel();
 		
 		//data - set cover primary state		
 		EventMedia previousPrimaryMedia = eventMediaService.getPrimaryMediaByEventUUID(eventUUID);
@@ -96,10 +64,15 @@ public class NewsMediaAcpController {
 		//data - media
 		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
 		logger.info("Length of EventReview entries: "+ listEventMedia.size());
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
 		model.put("eventMediaList", listEventMedia);
 		
+//		String viewName = "events/event_news_edit";
+//		mav.setViewName(viewName);
+		
 		logger.info("leaving /events/setCoverMedia");
-//		return mav;
 		return model;
 	}
 	
@@ -116,22 +89,18 @@ public class NewsMediaAcpController {
 			@RequestParam String eventUUID){
 		logger.info("entering /events/reloadEventMedia");
 		
-		ModelAndView mav = new ModelAndView();
-		
-		//view
-		String viewName = "events/event_news_edit";
-		mav.setViewName(viewName);
-		
-		//data
-		Map<String, Object> model = mav.getModel();
-		
 		//data - media
 		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
 		logger.info("Length of EventReview entries: "+ listEventMedia.size());
-		model.put("eventMediaList", listEventMedia);
 		
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
+		model.put("eventMediaList", listEventMedia);
+//		String viewName = "events/event_news_edit";
+//		mav.setViewName(viewName);
+				
 		logger.info("leaving /events/reloadEventMedia");
-//		return mav;
 		return model;
 	}
 	
@@ -209,7 +178,6 @@ public class NewsMediaAcpController {
 	@ResponseBody
 	public Map<String,Object> changeSortNumber(@RequestParam String itemJSONString) {
 		logger.info("entering /events/changeSortNumber");
-		
 
         JSONObject ic_job= new JSONObject(itemJSONString);
    
@@ -224,8 +192,6 @@ public class NewsMediaAcpController {
 		
         /* initial settings */
 		ModelAndView mav = new ModelAndView();
-        
-		/* assemble model and view */
 		Map<String,Object> model = mav.getModel();
         //String viewName = "events/changeSortNumber";
 		//mav.setViewName(viewName);		

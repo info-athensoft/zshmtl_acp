@@ -28,7 +28,6 @@ import com.athensoft.content.event.entity.News;
 @Component
 @Qualifier("newsDaoJDBCImpl")
 public class NewsDaoJDBCImpl implements NewsDao {
-	
 	private static final Logger logger = Logger.getLogger(NewsDaoJDBCImpl.class);
 	
 	private static final String TABLE = "event_news";
@@ -56,9 +55,7 @@ public class NewsDaoJDBCImpl implements NewsDao {
 
 	@Override
 	public List<Event> findByFilter(String queryString) {
-		
 		final String TABLE1 = "event_news";
-		
 		StringBuffer sbf = new StringBuffer();
 		sbf.append(" SELECT * from "+TABLE1);
 		sbf.append(" WHERE 1=1 ");
@@ -257,12 +254,10 @@ public class NewsDaoJDBCImpl implements NewsDao {
 			x.setViewNum(rs.getInt("view_num"));
 			x.setDescShort(rs.getString("desc_short"));
 			x.setDescLong(rs.getString("desc_long"));
-			
-				Timestamp ts = rs.getTimestamp("post_datetime");			
-			x.setPostDatetime(new Date(ts.getTime()));
-			
 			x.setEventClass(rs.getString("event_class"));
 			x.setEventStatus(rs.getInt("event_status"));
+			Timestamp ts = rs.getTimestamp("post_datetime");			
+			x.setPostDatetime(ts==null?null:new Date(ts.getTime()));
 			
 	        return x;
 		}		

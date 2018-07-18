@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.ad.entity.AdRequest;
-import com.athensoft.content.ad.entity.AdRequestType;
 import com.athensoft.content.ad.service.AdPostService;
 import com.athensoft.content.ad.service.AdRequestService;
 import com.athensoft.content.event.entity.Event;
@@ -30,18 +29,8 @@ public class GlobalController {
 	@Autowired
 	private NewsService newsService;
 	
-//	@Autowired
-//	public void setNewsService(NewsService newsService) {
-//		this.newsService = newsService;
-//	}
-	
 	@Autowired
 	private EventReviewService eventReviewService;
-	
-//	@Autowired
-//	public void setEventReviewService(EventReviewService eventReviewService) {
-//		this.eventReviewService = eventReviewService;
-//	}
 	
 	@Autowired
 	private AdPostService adPostService;
@@ -49,18 +38,8 @@ public class GlobalController {
 	@Autowired
 	private AdRequestService adRequestService;
 	
-//	@Autowired
-//	public void setAdPostService(AdPostService adPostService) {
-//		this.adPostService = adPostService;
-//	}
-	
 	@Autowired
 	private MemberService memberService;
-	
-//	@Autowired
-//	public void setMemberService(MemberService memberService) {
-//		this.memberService = memberService;
-//	}
 	
 	
 	
@@ -79,13 +58,11 @@ public class GlobalController {
 	 */
 	@RequestMapping("/index")
 	public ModelAndView gotoHome2(){
-		
 		//logic - dashboard
 		long newsTotalCount = newsService.countAllNews();
 		long reviewsTotalCount = eventReviewService.countAllReviews();
 		long adpostTotalCount = adPostService.countAllAdpost();
 		long memberTotalCount = memberService.countAllMembers();
-		
 		
 		//member request
 		List<Member> listMember = memberService.getLatestApplyRequest();
@@ -101,23 +78,22 @@ public class GlobalController {
 		//latest reviews of news
 		List<EventReview> listReviews = eventReviewService.getLatestReview(20);
 		
-		ModelAndView mav = new ModelAndView();
 		
-		//data
+		ModelAndView mav = new ModelAndView();
 		Map<String,Object> model = mav.getModel();
 		model.put("newsTotalCount", newsTotalCount);
 		model.put("reviewsTotalCount", reviewsTotalCount);
 		model.put("adpostTotalCount", adpostTotalCount);
 		model.put("memberTotalCount", memberTotalCount);
-		
+		//
 		model.put("listAdRequest", listAdRequest);
 		model.put("listAdOtherRequest", listAdRequest2);
-		
+		//
 		model.put("listMemberRequest", listMember);
 		model.put("listMemberOtherRequest", listMember2);
-		
+		//
 		model.put("listNews", listNews);
-		
+		//
 		model.put("listReviews", listReviews);
 		
 		String viewName = "index";

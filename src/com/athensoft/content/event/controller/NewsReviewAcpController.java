@@ -24,18 +24,7 @@ import com.athensoft.content.event.service.EventReviewService;
 @Controller
 @RequestMapping("/events")
 public class NewsReviewAcpController {
-	
 	private static final Logger logger = Logger.getLogger(NewsReviewAcpController.class);
-	
-	/**
-	 * News Service instance
-	 */
-//	private NewsService newsService;
-//	
-//	@Autowired
-//	public void setNewsService(NewsService newsService) {
-//		this.newsService = newsService;
-//	}
 	
 	/**
 	 * EventReview Service instance
@@ -43,125 +32,66 @@ public class NewsReviewAcpController {
 	@Autowired
 	private EventReviewService eventReviewService;
 		
-//	@Autowired
-//	public void setEventReviewService(EventReviewService eventReviewService) {
-//		this.eventReviewService = eventReviewService;
-//	}
 	
 	/**
-		 * get news review objects in JSON data form<p>
-		 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
-		 * @return data table of new review objects
-		 */
-		@RequestMapping(value="/eventsNewsReviewListAllData",produces="application/json")
-		@ResponseBody
-		public Map<String,Object> getDataNewsReviewList(){
-			logger.info("entering /events/eventsNewsReviewListData");
-			
-			ModelAndView mav = new ModelAndView();
-			Map<String, Object> model = mav.getModel();
-			
-			//data
-			List<EventReview> listEventReview = eventReviewService.getAllEventReview();
-			logger.info("Length of EventReview entries: "+ listEventReview.size());
-			
-			String[][] data = getData(listEventReview);
-			
-			/*
-			int entryLength = listEventReview.size();
-			final int COLUMN_NUM = 6;
-			String[][] data = new String[entryLength][COLUMN_NUM];
-			
-			String field0 = "";	//review uuid
-			String field1 = "";	//review datatime
-			String field2 = ""; //customer id
-			String field3 = "";	//review content
-			String field4 = "";	//review status
-			String field5 = "";	//action
+	 * get news review objects in JSON data form<p>
+	 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
+	 * @return data table of new review objects
+	 */
+	@RequestMapping(value="/eventsNewsReviewListAllData",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> getDataNewsReviewList(){
+		logger.info("entering /events/eventsNewsReviewListData");
 		
-			
-			
-			
-			for(int i=0; i<entryLength ; i++){			
-	//			field0 = "<input type='checkbox' name='id[]' value="+listEventReview.get(i).getEventUUID()+">";
-				field0 = listEventReview.get(i).getReviewUUID()+"";
-				field1 = listEventReview.get(i).getReviewDatetime()+"";
-				field2 = listEventReview.get(i).getCustomerId()+"";
-				field3 = listEventReview.get(i).getReviewContent();
-				
-				
-				int intReviewStatus = listEventReview.get(i).getReviewStatus();
-				String reviewStatus = "";
-				String reviewStatusKey = "";
-				switch(intReviewStatus){
-					case EventReview.APPROVED: 
-						reviewStatus = "Approved";
-						reviewStatusKey = "success";
-						break;
-					case EventReview.PENDING: 
-						reviewStatus = "Pending";
-						reviewStatusKey = "info";
-						break;
-					case EventReview.REJECTED: 
-						reviewStatus = "Rejected";
-						reviewStatusKey = "warning";
-						break;
-					default: 
-						break;
-				}
-				
-				
-				field4 = "<span class='label label-sm label-"+reviewStatusKey+"'>"+reviewStatus+"</span>";
-				field5 = "<a href='/acp/events/eventsNewsReviewEdit?reviewUUID="+field0+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Edit</a>";
-				
-				data[i][0] = field0;
-				data[i][1] = field1;
-				data[i][2] = field2;
-				data[i][3] = field3;
-				data[i][4] = field4;
-				data[i][5] = field5;
-			} */
-			
-			model.put("draw", new Integer(1));
-			model.put("recordsTotal", new Integer(5));
-			model.put("recordsFiltered", new Integer(5));
-			model.put("data", data);
-			model.put("customActionStatus","OK");
-			model.put("customActionMessage","OK");
-			
-			logger.info("leaving /events/eventsNewsReviewListData");
-			return model;
-		}
+		//data
+		List<EventReview> listEventReview = eventReviewService.getAllEventReview();
+		logger.info("Length of EventReview entries: "+ listEventReview.size());
 		
-		/**
-		 * get news review objects in JSON data form<p>
-		 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
-		 * @return data table of new review objects
-		 */
-		@RequestMapping(value="/eventsNewsReviewListData",produces="application/json")
-		@ResponseBody
-		public Map<String,Object> getDataNewsReviewListByEventUUID(@RequestParam String eventUUID){
-			logger.info("entering /events/eventsNewsReviewListData");
-			
-			ModelAndView mav = new ModelAndView();
-			Map<String, Object> model = mav.getModel();
-			
-			//data
-			List<EventReview> listEventReview = eventReviewService.getEventReviewByEventUUID(eventUUID);
-			logger.info("Length of EventReview entries: "+ listEventReview.size());
-			
-			String[][] data = getData(listEventReview);
-			
-			model.put("draw", new Integer(1));
-			model.put("recordsTotal", new Integer(5));
-			model.put("recordsFiltered", new Integer(5));
-			model.put("data", data);
-			model.put("customActionStatus","OK");
-			model.put("customActionMessage","OK");
-			
-			logger.info("leaving /events/eventsNewsReviewListData");
-			return model;
-		}
+		String[][] data = getData(listEventReview);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
+		model.put("draw", new Integer(1));
+		model.put("recordsTotal", new Integer(5));
+		model.put("recordsFiltered", new Integer(5));
+		model.put("data", data);
+		model.put("customActionStatus","OK");
+		model.put("customActionMessage","OK");
+		
+		logger.info("leaving /events/eventsNewsReviewListData");
+		return model;
+	}
+		
+	/**
+	 * get news review objects in JSON data form<p>
+	 * WARNING: DO NOT GET ALL EVENTREVIEW OBJECT IN PRODUCT. JUST FOR TEST.
+	 * @return data table of new review objects
+	 */
+	@RequestMapping(value="/eventsNewsReviewListData",produces="application/json")
+	@ResponseBody
+	public Map<String,Object> getDataNewsReviewListByEventUUID(@RequestParam String eventUUID){
+		logger.info("entering /events/eventsNewsReviewListData");
+		
+		//data
+		List<EventReview> listEventReview = eventReviewService.getEventReviewByEventUUID(eventUUID);
+		logger.info("Length of EventReview entries: "+ listEventReview==null?"NULL":listEventReview.size());
+		
+		String[][] data = getData(listEventReview);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
+		model.put("draw", new Integer(1));
+		model.put("recordsTotal", new Integer(5));
+		model.put("recordsFiltered", new Integer(5));
+		model.put("data", data);
+		model.put("customActionStatus","OK");
+		model.put("customActionMessage","OK");
+		
+		logger.info("leaving /events/eventsNewsReviewListData");
+		return model;
+	}
 
 	/**
 	 * get news review objects in JSON data form, which comply with criteria
@@ -174,10 +104,7 @@ public class NewsReviewAcpController {
 	public Map<String, Object> getDataSearchNewsReviewByFilter(@RequestParam String itemJSONString){
 		logger.info("entering /events/newsReviewSearchFilterData");
 		
-		ModelAndView mav = new ModelAndView();
 		
-		//data
-		Map<String, Object> model = mav.getModel();
 		JSONObject jobj= new JSONObject(itemJSONString);
 		
 		String where1 = jobj.getString("eventReviewNo").trim();
@@ -249,7 +176,10 @@ public class NewsReviewAcpController {
 		String[][] data = getData(listEventReview);
 		
 		
+		ModelAndView mav = new ModelAndView();
 		
+		//data
+		Map<String, Object> model = mav.getModel();
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
 		model.put("recordsFiltered", new Integer(5));
@@ -262,43 +192,30 @@ public class NewsReviewAcpController {
 		return model;
 	}
 	
-	
-	//	@Autowired
-	//	public void setEventReviewService(EventReviewService eventReviewService) {
-	//		this.eventReviewService = eventReviewService;
-	//	}
 		
-		/**
-		 * goto event-news review edit page with data for updating
-		 * @param eventUUID the eventUUID of new object selected
-		 * @return data of review objects of news
-		 */
-	//	@RequestMapping(value="/events/eventsNewsReviewEdit")
-		@RequestMapping(value="/review/edit.html")
-		public ModelAndView gotoEventReviewEdit(@RequestParam String reviewUUID){
-			logger.info("entering... /events/review/edit.html");
-			
-			ModelAndView mav = new ModelAndView();
-			
-			//view
-			String viewName = "event/review_edit";
-			mav.setViewName(viewName);
-			
-			//data
-			Map<String, Object> model = mav.getModel();
-			
-			//data - news
-			//News news = newsService.getNewsByEventUUID(eventUUID);	
-			//model.put("newsObject", news);
-			
-			//data - review
-			EventReview eventReview = eventReviewService.getEventReviewByReviewUUID(reviewUUID);
-			logger.info("eventReview: "+ eventReview.toString());
-			model.put("eventReview", eventReview);
-			
-			logger.info("leaving... /events/review/edit.html");
-			return mav;
-		}
+	/**
+	 * goto event-news review edit page with data for updating
+	 * @param eventUUID the eventUUID of new object selected
+	 * @return data of review objects of news
+	 */
+	@RequestMapping(value="/review/edit.html")
+	public ModelAndView gotoEventReviewEdit(@RequestParam String reviewUUID){
+		logger.info("entering... /events/review/edit.html");
+				
+		//data - review
+		EventReview eventReview = eventReviewService.getEventReviewByReviewUUID(reviewUUID);
+		logger.info("eventReview: "+ eventReview.toString());
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
+		model.put("eventReview", eventReview);
+		//view
+		String viewName = "event/review_edit";
+		mav.setViewName(viewName);
+		
+		logger.info("leaving... /events/review/edit.html");
+		return mav;
+	}
 
 
 
@@ -311,7 +228,6 @@ public class NewsReviewAcpController {
 	@RequestMapping(value="/review/update",method=RequestMethod.POST)
 	@ResponseBody
 	public void updateNewsReview(@RequestParam String itemJSONString) {
-		
 		logger.info("entering /events/review/update");
 		
 		/* initial settings */
