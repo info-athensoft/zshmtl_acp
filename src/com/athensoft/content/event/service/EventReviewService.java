@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.athensoft.content.event.dao.EventReviewDao;
-import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.EventReview;
 
 /**
@@ -24,10 +23,6 @@ public class EventReviewService {
 	@Autowired
 	@Qualifier("eventReviewDaoJDBCImpl")
 	private EventReviewDao eventReviewDao;
-	
-	public void setEventReviewDao(EventReviewDao eventReviewDao) {
-		this.eventReviewDao = eventReviewDao;
-	}
 	
 	/**
 	 * get an eventReview object by its globalId

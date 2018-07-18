@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.ad.entity.AdAction;
 import com.athensoft.content.ad.entity.AdRecommend;
-import com.athensoft.content.ad.service.AdPostService;
 import com.athensoft.content.ad.service.AdRecommendService;
 
 

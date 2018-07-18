@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -24,6 +25,7 @@ import com.athensoft.content.ad.entity.AdPost;
 @Repository
 @Qualifier("adPostDaoJdbcImpl")
 public class AdPostDaoJdbcImpl implements AdPostDao {
+	private static final Logger logger = Logger.getLogger(AdPostDaoJdbcImpl.class);
 	
 	private final String TABLE = "ad_post";
 	
@@ -262,7 +264,7 @@ public class AdPostDaoJdbcImpl implements AdPostDao {
 
 	@Override
 	public void updateBatch(List<AdPost> adPostList) {
-		System.out.println("##########"+adPostList.size());
+		logger.debug("updateBatch() adPostList size="+adPostList==null?"NULL":adPostList.size());
 		String sql = "update ad_post set ad_status=:adStatus, modify_date=:modifyDate where ad_uuid =:adUUID";
 
 		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();
@@ -303,21 +305,21 @@ public class AdPostDaoJdbcImpl implements AdPostDao {
 //			x.setAdOwnerId(rs.getLong("ad_owner_id"));
 			x.setAdStatus(rs.getInt("ad_status"));
 			
-				Timestamp cd = rs.getTimestamp("create_date");			
-			x.setCreateDate(new Date(cd.getTime()));
-				cd = null;
+			Timestamp cd = rs.getTimestamp("create_date");			
+			x.setCreateDate(cd==null?null:new Date(cd.getTime()));
+			cd = null;
 			
-				Timestamp pd = rs.getTimestamp("post_date");			
-			x.setPostDate(new Date(pd.getTime()));
-				pd = null;
+			Timestamp pd = rs.getTimestamp("post_date");			
+			x.setPostDate(pd==null?null:new Date(pd.getTime()));
+			pd = null;
 				
-				Timestamp ed = rs.getTimestamp("expire_date");			
-			x.setExpireDate(new Date(ed.getTime()));
-				ed = null;
+			Timestamp ed = rs.getTimestamp("expire_date");			
+			x.setExpireDate(ed==null?null:new Date(ed.getTime()));
+			ed = null;
 			
-				Timestamp md = rs.getTimestamp("modify_date");			
-			x.setModifyDate(new Date(md.getTime()));
-				md = null;
+			Timestamp md = rs.getTimestamp("modify_date");			
+			x.setModifyDate(md==null?null:new Date(md.getTime()));
+			md = null;
 				
 	        return x;
 		}		

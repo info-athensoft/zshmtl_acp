@@ -32,17 +32,13 @@ public class AdPostController {
 	
 	@RequestMapping(value="/list.html")
 	public String gotoAdPostList(){
-		
 		String viewName = "ad/adpost_list";
-		
 		return viewName;
 	}
 	
 	@RequestMapping(value="/create.html")
 	public String gotoAdPostCreate(){
-		
 		String viewName = "ad/adpost_create";
-		
 		return viewName;
 	}
 	
@@ -50,23 +46,21 @@ public class AdPostController {
 	public ModelAndView gotoAdPostEdit(@RequestParam String adUUID){
 		logger.info("entering... /adpost/edit.html");
 		
-		ModelAndView mav = new ModelAndView();
-		
-		//view
-		String viewName = "ad/adpost_edit";
-		mav.setViewName(viewName);
-		
-		//data
-		Map<String, Object> model = mav.getModel();
-		
 		//data - news
 		AdPost adpost = adPostService.getAdPostByAdUUID(adUUID);	
-		model.put("adPostObject", adpost);
 		
 		//data - media
 		//List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
 		//logger.info("Length of EventReview entries: "+ listEventMedia.size());
+		
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
+		model.put("adPostObject", adpost);
 		//model.put("eventMediaList", listEventMedia);
+		
+		String viewName = "ad/adpost_edit";
+		mav.setViewName(viewName);
 		
 		logger.info("leaving... /adpost/edit.html");
 		return mav;
@@ -77,15 +71,15 @@ public class AdPostController {
 	@ResponseBody
 	public Map<String,Object> getDataAdPostList(){
 		logger.info("entering... /ad/adpost/list");
-		
-		ModelAndView mav = new ModelAndView();
-		
+
 		//data
 		List<AdPost> listAdPost = adPostService.getAdPostList();
 		logger.info("Length of adpost entries: "+ listAdPost.size());
 		
 		String[][] data = adPostService.getData(listAdPost, AdAction.EDIT);
 		
+		
+		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
 		
 		model.put("draw", new Integer(1));
@@ -289,14 +283,11 @@ public class AdPostController {
 		List<AdPost> listAdPost = adPostService.getAdPostByFilter(queryString.toString());
 		logger.info("Length of listAdPost entries = "+ listAdPost.size());
 		
-		
 		String[][] data = adPostService.getData(listAdPost, AdAction.EDIT);
 		
+		
 		ModelAndView mav = new ModelAndView();
-		
-		//data
 		Map<String, Object> model = mav.getModel();
-		
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
 		model.put("recordsFiltered", new Integer(5));
@@ -305,7 +296,6 @@ public class AdPostController {
 		model.put("customActionMessage","OK");
 		
 		logger.info("leaving /adpost/searchFilterData");
-		
 		return model;
 	}
 	
@@ -313,13 +303,9 @@ public class AdPostController {
 	@RequestMapping(value="/create",method=RequestMethod.POST)
 	@ResponseBody
 	public void createAdPost(@RequestParam String itemJSONString) {
-		
 		logger.info("entering /ad/adpost/create");
 		
-		/* initial settings */
-		//ModelAndView mav = new ModelAndView();
 		
-		//set model
         JSONObject jsonObj= new JSONObject(itemJSONString);
         
         AdPost adpost = new AdPost();
@@ -333,12 +319,12 @@ public class AdPostController {
         adpost.setAdUrl("url");							//TODO
         adpost.setCreateDate(new Date());				//TODO
         adpost.setPostDate(new Date());					//TODO
-        adpost.setAdOwnerId(1L);	//FIXME //TODO 
+        adpost.setAdOwnerId(1L);						//FIXME //TODO 
+        adpost.setModifyDate(new Date());				//TODO
+        adpost.setAdStatus(jsonObj.getInt("adpostStatus"));
         
         String strExpireDate = jsonObj.getString("expireDate");
-        
         Date expireDate = null;
-        
         if(strExpireDate == null || strExpireDate.length()==0){
         	strExpireDate = "3000-01-01";		//set to not expired
         }else{
@@ -349,20 +335,13 @@ public class AdPostController {
             	ex.printStackTrace();
             }
         }
-        
         adpost.setExpireDate(expireDate);				
-        adpost.setModifyDate(new Date());				//TODO
-        //missing author
-        adpost.setAdStatus(jsonObj.getInt("adpostStatus"));
           
         logger.info(adpost);
           
 		/* business logic*/
         adPostService.createAdPost(adpost);
 		
-		/* assemble model and view */
-//      model.put("news", news);
-       // Map<String,Object> model = mav.getModel();
         
         logger.info("exiting... /ad/adpost/create");
 		return ;		
@@ -372,11 +351,9 @@ public class AdPostController {
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> updateAdPost(@RequestParam String itemJSONString) {
-		
 		logger.info("entering /ad/adpost/update");
 		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
+		
 		
 		//set model
         JSONObject jsonObj= new JSONObject(itemJSONString);
@@ -393,11 +370,11 @@ public class AdPostController {
         adpost.setAdStatus(jsonObj.getInt("adpostStatus"));
         //adpost.setCreateDate(new Date());				//TODO
         adpost.setPostDate(new Date());					//TODO
+        adpost.setExpireDate(new Date());				//TODO
+        adpost.setModifyDate(new Date());				//TODO
         
         String strExpireDate = jsonObj.getString("expireDate");
-        
         Date expireDate = null;
-        
         if(strExpireDate == null || strExpireDate.length()==0){
         	strExpireDate = "3000-01-01";		//set to not expired
         }else{
@@ -408,19 +385,15 @@ public class AdPostController {
             	ex.printStackTrace();
             }
         }
-        
         adpost.setExpireDate(expireDate);
         
-        adpost.setExpireDate(new Date());				//TODO
-        adpost.setModifyDate(new Date());				//TODO
-        //missing author
-          
         logger.info(adpost);
           
 		/* business logic*/
         adPostService.updateAdPost(adpost);
 		
-		/* assemble model and view */
+        /* initial settings */
+		ModelAndView mav = new ModelAndView();
         Map<String,Object> model = mav.getModel();
         
         logger.info("exiting... /ad/adpost/update");
@@ -434,14 +407,9 @@ public class AdPostController {
 			@RequestParam String adUUIDArray,
 			@RequestParam int adStatus
 			) {
-		
 		logger.info("entering /adpost/updateGroup");
 		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
 		
-		//set model
-        Map<String, Object> model = mav.getModel();
    
         List<AdPost> adpostList = new ArrayList<AdPost>();
         String[] adUUIDs = adUUIDArray.split(",");
@@ -456,14 +424,17 @@ public class AdPostController {
              adpost = null;
         }
         
-        logger.info("adpostList size="+adpostList.size());
-        logger.info("adpostList ="+adpostList.toString());
+        logger.info("adpostList size="+adpostList==null?"NULL":adpostList.size());
         
 		/* business logic*/
         adPostService.updateAdPostGroup(adpostList);
         
+        /* initial settings */
+		ModelAndView mav = new ModelAndView();
 		
-		/* assemble model and view */
+		//set model
+        Map<String, Object> model = mav.getModel();
+        
 		logger.info("leaving /adpost/updateGroup");
 		return model;		
 	}

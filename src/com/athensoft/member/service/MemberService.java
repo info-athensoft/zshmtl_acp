@@ -47,10 +47,6 @@ public class MemberService {
 	
 
 	public Member getMemberByAcctName(String acctName) {
-		
-		//TODO test
-		System.out.println(memberDao.findByAcctName(acctName));
-		
 		return memberDao.findByAcctName(acctName);
 	}
 	

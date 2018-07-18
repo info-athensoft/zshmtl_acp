@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,11 +22,13 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import com.athensoft.content.event.dao.EventReviewDaoJDBCImpl;
 import com.athensoft.member.entity.Member;
 
 @Repository
 @Qualifier("memberDaoJdbcImpl")
 public class MemberDaoJdbcImpl implements MemberDao {
+	private static final Logger logger = Logger.getLogger(MemberDaoJdbcImpl.class);
 	
 	private final String TABLE = "member_profile";
 	
@@ -238,13 +241,10 @@ public class MemberDaoJdbcImpl implements MemberDao {
 			paramSource.addValue("member_banned_date",member.getMemberBannedDate());
 		}
 		
-		
-		
 		sbf.append("member_status=:member_status ");
 		sbf.append(" WHERE acct_name = :acct_name");
 		
 		String sql = sbf.toString();
-		
 		
 		paramSource.addValue("acct_name", member.getAcctName());
 		paramSource.addValue("name1",member.getName1());
@@ -265,8 +265,6 @@ public class MemberDaoJdbcImpl implements MemberDao {
 		paramSource.addValue("member_level",member.getMemberLevel());
 		paramSource.addValue("member_status",member.getMemberStatus());
 		
-		
-		
 		KeyHolder keyholder = new GeneratedKeyHolder();
 		jdbc.update(sql, paramSource, keyholder);
 		
@@ -276,7 +274,7 @@ public class MemberDaoJdbcImpl implements MemberDao {
 	
 	@Override
 	public void updateBatch(List<Member> memberList) {
-		System.out.println("##########"+memberList.size());
+		logger.debug("updateBatch() memberList size="+memberList==null?"NULL":memberList.size());
 		String sql = "update member_profile set member_status=:memberStatus where acct_name =:acctName";
 
 		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();

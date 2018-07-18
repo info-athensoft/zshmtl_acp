@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.athensoft.member.controller.MemberController;
+
 /**
  * A high-level class of event, may have multiple subclasses, represents a message to publish
  * 
@@ -11,6 +15,9 @@ import java.util.List;
  * @version 1.0 
  */
 public class Event {
+	
+	private static final Logger logger = Logger.getLogger(Event.class);
+	
 	/**
 	 * global id without business sense
 	 */
@@ -158,7 +165,7 @@ public class Event {
 				}
 			}
 		}else{
-			System.out.println("WARNING: "+this.getClass().getName()+" - no eventmedia object in the list");
+			logger.debug("WARNING: "+this.getClass().getName()+" - no eventmedia object in the list");
 			em = new EventMedia();
 			em.setMediaName("default media");
 			em.setMediaURL("event-default.png");

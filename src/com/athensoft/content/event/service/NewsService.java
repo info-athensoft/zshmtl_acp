@@ -26,9 +26,6 @@ public class NewsService {
 	@Qualifier("newsDaoJDBCImpl")
 	private NewsDao newsDao;
 
-	public void setNewsDao(NewsDao newsDao) {
-		this.newsDao = newsDao;
-	}
 	
 	/**
 	 * get a news object by its globalId
