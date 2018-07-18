@@ -23,9 +23,6 @@ public class EventMediaService {
 	@Qualifier("eventMediaDaoJDBCImpl")
 	private EventMediaDao eventMediaDao;
 
-	public void setEventMediaDao(EventMediaDao eventMediaDao) {
-		this.eventMediaDao = eventMediaDao;
-	}
 	
 	/**
 	 * get eventMedia objects by its eventUUID

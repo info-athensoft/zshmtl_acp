@@ -12,14 +12,10 @@ import com.athensoft.member.entity.MemberStatus;
 
 @Service
 public class MemberService {
-
-	private MemberDao memberDao;
 	
 	@Autowired
 	@Qualifier("memberDaoJdbcImpl")
-	public void setMemberDao(MemberDao memberDao){
-		this.memberDao = memberDao;
-	}
+	private MemberDao memberDao;
 	
 	public List<Member> getAllMembers() {
 		return memberDao.findAll();

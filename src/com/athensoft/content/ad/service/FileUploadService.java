@@ -280,14 +280,14 @@ public class FileUploadService {
 	private static String getFileBaseDir(Properties pro) {
 		/* property: docBase of photo at server side */
 		String path = pro.getProperty("file.photo.docbase");
-		System.out.println("image base path in file system=" + path);
+		logger.info("image base path in file system=" + path);
 		return path;
 	}
 
 	private static String getFileBaseUrl(Properties pro) {
 		/* property: docBase of photo at server side */
 		String path = pro.getProperty("file.photo.baseurl");
-		System.out.println("image base url =" + path);
+		logger.info("image base url =" + path);
 		return path;
 	}
 
