@@ -38,33 +38,20 @@ public class NewsAcpController {
 	/**
 	 * News Service instance
 	 */
-	private NewsService newsService;
-	
 	@Autowired
-	public void setNewsService(NewsService newsService) {
-		this.newsService = newsService;
-	}
+	private NewsService newsService;
 	
 	/**
 	 * EventReview Service instance
 	 */
-//	private EventReviewService eventReviewService;
-//		
 //	@Autowired
-//	public void setEventReviewService(EventReviewService eventReviewService) {
-//		this.eventReviewService = eventReviewService;
-//	}
+//	private EventReviewService eventReviewService;
 	
 	/**
 	 * EventMedia Service instance
 	 */
-	private EventMediaService eventMediaService;
-	
 	@Autowired
-	public void setEventMediaService(EventMediaService eventMediaService) {
-		this.eventMediaService = eventMediaService;
-	}
-	
+	private EventMediaService eventMediaService;
 	
 	/**
 	 * go to the view of event dashboard
@@ -107,23 +94,21 @@ public class NewsAcpController {
 	public ModelAndView gotoNewsEdit(@RequestParam String eventUUID){
 		logger.info("entering /event/eventsNewsEdit");
 		
-		ModelAndView mav = new ModelAndView();
-		
-		//view
-		String viewName = "event/event_news_edit";
-		mav.setViewName(viewName);
-		
-		//data
-		Map<String, Object> model = mav.getModel();
-		
 		//data - news
 		News news = newsService.getNewsByEventUUID(eventUUID);	
-		model.put("newsObject", news);
 		
 		//data - media
 		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
-		logger.info("Length of EventReview entries: "+ listEventMedia.size());
+		logger.info("Length of EventReview entries: "+ listEventMedia==null?"NULL":listEventMedia.size());
+		
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
+		model.put("newsObject", news);
 		model.put("eventMediaList", listEventMedia);
+		
+		String viewName = "event/event_news_edit";
+		mav.setViewName(viewName);
 		
 		logger.info("leaving /event/eventsNewsEdit");
 		return mav;
@@ -151,16 +136,15 @@ public class NewsAcpController {
 	public Map<String,Object> getDataNewsList(){
 		logger.info("entering /event/eventsNewsListData");
 		
-		ModelAndView mav = new ModelAndView();
-		
 		//data
 		List<Event> listNews = newsService.getAllNews();
-		logger.info("Length of news entries: "+ listNews.size());
+		logger.info("Length of news entries: "+ listNews==null?"NULL":listNews.size());
 		
 		String[][] data = getData(listNews, ACTION_EDIT);
 		
-		Map<String, Object> model = mav.getModel();
 		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
 		model.put("recordsFiltered", new Integer(5));
@@ -213,15 +197,10 @@ public class NewsAcpController {
 			int where6a = 0;
 			int where6b = 0;
 			
-	//		System.out.println("strViewNumFrom="+strViewNumFrom+"##");
-	//		System.out.println("strViewNumTo="+strViewNumTo+"##");
 			
-			if(strViewNumFrom==null){
-				strViewNumFrom = "";
-			}
-			if(strViewNumTo==null){
-				strViewNumTo = "";
-			}
+			if(strViewNumFrom==null) strViewNumFrom = "";
+			
+			if(strViewNumTo==null) strViewNumTo = "";
 			
 			if(!strViewNumFrom.equals("")){
 				where6a = Integer.parseInt(strViewNumFrom);
@@ -244,22 +223,22 @@ public class NewsAcpController {
 				queryString_where5 = " ";
 			}else if(!strPostDatetimeFrom.equals("")&&strPostDatetimeTo.equals("")){
 				/* select * from event_news where date(post_datetime) >= adddate('2017-01-12', -1); */
-				queryString_where5 = " and date(post_datetime) >= '"+where5a+"' ";
+				queryString_where5 = " AND date(post_datetime) >= '"+where5a+"' ";
 			}else if(strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
 				/* select * from event_news where date(post_datetime) <= '2017-02-05'; */
-				queryString_where5 = " and date(post_datetime) <= '"+where5b+"' ";
+				queryString_where5 = " AND date(post_datetime) <= '"+where5b+"' ";
 			}else if(!strPostDatetimeFrom.equals("")&&!strPostDatetimeTo.equals("")){
 				
 				/*
-				select * from event_news where date(post_datetime) between adddate('2017-01-12', -1) and '2017-02-05';
+				select * from event_news where date(post_datetime) between adddate('2017-01-12', -1) AND '2017-02-05';
 				*/
 				int dateFlag = strPostDatetimeFrom.compareTo(strPostDatetimeTo);
 				if(dateFlag<0){
-					queryString_where5 = " and (date(post_datetime) between adddate('"+where5a+"', -1) and '"+where5b+"' ) ";
+					queryString_where5 = " AND (date(post_datetime) between adddate('"+where5a+"', -1) AND '"+where5b+"' ) ";
 				}else if(dateFlag==0){
-					queryString_where5 = " and (date(post_datetime) =  '"+where5a+"' ) ";
+					queryString_where5 = " AND (date(post_datetime) =  '"+where5a+"' ) ";
 				}else{
-					queryString_where5 = " and (date(post_datetime) between adddate('"+where5b+"', -1) and '"+where5a+"' ) ";
+					queryString_where5 = " AND (date(post_datetime) between adddate('"+where5b+"', -1) AND '"+where5a+"' ) ";
 				}
 				
 			}else{
@@ -271,19 +250,19 @@ public class NewsAcpController {
 			if(strViewNumFrom.equals("")&&strViewNumTo.equals("")){
 				queryString_where6 = " ";
 			}else if(!strViewNumFrom.equals("")&&strViewNumTo.equals("")){
-				queryString_where6 = " and view_num >= "+where6a;
+				queryString_where6 = " AND view_num >= "+where6a;
 			}else if(strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
-				queryString_where6 = " and view_num <= "+where6b;
+				queryString_where6 = " AND view_num <= "+where6b;
 			}else if(!strViewNumFrom.equals("")&&!strViewNumTo.equals("")){
 				if(where6a<=where6b){
-					queryString_where6 = " and (view_num between "+where6a+" and "+where6b+" ) ";
+					queryString_where6 = " AND (view_num between "+where6a+" AND "+where6b+" ) ";
 				}else{
-					queryString_where6 = " and (view_num between "+where6b+" and "+where6a+" ) ";
+					queryString_where6 = " AND (view_num between "+where6b+" AND "+where6a+" ) ";
 				}
 			}
 			queryString.append(queryString_where6);
 					
-			queryString.append(where7==0?" ":" and event_status = "+where7+" ");
+			queryString.append(where7==0?" ":" AND event_status = "+where7+" ");
 			logger.info("QueryString = "+ queryString.toString());
 			
 			List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
@@ -319,101 +298,15 @@ public class NewsAcpController {
 	public Map<String,Object> getDataNewsDelete(){
 		logger.info("entering /events/eventsNewsDeleteData");
 		
-		ModelAndView mav = new ModelAndView();
-		
 		//data
 		List<Event> listNews = newsService.getAllNews();
 		logger.info("Length of news entries: "+ listNews.size());
 		
-		/*
-		int entryLength = listNews.size();
-		final int COLUMN_NUM = 9;
-		String[][] data = new String[entryLength][COLUMN_NUM];
-		
-		String field0 = "";	//check box
-		String field1 = "";	//event UUID
-		String field2 = "";	//event title
-		String field3 = "";	//author
-		String field4 = "";	//event class
-		String field5 = "";	//post datetime
-		String field6 = "";	//view num
-		String field7 = "";	//event status
-		String field8 = "";	//action
-		
-		for(int i=0; i<entryLength ; i++){			
-			field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
-			field1 = listNews.get(i).getEventUUID()+"";
-			field2 = listNews.get(i).getTitle();
-			field3 = listNews.get(i).getAuthor();
-			
-			int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
-			String eventClass = "";
-			switch(intEventClass){
-				case News.CLASS_DEFAULT:
-					eventClass = "Default";
-					break;
-				case News.CLASS_NEW:
-					eventClass = "New";
-					break;
-				case News.CLASS_HOT:
-					eventClass = "Hot";
-					break;
-				default: 
-					eventClass = "Unknown";
-					break;
-			}
-			field4 = eventClass;
-			
-			field5 = listNews.get(i).getPostDatetime()+"";
-			field6 = listNews.get(i).getViewNum()+"";
-			int intEventStatus = listNews.get(i).getEventStatus();
-			String eventStatus = "";
-			String eventStatusKey = "";
-			switch(intEventStatus){
-				case News.PUBLISHED: 
-					eventStatus = "Published";
-					eventStatusKey = "success";
-					break;
-				case News.WAIT_TO_POST: 
-					eventStatus = "Wait to post";
-					eventStatusKey = "warning";
-					break;
-				case News.DELETED: 
-					eventStatus = "Deleted";
-					eventStatusKey = "default";
-					break;
-				case News.OUT_OF_DATE: 
-					eventStatus = "Out of date";
-					eventStatusKey = "info";
-					break;
-				case News.SUSPENDED: 
-					eventStatus = "Suspended";
-					eventStatusKey = "danger";
-					break;
-				default: 
-					break;
-			}
-			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-			field8 = "<a href='/acp/events/eventsNewsDelete?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Delete</a>";
-			
-			//logger.info("field8="+field8);
-			
-			data[i][0] = field0;
-			data[i][1] = field1;
-			data[i][2] = field2;
-			data[i][3] = field3;
-			data[i][4] = field4;
-			data[i][5] = field5;
-			data[i][6] = field6;
-			data[i][7] = field7;
-			data[i][8] = field8;
-		}
-		*/
-		
 		String[][] data = getData(listNews, ACTION_DELETE);
 		
-		Map<String, Object> model = mav.getModel();
 		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
 		model.put("recordsFiltered", new Integer(5));
@@ -469,15 +362,9 @@ public class NewsAcpController {
 			int where6a = 0;
 			int where6b = 0;
 			
-	//		System.out.println("strViewNumFrom="+strViewNumFrom+"##");
-	//		System.out.println("strViewNumTo="+strViewNumTo+"##");
 			
-			if(strViewNumFrom==null){
-				strViewNumFrom = "";
-			}
-			if(strViewNumTo==null){
-				strViewNumTo = "";
-			}
+			if(strViewNumFrom==null) strViewNumFrom = "";
+			if(strViewNumTo==null) strViewNumTo = "";
 			
 			if(!strViewNumFrom.equals("")){
 				where6a = Integer.parseInt(strViewNumFrom);
@@ -544,90 +431,7 @@ public class NewsAcpController {
 			logger.info("QueryString = "+ queryString.toString());
 			
 			List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
-			logger.info("Length of news entries = "+ listNews.size());
-			
-			/*
-			int entryLength = listNews.size();
-			final int COLUMN_NUM = 9;
-			String[][] data = new String[entryLength][COLUMN_NUM];
-			
-			String field0 = "";	//check box
-			String field1 = "";	//event UUID
-			String field2 = "";	//event title
-			String field3 = "";	//author
-			String field4 = "";	//event class
-			String field5 = "";	//post datetime
-			String field6 = "";	//view num
-			String field7 = "";	//event status
-			String field8 = "";	//action
-			
-			for(int i=0; i<entryLength ; i++){			
-				field0 = "<input type='checkbox' name='id[]' value="+listNews.get(i).getEventUUID()+">";
-				field1 = listNews.get(i).getEventUUID()+"";
-				field2 = listNews.get(i).getTitle();
-				field3 = listNews.get(i).getAuthor();
-				
-				int intEventClass = Integer.parseInt((listNews.get(i).getEventClass()).trim());
-				String eventClass = "";
-				switch(intEventClass){
-					case News.CLASS_DEFAULT:
-						eventClass = "Default";
-						break;
-					case News.CLASS_NEW:
-						eventClass = "New";
-						break;
-					case News.CLASS_HOT:
-						eventClass = "Hot";
-						break;
-					default: 
-						eventClass = "Unknown";
-						break;
-				}
-				field4 = eventClass;
-						
-				field5 = listNews.get(i).getPostDatetime()+"";
-				field6 = listNews.get(i).getViewNum()+"";
-				int intEventStatus = listNews.get(i).getEventStatus();
-				String eventStatus = "";
-				String eventStatusKey = "";
-				switch(intEventStatus){
-					case News.PUBLISHED: 
-						eventStatus = "Published";
-						eventStatusKey = "success";
-						break;
-					case News.WAIT_TO_POST: 
-						eventStatus = "Wait to post";
-						eventStatusKey = "warning";
-						break;
-					case News.DELETED: 
-						eventStatus = "Deleted";
-						eventStatusKey = "default";
-						break;
-					case News.OUT_OF_DATE: 
-						eventStatus = "Out of date";
-						eventStatusKey = "info";
-						break;
-					case News.SUSPENDED: 
-						eventStatus = "Suspended";
-						eventStatusKey = "danger";
-						break;
-					default: 
-						break;
-				}
-				
-				field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-				field8 = "<a href='/acp/events/eventsNewsDelete?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> Delete</a>";
-				
-				data[i][0] = field0;
-				data[i][1] = field1;
-				data[i][2] = field2;
-				data[i][3] = field3;
-				data[i][4] = field4;
-				data[i][5] = field5;
-				data[i][6] = field6;
-				data[i][7] = field7;
-				data[i][8] = field8;
-			}*/
+			logger.info("Length of news entries = "+ listNews==null?"NULL":listNews.size());
 			
 			String[][] data = getData(listNews, ACTION_DELETE);
 			
@@ -639,7 +443,6 @@ public class NewsAcpController {
 			model.put("customActionMessage","OK");
 			
 			logger.info("leaving /events/newsSearchFilterData");
-			
 			return model;
 		}
 
@@ -651,7 +454,6 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/events/createNews",method=RequestMethod.POST)
 	public ModelAndView createNews(@RequestParam String itemJSONString) {
-		
 		logger.info("entering /event/createNews");
 		
 		/* initial settings */
@@ -700,14 +502,9 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/events/updateNews",method=RequestMethod.POST)
 	public ModelAndView updateNews(@RequestParam String itemJSONString) {
-		
 		logger.info("entering /event/updateNews");
 		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
-		
-		//set model
-//        Map<String, Object> model = mav.getModel();
+
         JSONObject ic_job= new JSONObject(itemJSONString);
    
         News news = new News();
@@ -715,7 +512,6 @@ public class NewsAcpController {
         news.setEventUUID(ic_job.getString("eventUUID"));
         news.setTitle(ic_job.getString("title"));
         news.setAuthor(ic_job.getString("author"));
-          
 //      news.setPostDatetime(new Date(ic_job.getString("postDatetime")));
         news.setPostDatetime(new Date());
         news.setViewNum(ic_job.getInt("viewNum"));
@@ -723,15 +519,15 @@ public class NewsAcpController {
         news.setDescLong(ic_job.getString("descLong"));
         news.setEventClass(ic_job.getString("eventClass"));
         news.setEventStatus(ic_job.getInt("eventStatus"));
-          
         logger.info("news = "+news);
           
 		/* business logic*/
         //long itemId = itemService.createItem(ic); 
-
         newsService.updateNews(news);
 		
-		/* assemble model and view */
+        /* initial settings */
+		ModelAndView mav = new ModelAndView();
+//      Map<String, Object> model = mav.getModel();
 //      model.put("news", news);
         String viewName = "event/event_news_list";
 		mav.setViewName(viewName);		
@@ -751,14 +547,8 @@ public class NewsAcpController {
 			@RequestParam String eventUUIDArray,
 			@RequestParam int newsStatus
 			) {
-		
 		logger.info("entering /events/updateNewsGroup");
 		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
-		
-		//set model
-        Map<String, Object> model = mav.getModel();
    
         List<News> newsList = new ArrayList<News>();
         String[] eventUUIDs = eventUUIDArray.split(",");
@@ -771,15 +561,14 @@ public class NewsAcpController {
              newsList.add(news);
              news = null;
         }
-        
-        logger.info("newsList size="+newsList.size());
-        logger.info("newsList ="+newsList.toString());
+        logger.info("newsList size="+newsList==null?"NULL":newsList.size());
         
 		/* business logic*/
         newsService.updateNewsGroup(newsList);
         
-		
-		/* assemble model and view */
+        /* initial settings */
+		ModelAndView mav = new ModelAndView();
+        Map<String, Object> model = mav.getModel();
 		logger.info("leaving /events/updateNewsGroup");
 		return model;		
 	}
@@ -822,31 +611,23 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/events/deleteNews",produces="application/json")
 	public ModelAndView deleteNews(@RequestParam String eventUUID) {
-		
 		logger.info("entering /events/eventsNewsDelete");
-		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
-		
-		//set model
-        Map<String, Object> model = mav.getModel();
         
         //data
         News news = new News();
         news.setEventUUID(eventUUID);
-        
         logger.info("news="+news.toString());
         
 		/* business logic*/
         newsService.deleteNews(news);
         
-		
-		/* assemble model and view */
+        /* initial settings */
+		ModelAndView mav = new ModelAndView();
+        Map<String, Object> model = mav.getModel();
         String viewName = "event/event_news_delete";
 		mav.setViewName(viewName);
 		
         logger.info("leaving /events/eventsNewsDelete");
-		
 		return mav;		
 	}
 	

@@ -27,16 +27,14 @@ public class AdRequestController {
 	public Map<String,Object> getDataAdPostList(){
 		logger.info("entering... /ad/adrequest/list");
 		
-		ModelAndView mav = new ModelAndView();
-		
 		//data
 		List<AdRequest> listAdRequest = adRequestService.getAllAdRequest();
-		logger.info("Length of adrequest entries: "+ listAdRequest.size());
+		logger.info("Length of adrequest entries: "+ listAdRequest==null?"NULL":listAdRequest.size());
 		
 		String[][] data = adRequestService.getData(listAdRequest, AdAction.EDIT);
 		
+		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
-		
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
 		model.put("recordsFiltered", new Integer(5));

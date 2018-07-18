@@ -29,15 +29,12 @@ public class AdRecommendController {
 	@Autowired
 	private  AdRecommendService adRecommendService;
 	
-	@Autowired
-	private  AdPostService adPostService;
+//	@Autowired
+//	private  AdPostService adPostService;
 	
 	@RequestMapping(value="/list.html")
 	public String gotoAdRecommendList(){
-		logger.info("entering... /ad/adrcmd/list.html");
 		String viewName = "ad/adrecommend_list";
-		
-		logger.info("exit... /ad/adrcmd/list.html");
 		return viewName;
 	}
 	
@@ -53,10 +50,8 @@ public class AdRecommendController {
 		String[] actions = {AdAction.VIEW, AdAction.EDIT, AdAction.DELETE};
 		String[][] data = adRecommendService.getData(listAdRecommend, actions);
 		
-		//
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
-		
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
 		model.put("recordsFiltered", new Integer(5));
@@ -70,19 +65,16 @@ public class AdRecommendController {
 	
 	@RequestMapping(value="/create.html")
 	public String gotoAdRecommendCreate(){
-		
 		String viewName = "ad/adrecommend_create";
-		
 		return viewName;
 	}
 	
 	@RequestMapping(value="/create",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> createAdRecommend(@RequestParam String itemJSONString) {
-		
 		logger.info("entering /ad/adrcmd/create");
-		//set model
-        JSONObject jsonObj= new JSONObject(itemJSONString);
+
+		JSONObject jsonObj= new JSONObject(itemJSONString);
         
         AdRecommend adrcmd = new AdRecommend();
         adrcmd.setAdUUID(jsonObj.getString("adUUID"));
@@ -90,7 +82,6 @@ public class AdRecommendController {
         adrcmd.setPageName(jsonObj.getString("pageName"));
         adrcmd.setRcmdRank(jsonObj.getInt("rcmdRank"));
         adrcmd.setRcmdStatus(jsonObj.getInt("rcmdStatus"));
-        
         adrcmd.setRcmdScore(0.0);	//default
           
         logger.info(adrcmd);
@@ -99,10 +90,7 @@ public class AdRecommendController {
         adRecommendService.createAdRecommend(adrcmd);
 		
         
-        /* initial settings */
 		ModelAndView mav = new ModelAndView();
-		
-		/* assemble model and view */
         Map<String,Object> model = mav.getModel();
         model.put("adRecommend", adrcmd);
         
@@ -116,13 +104,9 @@ public class AdRecommendController {
 		
 		AdRecommend adrcmd = new AdRecommend();
 		adrcmd = adRecommendService.getAdRecommendByGlobalId(globalId);
-		
 		logger.info("adrcmd = "+adrcmd.toString());
 		
-		 /* initial settings */
 		ModelAndView mav = new ModelAndView();
-		
-		/* assemble model and view */
         Map<String,Object> model = mav.getModel();
         model.put("adRecommend", adrcmd);
         
@@ -149,13 +133,9 @@ public class AdRecommendController {
 		
 		AdRecommend adrcmd = new AdRecommend();
 		adrcmd = adRecommendService.getAdRecommendByGlobalId(globalId);
-		
 		logger.info("adrcmd = "+adrcmd.toString());
 		
-		 /* initial settings */
 		ModelAndView mav = new ModelAndView();
-		
-		/* assemble model and view */
         Map<String,Object> model = mav.getModel();
         model.put("adRecommend", adrcmd);
         
@@ -214,10 +194,7 @@ public class AdRecommendController {
 		String[][] data = adRecommendService.getData(listAdRecommend, actions);
 		
 		ModelAndView mav = new ModelAndView();
-		
-		//data
 		Map<String, Object> model = mav.getModel();
-		
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
 		model.put("recordsFiltered", new Integer(5));
@@ -226,7 +203,6 @@ public class AdRecommendController {
 		model.put("customActionMessage","OK");
 		
 		logger.info("leaving... /ad/adrcmd/searchbyfilter");
-		
 		return model;
 	}
 }
