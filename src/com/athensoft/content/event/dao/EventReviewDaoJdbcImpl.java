@@ -184,11 +184,9 @@ public class EventReviewDaoJdbcImpl extends BaseDaoJdbcImpl implements EventRevi
 			x.setCustomerId(rs.getLong("customer_id"));
 			x.setReviewContent(rs.getString("review_content"));
 			x.setAcctName(rs.getString("acct_name"));
-			Timestamp ts = rs.getTimestamp("review_datetime");			
-			x.setReviewDatetime(ts==null?null:new Date(ts.getTime()));
-
 			x.setReviewStatus(rs.getInt("review_status"));
-			
+			Timestamp rd = rs.getTimestamp("review_datetime");	
+			x.setReviewDatetime(rd==null?null:new Date(rd.getTime()));
             return x;
 		}		
 	}

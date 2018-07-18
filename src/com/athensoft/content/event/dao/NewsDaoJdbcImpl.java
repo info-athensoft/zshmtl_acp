@@ -247,8 +247,8 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 			x.setDescLong(rs.getString("desc_long"));
 			x.setEventClass(rs.getString("event_class"));
 			x.setEventStatus(rs.getInt("event_status"));
-			Timestamp ts = rs.getTimestamp("post_datetime");			
-			x.setPostDatetime(ts==null?null:new Date(ts.getTime()));
+			Timestamp pd = rs.getTimestamp("post_datetime");			
+			x.setPostDatetime(pd==null?null:new Date(pd.getTime()));
 			
 	        return x;
 		}		

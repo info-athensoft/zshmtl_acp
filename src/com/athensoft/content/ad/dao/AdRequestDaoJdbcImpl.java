@@ -274,9 +274,10 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 			x.setRequestPhone(rs.getString("request_phone"));
 			x.setRequestType(rs.getInt("request_type"));
 			x.setRequestStatus(rs.getInt("request_status"));
-				Timestamp rd = rs.getTimestamp("request_date");			
-			x.setRequestDate(new Date(rd.getTime()));
-				rd = null;
+			
+			Timestamp rd = rs.getTimestamp("request_date");			
+			x.setRequestDate(rd==null?null:new Date(rd.getTime()));
+			rd = null;
 	        return x;
 		}
 	}
