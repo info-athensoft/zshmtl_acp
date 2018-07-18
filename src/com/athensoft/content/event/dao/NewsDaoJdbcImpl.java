@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -27,18 +26,19 @@ import com.athensoft.content.event.entity.News;
 @Qualifier("newsDaoJDBCImpl")
 public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 	private static final Logger logger = Logger.getLogger(NewsDaoJdbcImpl.class);
-	
+
 	private static final String TABLE = "event_news";
-	
+
 	@Override
 	public List<Event> findAll() {
 		String sql = "select * from event_news";
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-//		paramSource.addValue("global_id", globalId);
+
 		List<Event> x = new ArrayList<Event>();
-		try{
+		try {
 			x = jdbc.query(sql, paramSource, new NewsRowMapper());
-		}catch(EmptyResultDataAccessException ex){
+		} catch (EmptyResultDataAccessException ex) {
 			x = null;
 		}
 		return x;
@@ -46,18 +46,18 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 
 	@Override
 	public List<Event> findByFilter(String queryString) {
-		final String TABLE1 = "event_news";
 		StringBuffer sbf = new StringBuffer();
-		sbf.append(" SELECT * from "+TABLE1);
+		sbf.append(" SELECT * from " + TABLE);
 		sbf.append(" WHERE 1=1 ");
 		sbf.append(queryString);
 		String sql = sbf.toString();
-		
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+
 		List<Event> x = new ArrayList<Event>();
-		try{
+		try {
 			x = jdbc.query(sql, paramSource, new NewsRowMapper());
-		}catch(EmptyResultDataAccessException ex){
+		} catch (EmptyResultDataAccessException ex) {
 			x = null;
 		}
 		return x;
@@ -65,13 +65,15 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 
 	@Override
 	public Event findById(long globalId) {
-		String sql = "select * from event_news where global_id =:global_id";
+		String sql = "select * from " + TABLE + " where global_id =:global_id";
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("global_id", globalId);
+
 		Event x = null;
-		try{
+		try {
 			x = jdbc.queryForObject(sql, paramSource, new NewsRowMapper());
-		}catch(EmptyResultDataAccessException ex){
+		} catch (EmptyResultDataAccessException ex) {
 			x = null;
 		}
 		return x;
@@ -79,65 +81,61 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 
 	@Override
 	public Event findByEventUUID(String eventUUID) {
-		String sql = "select * from event_news where event_uuid =:event_uuid";
+		String sql = "select * from " + TABLE + " where event_uuid =:event_uuid";
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("event_uuid", eventUUID);
+
 		Event x = null;
-		try{
+		try {
 			x = jdbc.queryForObject(sql, paramSource, new NewsRowMapper());
-		}catch(EmptyResultDataAccessException ex){
+		} catch (EmptyResultDataAccessException ex) {
 			x = null;
 		}
 		return x;
 	}
 
-
 	@Override
 	public Long count() {
-		String sql = "SELECT COUNT(*) from "+TABLE;
+		String sql = "SELECT COUNT(*) from " + TABLE;
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		Long res = (Long)jdbc.queryForObject(sql,paramSource, Long.class);
-		return res;
+		return (Long) jdbc.queryForObject(sql, paramSource, Long.class);
 	}
 
 	@Override
-	public void create(News news) {
-		final String TABLE1 = "event_news";
-		
+	public int create(News news) {
 		StringBuffer sbf = new StringBuffer();
-		sbf.append("insert into "+TABLE1);
+		sbf.append("insert into " + TABLE);
 		sbf.append("(event_uuid,title,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");
-		sbf.append("values(:event_uuid,:title,:author,:post_datetime,:view_num,:desc_short,:desc_long,:event_class,:event_status)");
+		sbf.append(
+				"values(:event_uuid,:title,:author,:post_datetime,:view_num,:desc_short,:desc_long,:event_class,:event_status)");
 		String sql = sbf.toString();
-		
-//		final int USER_ACCOUNT_STATUS 	= 0;  //1: registered and active, 0: in-activated, 2: locked, pending     
-//		final Date dateCreate 			= new Date();
-//		final Date dateLastModified 	= dateCreate;
+
+		// final int USER_ACCOUNT_STATUS = 0; //1: registered and active, 0:
+		// in-activated, 2: locked, pending
+		// final Date dateCreate = new Date();
+		// final Date dateLastModified = dateCreate;
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-//		paramSource.addValue("global_id", news.getGlobalId());
+		// paramSource.addValue("global_id", news.getGlobalId());
 		paramSource.addValue("event_uuid", news.getEventUUID());
-		paramSource.addValue("title",news.getTitle());
-		paramSource.addValue("author",news.getAuthor());
-		paramSource.addValue("post_datetime",news.getPostDatetime());
+		paramSource.addValue("title", news.getTitle());
+		paramSource.addValue("author", news.getAuthor());
+		paramSource.addValue("post_datetime", news.getPostDatetime());
 		paramSource.addValue("view_num", news.getViewNum());
 		paramSource.addValue("desc_short", news.getDescShort());
-		paramSource.addValue("desc_long",news.getDescLong());
-		paramSource.addValue("event_class",news.getEventClass());
-		paramSource.addValue("event_status",news.getEventStatus());
-		
+		paramSource.addValue("desc_long", news.getDescLong());
+		paramSource.addValue("event_class", news.getEventClass());
+		paramSource.addValue("event_status", news.getEventStatus());
+
 		KeyHolder keyholder = new GeneratedKeyHolder();
-		jdbc.update(sql, paramSource, keyholder);
-		return;
-		
-		//return jdbc.execute(sql, new UserAccountRowMapper());
+
+		return jdbc.update(sql, paramSource, keyholder);
 	}
 
 	@Override
-	public void update(News news) {
-		final String TABLE1 = "event_news";
-		
+	public int update(News news) {
 		StringBuffer sbf = new StringBuffer();
-		sbf.append("UPDATE "+TABLE1+" ");
+		sbf.append("UPDATE " + TABLE + " ");
 		sbf.append("SET ");
 		sbf.append("title = :title, ");
 		sbf.append("author = :author, ");
@@ -149,33 +147,26 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 		sbf.append("event_status = :event_status ");
 		sbf.append("WHERE ");
 		sbf.append("event_uuid = :event_uuid");
-				
-				/*+ "(,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");*/
-		
+
 		String sql = sbf.toString();
-		
-//		final Date dateCreate 			= new Date();
-//		final Date dateLastModified 	= dateCreate;
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-//		paramSource.addValue("global_id", news.getGlobalId());
 		paramSource.addValue("event_uuid", news.getEventUUID());
-		paramSource.addValue("title",news.getTitle());
-		paramSource.addValue("author",news.getAuthor());
-		paramSource.addValue("post_datetime",news.getPostDatetime());
+		paramSource.addValue("title", news.getTitle());
+		paramSource.addValue("author", news.getAuthor());
+		paramSource.addValue("post_datetime", news.getPostDatetime());
 		paramSource.addValue("view_num", news.getViewNum());
 		paramSource.addValue("desc_short", news.getDescShort());
-		paramSource.addValue("desc_long",news.getDescLong());
-		paramSource.addValue("event_class",news.getEventClass());
-		paramSource.addValue("event_status",news.getEventStatus());
-		
-		KeyHolder keyholder = new GeneratedKeyHolder();
-		jdbc.update(sql, paramSource, keyholder);
-		return;
-		
+		paramSource.addValue("desc_long", news.getDescLong());
+		paramSource.addValue("event_class", news.getEventClass());
+		paramSource.addValue("event_status", news.getEventStatus());
+
+		return jdbc.update(sql, paramSource);
+
 	}
 
 	@Override
-	public void updateBatch(final List<News> newsList) {
+	public int[] updateBatch(final List<News> newsList) {
 		String sql = "update event_news set event_status=:eventStatus where event_uuid =:eventUUID";
 
 		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();
@@ -183,48 +174,39 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 			parameters.add(new BeanPropertySqlParameterSource(x));
 		}
 
-		jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
+		return jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
 	}
 
 	@Override
-	public void markNewsStatusDeleted(String eventUUID) {
-		final String TABLE1 = "event_news";
-		
+	public int markNewsStatusDeleted(String eventUUID) {
 		StringBuffer sbf = new StringBuffer();
-		sbf.append("update "+TABLE1+" ");
+		sbf.append("update " + TABLE + " ");
 		sbf.append("set ");
 		sbf.append("event_status = :event_status ");
 		sbf.append("where ");
 		sbf.append("event_uuid = :event_uuid");
-				
+
 		String sql = sbf.toString();
-		
-//		final Date dateCreate 			= new Date();
-//		final Date dateLastModified 	= dateCreate;
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-//		paramSource.addValue("global_id", news.getGlobalId());
 		paramSource.addValue("event_uuid", eventUUID);
-		paramSource.addValue("event_status",3);
-		
-		KeyHolder keyholder = new GeneratedKeyHolder();
-		jdbc.update(sql, paramSource, keyholder);
-		return;
+		paramSource.addValue("event_status", 3);
+
+		return jdbc.update(sql, paramSource);
 	}
 
 	@Override
-	public void delete(News news) {
-		
+	public int delete(News news) {
+
 		String sql = "delete from event_news where event_uuid =:eventUUID";
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("eventUUID", news.getEventUUID());
-		
-		KeyHolder keyholder = new GeneratedKeyHolder();
-		jdbc.update(sql, paramSource, keyholder);
-		return;
+
+		return jdbc.update(sql, paramSource);
 	}
-	
+
 	@Override
-	public void deleteBatch(final List<News> newsList) {
+	public int[] deleteBatch(final List<News> newsList) {
 		String sql = "delete from event_news where event_uuid =:eventUUID";
 
 		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();
@@ -232,10 +214,10 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 			parameters.add(new BeanPropertySqlParameterSource(x));
 		}
 
-		jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
+		return jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
 	}
 
-	private static class NewsRowMapper implements RowMapper<Event>{
+	private static class NewsRowMapper implements RowMapper<Event> {
 		public Event mapRow(ResultSet rs, int rowNumber) throws SQLException {
 			Event x = new News();
 			x.setGlobalId(rs.getLong("global_id"));
@@ -247,11 +229,11 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 			x.setDescLong(rs.getString("desc_long"));
 			x.setEventClass(rs.getString("event_class"));
 			x.setEventStatus(rs.getInt("event_status"));
-			Timestamp pd = rs.getTimestamp("post_datetime");			
-			x.setPostDatetime(pd==null?null:new Date(pd.getTime()));
-			
-	        return x;
-		}		
+			Timestamp pd = rs.getTimestamp("post_datetime");
+			x.setPostDatetime(pd == null ? null : new Date(pd.getTime()));
+
+			return x;
+		}
 	}
 
 }

@@ -85,6 +85,32 @@ public class AdRecommendDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRecomme
 	}
 
 	@Override
+	public List<AdRecommend> findByFilter(String queryString) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("SELECT ");
+		sbf.append("global_id, ");
+		sbf.append("ad_uuid, ");
+		sbf.append("page_id, ");
+		sbf.append("page_name, ");
+		sbf.append("rcmd_score, ");
+		sbf.append("rcmd_rank, ");
+		sbf.append("rcmd_status ");
+		sbf.append(" FROM " + TABLE);
+		sbf.append(" WHERE 1=1 ");
+		sbf.append(queryString);
+		String sql = sbf.toString();
+
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		List<AdRecommend> x = new ArrayList<AdRecommend>();
+		try {
+			x = jdbc.query(sql, paramSource, new AdRecommendRowMapper());
+		} catch (Exception ex) {
+			x = null;
+		}
+		return x;
+	}
+
+	@Override
 	public int create(AdRecommend x) {
 		StringBuffer sbf = new StringBuffer();
 		sbf.append(" INSERT INTO ").append(TABLE);
@@ -126,7 +152,7 @@ public class AdRecommendDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRecomme
 	}
 
 	@Override
-	public void update(AdRecommend x) {
+	public int update(AdRecommend x) {
 		StringBuffer sbf = new StringBuffer();
 		sbf.append(" UPDATE ").append(TABLE);
 		sbf.append(" SET ad_uuid=:ad_uuid,");
@@ -147,35 +173,21 @@ public class AdRecommendDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRecomme
 		paramSource.addValue("rcmd_status", x.getRcmdStatus());
 		paramSource.addValue("global_id", x.getGlobalId());
 
-		try {
-			jdbc.update(sql, paramSource);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		return;
-
+		return jdbc.update(sql, paramSource);
 	}
 
 	@Override
-	public void delete(AdRecommend x) {
+	public int delete(AdRecommend x) {
 		StringBuffer sbf = new StringBuffer();
 		sbf.append(" DELETE FROM ").append(TABLE);
 		sbf.append(" WHERE global_id=:global_id");
 
 		String sql = sbf.toString();
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("global_id", x.getGlobalId());
 
-		try {
-			jdbc.update(sql, paramSource);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		return;
-
+		return jdbc.update(sql, paramSource);
 	}
 
 	private static class AdRecommendRowMapper implements RowMapper<AdRecommend> {
@@ -190,32 +202,6 @@ public class AdRecommendDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRecomme
 			x.setRcmdStatus(rs.getInt("rcmd_status"));
 			return x;
 		}
-	}
-
-	@Override
-	public List<AdRecommend> findByFilter(String queryString) {
-		StringBuffer sbf = new StringBuffer();
-		sbf.append("SELECT ");
-		sbf.append("global_id, ");
-		sbf.append("ad_uuid, ");
-		sbf.append("page_id, ");
-		sbf.append("page_name, ");
-		sbf.append("rcmd_score, ");
-		sbf.append("rcmd_rank, ");
-		sbf.append("rcmd_status ");
-		sbf.append(" FROM " + TABLE);
-		sbf.append(" WHERE 1=1 ");
-		sbf.append(queryString);
-		String sql = sbf.toString();
-
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		List<AdRecommend> x = new ArrayList<AdRecommend>();
-		try {
-			x = jdbc.query(sql, paramSource, new AdRecommendRowMapper());
-		} catch (Exception ex) {
-			x = null;
-		}
-		return x;
 	}
 
 }

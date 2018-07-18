@@ -56,25 +56,25 @@ public interface EventReviewDao {
 	 * create an event review object and persist it
 	 * @param review an event review object
 	 */
-	public void create(EventReview review);
+	public int create(EventReview review);
 	
 	/**
 	 * update an event review object and persist it
 	 * @param review an event review object
 	 */
-	public void update(EventReview review);
+	public int update(EventReview review);
 	
 	
 	/**
 	 * @param review
 	 */
-	public void updateStatus(EventReview review);
+	public int updateStatus(EventReview review);
 	
 	/**
 	 * remove an event review object from data source<p>
 	 * WARNING: THE METHOD HAS NOT COMPLETED.
 	 */
-	public void delete();
+	public int delete();
 	
 	
 }

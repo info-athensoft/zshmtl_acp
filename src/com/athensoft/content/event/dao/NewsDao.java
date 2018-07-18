@@ -51,32 +51,32 @@ public interface NewsDao {
 	 * create a news object and persist it
 	 * @param news a news object
 	 */
-	public void create(News news);
+	public int create(News news);
 	
 	/**
 	 * update a news object and persist it
 	 * @param news a news object
 	 */
-	public void update(News news);
+	public int update(News news);
 	
 	/**
 	 * update news objects and persist them in batch
 	 * @param news list of news objects to persist
 	 */
-	public void updateBatch(List<News> news);
+	public int[] updateBatch(List<News> news);
 
-	public void markNewsStatusDeleted(String eventUUID);
+	public int markNewsStatusDeleted(String eventUUID);
 
 	/**
 	 * remove a news object from data source<p>
 	 * WARNING: THE METHOD HAS NOT COMPLETED.
 	 */
-	public void delete(News news);
+	public int delete(News news);
 	
 	/**
 	 * remove news objects permanently in batch
 	 * @param news list of news objects to persist
 	 */
-	public void deleteBatch(List<News> news);
+	public int[] deleteBatch(List<News> news);
 	
 }

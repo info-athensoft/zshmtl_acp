@@ -15,8 +15,8 @@ public interface AdRecommendDao {
 	
 	public int create(AdRecommend adRecommend);
 	
-	public void update(AdRecommend adRecommend);
+	public int update(AdRecommend adRecommend);
 	
-	public void delete(AdRecommend adRecommend);
+	public int delete(AdRecommend adRecommend);
 	
 }

@@ -23,5 +23,5 @@ public interface AdPostDao {
 	
 	public int delete(Long globalId);
 	
-	public void updateBatch(List<AdPost> adPostList);
+	public int[] updateBatch(List<AdPost> adPostList);
 }

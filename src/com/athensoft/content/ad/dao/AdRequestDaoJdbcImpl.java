@@ -7,20 +7,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.athensoft.base.dao.BaseDaoJdbcImpl;
+import com.athensoft.content.ad.controller.AdPostController;
 import com.athensoft.content.ad.entity.AdRequest;
 
 @Repository
 @Qualifier("adRequestDaoJdbcImpl")
-public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDao{
+public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDao {
+	private static final Logger logger = Logger.getLogger(AdRequestDaoJdbcImpl.class);
 
 	private static String TABLE = "ad_request";
-	
+
 	@Override
 	public List<AdRequest> findAll() {
 		StringBuffer sbf = new StringBuffer();
@@ -35,17 +38,18 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 		sbf.append("request_type,");
 		sbf.append("request_status");
 		sbf.append(" FROM ").append(TABLE);
-		
+
 		String sql = sbf.toString();
-		List<AdRequest> x = new ArrayList<AdRequest>();
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		
-		try{
+
+		List<AdRequest> x = new ArrayList<AdRequest>();
+		try {
 			x = jdbc.query(sql, paramSource, new AdRequestRowMapper());
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			x = null;
 		}
-		
+
 		return x;
 	}
 
@@ -64,17 +68,18 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 		sbf.append("request_status");
 		sbf.append(" FROM ").append(TABLE);
 		sbf.append(" WHERE 1=1 ").append(queryString);
-		
+
 		String sql = sbf.toString();
-		List<AdRequest> x = new ArrayList<AdRequest>();
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		
-		try{
+
+		List<AdRequest> x = new ArrayList<AdRequest>();
+		try {
 			x = jdbc.query(sql, paramSource, new AdRequestRowMapper());
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			x = null;
 		}
-		
+
 		return x;
 	}
 
@@ -94,18 +99,19 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 		sbf.append(" FROM ").append(TABLE);
 		sbf.append(" WHERE 1=1 ");
 		sbf.append(" AND request_status =:request_status");
-		
+
 		String sql = sbf.toString();
-		List<AdRequest> x = new ArrayList<AdRequest>();
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("request_status", new Integer(requestStatus));
-		
-		try{
+
+		List<AdRequest> x = new ArrayList<AdRequest>();
+		try {
 			x = jdbc.query(sql, paramSource, new AdRequestRowMapper());
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			x = null;
 		}
-		
+
 		return x;
 	}
 
@@ -125,18 +131,51 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 		sbf.append(" FROM ").append(TABLE);
 		sbf.append(" WHERE 1=1 ");
 		sbf.append(" AND acct_name =:acct_name");
-		
+
 		String sql = sbf.toString();
-		List<AdRequest> x = new ArrayList<AdRequest>();
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("acct_name", acctName);
-		
-		try{
+
+		List<AdRequest> x = new ArrayList<AdRequest>();
+		try {
 			x = jdbc.query(sql, paramSource, new AdRequestRowMapper());
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			x = null;
 		}
-		
+
+		return x;
+	}
+
+	@Override
+	public List<AdRequest> findByType(int requestType) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("SELECT ");
+		sbf.append("global_id,");
+		sbf.append("acct_name,");
+		sbf.append("request_name,");
+		sbf.append("request_phone,");
+		sbf.append("request_subject,");
+		sbf.append("request_msg,");
+		sbf.append("request_date,");
+		sbf.append("request_type,");
+		sbf.append("request_status");
+		sbf.append(" FROM ").append(TABLE);
+		sbf.append(" WHERE 1=1 ");
+		sbf.append(" AND request_type =:request_type");
+
+		String sql = sbf.toString();
+
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("request_type", new Integer(requestType));
+
+		List<AdRequest> x = new ArrayList<AdRequest>();
+		try {
+			x = jdbc.query(sql, paramSource, new AdRequestRowMapper());
+		} catch (Exception ex) {
+			x = null;
+		}
+
 		return x;
 	}
 
@@ -163,10 +202,10 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 		sbf.append(":request_type,");
 		sbf.append(":request_status");
 		sbf.append(" )");
-		
+
 		String sql = sbf.toString();
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		
 		paramSource.addValue("acct_name", x.getAcctName());
 		paramSource.addValue("request_phone", x.getRequestPhone());
 		paramSource.addValue("request_subject", x.getRequestSubject());
@@ -174,15 +213,8 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 		paramSource.addValue("request_type", x.getRequestType());
 		paramSource.addValue("request_status", x.getRequestStatus());
 		paramSource.addValue("request_date", x.getRequestDate());
-		
-		int res = 0;
-		try{
-			res = jdbc.update(sql, paramSource);
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
-		
-		return res;
+
+		return jdbc.update(sql, paramSource);
 	}
 
 	@Override
@@ -197,10 +229,10 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 		sbf.append("  request_status=:request_status,");
 		sbf.append("  request_date=:request_date ");
 		sbf.append(" WHERE global_id=:global_id");
-		
+
 		String sql = sbf.toString();
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		
 		paramSource.addValue("acct_name", x.getAcctName());
 		paramSource.addValue("request_phone", x.getRequestPhone());
 		paramSource.addValue("request_subject", x.getRequestSubject());
@@ -209,14 +241,8 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 		paramSource.addValue("request_status", x.getRequestStatus());
 		paramSource.addValue("request_date", x.getRequestDate());
 		paramSource.addValue("global_id", x.getGlobalId());
-		
-		try{
-			jdbc.update(sql, paramSource);
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
-		
-		return 0;
+
+		return jdbc.update(sql, paramSource);
 	}
 
 	@Override
@@ -226,20 +252,14 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 		sbf.append(" SET ");
 		sbf.append(" request_status=:request_status");
 		sbf.append(" WHERE global_id=:global_id");
-		
+
 		String sql = sbf.toString();
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		
 		paramSource.addValue("request_status", x.getRequestStatus());
 		paramSource.addValue("global_id", x.getGlobalId());
-		
-		try{
-			jdbc.update(sql, paramSource);
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
-		
-		return 0;
+
+		return jdbc.update(sql, paramSource);
 	}
 
 	@Override
@@ -247,22 +267,16 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 		StringBuffer sbf = new StringBuffer();
 		sbf.append(" DELETE FROM ").append(TABLE);
 		sbf.append(" WHERE global_id=:global_id");
-		
+
 		String sql = sbf.toString();
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		
 		paramSource.addValue("global_id", globalId);
-		
-		try{
-			jdbc.update(sql, paramSource);
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
-		
-		return 0;
+
+		return jdbc.update(sql, paramSource);
 	}
-	
-	private static class AdRequestRowMapper implements RowMapper<AdRequest>{
+
+	private static class AdRequestRowMapper implements RowMapper<AdRequest> {
 		@Override
 		public AdRequest mapRow(ResultSet rs, int rowNumber) throws SQLException {
 			AdRequest x = new AdRequest();
@@ -274,43 +288,12 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 			x.setRequestPhone(rs.getString("request_phone"));
 			x.setRequestType(rs.getInt("request_type"));
 			x.setRequestStatus(rs.getInt("request_status"));
-			
-			Timestamp rd = rs.getTimestamp("request_date");			
-			x.setRequestDate(rd==null?null:new Date(rd.getTime()));
+
+			Timestamp rd = rs.getTimestamp("request_date");
+			x.setRequestDate(rd == null ? null : new Date(rd.getTime()));
 			rd = null;
-	        return x;
+			return x;
 		}
 	}
 
-	@Override
-	public List<AdRequest> findByType(int requestType) {
-		StringBuffer sbf = new StringBuffer();
-		sbf.append("SELECT ");
-		sbf.append("global_id,");
-		sbf.append("acct_name,");
-		sbf.append("request_name,");
-		sbf.append("request_phone,");
-		sbf.append("request_subject,");
-		sbf.append("request_msg,");
-		sbf.append("request_date,");
-		sbf.append("request_type,");
-		sbf.append("request_status");
-		sbf.append(" FROM ").append(TABLE);
-		sbf.append(" WHERE 1=1 ");
-		sbf.append(" AND request_type =:request_type");
-		
-		String sql = sbf.toString();
-		List<AdRequest> x = new ArrayList<AdRequest>();
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("request_type", new Integer(requestType));
-		
-		try{
-			x = jdbc.query(sql, paramSource, new AdRequestRowMapper());
-		}catch(Exception ex){
-			x = null;
-		}
-		
-		return x;
-	}
-	
 }

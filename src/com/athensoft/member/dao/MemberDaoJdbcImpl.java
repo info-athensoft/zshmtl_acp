@@ -254,15 +254,12 @@ public class MemberDaoJdbcImpl extends BaseDaoJdbcImpl implements MemberDao {
 		paramSource.addValue("member_level",member.getMemberLevel());
 		paramSource.addValue("member_status",member.getMemberStatus());
 		
-		KeyHolder keyholder = new GeneratedKeyHolder();
-		jdbc.update(sql, paramSource, keyholder);
-		
-		return 0;
+		return jdbc.update(sql, paramSource);
 	}
 	
 	
 	@Override
-	public void updateBatch(List<Member> memberList) {
+	public int[] updateBatch(List<Member> memberList) {
 		logger.debug("updateBatch() memberList size="+memberList==null?"NULL":memberList.size());
 		String sql = "update member_profile set member_status=:memberStatus where acct_name =:acctName";
 
@@ -271,8 +268,7 @@ public class MemberDaoJdbcImpl extends BaseDaoJdbcImpl implements MemberDao {
 			parameters.add(new BeanPropertySqlParameterSource(x));
 		}
 
-		jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
-		
+		return jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
 	}
 	
 
