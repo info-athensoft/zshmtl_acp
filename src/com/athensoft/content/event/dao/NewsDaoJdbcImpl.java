@@ -27,8 +27,8 @@ import com.athensoft.content.event.entity.News;
 
 @Component
 @Qualifier("newsDaoJDBCImpl")
-public class NewsDaoJDBCImpl implements NewsDao {
-	private static final Logger logger = Logger.getLogger(NewsDaoJDBCImpl.class);
+public class NewsDaoJdbcImpl implements NewsDao {
+	private static final Logger logger = Logger.getLogger(NewsDaoJdbcImpl.class);
 	
 	private static final String TABLE = "event_news";
 	

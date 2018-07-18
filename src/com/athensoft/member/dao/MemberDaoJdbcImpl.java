@@ -22,7 +22,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.athensoft.content.event.dao.EventReviewDaoJDBCImpl;
+import com.athensoft.content.event.dao.EventReviewDaoJdbcImpl;
 import com.athensoft.member.entity.Member;
 
 @Repository

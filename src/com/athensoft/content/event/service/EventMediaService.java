@@ -20,7 +20,7 @@ public class EventMediaService {
 	 * DAO of EventMedia
 	 */
 	@Autowired
-	@Qualifier("eventMediaDaoJDBCImpl")
+	@Qualifier("eventMediaDaoJdbcImpl")
 	private EventMediaDao eventMediaDao;
 
 	

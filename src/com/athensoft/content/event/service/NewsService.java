@@ -23,7 +23,7 @@ public class NewsService {
 	 * DAO of News
 	 */
 	@Autowired
-	@Qualifier("newsDaoJDBCImpl")
+	@Qualifier("newsDaoJdbcImpl")
 	private NewsDao newsDao;
 
 	

@@ -7,34 +7,31 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import com.athensoft.base.BaseDaoJdbcImpl;
 import com.athensoft.content.ad.entity.AdPost;
 
 @Repository
 @Qualifier("adPostDaoJdbcImpl")
-public class AdPostDaoJdbcImpl implements AdPostDao {
+public class AdPostDaoJdbcImpl extends BaseDaoJdbcImpl implements AdPostDao {
 	private static final Logger logger = Logger.getLogger(AdPostDaoJdbcImpl.class);
 	
 	private final String TABLE = "ad_post";
 	
-	private NamedParameterJdbcTemplate jdbc;
-	
-	@Autowired
-	public void setDataSource(DataSource dataSource){
-		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
-	}
+//	private NamedParameterJdbcTemplate jdbc;
+//	
+//	@Autowired
+//	public void setDataSource(DataSource dataSource){
+//		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+//	}
 	
 	@Override
 	public List<AdPost> findAll() {

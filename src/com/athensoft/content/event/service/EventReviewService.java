@@ -21,7 +21,7 @@ public class EventReviewService {
 	 * DAO of EventReview
 	 */
 	@Autowired
-	@Qualifier("eventReviewDaoJDBCImpl")
+	@Qualifier("eventReviewDaoJdbcImpl")
 	private EventReviewDao eventReviewDao;
 	
 	/**

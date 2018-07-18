@@ -24,8 +24,8 @@ import com.athensoft.content.event.entity.EventReview;
 
 @Component
 @Qualifier("eventReviewDaoJDBCImpl")
-public class EventReviewDaoJDBCImpl implements EventReviewDao{
-	private static final Logger logger = Logger.getLogger(EventReviewDaoJDBCImpl.class);
+public class EventReviewDaoJdbcImpl implements EventReviewDao{
+	private static final Logger logger = Logger.getLogger(EventReviewDaoJdbcImpl.class);
 	
 	private static final String TABLE = "event_review";
 	

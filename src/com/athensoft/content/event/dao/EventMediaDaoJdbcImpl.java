@@ -28,7 +28,7 @@ import com.athensoft.content.event.entity.EventMedia;
  */
 @Component
 @Qualifier("eventMediaDaoJDBCImpl")
-public class EventMediaDaoJDBCImpl implements EventMediaDao {
+public class EventMediaDaoJdbcImpl implements EventMediaDao {
 	
 	private NamedParameterJdbcTemplate jdbc;
 	
