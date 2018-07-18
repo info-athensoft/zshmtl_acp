@@ -188,10 +188,7 @@ public class MemberController {
 	        default:
 	        	break;
         }
-       
         
-//        System.out.println("memberActiveDate="+jsonObj.getString("memberActiveDate"));
-//        
 //      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //		Date tmpDate = null;
 //		try {
@@ -208,7 +205,6 @@ public class MemberController {
 
         memberService.updateMember(member);
 		
-        /* initial settings */
 		ModelAndView mav = new ModelAndView();
 		Map<String,Object> model = mav.getModel();
 		model.put("updateState", "ok");
@@ -242,8 +238,8 @@ public class MemberController {
 		/* business logic*/
         memberService.updateMemberGroup(memberList);
         
-        /* initial settings */
-		ModelAndView mav = new ModelAndView();
+
+        ModelAndView mav = new ModelAndView();
         Map<String, Object> model = mav.getModel();
         
 		logger.info("leaving /member/updateGroup");
@@ -371,7 +367,6 @@ public class MemberController {
 		
 		statusPair[0]=statusKey;
 		statusPair[1]=status;
-		
 		
 		return statusPair;
 	}
