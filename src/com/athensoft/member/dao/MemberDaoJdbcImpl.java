@@ -7,37 +7,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.athensoft.content.event.dao.EventReviewDaoJdbcImpl;
+import com.athensoft.base.BaseDaoJdbcImpl;
 import com.athensoft.member.entity.Member;
 
 @Repository
 @Qualifier("memberDaoJdbcImpl")
-public class MemberDaoJdbcImpl implements MemberDao {
+public class MemberDaoJdbcImpl extends BaseDaoJdbcImpl implements MemberDao {
 	private static final Logger logger = Logger.getLogger(MemberDaoJdbcImpl.class);
 	
 	private final String TABLE = "member_profile";
-	
-	private NamedParameterJdbcTemplate jdbc;
-	
-	@Autowired
-	public void setDataSource(DataSource dataSource){
-		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
-	}
 	
 	@Override
 	public List<Member> findAll() {

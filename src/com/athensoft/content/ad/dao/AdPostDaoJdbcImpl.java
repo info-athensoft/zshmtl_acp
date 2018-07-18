@@ -26,13 +26,6 @@ public class AdPostDaoJdbcImpl extends BaseDaoJdbcImpl implements AdPostDao {
 	
 	private final String TABLE = "ad_post";
 	
-//	private NamedParameterJdbcTemplate jdbc;
-//	
-//	@Autowired
-//	public void setDataSource(DataSource dataSource){
-//		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
-//	}
-	
 	@Override
 	public List<AdPost> findAll() {
 		StringBuffer sbf = new StringBuffer();

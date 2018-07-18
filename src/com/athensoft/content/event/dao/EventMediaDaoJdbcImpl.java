@@ -7,18 +7,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import com.athensoft.base.BaseDaoJdbcImpl;
 import com.athensoft.content.event.entity.EventMedia;
 
 /**
@@ -28,14 +25,7 @@ import com.athensoft.content.event.entity.EventMedia;
  */
 @Component
 @Qualifier("eventMediaDaoJDBCImpl")
-public class EventMediaDaoJdbcImpl implements EventMediaDao {
-	
-	private NamedParameterJdbcTemplate jdbc;
-	
-	@Autowired
-	public void setDataSource(DataSource dataSource){
-		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
-	}
+public class EventMediaDaoJdbcImpl extends BaseDaoJdbcImpl implements EventMediaDao {
 	
 	private static final String TABLE = "event_media";
 	
