@@ -35,24 +35,13 @@ import com.athensoft.content.event.service.EventMediaService;
  */
 @Controller
 public class FileUploadAcpController {
-	
 	private static final Logger logger = Logger.getLogger(FileUploadAcpController.class);
 	
-//	public static final String FileDir = "D:\\Shared\\2017_athensoft_website\\fileupload";
-	
-	
-//	public static final String FileDir = "C:\\temp\\fileupload";
-	
-	
-//	public static final String FileDir = "/home/resources/fileupload";
-	
-	//public static final String ImgBaseUrl = "/img-event";
 	
 	public static final int BUF_SIZE = 2 * 1024;
 	
 	private static final String RESP_SUCCESS = "{\"jsonrpc\" : \"2.0\", \"result\" : \"OK\", \"id\" : \"id\"}";
 	private static final String RESP_ERROR = "{\"jsonrpc\" : \"2.0\", \"error\" : {\"code\": 101, \"message\": \"Failed to open input stream.\"}, \"id\" : \"id\"}";
-	
 	
 	private int chunk;
 	private int chunks;
@@ -60,18 +49,8 @@ public class FileUploadAcpController {
 	private String user;
 	private String time;
 
-	
-	private EventMediaService eventMediaService;
-	
-	/**
-	 * set event media service
-	 * @param eventMediaService
-	 */
 	@Autowired
-	public void setEventMediaService(EventMediaService eventMediaService) {
-		this.eventMediaService = eventMediaService;
-	}
-	
+	private EventMediaService eventMediaService;
 	
 	/**
 	 * upload files
@@ -204,8 +183,6 @@ public class FileUploadAcpController {
 				while (iter.hasNext()) {
 				    FileItemStream item = iter.next();
 				    InputStream input = item.openStream();
-
-				    
 				    
 				    // Handle a form field.
 				    if(item.isFormField()){
@@ -235,14 +212,12 @@ public class FileUploadAcpController {
 				    else {
 //				    	String fileDir = req.getSession().getServletContext().getRealPath("/")+FileDir;
 				    	
-//				    	String fileDir = FileDir+File.separator+eventUUID;
 				    	String fileDir = getFileBaseDir(getLoadedProperties())+File.separator+eventUUID;
 //						
 				    	File dstFile = new File(fileDir);
 						if (!dstFile.exists()){
 							dstFile.mkdirs();
 						}
-//						
 						File dst = new File(dstFile.getPath()+ "/" + this.name);
 						
 						logger.info("fileDir:" + fileDir);
@@ -272,9 +247,6 @@ public class FileUploadAcpController {
 				responseString = RESP_ERROR;
 				e.printStackTrace();
 			}
-			
-			
-			
 		}
 		
 		// Not a multi-part MIME request.
@@ -285,17 +257,13 @@ public class FileUploadAcpController {
 		logger.info("responseString:" + responseString);
 		
 		ModelAndView mav = new ModelAndView();
-		
-		//view
-		String viewName = "events/event_news_edit";
-		mav.setViewName(viewName);
-		
-		//data
 		Map<String, Object> model = mav.getModel();
-		
 		model.put("jsonrpc", "2.0");
 		model.put("result", "OK");
 		model.put("id", "id");
+		
+		String viewName = "events/event_news_edit";
+		mav.setViewName(viewName);
 		
 		logger.info("leaving /events/fileUploadAndCreateRecord");
 		return model;
@@ -345,14 +313,14 @@ public class FileUploadAcpController {
 	private static String getFileBaseDir(Properties pro) {
 		/* property: docBase of photo at server side */
 		String path = pro.getProperty("file.photo.docbase");
-		System.out.println("image base path in file system=" + path);
+		logger.info("image base path in file system=" + path);
 		return path;
 	}
 
 	private static String getFileBaseUrl(Properties pro) {
 		/* property: docBase of photo at server side */
 		String path = pro.getProperty("file.photo.baseurl");
-		System.out.println("image base url =" + path);
+		logger.info("image base url =" + path);
 		return path;
 	}
 
