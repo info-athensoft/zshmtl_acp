@@ -41,11 +41,6 @@ public class NewsAcpController {
 	@Autowired
 	private NewsService newsService;
 	
-	/**
-	 * EventReview Service instance
-	 */
-//	@Autowired
-//	private EventReviewService eventReviewService;
 	
 	/**
 	 * EventMedia Service instance
