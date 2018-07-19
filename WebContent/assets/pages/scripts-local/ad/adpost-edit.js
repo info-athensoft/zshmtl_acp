@@ -3,14 +3,12 @@
 
 /* create adpost - button:back */
 function backToAdPostList(){
-	//alert("backToAdPostList");
 	location.href = "/acp/ad/adpost/list.html";
 }
 
 
 /* update adpost - button:save change,create */
 function updateAdPost() {
-    //alert(JSON.stringify(businessObject));
     var businessObject = getAdPostObject();
     
     /* validating by business rule */
@@ -31,15 +29,16 @@ function updateAdPost() {
     //execute saving
     $.ajax({
         type    :    "post",
-        url        : "/acp/ad/adpost/update?itemJSONString="+JSON.stringify(businessObject),
+        url        : "/acp/ad/adpost/update?itemJSONString="+param,
         dataType:    "json",
         timeout :     30000,
         
         success:function(msg){
+        	alert("提示: 修改成功!");
         	location.href="/acp/ad/adpost/list.html";
         },
-        error:function(){
-        	alert("错误: 广告修改失败，请检查输入重新尝试!");     
+        error:function(XMLHttpRequest, textStatus){
+        	alert("错误: 修改失败，请检查输入重新尝试!");     
 //            alert("ERROR: AdPost editing failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){

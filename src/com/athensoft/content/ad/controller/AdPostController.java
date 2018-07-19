@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,16 +49,10 @@ public class AdPostController {
 		// data - news
 		AdPost adpost = adPostService.getAdPostByAdUUID(adUUID);
 
-		// data - media
-		// List<EventMedia> listEventMedia =
-		// eventMediaService.getEventMediaByEventUUID(eventUUID);
-		// logger.info("Length of EventReview entries: "+
-		// listEventMedia.size());
-
+		
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
 		model.put("adPostObject", adpost);
-		// model.put("eventMediaList", listEventMedia);
 
 		String viewName = "ad/adpost_edit";
 		mav.setViewName(viewName);
@@ -73,7 +68,7 @@ public class AdPostController {
 
 		// data
 		List<AdPost> listAdPost = adPostService.getAdPostList();
-		logger.info("Length of adpost entries: " + listAdPost.size());
+		logger.info("Length of adpost entries: " + listAdPost==null?"NULL":listAdPost.size());
 
 		String[][] data = adPostService.getData(listAdPost, AdAction.EDIT);
 
@@ -394,18 +389,24 @@ public class AdPostController {
 		return;
 	}
 
-	@RequestMapping(value = "/updateGroup", produces = "application/json")
+	@RequestMapping(value = "/updateGroup", method=RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public Map<String, Object> updateGroupAdPost(@RequestParam String adUUIDArray, @RequestParam int adStatus) {
-		logger.info("entering /adpost/updateGroup");
-
+	public void updateGroupAdPost(@RequestBody AdPostGroup adGroup) {
+		logger.info("entering... /adpost/updateGroup");
+		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>="+adGroup.toString());
+		
+		List<String> adUUIDs = adGroup.getAdUUIDArray();
+		int adUUIDLength = adUUIDs.size();
+		
+		int adStatus = adGroup.getAdStatus();
+		
 		List<AdPost> adpostList = new ArrayList<AdPost>();
-		String[] adUUIDs = adUUIDArray.split(",");
-		int adUUIDLength = adUUIDs.length;
 
 		for (int i = 0; i < adUUIDLength; i++) {
 			AdPost adpost = new AdPost();
-			adpost.setAdUUID(adUUIDs[i]);
+//			adpost.setAdUUID(adUUIDs[i]);
+			adpost.setAdUUID(adUUIDs.get(i));
 			adpost.setAdStatus(adStatus);
 			adpost.setModifyDate(new Date());
 			adpostList.add(adpost);
@@ -417,14 +418,63 @@ public class AdPostController {
 		/* business logic */
 		adPostService.updateAdPostGroup(adpostList);
 
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
 
-		// set model
-		Map<String, Object> model = mav.getModel();
-
-		logger.info("leaving /adpost/updateGroup");
-		return model;
+		logger.info("leaving... /adpost/updateGroup");
+		return ;
+	}
+	
+	
+//	@RequestMapping(value = "/updateGroup", method=RequestMethod.POST, produces = "application/json")
+//	@ResponseBody
+//	public void updateGroupAdPost(@RequestParam String adUUIDArray, @RequestParam int adStatus) {
+//		logger.info("entering... /adpost/updateGroup");
+//		
+//		String[] adUUIDs = adUUIDArray.split(",");
+//		int adUUIDLength = adUUIDs.length;
+//		List<AdPost> adpostList = new ArrayList<AdPost>();
+//
+//		for (int i = 0; i < adUUIDLength; i++) {
+//			AdPost adpost = new AdPost();
+//			adpost.setAdUUID(adUUIDs[i]);
+//			adpost.setAdStatus(adStatus);
+//			adpost.setModifyDate(new Date());
+//			adpostList.add(adpost);
+//			adpost = null;
+//		}
+//
+//		logger.info("adpostList size=" + adpostList == null ? "NULL" : adpostList.size());
+//
+//		/* business logic */
+//		adPostService.updateAdPostGroup(adpostList);
+//
+//
+//		logger.info("leaving... /adpost/updateGroup");
+//		return ;
+//	}
+	
+	public static class AdPostGroup{
+		private List<String> adUUIDArray;
+		private int adStatus;
+		
+		public List<String> getAdUUIDArray() {
+			return adUUIDArray;
+		}
+		public void setAdUUIDArray(List<String> adUUIDArray) {
+			this.adUUIDArray = adUUIDArray;
+		}
+		public int getAdStatus() {
+			return adStatus;
+		}
+		public void setAdStatus(int adStatus) {
+			this.adStatus = adStatus;
+		}
+		@Override
+		public String toString() {
+			return "AdPostGroup [adUUIDArray=" + adUUIDArray + ", adStatus=" + adStatus + "]";
+		}
+		
+		
+		
 	}
 
 }

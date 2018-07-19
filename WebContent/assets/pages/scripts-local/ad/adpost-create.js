@@ -38,7 +38,7 @@ function createAdPost() {
         success:function(msg){
         	location.href="/acp/ad/adpost/list.html";
         },
-        error:function(){
+        error:function(XMLHttpRequest, textStatus){
         	alert("错误: 广告新增失败，请检查输入重新尝试!");
 //            alert("ERROR: AdPost creating failed.");     
         },            
@@ -63,8 +63,6 @@ function resetCreateAdPost(){
 }
 
 function getAdPostObject(){
-	//alert("ok");
-	//alert($("#expireDate").val());
 	
 	var p1 = $("#adType").val();
 	var p2 = $("#acctName").val();

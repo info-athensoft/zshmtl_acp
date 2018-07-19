@@ -112,8 +112,8 @@ function clickUploadUserProfile(acctName,adUUID) {
 	    processData	: 	false,
 	    data		: 	form_data, // setting the data attribute of AJAX with file_data
 	    type		: 	'post',
-	    error		: 	function (xhr, status) {
-	        				alert(status);
+	    error		: 	function (XMLHttpRequest, textStatus) {
+	    					alert(XMLHttpRequest.status+","+textStatus);
 	    				},
 	    success		: 	function(data) {
 	    					//alert("INFO: clickUpload success");

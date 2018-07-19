@@ -33,11 +33,11 @@ function createAdRecommend() {
     
     //execute saving
     $.ajax({
-        type    :"post",
+    	async	: false,
+    	type    :"post",
         url     :"/acp/ad/adrcmd/create",
         data	:"itemJSONString="+param,
         dataType: "json",
-        async: false,
         timeout : 30000,
         
         success:function(msg){
