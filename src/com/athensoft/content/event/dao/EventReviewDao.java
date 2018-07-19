@@ -24,20 +24,20 @@ public interface EventReviewDao {
 	 * @return	list of event review objects
 	 */
 	public List<EventReview> findByFilter(String queryString);
-	
-	/**
-	 * get all event review objects by eventUUID
-	 * @param eventUUID the eventUUID of news object
-	 * @return	list of event review objects
-	 */
-	public List<EventReview> findByEventUUID(String eventUUID);
-	
+
 	/**
 	 * get event review object by its gloablId
 	 * @param globalId the globlaId of news review object
 	 * @return a event review object
 	 */
 	public EventReview findById(long globalId);
+
+	/**
+	 * get all event review objects by eventUUID
+	 * @param eventUUID the eventUUID of news object
+	 * @return	list of event review objects
+	 */
+	public List<EventReview> findByEventUUID(String eventUUID);
 	
 	/**
 	 * get event review object by its reviewUUID

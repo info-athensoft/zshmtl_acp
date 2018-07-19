@@ -39,7 +39,6 @@ var AdPostList = function () {
                 "pageLength": 10, // default record count per page
                 "ajax": {
                     "url": "/acp/ad/adpost/list", // ajax source
-                    //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
                 },
                 "order": [
                     [8, "desc"]	//order by modify date
@@ -178,7 +177,7 @@ function filterSearch(){
     
    // alert(param);
     
-    var x = dt.ajax.url("/acp/ad/adpost/searchbyfilter?itemJSONString="+param).load();
+    var x = dt.ajax.url("/acp/ad/adpost/search?itemJSONString="+param).load();
 }
 
 

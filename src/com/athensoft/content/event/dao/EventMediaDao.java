@@ -19,19 +19,19 @@ public interface EventMediaDao {
 	public List<EventMedia> findAll();
 	
 	/**
+	 * get event media object by its gloablId
+	 * @param mediaId the globlaId of news media object
+	 * @return an event media object
+	 */
+	public EventMedia findById(long mediaId);
+
+	/**
 	 * get event media object by its eventUUID
 	 * @param eventUUID the eventUUID of news object
 	 * @return an event media object
 	 */
 	public List<EventMedia> findByEventUUID(String eventUUID);
 
-	/**
-	 * get event media object by its gloablId
-	 * @param mediaId the globlaId of news media object
-	 * @return an event media object
-	 */
-	public EventMedia findById(long mediaId);
-	
 	/**
 	 * get primary event media object by its eventUUID
 	 * @param eventUUID the eventUUID of news object
