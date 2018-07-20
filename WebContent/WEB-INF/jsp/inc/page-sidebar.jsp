@@ -35,24 +35,24 @@
 				<ul class="sub-menu">
 					
 					<li>
-						<a href="${webapp_name}/member/member_list.html">
+						<a href="${webapp_name}/member/list.html">
 						 会员管理</a>
 					</li>
 					<!--
 					<li>
-						<a href="${webapp_name}/member/member_list.html">
+						<a href="${webapp_name}/member/list.html">
 						 会员信息</a>
 					</li> 
 					<li>
-						<a href="${webapp_name}/member/member_list.html">
+						<a href="${webapp_name}/member/list.html">
 						 会员申请</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/member/member_list.html">
+						<a href="${webapp_name}/member/list.html">
 						 会员续约</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/member/member_list.html">
+						<a href="${webapp_name}/member/list.html">
 						 状态审核</a>
 					</li> -->
 				</ul>

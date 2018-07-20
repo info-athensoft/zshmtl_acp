@@ -156,7 +156,7 @@ public class NewsAcpController {
 	/**
 	 * get news objects in JSON data form, which comply with criteria
 	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
-	 * @param itemJSONString search criteria object in JSON format
+	 * @param jsonObjString search criteria object in JSON format
 	 * @return a map structure containing data rendered to views
 	 */
 	@RequestMapping(value="/search",produces="application/json")
@@ -292,7 +292,7 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/deletelist",produces="application/json")
 	@ResponseBody
-	public Map<String,Object> getDataListDeleteNews(){
+	public Map<String,Object> getDataDeleteListNews(){
 		logger.info("entering... /events/news/deletelist");
 		
 		//data
@@ -318,19 +318,19 @@ public class NewsAcpController {
 	/**
 	 * get news objects in JSON data form, which comply with criteria
 	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
-	 * @param itemJSONString search criteria object in JSON format
+	 * @param jsonObjString search criteria object in JSON format
 	 * @return a map structure containing data rendered to views
 	 */
-	@RequestMapping(value="/events/newsDeleteSearchFilterData",produces="application/json")
+	@RequestMapping(value="/deletesearch",produces="application/json")
 	@ResponseBody
-	public Map<String, Object> getDataDeleteSearchNews(@RequestParam String itemJSONString){
-		logger.info("entering /events/newsSearchFilterData");
+	public Map<String, Object> getDataDeleteSearchNews(@RequestParam String jsonObjString){
+		logger.info("entering... /events/news/deletesearch");
 		
 		ModelAndView mav = new ModelAndView();
 		
 		//data
 		Map<String, Object> model = mav.getModel();
-		JSONObject jobj= new JSONObject(itemJSONString);
+		JSONObject jobj= new JSONObject(jsonObjString);
 		
 		String where1 = jobj.getString("eventUUID").trim();
 		String where2 = jobj.getString("title").trim();
@@ -439,14 +439,14 @@ public class NewsAcpController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving... /events/news/search");
+		logger.info("leaving... /events/news/deletesearch");
 		return model;
 	}
 
 
 	/**
 	 * create news object based on data passed in JSON format
-	 * @param itemJSONString news object in JSON format 
+	 * @param jsonObjString news object in JSON format 
 	 * @return data and event-news view
 	 */
 	@RequestMapping(value="/create",method=RequestMethod.POST)
@@ -485,15 +485,16 @@ public class NewsAcpController {
 	
 	/**
 	 * update news object
-	 * @param itemJSONString news object to update in JSON format
+	 * @param jsonObjString news object to update in JSON format
 	 * @return data and target view
 	 */
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public ModelAndView updateNews(@RequestParam String itemJSONString) {
+	@ResponseBody
+	public void updateNews(@RequestParam String jsonObjString) {
 		logger.info("entering... /events/news/update");
 		
 
-        JSONObject ic_job= new JSONObject(itemJSONString);
+        JSONObject ic_job= new JSONObject(jsonObjString);
    
         News news = new News();
 //      news.setGlobalId(ic_job.getLong("globalId"));
@@ -510,32 +511,26 @@ public class NewsAcpController {
         logger.info("news = "+news);
           
 		/* business logic*/
-        //long itemId = itemService.createItem(ic); 
         newsService.updateNews(news);
 		
-        /* initial settings */
-		ModelAndView mav = new ModelAndView();
-//      Map<String, Object> model = mav.getModel();
-//      model.put("news", news);
-        String viewName = "event/event_news_list";
-		mav.setViewName(viewName);		
-		
 		logger.info("leaving... /events/news/update");
-		return mav;		
+		return ;		
 	}
+	
 	
 	/**
 	 * update news objects in group
-	 * @param itemJSONString news object to update in JSON format
-	 * @return data and target view
+	 * @param eventUUIDArray
+	 * @param newsStatus
+	 * @return
 	 */
 	@RequestMapping(value="/updategroup",produces="application/json")
 	@ResponseBody
-	public Map<String,Object> updateGroupNews(
+	public void updateGroupNews(
 			@RequestParam String eventUUIDArray,
 			@RequestParam int newsStatus
 			) {
-		logger.info("entering /events/updateNewsGroup");
+		logger.info("entering... /events/news/updategroup");
 		
    
         List<News> newsList = new ArrayList<News>();
@@ -554,11 +549,8 @@ public class NewsAcpController {
 		/* business logic*/
         newsService.updateNewsGroup(newsList);
         
-        /* initial settings */
-		ModelAndView mav = new ModelAndView();
-        Map<String, Object> model = mav.getModel();
-		logger.info("leaving /events/updateNewsGroup");
-		return model;		
+		logger.info("leaving... /events/news/updategroup");
+		return ;		
 	}
 	
 	
@@ -597,9 +589,9 @@ public class NewsAcpController {
 	 * @param eventUUID eventUUID
 	 * @return data and target view
 	 */
-	@RequestMapping(value="/events/deleteNews",produces="application/json")
-	public ModelAndView deleteNews(@RequestParam String eventUUID) {
-		logger.info("entering /events/eventsNewsDelete");
+	@RequestMapping(value="/delete",produces="application/json")
+	public void deleteNews(@RequestParam String eventUUID) {
+		logger.info("entering... /events/news/delete");
         
         //data
         News news = new News();
@@ -609,14 +601,8 @@ public class NewsAcpController {
 		/* business logic*/
         newsService.deleteNews(news);
         
-        /* initial settings */
-		ModelAndView mav = new ModelAndView();
-        Map<String, Object> model = mav.getModel();
-        String viewName = "event/event_news_delete";
-		mav.setViewName(viewName);
-		
-        logger.info("leaving /events/eventsNewsDelete");
-		return mav;		
+        logger.info("leaving... /events/news/delete");
+		return ;		
 	}
 	
 	
@@ -699,7 +685,7 @@ public class NewsAcpController {
 			String eventStatusKey = eventStatusPair[0];
 			String eventStatus = eventStatusPair[1];
 			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
-			field8 = "<a href='/acp/events/"+getAction(actionName)+"?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> "+actionName+"</a>";
+			field8 = "<a href='/acp/events/news"+getAction(actionName)+"?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> "+actionName+"</a>";
 			
 			//logger.info("field8="+field8);
 			
@@ -781,10 +767,10 @@ public class NewsAcpController {
 		String action = "";
 		switch(actionName){
 		case ACTION_EDIT:
-			action = "eventsNewsEdit";
+			action = "/edit.html";
 			break;
 		case ACTION_DELETE:
-			action = "deleteNews";
+			action = "/delete.html";
 			break;
 		}
 		return action;

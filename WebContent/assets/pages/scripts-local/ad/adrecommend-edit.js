@@ -227,7 +227,6 @@ function resetAdRecommend(){
 /* adrecommend - button:save change,update */
 function updateAdRecommend() {
     var businessObject = getBusinessObject();
-	
     var param = JSON.stringify(businessObject);
     
     //execute saving
@@ -263,7 +262,7 @@ function updateAdRecommendAndContinue() {
     $.ajax({
         type    :	"post",
         url		:	"your_controller_name",
-        data	:	"itemJSONString="+param,
+        data	:	"jsonObjString="+param,
         dataType:	"html",
         timeout :	30000,
         

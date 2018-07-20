@@ -6,7 +6,6 @@
  */
 
 
-
 /* edit news - init */
 var MemberEdit = function (option) {
 /*
@@ -221,7 +220,7 @@ var MemberEdit = function (option) {
 
 /*edit member - button:back */
 function backToMemberList(){
-	location.href = "/acp/member/member_list.html";
+	location.href = "/acp/member/list.html";
 }
 
 /*edit member - button:reset */
@@ -252,19 +251,19 @@ function resetMember(){
 function updateMember() {
     
     var businessObject = getBusinessObject();
-    //alert(JSON.stringify(businessObject));
-	
+    var param = JSON.stringify(businessObject);
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "/acp/member/update?itemJSONString="+JSON.stringify(businessObject),
-        dataType:    "html",
-        timeout :     30000,
+        type    :	"post",
+        url		:	"/acp/member/update",
+        data	:	"jsonObjString="+param,
+        dataType:	"html",
+        timeout :	30000,
         
         success:function(msg){
 //        	alert("INFO: Updated successfully!");
         	alert("提示: 修改成功!");
-            location.href="/acp/member/member_list.html";
+            location.href="/acp/member/list.html";
         },
         error:function(){
 //            alert("ERROR: Member updating failed.");     
@@ -279,21 +278,23 @@ function updateMember() {
 
 /*edit news - button:save and continue */
 function updateMemberAndContinue() {
-	//alert("Entered updateNewsAndContinue successfully."); 
     var businessObject = getBusinessObject();	//refer to event-news-edit.js
-    //alert(JSON.stringify(businessObject));
-	
+	var param = JSON.stringify(businessObject);
+    
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "updateMember?itemJSONString="+JSON.stringify(businessObject),
-        dataType:    "html",
-        timeout :     30000,
+        type	:	"post",
+        url		:	"/acp/member/update",
+        data	:	"jsonObjString="+param,
+        dataType:	"html",
+        timeout :	30000,
         
         success:function(msg){
+        	alert("提示: 修改成功!");
         	//alert("News updated successfully."); 
         },
         error:function(){
+        	alert("错误: 修改失败，请检查输入重新尝试!");
             alert("ERROR: updating failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
@@ -308,10 +309,10 @@ function markMembersStatusDeleted(acctName) {
 	//alert('entered markNewsStatusDeleted');
    
     $.ajax({
-        type    :    "post",
-        url        : "markMemberStatusDeleted?acctName="+acctName,
-        dataType:    "html",
-        timeout :     30000,
+        type	:	"post",
+        url		:	"markMemberStatusDeleted?acctName="+acctName,
+        dataType:	"html",
+        timeout :	30000,
         
         success:function(msg){
             //update deleted status

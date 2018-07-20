@@ -96,16 +96,16 @@ public class NewsReviewAcpController {
 	/**
 	 * get news review objects in JSON data form, which comply with criteria
 	 * the data for showing in datatable in front-end pages is contained in a 2-dimension array
-	 * @param itemJSONString search criteria object in JSON format
+	 * @param jsonObjString search criteria object in JSON format
 	 * @return a map structure containing data rendered to views
 	 */
 	@RequestMapping(value="/newsReviewSearchFilterData",produces="application/json")
 	@ResponseBody
-	public Map<String, Object> getDataSearchNewsReviewByFilter(@RequestParam String itemJSONString){
+	public Map<String, Object> getDataSearchNewsReviewByFilter(@RequestParam String jsonObjString){
 		logger.info("entering /events/newsReviewSearchFilterData");
 		
 		
-		JSONObject jobj= new JSONObject(itemJSONString);
+		JSONObject jobj= new JSONObject(jsonObjString);
 		
 		String where1 = jobj.getString("eventReviewNo").trim();
 		
@@ -222,12 +222,12 @@ public class NewsReviewAcpController {
 
 	/**
 	 * update news review object
-	 * @param itemJSONString news object to update in JSON format
+	 * @param jsonObjString news object to update in JSON format
 	 * @return data and target view
 	 */
 	@RequestMapping(value="/review/update",method=RequestMethod.POST)
 	@ResponseBody
-	public void updateNewsReview(@RequestParam String itemJSONString) {
+	public void updateNewsReview(@RequestParam String jsonObjString) {
 		logger.info("entering /events/review/update");
 		
 		/* initial settings */
@@ -235,7 +235,7 @@ public class NewsReviewAcpController {
 		
 		//set model
 //        Map<String, Object> model = mav.getModel();
-        JSONObject ic_job= new JSONObject(itemJSONString);
+        JSONObject ic_job= new JSONObject(jsonObjString);
    
         EventReview newsReview = new EventReview();
 //        newsReview.setGlobalId(ic_job.getLong("globalId"));

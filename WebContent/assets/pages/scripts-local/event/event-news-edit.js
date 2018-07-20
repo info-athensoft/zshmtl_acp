@@ -224,8 +224,8 @@ function updateNews() {
     $.ajax({
         type    :   "post",
         url     :	"/acp/events/update",
-        data	:	"itemJSONString="+param,
-        dataType:   "html",
+        data	:	"jsonObjString="+param,
+//        dataType:   "html",
         timeout :   30000,
         
         success:function(msg){
@@ -382,7 +382,7 @@ function changeMediaName(object,mediaId,eventUUID) {
     $.ajax({
         type	:	"post",
         url		:	"changeMediaName",
-        data	:	"itemJSONString="+param,
+        data	:	"jsonObjString="+param,
         dataType:	"html",
         timeout :	30000,
         
@@ -417,7 +417,7 @@ function changeMediaLabel(object, mediaId, eventUUID) {
     $.ajax({
         type    :	"post",
         url		:	"changeMediaLabel",
-        data	:	"itemJSONString="+param,
+        data	:	"jsonObjString="+param,
         dataType:	"json",
         timeout :	30000,
         
@@ -451,7 +451,7 @@ function changeSortNumber(object,mediaId,eventUUID) {
     $.ajax({
         type    :	"post",
         url		:	"changeSortNumber",
-        data	:	"itemJSONString="+param,
+        data	:	"jsonObjString="+param,
         dataType:	"html",
         timeout :	30000,
         
@@ -499,5 +499,5 @@ function filterSearchReview(){
     		eventReviewStatus	:   p5
     };
     var dt = $("#datatable_reviews").DataTable();
-    var x = dt.ajax.url("newsReviewSearchFilterData?itemJSONString="+JSON.stringify(eventReviewObject)).load();
+    var x = dt.ajax.url("newsReviewSearchFilterData?jsonObjString="+JSON.stringify(eventReviewObject)).load();
 }

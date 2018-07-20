@@ -31,7 +31,7 @@ function createAdPost() {
     $.ajax({
         type    :	"post",
         url     :	"/acp/ad/adpost/create",
-        data	:	"itemJSONString="+param,
+        data	:	"jsonObjString="+param,
         dataType:	"json",
         timeout :	30000,
         

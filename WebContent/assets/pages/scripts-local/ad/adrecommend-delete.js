@@ -227,28 +227,27 @@ function resetAdRecommend(){
 /* adrecommend - button:save change,update */
 function deleteAdRecommend() {
     var businessObject = getBusinessObject();
-	
     var param = JSON.stringify(businessObject);
     
     //execute saving
     $.ajax({
-        type    :	"post",
-        url     :	"/acp/ad/adrcmd/delete",
-        contentType	:	"application/json;charset=UTF-8",
+    	contentType	:	"application/json;charset=UTF-8",
+        type    	:	"post",
+        url     	:	"/acp/ad/adrcmd/delete",
         //dataType:    "html",		//DO NOT specify this!
-        data 	: 	param,
-        timeout :	30000,
+        data 		: 	param,
+        timeout 	:	30000,
         
         success:function(msg){
 //        	alert("INFO: Updated successfully!");
         	alert("提示: 删除成功!");
             location.href="/acp/ad/adrcmd/list.html";
         },
-        error:function(){
+        error:function(XMLHttpRequest, textStatus){
 //            alert("ERROR: Member updating failed.");     
             alert("错误: 删除失败，请返回到列表页面，重新尝试");     
         },            
-        complete: function(XMLHttpRequest, textStatus){
+        complete:function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
         }        
     });
@@ -267,8 +266,6 @@ function getBusinessObject(){
 	var p4 = $("#pageName").val();
 	var p5 = $("#rcmdRank").val();
 	var p6 = $("#rcmdStatus").val();
-    
-   
 
 //	validate
     var businessObject =
@@ -300,7 +297,6 @@ function setPageName(){
 //			pageName = "未定义";
 //	}
 	var pageName = $("#pageId option:selected").text();
-	//alert(pageName);
 	$("#pageName").val(pageName);
 	return;
 }

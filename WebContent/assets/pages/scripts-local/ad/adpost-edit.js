@@ -28,10 +28,11 @@ function updateAdPost() {
     
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "/acp/ad/adpost/update?itemJSONString="+param,
-        dataType:    "json",
-        timeout :     30000,
+        type	:	"post",
+        url		:	"/acp/ad/adpost/update",
+        data	:	"jsonObjString="+param,
+        dataType:	"json",
+        timeout :	30000,
         
         success:function(msg){
         	alert("提示: 修改成功!");
@@ -82,7 +83,6 @@ function getAdPostObject(){
 		expireDate	:p5,
 		author		:p6,
 		adpostStatus:p7,
-		
 		adImage		:p8,
 		adUUID		:p9,
 		adLink		:p10,

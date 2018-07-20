@@ -30,15 +30,15 @@ function createNews() {
         type    :   "post",
         url     :	"/acp/events/news/create",
         data	:	"jsonObjString="+param,
-        dataType:   "json",
+//        dataType:   "json",
         timeout :   30000,
         
         success:function(msg){
-        	alert("提示: 新闻创建成功!");
+        	alert("提示: 新增成功!");
         	location.href="/acp/events/news/list.html";
         },
         error:function(XMLHttpRequest, textStatus){
-        	alert("错误: 新闻创建失败，请重新尝试!");     
+        	alert("错误: 新增失败，请重新尝试!");     
 //            alert("ERROR: News creating failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){

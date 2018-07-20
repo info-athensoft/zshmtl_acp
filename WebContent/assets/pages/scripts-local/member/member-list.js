@@ -185,10 +185,10 @@ function filterSearch(){
     var dt = $("#datatable_memberList").DataTable();					//your code
     
     //mended on 2018-0218 for Tomcat 8.5 stricter request charset
-    var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
-    
+    //var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
+    var param = JSON.stringify(businessObject);
     //by Athens Temperorily  comment this
-    var x = dt.ajax.url("/acp/member/searchFilterData?itemJSONString="+encoded_param).load();		//your code
+    var x = dt.ajax.url("/acp/member/search?jsonObjString="+param).load();		//your code
     
 }
 

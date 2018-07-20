@@ -26,7 +26,7 @@ function updateNewsReview() {
     //execute saving
     $.ajax({
         type    :    "post",
-        url        : "/acp/events/review/update?itemJSONString="+JSON.stringify(reviewObject),
+        url        : "/acp/events/review/update?jsonObjString="+JSON.stringify(reviewObject),
         dataType:    "html",
         timeout :     30000,
         
@@ -66,7 +66,7 @@ function updateReviewStatus() {
     //execute saving
     $.ajax({
         type    :    "post",
-        url        : "/acp/events/review/update?itemJSONString="+JSON.stringify(reviewObject),
+        url        : "/acp/events/review/update?jsonObjString="+JSON.stringify(reviewObject),
         //dataType:    "html",
         timeout :     30000,
         

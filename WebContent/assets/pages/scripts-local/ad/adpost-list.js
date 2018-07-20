@@ -105,37 +105,6 @@ var AdPostList = function () {
 
 
 /* list news - button:group update status */
-function groupUpdateStatus2(adUUIDArray,adStatus){
-    alert("adUUIDArray:="+adUUIDArray);
-	
-	var jsonObjString = {
-			adUUIDArray:adUUIDArray,
-			adStatus:adStatus
-	};
-	
-	var param = JSON.stringify(jsonObjString);
-	
-    $.ajax({
-    	async	:	false,
-    	type    :   "post",
-        url     : 	"/acp/ad/adpost/updateGroup",
-        data	:	"adUUIDArray="+adUUIDArray+"&adStatus="+adStatus,
-        timeout :   30000,
-        
-        success:function(msg){
-        	alert("提示: 广告状态批量修改成功!");
-            location.href="/acp/ad/adpost/list.html";
-        },
-        error:function(XMLHttpRequest, textStatus){
-            alert("错误: 广告状态批量修改异常，请重新尝试!");     
-            alert(XMLHttpRequest.status+","+textStatus);
-        },            
-        complete: function(XMLHttpRequest, textStatus){
-        }        
-    });
-}
-
-
 function groupUpdateStatus(adUUIDArray,adStatus){
 	
 	var jsonObjString = {
@@ -145,7 +114,7 @@ function groupUpdateStatus(adUUIDArray,adStatus){
 	
 	var param = JSON.stringify(jsonObjString);
 	
-	alert(param);
+	//alert(param);
 	
     $.ajax({
     	async	:	false,
@@ -161,7 +130,7 @@ function groupUpdateStatus(adUUIDArray,adStatus){
         },
         error:function(XMLHttpRequest, textStatus){
             alert("错误: 广告状态批量修改异常，请重新尝试!");     
-            alert(XMLHttpRequest.status+","+textStatus);
+//            alert(XMLHttpRequest.status+","+textStatus);
         },            
         complete: function(XMLHttpRequest, textStatus){
         }        
@@ -211,7 +180,6 @@ function filterSearch(){
     //mended on 2018-0218 for tomcat 8.5 sticter request charset
     //var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
     var param = JSON.stringify(businessObject); 
-    
     var x = dt.ajax.url("/acp/ad/adpost/search?jsonObjString="+param).load();
 }
 

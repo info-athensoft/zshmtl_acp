@@ -105,7 +105,7 @@ public class NewsMediaAcpController {
 	}
 	
 	@RequestMapping(value="/events/changeMediaName",method=RequestMethod.POST)
-	public ModelAndView changeMediaName(@RequestParam String itemJSONString) {
+	public ModelAndView changeMediaName(@RequestParam String jsonObjString) {
 		
 		logger.info("entering /events/changeMediaName");
 		
@@ -114,7 +114,7 @@ public class NewsMediaAcpController {
 		
 		//set model
 //      Map<String, Object> model = mav.getModel();
-        JSONObject ic_job= new JSONObject(itemJSONString);
+        JSONObject ic_job= new JSONObject(jsonObjString);
    
 //      News news = new News();
 //      news.setGlobalId(ic_job.getLong("globalId"));
@@ -140,13 +140,13 @@ public class NewsMediaAcpController {
 	
 	@RequestMapping(value="/events/changeMediaLabel",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> changeMediaLabel(@RequestParam String itemJSONString) {
+	public Map<String,Object> changeMediaLabel(@RequestParam String jsonObjString) {
 		logger.info("entering /events/changeMediaLabel");
 		
 		
 		//set model
 //      Map<String, Object> model = mav.getModel();
-        JSONObject ic_job= new JSONObject(itemJSONString);
+        JSONObject ic_job= new JSONObject(jsonObjString);
    
 //      News news = new News();
 //      news.setGlobalId(ic_job.getLong("globalId"));
@@ -176,10 +176,10 @@ public class NewsMediaAcpController {
 	
 	@RequestMapping(value="/events/changeSortNumber",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> changeSortNumber(@RequestParam String itemJSONString) {
+	public Map<String,Object> changeSortNumber(@RequestParam String jsonObjString) {
 		logger.info("entering /events/changeSortNumber");
 
-        JSONObject ic_job= new JSONObject(itemJSONString);
+        JSONObject ic_job= new JSONObject(jsonObjString);
    
 //      News news = new News();
 //      news.setGlobalId(ic_job.getLong("globalId"));

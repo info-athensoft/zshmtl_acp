@@ -27,22 +27,22 @@ function createAdRecommend() {
     	return;
     }*/
     
-    
-    
     //execute saving
     $.ajax({
-    	async	: false,
-    	type    :"post",
-        url     :"/acp/ad/adrcmd/create",
-        data	:"jsonObjString="+param,
-        dataType: "json",
-        timeout : 30000,
+    	async	:	false,
+    	type    :	"post",
+        url     :	"/acp/ad/adrcmd/create",
+        data	:	"jsonObjString="+param,
+        dataType:	"json",
+        timeout :	30000,
         
         success:function(msg){
+        	alert("提示：新增成功！");
         	location.href="/acp/ad/adrcmd/list.html";
         },
         error:function(){
-            alert("ERROR: AdRcmd creating failed.");     
+        	alert("错误：新增失败，请重新尝试！");
+//            alert("ERROR: AdRcmd creating failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication

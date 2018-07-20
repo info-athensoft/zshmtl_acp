@@ -301,10 +301,10 @@ public class AdPostController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
-	public void createAdPost(@RequestParam String itemJSONString) {
+	public void createAdPost(@RequestParam String jsonObjString) {
 		logger.info("entering /ad/adpost/create");
 
-		JSONObject jsonObj = new JSONObject(itemJSONString);
+		JSONObject jsonObj = new JSONObject(jsonObjString);
 
 		AdPost adpost = new AdPost();
 		adpost.setAdType(jsonObj.getInt("adType"));
@@ -346,10 +346,10 @@ public class AdPostController {
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public void updateAdPost(@RequestParam String itemJSONString) {
+	public void updateAdPost(@RequestParam String jsonObjString) {
 		logger.info("entering /ad/adpost/update");
 
-		JSONObject jsonObj = new JSONObject(itemJSONString);
+		JSONObject jsonObj = new JSONObject(jsonObjString);
 
 		AdPost adpost = new AdPost();
 		adpost.setAdType(jsonObj.getInt("adType"));

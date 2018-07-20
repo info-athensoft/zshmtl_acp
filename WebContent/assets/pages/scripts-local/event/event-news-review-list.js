@@ -181,7 +181,7 @@ function filterSearch(){
     //mended on 2018-0218 for tomcat 8.5 sticter request charset
     var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
     
-    var x = dt.ajax.url("newsSearchFilterData?itemJSONString="+encoded_param).load();
+    var x = dt.ajax.url("newsSearchFilterData?jsonObjString="+encoded_param).load();
     
     
 }

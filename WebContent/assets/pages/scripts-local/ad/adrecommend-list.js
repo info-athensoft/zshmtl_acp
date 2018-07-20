@@ -128,7 +128,8 @@ function groupUpdateStatus(adUUIDArray,adStatus){
             location.href="/acp/ad/adrcmd/list.html";
         },
         error:function(XMLHttpRequest, textStatus){
-            alert("ERROR: adrcommend updating failed.");     
+        	alert("错误: 修改失败，请重新尝试!");
+//            alert("ERROR: adrcommend updating failed.");     
         },            
         complete:function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -170,11 +171,11 @@ function filterSearch(){
 //	validate
     var businessObject =
     {
-    		adUUID:p1,
-    		pageId:p2,
-    		pageName:p3,
-    		rcmdRank:p4,
-    		rcmdStatus:p5
+		adUUID:p1,
+		pageId:p2,
+		pageName:p3,
+		rcmdRank:p4,
+		rcmdStatus:p5
     };
 
     var dt = $("#datatable_adRecommendList").DataTable();

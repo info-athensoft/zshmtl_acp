@@ -118,17 +118,50 @@ function groupDeleteNews(eventUUIDArray,newsStatus){
         timeout :	30000,
         
         success:function(msg){
+        	alert("提示: 删除成功!");
             location.href="/acp/events/deletelist.html";
         	//alert("INFO: News status updated.");
         },
         error:function(){
-            alert("ERROR: News deleting failed.");     
+        	alert("错误: 删除失败，请重新尝试!");
+//            alert("ERROR: News deleting failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
         }        
     });
 }
+
+
+/* remove news - button:group delete news permanently */
+function deleteNews(){
+	
+	var eventUUID = $("#eventUUID").val();
+	
+    //execute deleting
+    $.ajax({
+        type    :	"post",
+        url     :	"/acp/events/news/delete",
+        data	:	"eventUUID="+eventUUID,
+//        dataType:	"json",
+        timeout :	30000,
+        
+        success:function(msg){
+        	alert("提示: 删除成功!");
+            location.href="/acp/events/deletelist.html";
+        	//alert("INFO: News status updated.");
+        },
+        error:function(){
+        	alert("错误: 删除失败，请重新尝试!");
+//            alert("ERROR: News deleting failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
+            //reset to avoid duplication
+        }        
+    });
+}
+
+
 
 
 /* list news - datatable:button:filter search */
@@ -177,10 +210,8 @@ function filterSearch(){
     };
 
     var dt = $("#datatable_eventNewsList").DataTable();
-    
-    var x = dt.ajax.url("newsDeleteSearchFilterData?itemJSONString="+JSON.stringify(businessObject)).load();
-    
-    
+    var param = JSON.stringify(businessObject);
+    var x = dt.ajax.url("/acp/events/news/deletesearch?jsonObjString="+param).load();
 }
 
 
