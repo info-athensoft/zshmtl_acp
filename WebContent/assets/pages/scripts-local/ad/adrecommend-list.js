@@ -118,18 +118,19 @@ function groupUpdateStatus(adUUIDArray,adStatus){
     //execute saving
     $.ajax({
         type    :	"post",
-        url     :	"/acp/ad/adrcmd/updateGroup",		
+        url     :	"/acp/ad/adrcmd/updategroup",		
         data	:	param,
         dataType:   "json",
         timeout :   30000,
         
         success:function(msg){
+        	alert("提示: 修改成功!");
             location.href="/acp/ad/adrcmd/list.html";
         },
-        error:function(){
+        error:function(XMLHttpRequest, textStatus){
             alert("ERROR: adrcommend updating failed.");     
         },            
-        complete: function(XMLHttpRequest, textStatus){
+        complete:function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
         }        
     });

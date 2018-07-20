@@ -232,21 +232,21 @@ function updateAdRecommend() {
     
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "/acp/ad/adrcmd/update",
-        contentType	:	"application/json;charset=UTF-8",
-        //dataType:    "html",		//DO NOT specify this!
-        data : 	param,
-        timeout :     30000,
+    	contentType	:	"application/json;charset=UTF-8",
+        type		:	"post",
+        url			:	"/acp/ad/adrcmd/update",
+        data		:	param,
+      //dataType	:	"html",		//DO NOT specify this!
+        timeout 	:	30000,
         
         success:function(msg){
-//        	alert("INFO: Updated successfully!");
         	alert("提示: 修改成功!");
+//        	alert("INFO: Updated successfully!");
             location.href="/acp/ad/adrcmd/list.html";
         },
         error:function(){
-//            alert("ERROR: Member updating failed.");     
-            alert("错误: 修改失败，请返回到列表页面，重新尝试");     
+            alert("错误: 修改失败，请重新尝试!");  
+//          alert("ERROR: Member updating failed."); 
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -258,19 +258,22 @@ function updateAdRecommend() {
 /*edit adrecommend - button:save and continue */
 function updateAdRecommendAndContinue() {
     var businessObject = getBusinessObject();	//refer to event-news-edit.js
-	
+	var param = JSON.stringify(businessObject);
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "your_controller_name?itemJSONString="+JSON.stringify(businessObject),	//TODO FIXME
-        dataType:    "html",
-        timeout :     30000,
+        type    :	"post",
+        url		:	"your_controller_name",
+        data	:	"itemJSONString="+param,
+        dataType:	"html",
+        timeout :	30000,
         
         success:function(msg){
+        	alert("提示: 修改成功!");
         	//alert("updated successfully."); 
         },
         error:function(){
-            alert("ERROR: AdRecommend updating failed.");     
+        	alert("错误: 修改失败，请重新尝试!");
+//            alert("ERROR: AdRecommend updating failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -291,8 +294,6 @@ function getBusinessObject(){
 	var p4 = $("#pageName").val();
 	var p5 = $("#rcmdRank").val();
 	var p6 = $("#rcmdStatus").val();
-    
-   
 
 //	validate
     var businessObject =

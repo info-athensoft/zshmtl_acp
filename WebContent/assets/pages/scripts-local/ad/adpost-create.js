@@ -10,9 +10,10 @@ function backToAdPostList(){
 
 /* create adpost - button:save change,create */
 function createAdPost() {
-    //alert(JSON.stringify(businessObject));
-    var businessObject = getAdPostObject();
     
+	var businessObject = getAdPostObject();
+	var param = JSON.stringify(businessObject);
+	
     /* validating by business rule */
     /*
     var eventTitle = businessObject.title;
@@ -26,16 +27,16 @@ function createAdPost() {
     	return;
     }*/
     
-    var param = JSON.stringify(businessObject);
-    
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "/acp/ad/adpost/create?itemJSONString="+JSON.stringify(businessObject),
-        dataType:    "json",
-        timeout :     30000,
+        type    :	"post",
+        url     :	"/acp/ad/adpost/create",
+        data	:	"itemJSONString="+param,
+        dataType:	"json",
+        timeout :	30000,
         
         success:function(msg){
+        	alert("提示: 广告创建成功!");
         	location.href="/acp/ad/adpost/list.html";
         },
         error:function(XMLHttpRequest, textStatus){

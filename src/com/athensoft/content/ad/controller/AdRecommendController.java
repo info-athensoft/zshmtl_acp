@@ -1,7 +1,6 @@
 package com.athensoft.content.ad.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.athensoft.content.ad.controller.AdPostController.AdPostGroup;
 import com.athensoft.content.ad.entity.AdAction;
-import com.athensoft.content.ad.entity.AdPost;
 import com.athensoft.content.ad.entity.AdRecommend;
 import com.athensoft.content.ad.service.AdRecommendService;
 
@@ -188,10 +185,10 @@ public class AdRecommendController {
 		return;
 	}
 	
-	@RequestMapping(value = "/updateGroup", method=RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/updategroup", method=RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public void updateGroupAdPost(@RequestBody AdRecommendGroup adRecommendGroup) {
-		logger.info("entering... /ad/adrcmd/updateGroup");
+		logger.info("entering... /ad/adrcmd/updategroup");
 		
 		List<String> adUUIDs = adRecommendGroup.getAdUUIDArray();
 		int adStatus = adRecommendGroup.getAdStatus();
@@ -213,7 +210,7 @@ public class AdRecommendController {
 		adRecommendService.updateGroupAdRecommend(adRecommendList);
 
 
-		logger.info("leaving... /ad/adrcmd/updateGroup");
+		logger.info("leaving... /ad/adrcmd/updategroup");
 		return ;
 	}
 

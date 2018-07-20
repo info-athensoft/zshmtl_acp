@@ -37,7 +37,7 @@ var EventNewsDelete = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "/acp/events/eventsNewsDeleteData", // ajax source
+                    "url": "/acp/events/news/deletelist", // ajax source
                     //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
                     //"dataSrc": "data"
                 },
@@ -111,13 +111,14 @@ function groupDeleteNews(eventUUIDArray,newsStatus){
 	
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "deleteNewsGroup?eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
-        dataType:    "json",
-        timeout :     30000,
+        type    :	"post",
+        url     :	"/acp/events/news/deletegroup",
+        data	:	"eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
+        dataType:	"json",
+        timeout :	30000,
         
         success:function(msg){
-            location.href="eventsNewsDelete";
+            location.href="/acp/events/deletelist.html";
         	//alert("INFO: News status updated.");
         },
         error:function(){

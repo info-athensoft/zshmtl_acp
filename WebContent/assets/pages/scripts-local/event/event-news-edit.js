@@ -2,11 +2,7 @@
  * 
  *  images upload processing
  * 
- * 
  */
-
-
-
 /* edit news - init */
 var EventNewsEdit = function (option) {
 
@@ -88,21 +84,17 @@ var EventNewsEdit = function (option) {
                 	var eventUUID = option;
                 	//refresh tab_images when uploading done
                 	reloadEventMedia(eventUUID);
-                	
                 }
             }
         });
-
         
         uploader.setOption('url','/acp/events/fileUploadAndCreateRecord?eventUUID='+option);
         uploader.init();
-
     }
 
     var handleReviews = function () {
-    	
     	var eventUUID = $("#eventUUID").val();
-    	console.log("option eventUUID="+eventUUID);
+    	//console.log("option eventUUID="+eventUUID);
     	
         var grid = new Datatable();
 
@@ -207,7 +199,6 @@ var EventNewsEdit = function (option) {
         //main function to initiate the module
         init: function (option) {
             initComponents();
-
             handleImages(option);
             handleReviews();
             //handleHistory();
@@ -220,28 +211,30 @@ var EventNewsEdit = function (option) {
 
 /*edit news - button:back */
 function backToNewsList(){
-	location.href = "/acp/events/eventsNewsList";
+	location.href = "/acp/events/news/list.html";
 }
 
 
 /* event news - button:save change,update */
 function updateNews() {
-    
     var businessObject = getBusinessObject();
-    //alert(JSON.stringify(businessObject));
+	var param = JSON.stringify(businessObject)
 	
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "updateNews?itemJSONString="+JSON.stringify(businessObject),
-        dataType:    "html",
-        timeout :     30000,
+        type    :   "post",
+        url     :	"/acp/events/update",
+        data	:	"itemJSONString="+param,
+        dataType:   "html",
+        timeout :   30000,
         
         success:function(msg){
-            location.href="eventsNewsList";
+        	alert("提示: 修改成功!");
+            location.href="/acp/events/list.html";
         },
-        error:function(){
-            alert("ERROR: News updating failed.");     
+        error:function(XMLHttpRequest, textStatus){
+        	alert("错误: 修改失败，请重新尝试!");
+//            alert("ERROR: News updating failed."); 
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -264,10 +257,12 @@ function updateNewsAndContinue() {
         timeout :     30000,
         
         success:function(msg){
+        	alert("提示: 修改成功!");
         	//alert("News updated successfully."); 
         },
-        error:function(){
-            alert("ERROR: News updating failed.");     
+        error:function(XMLHttpRequest, textStatus){
+        	alert("错误: 修改失败，请重新尝试!");
+//            alert("ERROR: News updating failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -281,16 +276,16 @@ function markNewsStatusDeleted(eventUUID) {
 	//alert('entered markNewsStatusDeleted');
    
     $.ajax({
-        type    :    "post",
-        url        : "markNewsStatusDeleted?eventUUID="+eventUUID,
-        dataType:    "html",
-        timeout :     30000,
+        type    :	"post",
+        url		:	"markNewsStatusDeleted?eventUUID="+eventUUID,
+        dataType:	"html",
+        timeout	:	30000,
         
         success:function(msg){
-//            //update deleted status
+        	//update deleted status
         	//alert('update deleted status successfully.');
         },
-        error:function(xhr, status, error){
+        error:function(XMLHttpRequest, textStatus, error){
 //            alert("ERROR: Sort Number updating failed."); 
 //        	  alert(xhr.responseText);
         },            
@@ -305,8 +300,6 @@ function markNewsStatusDeleted(eventUUID) {
 /*edit news - tab:images */
 function setCoverMedia(mediaId, eventUUID) {
 	//alert('ENTERING setCoverMedia='+mediaId+"    "+eventUUID);
-//    var businessObject = getBusinessObject();
-//    alert(JSON.stringify(businessObject));
 	
     $.ajax({
         type    :    "post",
@@ -348,13 +341,14 @@ function setCoverMedia(mediaId, eventUUID) {
 			str = str + '</tbody></table>';
 			$("#event-media-table").html(str);
 			
-			alert("封面图设置成功");
+			alert("提示：封面图设置成功!");
 			
 			//console.log(str);
 			//location.reload();
         },
-        error:function(){
-            alert("ERROR: Set Cover Media failed.");     
+        error:function(XMLHttpRequest, textStatus){
+        	alert("错误: 封面图设置失败，请重新尝试！");     
+//            alert("ERROR: Set Cover Media failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
         	//alert("封面图已设定");
@@ -366,64 +360,8 @@ function setCoverMedia(mediaId, eventUUID) {
 
 /*edit news - tab:images */
 function reloadEventMedia(eventUUID){
-	
-	
 	//alert("RELOADING...");
 	location.reload();
-	
-	/*
-	
-	$.ajax({
-        type    :    "post",
-        url        : "reloadEventMedia?eventUUID="+eventUUID,
-        dataType:    "json",
-        timeout :     30000,
-        
-        success:function(msg){
-        	
-        	var t = $("#tabs_event").tabs({active:2});
-        	
-        	//$("#tabs_event").tabs({ active: 2 });
-        	var mydata = msg.eventMediaList;
-        	//alert(data);
-        	
-        	
-        	var str = '<table class="table table-bordered table-hover"><thead>'
-					+ '<tr role="row" class="heading">'
-					+ '<th width="8%">Image</th>'
-					+ '<th width="20%">Label</th>'
-					+ '<th width="8%">Sort Number</th>'
-					+ '<th width="15%">Post Time</th>'
-					+ '<th width="10%">Primary Media</th>'
-					+ '<th width="10%">Action</th></tr>'
-					+ '</thead><tbody>';
-			
-		    for(var index in mydata){
-				var i = index;
-				
-				str = str+ '<tr>'
-				+'<td><a href="/acp/assets/admin/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">'
-				+	'<img class="img-responsive" src="/acp/assets/admin/pages/media/works/img1.jpg" alt=""></a></td>'
-				+'<td><input type="text" class="form-control" name="mediaName" value="'+mydata[i].mediaName+'"></td>'
-				+'<td><input type="text" class="form-control" name="sortNumber" value="'+mydata[i].sortNumber+'"></td>'
-				+'<td><input type="text" class="form-control" name="postTimestamp" value="'+mydata[i].postTimestamp+'"></td>'
-				+'<td><input type="text" class="form-control" name="primaryMedia" value="'+mydata[i].primaryMedia+'" disabled="disabled"><div><a href="javascript:;" onclick="setCoverMedia('+mydata[i].mediaId+',\''+mydata[i].eventUUID+'\');return false;" class="btn default btn-sm"><i class="fa fa-edit"></i> Set Cover </a></div></td>'
-				+'<td><a href="javascript:;" class="btn default btn-sm"><i class="fa fa-times"></i> Remove </a></td>'
-				+'</tr>';
-			}
-			    
-			str = str + '</tbody></table>';
-			$("#event-media-table").html(str);
-			//alert(str);
-        },
-        error:function(){
-            alert("ERROR: Reload Media failed.");     
-        },            
-        complete: function(XMLHttpRequest, textStatus){
-        	
-        }        
-    });
-    */
 }
 
 
@@ -438,21 +376,22 @@ function changeMediaName(object,mediaId,eventUUID) {
 			eventUUID  :    eventUUID,
 			mediaName :    mediaName
     };
+	
+	var param = JSON.stringify(mediaObject);
    
     $.ajax({
-        type    :    "post",
-        url        : "changeMediaName?itemJSONString="+JSON.stringify(mediaObject),
-        dataType:    "html",
-        timeout :     30000,
+        type	:	"post",
+        url		:	"changeMediaName",
+        data	:	"itemJSONString="+param,
+        dataType:	"html",
+        timeout :	30000,
         
         success:function(msg){
-//            location.href="";
-        	alert("修改成功");
+        	alert("提示：修改成功！");
         },
-        error:function(xhr, status, error){
-        	alert("修改失败");
+        error:function(XMLHttpRequest, textStatus, error){
+        	alert("错误：修改失败！");
 //            alert("ERROR: Sort Number updating failed."); 
-//        	  alert(xhr.responseText);
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -462,7 +401,7 @@ function changeMediaName(object,mediaId,eventUUID) {
 
 
 /*edit news - tab:images */
-function changeMediaLabel(object,mediaId,eventUUID) {
+function changeMediaLabel(object, mediaId, eventUUID) {
 	//alert(object);
 	var mediaLabel = object.value;
 
@@ -472,21 +411,22 @@ function changeMediaLabel(object,mediaId,eventUUID) {
 			eventUUID  :    eventUUID,
 			mediaLabel :    mediaLabel
     };
-   
+	
+	var param = JSON.stringify(mediaObject);
+	
     $.ajax({
-        type    :    "post",
-        url        : "changeMediaLabel?itemJSONString="+JSON.stringify(mediaObject),
-        dataType:    "json",
-        timeout :     30000,
+        type    :	"post",
+        url		:	"changeMediaLabel",
+        data	:	"itemJSONString="+param,
+        dataType:	"json",
+        timeout :	30000,
         
         success:function(msg){
-//            location.href="";
-        	alert("修改成功");
+        	alert("提示：修改成功！");
         },
-        error:function(xhr, status, error){
-        	alert("修改失败");
+        error:function(XMLHttpRequest, textStatus, error){
+        	alert("错误：修改失败，请重新尝试！");
 //            alert("ERROR: Sort Number updating failed."); 
-//        	  alert(xhr.responseText);
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -499,29 +439,28 @@ function changeMediaLabel(object,mediaId,eventUUID) {
 function changeSortNumber(object,mediaId,eventUUID) {
 	//alert(object);
 	var sortNumber = object.value;
-//    alert("sortNumber="+sortNumber+", mediaId="+mediaId+", eventUUID="+eventUUID);
 	var mediaObject =
     {
 			mediaId    :    mediaId,
 			eventUUID  :    eventUUID,
 			sortNumber :    sortNumber
     };
-   
+	
+	var param = JSON.stringify(mediaObject);
+	
     $.ajax({
-        type    :    "post",
-//        url        : "changeSortNumber?mediaId="+mediaId+"&eventUUID="+eventUUID+"&sortNumber="+sortNumber,
-        url        : "changeSortNumber?itemJSONString="+JSON.stringify(mediaObject),
-        dataType:    "html",
-        timeout :     30000,
+        type    :	"post",
+        url		:	"changeSortNumber",
+        data	:	"itemJSONString="+param,
+        dataType:	"html",
+        timeout :	30000,
         
         success:function(msg){
-//            location.href="";
-        	alert("修改成功");
+        	alert("提示：修改成功！");
         },
         error:function(xhr, status, error){
-//            alert("ERROR: Sort Number updating failed."); 
-//        	  alert(xhr.responseText);
-        	alert("修改失败");
+        	alert("错误：修改失败，请重新尝试！");
+//        	alert("ERROR: Sort Number updating failed."); 
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -532,10 +471,6 @@ function changeSortNumber(object,mediaId,eventUUID) {
 
 /*edit news - tab:reviews */
 function filterSearchReview(){
-	
-//	alert("do filterSearchReview()");
-
-	//	create a json object
     var p1 = $("#event_review_no").val();
     var p2a = $("#event_review_date_from").val();
     var p2b = $("#event_review_date_to").val();
@@ -543,8 +478,6 @@ function filterSearchReview(){
     var p4 = $("#event_review_content").val();
     var p5 = $("#event_review_status").val();
 
-//    alert(p2a+"---"+p2b+"  p5="+p5);
-    
 //	validate
     /*
 	if(!isNonNegativeInteger(p6a)){
@@ -565,10 +498,6 @@ function filterSearchReview(){
     		eventReviewContent	:   p4,
     		eventReviewStatus	:   p5
     };
-
     var dt = $("#datatable_reviews").DataTable();
-    
     var x = dt.ajax.url("newsReviewSearchFilterData?itemJSONString="+JSON.stringify(eventReviewObject)).load();
-    
-    
 }

@@ -3,14 +3,14 @@
 
 /* create news - button:back */
 function backToNewsList(){
-	location.href = "/acp/events/eventsNewsList";
+	location.href = "/acp/events/news/list.html";
 }
 
 
 /* create news - button:save change,create */
 function createNews() {
-    //alert(JSON.stringify(businessObject));
     var businessObject = getBusinessObject();
+    var param = JSON.stringify(businessObject);
     
     /* validating by business rule */
     //event title
@@ -27,16 +27,19 @@ function createNews() {
     
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "createNews?itemJSONString="+JSON.stringify(businessObject),
-        dataType:    "html",
-        timeout :     30000,
+        type    :   "post",
+        url     :	"/acp/events/news/create",
+        data	:	"jsonObjString="+param,
+        dataType:   "json",
+        timeout :   30000,
         
         success:function(msg){
-        	location.href="eventsNewsList";
+        	alert("提示: 新闻创建成功!");
+        	location.href="/acp/events/news/list.html";
         },
-        error:function(){
-            alert("ERROR: News creating failed.");     
+        error:function(XMLHttpRequest, textStatus){
+        	alert("错误: 新闻创建失败，请重新尝试!");     
+//            alert("ERROR: News creating failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication

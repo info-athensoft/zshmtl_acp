@@ -102,19 +102,19 @@
 				</a>
 				<ul class="sub-menu">
 					<li>
-						<a href="${webapp_name}/events/eventsNewsList">
+						<a href="${webapp_name}/events/news/list.html">
 						 新闻列表</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/events/eventsNewsCreate">
+						<a href="${webapp_name}/events/news/create.html">
 						新增新闻</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/events/eventsNewsList">
+						<a href="${webapp_name}/events/news/list.html">
 						 修改新闻</a>
 					</li>
 					<li>
-						<a href="${webapp_name}/events/eventsNewsDelete">
+						<a href="${webapp_name}/events/news/deletelist.html">
 						 删除新闻</a>
 					</li>
 				</ul>

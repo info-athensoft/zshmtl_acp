@@ -18,32 +18,32 @@ import com.athensoft.content.ad.service.AdRequestService;
 @RequestMapping("/ad/adrequest")
 public class AdRequestController {
 	private static final Logger logger = Logger.getLogger(AdRequestController.class);
-	
+
 	@Autowired
 	private AdRequestService adRequestService;
-	
-	@RequestMapping(value="/list",produces="application/json")
+
+	@RequestMapping(value = "/list", produces = "application/json")
 	@ResponseBody
-	public Map<String,Object> getDataListAdPost(){
+	public Map<String, Object> getDataListAdRequest() {
 		logger.info("entering... /ad/adrequest/list");
-		
-		//data
+
+		// data
 		List<AdRequest> listAdRequest = adRequestService.getAllAdRequest();
-		logger.info("Length of adrequest entries: "+ listAdRequest==null?"NULL":listAdRequest.size());
-		
+		logger.info("Length of adrequest entries: " + listAdRequest == null ? "NULL" : listAdRequest.size());
+
 		String[][] data = adRequestService.getData(listAdRequest, AdAction.EDIT);
-		
+
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
 		model.put("recordsFiltered", new Integer(5));
 		model.put("data", data);
-		model.put("customActionStatus","OK");
-		model.put("customActionMessage","Data loaded");
-		
+		model.put("customActionStatus", "OK");
+		model.put("customActionMessage", "Data loaded");
+
 		logger.info("leaving... /ad/adrequest/list");
 		return model;
 	}
-	
+
 }

@@ -38,7 +38,7 @@ var EventNewsList = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "/acp/events/eventsNewsListData", // ajax source
+                    "url": "/acp/events/news/list", // ajax source
                     //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
                 },
                 "order": [
@@ -112,19 +112,22 @@ function groupUpdateStatus(eventUUIDArray,newsStatus){
 	
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "updateNewsGroup?eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
-        dataType:    "json",
-        timeout :     30000,
+        type    :   "post",
+        url     :	"/acp/events/news/updategroup",
+        data	:	"eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
+        dataType:   "json",
+        timeout :   30000,
         
         success:function(msg){
-            location.href="eventsNewsList";
+        	alert("提示: 修改成功!");
+            location.href="/acp/events/news/list.html";
         	//alert("INFO: News status updated.");
         },
-        error:function(){
-            alert("ERROR: News updating failed.");     
+        error:function(XMLHttpRequest, textStatus){
+        	alert("错误: 修改失败，请重新尝试!");
+//            alert("ERROR: News updating failed.");     
         },            
-        complete: function(XMLHttpRequest, textStatus){
+        complete:function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
         }        
     });
@@ -134,8 +137,6 @@ function groupUpdateStatus(eventUUIDArray,newsStatus){
 /* list news - datatable:button:filter search */
 function filterSearch(){
 	
-//	alert("do filterSearch()");
-//	create a json object
     var p2 = $("#eventUUID").val();
     var p3 = $("#eventTitle").val();
     var p4 = $("#eventAuthor").val();
@@ -146,7 +147,6 @@ function filterSearch(){
     var p9 = $("#eventClass").val();
     var p10 = $("#eventStatus").val();
 
-//    alert(p5a+" -- "+p5b);
     
 //	validate
 	if(!isNonNegativeInteger(p6a)){
@@ -158,7 +158,6 @@ function filterSearch(){
 		$("#viewNumTo").val("");
 	}
 //	isNonNegativeInteger(p6b);
-//	alert(p5a+" "+p5b);
   
     var businessObject =
     {
@@ -181,9 +180,7 @@ function filterSearch(){
     //mended on 2018-0218 for tomcat 8.5 sticter request charset
     var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
     
-    var x = dt.ajax.url("newsSearchFilterData?itemJSONString="+encoded_param).load();
-    
-    
+    var x = dt.ajax.url("/acp/events/news/search?itemJSONString="+encoded_param).load();
 }
 
 
