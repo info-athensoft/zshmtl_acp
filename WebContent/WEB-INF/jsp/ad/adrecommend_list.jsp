@@ -19,7 +19,7 @@
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8" />
-        <title>Athensoft | Ad - AdPost Listing</title>
+        <title>Athensoft | Ad - AdRecommend List</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
         
@@ -102,11 +102,11 @@
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="${webapp_name}/ad/adrcmd/list.html">广告推荐列表</a>
+								<a href="${webapp_name}/ad/adrcmd/list.html">广告推荐</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">广告推荐</a>
+								<a href="#">广告推荐列表</a>
 							</li>
 						</ul>
                         

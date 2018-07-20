@@ -19,7 +19,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Athensoft | Ad - AdPost Edit</title>
+        <title>Athensoft | Event - Review Edit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="Preview page of Metronic Admin Theme #2 for edit product" name="description" />
@@ -94,11 +94,11 @@
                         <ul class="page-breadcrumb">
 							<li>
 								<i class="fa fa-home"></i>
-								<a href="#">首页</a>
+								<a href="${webapp_name}/index.html">首页</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="${webapp_name}/events/eventsNewsList">新闻系统</a>
+								<a href="${webapp_name}/events/news/list.html">新闻系统</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
@@ -140,7 +140,7 @@
 														<label class="col-md-2 control-label">新闻编号: <span class="required">* </span></label>
 														<div class="col-md-4">
 															<input type="text" class="form-control" id="eventUUID" name="eventUUID" value="${eventReview.eventUUID}" readonly="readonly">
-															<span class="help-block"><a href="${webapp_name}/events/eventsNewsEdit?eventUUID=${eventReview.eventUUID}">点击查看</a></span>
+															<span class="help-block"><a href="${webapp_name}/events/news/edit.html?eventUUID=${eventReview.eventUUID}">点击查看</a></span>
 														</div>
 													</div>
 													

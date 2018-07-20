@@ -19,7 +19,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Athensoft | Ad - AdPost Edit</title>
+        <title>Athensoft | Ad - AdRecommend Edit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="Preview page of Metronic Admin Theme #2 for edit product" name="description" />
@@ -94,15 +94,15 @@
                         <ul class="page-breadcrumb">
 							<li>
 								<i class="fa fa-home"></i>
-								<a href="#">首页</a>
+								<a href="${webapp_name}/acp/index.html">首页</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="${webapp_name}/ad/ad_list.html">广告</a>
+								<a href="${webapp_name}/ad/adrcmd/list.html">广告推荐</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">推荐广告</a>
+								<a href="#">设置推荐广告</a>
 							</li>
 						</ul>
                         

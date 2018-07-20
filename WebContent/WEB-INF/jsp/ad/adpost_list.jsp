@@ -19,7 +19,7 @@
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8" />
-        <title>Athensoft | Ad - AdPost Listing</title>
+        <title>Athensoft | Ad - AdPost List</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
         
@@ -98,11 +98,11 @@
                         <ul class="page-breadcrumb">
 							<li>
 								
-								<a href="#">首页</a>
+								<a href="${webapp_name}/acp/index.html">首页</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="eventsDashboard">广告</a>
+								<a href="${webapp_name}/acp/index.html">广告</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>

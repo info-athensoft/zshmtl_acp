@@ -98,11 +98,11 @@
                         <ul class="page-breadcrumb">
 							<li>
 								
-								<a href="${webapp_name}">首页</a>
+								<a href="${webapp_name}/index.html">首页</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="eventsDashboard">会员管理</a>
+								<a href="${webapp_name}/member/list.html">会员管理</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>

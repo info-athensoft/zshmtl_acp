@@ -13,7 +13,7 @@
         </button>
         <ul class="dropdown-menu" role="menu">
             <li>
-                <a href="${webapp_name}/events/eventsNewsCreate">
+                <a href="${webapp_name}/events/news/create.html">
                     <i class="icon-docs"></i> 新建新闻 </a>
             </li>
             <li>
@@ -21,7 +21,7 @@
                     <i class="icon-tag"></i> 新建广告 </a>
             </li>
             <li>
-                <a href="${webapp_name}/member/member_list.html">
+                <a href="${webapp_name}/member/list.html">
                     <i class="icon-share"></i> 审核会员 </a>
             </li>
             <!-- 

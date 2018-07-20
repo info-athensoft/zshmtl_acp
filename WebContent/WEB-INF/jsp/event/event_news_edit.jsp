@@ -94,15 +94,15 @@
                         <ul class="page-breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="${webapp_name}">首页</a>
+							<a href="${webapp_name}/index.html">首页</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="${webapp_name}/events/eventsNewsList">新闻系统</a>
+							<a href="${webapp_name}/events/news/list.html">新闻系统</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">编辑</a>
+							<a href="#">编辑新闻</a>
 						</li>
 					</ul>
                         

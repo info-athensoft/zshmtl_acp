@@ -94,11 +94,11 @@
                         <ul class="page-breadcrumb">
 							<li>
 								<i class="fa fa-home"></i>
-								<a href="#">首页</a>
+								<a href="${webapp_name}/acp/index.html">首页</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="${webapp_name}/ad/ad_list.html">广告</a>
+								<a href="${webapp_name}/ad/adpost/list.html">广告</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>

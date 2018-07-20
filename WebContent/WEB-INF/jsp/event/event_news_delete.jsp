@@ -99,15 +99,15 @@
                         <ul class="page-breadcrumb">
 							<li>
 								<i class="fa fa-home"></i>
-								<a href="#">Home</a>
+								<a href="${webapp_name}/index.html">首页</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="eventsDashboard">Events</a>
+								<a href="${webapp_name}/events/news/list.html">新闻系统</a>
 								<i class="fa fa-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">News</a>
+								<a href="#">删除新闻</a>
 							</li>
 						</ul>
                         <div class="page-toolbar">
