@@ -149,7 +149,8 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 		sbf.append("event_uuid = :event_uuid");
 
 		String sql = sbf.toString();
-
+		logger.info(sql);
+		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("event_uuid", news.getEventUUID());
 		paramSource.addValue("title", news.getTitle());

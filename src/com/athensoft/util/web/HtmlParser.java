@@ -17,7 +17,7 @@ public class HtmlParser {
 	/**
 	 * 分析结果
 	 */
-	ArrayList<String> hrefList = new ArrayList();
+	ArrayList<String> hrefList = new ArrayList<String>();
 	/**
 	 * 网页编码方式
 	 */

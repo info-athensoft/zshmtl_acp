@@ -50,16 +50,15 @@ public class AdPostService {
 	
 	public String[][] getData(List<AdPost> listObj, String action){
 		int entryLength = listObj.size();
-//		final int COLUMN_NUM = 14;
 		final int COLUMN_NUM = 11;
 		String[][] data = new String[entryLength][COLUMN_NUM];
 		
 		String field0 = "";	//check box
 		String field1 = "";	//global id, adPostId
 		String field2 = "";	//adText -> adTitle
-		String field3 = "";	//adImage
-		String field4 = "";	//adLink
-		String field5 = "";	//adUrl
+//		String field3 = "";	//adImage
+//		String field4 = "";	//adLink
+//		String field5 = "";	//adUrl
 		
 		String field6 = "";	//adType
 		String field7 = "";	//adOwnerId
@@ -103,8 +102,6 @@ public class AdPostService {
 			field12 = "<span class='label label-sm label-"+adPostStatusKey+"'>"+adStatus+"</span>";
 			field13 = "<a href='"+getActionUrl(action)+"?adUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> "+getActionName(action)+"</a>";
 			
-			//logger.info("field8="+field8);
-			
 //			data[i][0] = field0;
 //			data[i][1] = field1;
 //			data[i][2] = field2;
@@ -123,8 +120,7 @@ public class AdPostService {
 			data[i][0] = field0;
 			data[i][1] = field1;
 			data[i][2] = field2;
-			
-			data[i][3] = field6;
+			data[i][3] = field6;	//
 			data[i][4] = field7;
 			data[i][5] = field8;
 			data[i][6] = field9;

@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.athensoft.member.controller.MemberController;
-
 /**
  * A high-level class of event, may have multiple subclasses, represents a message to publish
  * 

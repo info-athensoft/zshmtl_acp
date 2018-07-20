@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.athensoft.content.ad.controller.FileUploadController;
 import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.service.EventMediaService;
 

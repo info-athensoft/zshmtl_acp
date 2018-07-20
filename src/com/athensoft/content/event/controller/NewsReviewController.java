@@ -229,11 +229,6 @@ public class NewsReviewController {
 	public void updateNewsReview(@RequestParam String jsonObjString) {
 		logger.info("entering /events/review/update");
 		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
-		
-		//set model
-//        Map<String, Object> model = mav.getModel();
         JSONObject ic_job= new JSONObject(jsonObjString);
    
         EventReview newsReview = new EventReview();
@@ -248,13 +243,7 @@ public class NewsReviewController {
         logger.info("newsReview = "+newsReview);
           
 		/* business logic*/
-        //long itemId = itemService.createItem(ic); 
-
         eventReviewService.updateEventReviewStatus(newsReview);
-		
-		/* assemble model and view */
-//      String viewName = "events/event_news_list";
-//		mav.setViewName(viewName);		
 		
 		logger.info("leaving /events/review/update");
 		return ;		

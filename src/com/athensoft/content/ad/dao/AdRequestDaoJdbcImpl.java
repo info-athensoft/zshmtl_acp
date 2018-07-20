@@ -14,7 +14,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.athensoft.base.dao.BaseDaoJdbcImpl;
-import com.athensoft.content.ad.controller.AdPostController;
 import com.athensoft.content.ad.entity.AdRequest;
 
 @Repository
@@ -231,7 +230,8 @@ public class AdRequestDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRequestDa
 		sbf.append(" WHERE global_id=:global_id");
 
 		String sql = sbf.toString();
-
+		logger.info(sql);
+		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("acct_name", x.getAcctName());
 		paramSource.addValue("request_phone", x.getRequestPhone());
