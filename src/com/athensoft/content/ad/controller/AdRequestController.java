@@ -24,7 +24,7 @@ public class AdRequestController {
 	
 	@RequestMapping(value="/list",produces="application/json")
 	@ResponseBody
-	public Map<String,Object> getDataAdPostList(){
+	public Map<String,Object> getDataListAdPost(){
 		logger.info("entering... /ad/adrequest/list");
 		
 		//data

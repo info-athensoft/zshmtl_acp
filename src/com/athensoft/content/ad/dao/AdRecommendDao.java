@@ -17,6 +17,8 @@ public interface AdRecommendDao {
 	
 	public int update(AdRecommend adRecommend);
 	
+	public int[] updateBatch(List<AdRecommend> adRecommendList);
+	
 	public int delete(AdRecommend adRecommend);
 	
 }

@@ -30,6 +30,10 @@ public class AdRecommendService {
 		adRecommenDao.update(adRecommend);
 	}
 	
+	public void updateGroupAdRecommend(List<AdRecommend> adRecommendList){
+		adRecommenDao.updateBatch(adRecommendList);
+	}
+	
 	public void deleteAdRecommend(AdRecommend adRecommend){
 		adRecommenDao.delete(adRecommend);
 	}

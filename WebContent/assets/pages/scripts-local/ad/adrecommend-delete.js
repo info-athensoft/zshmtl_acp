@@ -232,12 +232,12 @@ function deleteAdRecommend() {
     
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "/acp/ad/adrcmd/delete",
+        type    :	"post",
+        url     :	"/acp/ad/adrcmd/delete",
         contentType	:	"application/json;charset=UTF-8",
         //dataType:    "html",		//DO NOT specify this!
-        data : 	param,
-        timeout :     30000,
+        data 	: 	param,
+        timeout :	30000,
         
         success:function(msg){
 //        	alert("INFO: Updated successfully!");

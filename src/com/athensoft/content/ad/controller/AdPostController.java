@@ -468,9 +468,6 @@ public class AdPostController {
 		public String toString() {
 			return "AdPostGroup [adUUIDArray=" + adUUIDArray + ", adStatus=" + adStatus + "]";
 		}
-		
-		
-		
 	}
 
 }

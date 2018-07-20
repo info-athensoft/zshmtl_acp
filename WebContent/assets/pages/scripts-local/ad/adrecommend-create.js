@@ -12,9 +12,7 @@ function backToAdRecommendList(){
 function createAdRecommend() {
     //alert(JSON.stringify(businessObject));
     var businessObject = getAdRecommendObject();
-    
-    //alert(businessObject);
-    
+    var param = JSON.stringify(businessObject);
     
     /* validating by business rule */
     /*
@@ -29,14 +27,14 @@ function createAdRecommend() {
     	return;
     }*/
     
-    var param = JSON.stringify(businessObject);
+    
     
     //execute saving
     $.ajax({
     	async	: false,
     	type    :"post",
         url     :"/acp/ad/adrcmd/create",
-        data	:"itemJSONString="+param,
+        data	:"jsonObjString="+param,
         dataType: "json",
         timeout : 30000,
         

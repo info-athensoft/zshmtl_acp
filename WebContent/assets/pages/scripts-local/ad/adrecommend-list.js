@@ -107,15 +107,21 @@ var AdRecommendList = function () {
 
 /* list news - button:group update status */
 function groupUpdateStatus(adUUIDArray,adStatus){
-	//alert("groupUpdateStatus()");
-    //alert(eventUUIDArray+":"+newsStatus);
+	
+	var jsonObjString = {
+		adUUIDArray:adUUIDArray,
+		adStatus:adStatus
+	};
+		
+	var param = JSON.stringify(jsonObjString);
 	
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "/acp/ad/adrcmd/updateGroup?adUUIDArray="+adUUIDArray+"&adStatus="+adStatus,		//FIXME //TODO
-        dataType:    "json",
-        timeout :     30000,
+        type    :	"post",
+        url     :	"/acp/ad/adrcmd/updateGroup",		
+        data	:	param,
+        dataType:   "json",
+        timeout :   30000,
         
         success:function(msg){
             location.href="/acp/ad/adrcmd/list.html";
@@ -160,9 +166,6 @@ function filterSearch(){
     }
     
     
-    
-    
-    
 //	validate
     var businessObject =
     {
@@ -179,7 +182,7 @@ function filterSearch(){
     //var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
     var param = JSON.stringify(businessObject); 
     
-    var x = dt.ajax.url("/acp/ad/adrcmd/searchbyfilter?itemJSONString="+param).load();
+    var x = dt.ajax.url("/acp/ad/adrcmd/search?jsonObjString="+param).load();
 }
 
 

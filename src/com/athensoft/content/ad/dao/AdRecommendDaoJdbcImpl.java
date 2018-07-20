@@ -5,18 +5,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.athensoft.base.dao.BaseDaoJdbcImpl;
+import com.athensoft.content.ad.entity.AdPost;
 import com.athensoft.content.ad.entity.AdRecommend;
 
 @Repository
 @Qualifier("adRecommendDaoJdbcImpl")
 public class AdRecommendDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRecommendDao {
-
+	private static final Logger logger = Logger.getLogger(AdRecommendDaoJdbcImpl.class);
+	
 	private final String TABLE = "ad_recommend";
 
 	@Override
@@ -174,6 +179,27 @@ public class AdRecommendDaoJdbcImpl extends BaseDaoJdbcImpl implements AdRecomme
 		paramSource.addValue("global_id", x.getGlobalId());
 
 		return jdbc.update(sql, paramSource);
+	}
+
+	@Override
+	public int[] updateBatch(List<AdRecommend> adRecommendList) {
+		logger.debug("updateBatch() adRecommendList size=" + adRecommendList == null ? "NULL" : adRecommendList.size());
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("UPDATE ").append(TABLE);
+		sbf.append(" SET");
+		sbf.append(" ad_status=:adStatus");
+		sbf.append(" WHERE ad_uuid =:adUUID");
+		
+		String sql = sbf.toString();
+		
+		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();
+		for (AdRecommend x : adRecommendList) {
+			parameters.add(new BeanPropertySqlParameterSource(x));
+		}
+
+		// jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
+		return jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
 	}
 
 	@Override
