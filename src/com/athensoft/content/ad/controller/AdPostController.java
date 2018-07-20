@@ -88,10 +88,10 @@ public class AdPostController {
 
 	@RequestMapping(value = "/search", produces = "application/json")
 	@ResponseBody
-	public Map<String, Object> getDataSearchAdPost(@RequestParam String itemJSONString) {
+	public Map<String, Object> getDataSearchAdPost(@RequestParam String jsonObjString) {
 		logger.info("entering /ad/adpost/search");
 
-		JSONObject jobj = new JSONObject(itemJSONString);
+		JSONObject jobj = new JSONObject(jsonObjString);
 
 		String where1 = jobj.getString("adUUID");
 		String where2 = jobj.getString("adTitle");
@@ -391,21 +391,17 @@ public class AdPostController {
 
 	@RequestMapping(value = "/updateGroup", method=RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void updateGroupAdPost(@RequestBody AdPostGroup adGroup) {
+	public void updateGroupAdPost(@RequestBody AdPostGroup adPostGroup) {
 		logger.info("entering... /adpost/updateGroup");
 		
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>="+adGroup.toString());
+		List<String> adUUIDs = adPostGroup.getAdUUIDArray();
+		int adStatus = adPostGroup.getAdStatus();
 		
-		List<String> adUUIDs = adGroup.getAdUUIDArray();
-		int adUUIDLength = adUUIDs.size();
-		
-		int adStatus = adGroup.getAdStatus();
-		
+		int adUUIDLength = adUUIDs.size();		
 		List<AdPost> adpostList = new ArrayList<AdPost>();
 
 		for (int i = 0; i < adUUIDLength; i++) {
 			AdPost adpost = new AdPost();
-//			adpost.setAdUUID(adUUIDs[i]);
 			adpost.setAdUUID(adUUIDs.get(i));
 			adpost.setAdStatus(adStatus);
 			adpost.setModifyDate(new Date());

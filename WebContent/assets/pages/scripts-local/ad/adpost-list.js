@@ -137,7 +137,6 @@ function groupUpdateStatus2(adUUIDArray,adStatus){
 
 
 function groupUpdateStatus(adUUIDArray,adStatus){
-   // alert("adUUIDArray:="+adUUIDArray);
 	
 	var jsonObjString = {
 		adUUIDArray:adUUIDArray,
@@ -213,7 +212,7 @@ function filterSearch(){
     //var encoded_param = encodeURIComponent(JSON.stringify(businessObject)); 
     var param = JSON.stringify(businessObject); 
     
-    var x = dt.ajax.url("/acp/ad/adpost/search?itemJSONString="+param).load();
+    var x = dt.ajax.url("/acp/ad/adpost/search?jsonObjString="+param).load();
 }
 
 
