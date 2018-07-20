@@ -68,7 +68,7 @@ var EventNewsEdit = function (option) {
                         $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-success").html('<i class="fa fa-check"></i> Done'); // set successfull upload
                         
                         //create media record to database
-                        alert("图片已上传");
+                        alert("提示：图片已上传");
                         
                     } else {
                         $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-danger").html('<i class="fa fa-warning"></i> Failed'); // set failed upload
@@ -302,10 +302,10 @@ function setCoverMedia(mediaId, eventUUID) {
 	//alert('ENTERING setCoverMedia='+mediaId+"    "+eventUUID);
 	
     $.ajax({
-        type    :    "post",
-        url        : "setCoverMedia?mediaId="+mediaId+"&eventUUID="+eventUUID,
-        dataType:    "json",
-        timeout :     30000,
+        type	:	"post",
+        url		:	"/acp/events/media/setCoverMedia?mediaId="+mediaId+"&eventUUID="+eventUUID,
+        dataType:	"json",
+        timeout :	30000,
         
         success:function(msg){
         	//var t = $("#tabs_event").tabs({active:2});
@@ -333,8 +333,8 @@ function setCoverMedia(mediaId, eventUUID) {
 				+'<td><input type="text" class="form-control" name="mediaName" value="'+mydata[i].mediaLabel+'"></td>'
 				+'<td><input type="text" class="form-control" name="sortNumber" value="'+mydata[i].sortNumber+'"></td>'
 				+'<td><input type="text" class="form-control" name="postTimestamp" value="'+mydata[i].postTimestamp+'"></td>'
-				+'<td><input type="text" class="form-control" name="primaryMedia" value="'+mydata[i].primaryMedia+'" disabled="disabled"><div><a href="javascript:;" onclick="setCoverMedia('+mydata[i].mediaId+',\''+mydata[i].eventUUID+'\');return false;" class="btn default btn-sm"><i class="fa fa-edit"></i> 设为封片 </a></div></td>'
-				+'<td><a href="javascript:;" class="btn default btn-sm"><i class="fa fa-times"></i> 删除 </a></td>'
+				+'<td><input type="text" class="form-control" name="primaryMedia" value="'+mydata[i].primaryMedia+'" disabled="disabled"></td>'
+				+'<td><a href="javascript:;" onclick="setCoverMedia('+mydata[i].mediaId+',\''+mydata[i].eventUUID+'\');return false;" class="btn default btn-sm"><i class="fa fa-edit"></i> 设为封面 </a> <a href="javascript:;" class="btn default btn-sm"><i class="fa fa-times"></i> 删除 </a></td>'
 				+'</tr>';
 			}
 			    
@@ -381,9 +381,9 @@ function changeMediaName(object,mediaId,eventUUID) {
    
     $.ajax({
         type	:	"post",
-        url		:	"changeMediaName",
+        url		:	"/acp/events/media/changeMediaName",
         data	:	"jsonObjString="+param,
-        dataType:	"html",
+//        dataType:	"html",
         timeout :	30000,
         
         success:function(msg){
@@ -416,9 +416,9 @@ function changeMediaLabel(object, mediaId, eventUUID) {
 	
     $.ajax({
         type    :	"post",
-        url		:	"changeMediaLabel",
+        url		:	"/acp/events/media/changeMediaLabel",
         data	:	"jsonObjString="+param,
-        dataType:	"json",
+//        dataType:	"json",
         timeout :	30000,
         
         success:function(msg){
@@ -450,9 +450,9 @@ function changeSortNumber(object,mediaId,eventUUID) {
 	
     $.ajax({
         type    :	"post",
-        url		:	"changeSortNumber",
+        url		:	"/acp/events/media/changeSortNumber",
         data	:	"jsonObjString="+param,
-        dataType:	"html",
+//        dataType:	"html",
         timeout :	30000,
         
         success:function(msg){

@@ -18,186 +18,137 @@ import com.athensoft.content.event.service.EventMediaService;
 
 /**
  * The controller of news media
+ * 
  * @author Athens
  * @version 1.0
  */
 @Controller
+@RequestMapping("/events/media")
 public class NewsMediaAcpController {
 	private static final Logger logger = Logger.getLogger(NewsMediaAcpController.class);
-	
+
 	/**
 	 * EventMedia Service instance
 	 */
 	@Autowired
 	private EventMediaService eventMediaService;
-	
-	
+
 	/**
-	 * set current media to as a cover media and refresh all media objects 
-	 * @param mediaId the mediaId of current media
-	 * @param eventUUID the eventUUID of current event
+	 * set current media to as a cover media and refresh all media objects
+	 * 
+	 * @param mediaId
+	 *            the mediaId of current media
+	 * @param eventUUID
+	 *            the eventUUID of current event
 	 * @return data table of updated media object
 	 */
-	@RequestMapping(value="/events/setCoverMedia",produces="application/json")
+	@RequestMapping(value = "/setCoverMedia", produces = "application/json")
 	@ResponseBody
-	public Map<String,Object> setCoverMedia(
-			@RequestParam long mediaId, 
-			@RequestParam String eventUUID){
-		logger.info("entering /events/setCoverMedia");
-		
-		
-		
-		//data - set cover primary state		
+	public Map<String, Object> setCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID) {
+		logger.info("entering... /events/media/setCoverMedia");
+
+		// data - set cover primary state
 		EventMedia previousPrimaryMedia = eventMediaService.getPrimaryMediaByEventUUID(eventUUID);
-		if (previousPrimaryMedia!=null){
+		if (previousPrimaryMedia != null) {
 			previousPrimaryMedia.setPrimaryMedia(false);
 			eventMediaService.updateEventMedia(previousPrimaryMedia);
 		}
-		
-		logger.info("mediaId="+mediaId+",eventUUID="+eventUUID);
-		
+		logger.info("mediaId=" + mediaId + ",eventUUID=" + eventUUID);
+
 		EventMedia media = eventMediaService.getEventMediaByMediaId(mediaId);
 		media.setPrimaryMedia(true);
 		eventMediaService.updateEventMedia(media);
-		
-		
-		//data - media
+
+		// data - media
 		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
-		logger.info("Length of EventReview entries: "+ listEventMedia.size());
-		
+		logger.info("Length of EventReview entries: " + listEventMedia == null ? "NULL" : listEventMedia.size());
+
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
 		model.put("eventMediaList", listEventMedia);
-		
-//		String viewName = "events/event_news_edit";
-//		mav.setViewName(viewName);
-		
-		logger.info("leaving /events/setCoverMedia");
+
+		logger.info("leaving... /events/media/setCoverMedia");
 		return model;
 	}
-	
-	
-	
+
 	/**
 	 * @param mediaId
 	 * @param eventUUID
 	 * @return
 	 */
-	@RequestMapping(value="/events/reloadEventMedia",produces="application/json")
+	@RequestMapping(value = "/reloadEventMedia", produces = "application/json")
 	@ResponseBody
-	public Map<String,Object> reloadEventMedia(
-			@RequestParam String eventUUID){
-		logger.info("entering /events/reloadEventMedia");
-		
-		//data - media
+	public Map<String, Object> reloadEventMedia(@RequestParam String eventUUID) {
+		logger.info("entering... /events/media/reloadEventMedia");
+
+		// data - media
 		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
-		logger.info("Length of EventReview entries: "+ listEventMedia.size());
-		
-		
+		logger.info("Length of EventReview entries: " + listEventMedia == null ? "NULL" : listEventMedia.size());
+
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
 		model.put("eventMediaList", listEventMedia);
-//		String viewName = "events/event_news_edit";
-//		mav.setViewName(viewName);
-				
-		logger.info("leaving /events/reloadEventMedia");
+
+		logger.info("leaving... /events/media/reloadEventMedia");
 		return model;
 	}
-	
-	@RequestMapping(value="/events/changeMediaName",method=RequestMethod.POST)
-	public ModelAndView changeMediaName(@RequestParam String jsonObjString) {
-		
-		logger.info("entering /events/changeMediaName");
-		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
-		
-		//set model
-//      Map<String, Object> model = mav.getModel();
-        JSONObject ic_job= new JSONObject(jsonObjString);
-   
-//      News news = new News();
-//      news.setGlobalId(ic_job.getLong("globalId"));
-        String mediaId = Integer.toString(ic_job.getInt("mediaId"));
-        String eventUUID = ic_job.getString("eventUUID");
-        String mediaName = ic_job.getString("mediaName");
-                 
-//      logger.info("news = "+news);
-          
-		/* business logic*/
-        //long itemId = itemService.createItem(ic); 
 
-        eventMediaService.changeMediaName(mediaId, eventUUID, mediaName);
-		
-		/* assemble model and view */
-//      model.put("news", news);
-        String viewName = "events/changeSortNumber";
-		mav.setViewName(viewName);		
-		
-		logger.info("leaving /events/changeMediaName");
-		return mav;		
-	}
-	
-	@RequestMapping(value="/events/changeMediaLabel",method=RequestMethod.POST)
+	@RequestMapping(value = "/changeMediaName", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> changeMediaLabel(@RequestParam String jsonObjString) {
-		logger.info("entering /events/changeMediaLabel");
-		
-		
-		//set model
-//      Map<String, Object> model = mav.getModel();
-        JSONObject ic_job= new JSONObject(jsonObjString);
-   
-//      News news = new News();
-//      news.setGlobalId(ic_job.getLong("globalId"));
-        String mediaId = Integer.toString(ic_job.getInt("mediaId"));
-        String eventUUID = ic_job.getString("eventUUID");
-        String mediaLabel = ic_job.getString("mediaLabel");
-                 
-//      logger.info("news = "+news);
-          
-		/* business logic*/
-        //long itemId = itemService.createItem(ic); 
+	public void changeMediaName(@RequestParam String jsonObjString) {
 
-        eventMediaService.changeMediaLabel(mediaId, eventUUID, mediaLabel);
-		
-        /* initial settings */
-		ModelAndView mav = new ModelAndView();
-        
-		/* assemble model and view */
-        //String viewName = "events/changeSortNumber";
-		//mav.setViewName(viewName);		
-		
-		Map<String,Object> model = mav.getModel();
-		
-		logger.info("leaving /events/changeMediaLabel");
-		return model;		
+		logger.info("entering... /events/media/changeMediaName");
+
+		JSONObject ic_job = new JSONObject(jsonObjString);
+
+		// News news = new News();
+		String mediaId = Integer.toString(ic_job.getInt("mediaId"));
+		String eventUUID = ic_job.getString("eventUUID");
+		String mediaName = ic_job.getString("mediaName");
+
+		/* business logic */
+		eventMediaService.changeMediaName(mediaId, eventUUID, mediaName);
+
+		logger.info("leaving... /events/media/changeMediaName");
+		return;
 	}
-	
-	@RequestMapping(value="/events/changeSortNumber",method=RequestMethod.POST)
+
+	@RequestMapping(value = "/changeMediaLabel", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> changeSortNumber(@RequestParam String jsonObjString) {
-		logger.info("entering /events/changeSortNumber");
+	public void changeMediaLabel(@RequestParam String jsonObjString) {
+		logger.info("entering... /events/media/changeMediaLabel");
 
-        JSONObject ic_job= new JSONObject(jsonObjString);
-   
-//      News news = new News();
-//      news.setGlobalId(ic_job.getLong("globalId"));
-        String mediaId = Integer.toString(ic_job.getInt("mediaId"));
-        String eventUUID = ic_job.getString("eventUUID");
-        String sortNumber = ic_job.getString("sortNumber");
-                 
-		/* business logic*/
-        eventMediaService.changeSortNumber(mediaId, eventUUID, sortNumber);
-		
-        /* initial settings */
-		ModelAndView mav = new ModelAndView();
-		Map<String,Object> model = mav.getModel();
-        //String viewName = "events/changeSortNumber";
-		//mav.setViewName(viewName);		
-		
-		logger.info("leaving /events/changeSortNumber");
-		return model;		
+		JSONObject ic_job = new JSONObject(jsonObjString);
+
+		// News news = new News();
+		String mediaId = Integer.toString(ic_job.getInt("mediaId"));
+		String eventUUID = ic_job.getString("eventUUID");
+		String mediaLabel = ic_job.getString("mediaLabel");
+
+		/* business logic */
+		eventMediaService.changeMediaLabel(mediaId, eventUUID, mediaLabel);
+
+		logger.info("leaving... /events/media/changeMediaLabel");
+		return;
 	}
-	
+
+	@RequestMapping(value = "/changeSortNumber", method = RequestMethod.POST)
+	@ResponseBody
+	public void changeSortNumber(@RequestParam String jsonObjString) {
+		logger.info("entering... /events/media/changeSortNumber");
+
+		JSONObject ic_job = new JSONObject(jsonObjString);
+
+		// News news = new News();
+		String mediaId = Integer.toString(ic_job.getInt("mediaId"));
+		String eventUUID = ic_job.getString("eventUUID");
+		String sortNumber = ic_job.getString("sortNumber");
+
+		/* business logic */
+		eventMediaService.changeSortNumber(mediaId, eventUUID, sortNumber);
+
+		logger.info("leaving... /events/media/changeSortNumber");
+		return;
+	}
+
 }

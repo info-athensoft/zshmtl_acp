@@ -44,7 +44,7 @@ public class MemberController {
 	@RequestMapping(value = "/list", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> getDataMemberList() {
-		logger.info("entering /member/memberListData");
+		logger.info("entering /member/list");
 
 		// data
 		List<Member> listMembers = memberService.getAllMembers();
@@ -207,8 +207,8 @@ public class MemberController {
 
 	@RequestMapping(value = "/updategroup", produces = "application/json")
 	@ResponseBody
-	public void updateMemberGroup(@RequestParam String memberArray, @RequestParam int memberStatus) {
-		logger.info("entering /member/updategroup");
+	public void updateGroupMember(@RequestParam String memberArray, @RequestParam int memberStatus) {
+		logger.info("entering... /member/updategroup");
 
 		List<Member> memberList = new ArrayList<Member>();
 		String[] members = memberArray.split(",");

@@ -37,7 +37,7 @@ var MemberList = function () {
                 ],
                 "pageLength": 20, 	// default record count per page
                 "ajax": {
-                    "url": "/acp/member/memberListData", // ajax source
+                    "url": "/acp/member/list", // ajax source
                 },
                 "order": [
                     [1, "asc"]		// set first column as a default sort by asc
@@ -104,17 +104,17 @@ var MemberList = function () {
 
 /* list member - button:group update status */
 function groupUpdateStatus(memberArray,memberStatus){
-	//alert("groupUpdateStatus()");
-    //alert(eventUUIDArray+":"+newsStatus);
 	
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "/acp/member/updateGroup?memberArray="+memberArray+"&memberStatus="+memberStatus,
-        dataType:    "json",
-        timeout :     30000,
+        type    :	"post",
+        url     :	"/acp/member/updategroup",
+        data	:	"memberArray="+memberArray+"&memberStatus="+memberStatus,
+//        dataType:	"json",
+        timeout :   30000,
         
         success:function(msg){
+        	
             location.href="/acp/member/member_list.html";			//should be specified with your destination url
         	//alert("INFO: News status updated.");
         },

@@ -45,10 +45,9 @@ public class NewsReviewAcpController {
 		
 		//data
 		List<EventReview> listEventReview = eventReviewService.getAllEventReview();
-		logger.info("Length of EventReview entries: "+ listEventReview.size());
+		logger.info("Length of EventReview entries: "+ listEventReview==null?"NULL":listEventReview.size());
 		
 		String[][] data = getData(listEventReview);
-		
 		
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
