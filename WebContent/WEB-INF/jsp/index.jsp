@@ -286,7 +286,7 @@
 	                                                            </span>
 	                                                            <ul class="mt-comment-actions">
 	                                                                <li>
-	                                                                    <a href="${webapp_name}/member/member_edit.html?acctName=${member.acctName}"><strong>处理</strong></a>
+	                                                                    <a href="${webapp_name}/member/edit.html?acctName=${member.acctName}"><strong>处理</strong></a>
 	                                                                </li>
 	                                                                <!-- 
 	                                                                <li>
@@ -371,7 +371,7 @@
 	                                                            </span>
 	                                                            <ul class="mt-comment-actions">
 	                                                                <li>
-	                                                                    <a href="${webapp_name}/member/member_edit.html?acctName=${member.acctName}"><strong>处理</strong></a>
+	                                                                    <a href="${webapp_name}/member/edit.html?acctName=${member.acctName}"><strong>处理</strong></a>
 	                                                                </li>
 	                                                                <!-- 
 	                                                                <li>
@@ -611,7 +611,7 @@
 	                                                <div class="item-head">
 	                                                    <div class="item-details">
 	                                                        <img class="item-pic rounded" src="${webapp_name}/assets/layouts/layout2/img/avatar.png">
-	                                                        <a href="${webapp_name}/events/eventsNewsEdit?eventUUID=${review.eventUUID}" class="item-name primary-link">管理该评论</a><br/>
+	                                                        <a href="${webapp_name}/events/news/edit?eventUUID=${review.eventUUID}" class="item-name primary-link">管理该评论</a><br/>
 	                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                                                        <span class="item-label">${review.reviewDatetime}</span>
 	                                                    </div>

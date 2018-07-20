@@ -92,9 +92,8 @@
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
                     <!-- BEGIN THEME PANEL -->
-                    <jsp:include page="${inc_dir}/theme-panel.jsp"></jsp:include>
                     <!-- END THEME PANEL -->
-                    <h1 class="page-title"> Event System <small>manage news</small></h1>
+                    <h1 class="page-title"> 新闻系统 <small>管理新闻、动态和活动</small></h1>
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
 							<li>
@@ -110,6 +109,7 @@
 								<a href="#">删除新闻</a>
 							</li>
 						</ul>
+						<!-- 
                         <div class="page-toolbar">
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
@@ -123,7 +123,7 @@
                                     <li><a href="#"><i class="icon-bag"></i> Separated link</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- END PAGE HEADER-->
                     <div class="row">
@@ -132,19 +132,11 @@
                             <div class="portlet light">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-shopping-cart"></i>News Removing <span class="caption-helper">Permanently delete news, unrecoverable...</span></div>
+                                        	删除新闻 <span class="caption-helper">永久删除新闻</span></div>
                                     <div class="actions">
-                                        <a href="eventsNewsList" class="btn btn-circle btn-info">
-                                            <i class="fa fa-plus"></i><span class="hidden-xs"> Goto News Listing </span>
+                                        <a href="${webapp_name}/events/news/list.html" class="btn btn-circle btn-info">
+                                            <i class="fa fa-plus"></i><span class="hidden-xs"> 返回新闻列表 </span>
                                         </a>
-                                        <div class="btn-group">
-                                            <a class="btn btn-circle btn-default dropdown-toggle" href="javascript:;" data-toggle="dropdown">
-                                                <i class="fa fa-share"></i>
-                                                <span class="hidden-xs"> Tools </span>
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="portlet-body">

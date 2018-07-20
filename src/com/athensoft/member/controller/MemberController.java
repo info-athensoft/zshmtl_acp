@@ -300,10 +300,10 @@ public class MemberController {
 		String action = "";
 		switch (actionName) {
 		case ACTION_EDIT:
-			action = "member_edit.html";
+			action = "edit.html";
 			break;
 		case ACTION_DELETE:
-			action = "deleteMember";
+			action = "delete.html";
 			break;
 		}
 		return action;
