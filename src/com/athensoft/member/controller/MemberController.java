@@ -68,7 +68,7 @@ public class MemberController {
 	@RequestMapping(value = "/search", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> getDataSearchMembers(@RequestParam String jsonObjString) {
-		logger.info("entering /member/search");
+		logger.info("entering... /member/search");
 
 		// get parameters
 		JSONObject jobj = new JSONObject(jsonObjString);
@@ -112,7 +112,7 @@ public class MemberController {
 		model.put("customActionStatus", "OK");
 		model.put("customActionMessage", "OK");
 
-		logger.info("leaving /member/searchFilterData");
+		logger.info("leaving... /member/searchFilterData");
 		return model;
 	}
 

@@ -23,8 +23,8 @@ import com.athensoft.content.event.service.EventReviewService;
  */
 @Controller
 @RequestMapping("/events")
-public class NewsReviewAcpController {
-	private static final Logger logger = Logger.getLogger(NewsReviewAcpController.class);
+public class NewsReviewController {
+	private static final Logger logger = Logger.getLogger(NewsReviewController.class);
 	
 	/**
 	 * EventReview Service instance

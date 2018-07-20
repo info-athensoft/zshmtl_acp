@@ -29,8 +29,8 @@ import com.athensoft.util.id.UUIDHelper;
  */
 @Controller
 @RequestMapping("/events/news")
-public class NewsAcpController {
-	private static final Logger logger = Logger.getLogger(NewsAcpController.class);
+public class NewsController {
+	private static final Logger logger = Logger.getLogger(NewsController.class);
 	
 	private static final String ACTION_EDIT = "±à¼­";
 	private static final String ACTION_DELETE = "É¾³ý";
@@ -457,26 +457,18 @@ public class NewsAcpController {
         JSONObject ic_job= new JSONObject(jsonObjString);
    
         News news = new News();
-//		news.setGlobalId(ic_job.getLong("globalId"));
-//      news.setEventUUID(ic_job.getString("eventUUID"));
-        
-        /* generate event UUID */
         news.setEventUUID(UUIDHelper.getUUID());
         news.setTitle(ic_job.getString("title"));
         news.setAuthor(ic_job.getString("author"));
-          
-//      news.setPostDatetime(new Date(ic_job.getString("postDatetime")));
         news.setPostDatetime(new Date());
         news.setViewNum(ic_job.getInt("viewNum"));
         news.setDescShort(ic_job.getString("descShort"));
         news.setDescLong(ic_job.getString("descLong"));
         news.setEventClass(ic_job.getString("eventClass"));
         news.setEventStatus(ic_job.getInt("eventStatus"));
-          
         logger.info(news);
           
 		/* business logic*/
-        //long itemId = itemService.createItem(ic); 
         newsService.createNews(news);
 		
         logger.info("exiting... /event/news/create");
@@ -497,11 +489,9 @@ public class NewsAcpController {
         JSONObject ic_job= new JSONObject(jsonObjString);
    
         News news = new News();
-//      news.setGlobalId(ic_job.getLong("globalId"));
         news.setEventUUID(ic_job.getString("eventUUID"));
         news.setTitle(ic_job.getString("title"));
         news.setAuthor(ic_job.getString("author"));
-//      news.setPostDatetime(new Date(ic_job.getString("postDatetime")));
         news.setPostDatetime(new Date());
         news.setViewNum(ic_job.getInt("viewNum"));
         news.setDescShort(ic_job.getString("descShort"));
@@ -561,26 +551,15 @@ public class NewsAcpController {
 	 */
 	@RequestMapping(value="/events/markNewsStatusDeleted")
 //	@ResponseBody
-	public Map<String,Object> markNewsStatusDeleted(@RequestParam String eventUUID){
+	public void markNewsStatusDeleted(@RequestParam String eventUUID){
 		logger.info("entering /event/markNewsStatusDeleted");
-		
-		ModelAndView mav = new ModelAndView();
-		
-		//view
-		String viewName = "events/event_news_edit";
-		mav.setViewName(viewName);
-		
-		//data
-		Map<String, Object> model = mav.getModel();
 		
 		logger.info("eventUUID="+eventUUID);
 		
 		newsService.markNewsStatusDeleted(eventUUID);
 		
-		
 		logger.info("leaving /event/markNewsStatusDeleted");
-//		return mav;
-		return model;
+		return ;
 	}
 	
 
@@ -614,42 +593,29 @@ public class NewsAcpController {
 	 * @param newsStatus the status of news, here it should be 6:permanently delete
 	 * @return data and target view
 	 */
-	@RequestMapping(value="/deletegroup",produces="application/json")
+	@RequestMapping(value = "/deletegroup", produces = "application/json")
 	@ResponseBody
-	public Map<String,Object> deleteGroupNews(
-			@RequestParam String eventUUIDArray,
-			@RequestParam int newsStatus
-			) {
-		
+	public void deleteGroupNews(@RequestParam String eventUUIDArray, @RequestParam int newsStatus) {
 		logger.info("entering... /events/news/deletegroup");
-		
-		/* initial settings */
-		ModelAndView mav = new ModelAndView();
-		
-		//set model
-        Map<String, Object> model = mav.getModel();
-   
-        List<News> newsList = new ArrayList<News>();
-        String[] eventUUIDs = eventUUIDArray.split(",");
-        int eventUUIDLength = eventUUIDs.length;
-        
-        for(int i=0; i<eventUUIDLength; i++){
-        	 News news = new News();
-             news.setEventUUID(eventUUIDs[i]);
-             news.setEventStatus(newsStatus);
-             newsList.add(news);
-             news = null;
-        }
-        
-        logger.info("newsList size="+newsList.size());
-        
-		/* business logic*/
-        newsService.deleteNewsGroup(newsList);
-        
-		
-		/* assemble model and view */
+
+		List<News> newsList = new ArrayList<News>();
+		String[] eventUUIDs = eventUUIDArray.split(",");
+		int eventUUIDLength = eventUUIDs.length;
+
+		for (int i = 0; i < eventUUIDLength; i++) {
+			News news = new News();
+			news.setEventUUID(eventUUIDs[i]);
+			news.setEventStatus(newsStatus);
+			newsList.add(news);
+			news = null;
+		}
+		logger.info("newsList size=" + newsList.size());
+
+		/* business logic */
+		newsService.deleteNewsGroup(newsList);
+
 		logger.info("leaving... /events/news/deletegroup");
-		return model;		
+		return;
 	}
 	
 	
@@ -758,7 +724,6 @@ public class NewsAcpController {
 		
 		eventStatusPair[0]=eventStatusKey;
 		eventStatusPair[1]=eventStatus;
-		
 		
 		return eventStatusPair;
 	}

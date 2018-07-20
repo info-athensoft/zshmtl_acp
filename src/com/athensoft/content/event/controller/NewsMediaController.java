@@ -24,8 +24,8 @@ import com.athensoft.content.event.service.EventMediaService;
  */
 @Controller
 @RequestMapping("/events/media")
-public class NewsMediaAcpController {
-	private static final Logger logger = Logger.getLogger(NewsMediaAcpController.class);
+public class NewsMediaController {
+	private static final Logger logger = Logger.getLogger(NewsMediaController.class);
 
 	/**
 	 * EventMedia Service instance
