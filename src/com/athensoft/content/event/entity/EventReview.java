@@ -2,12 +2,15 @@ package com.athensoft.content.event.entity;
 
 import java.util.Date;
 
+import lombok.Data;
+
 /**
  * A review object binding to an event object, which represents a review from web visitors
  * 
  * @author Athens
  * @version 1.0 
  */
+@Data
 public class EventReview {
 	
 	public static final int UNKNOWN = 0;
@@ -71,59 +74,6 @@ public class EventReview {
 	 */
 	private int reviewStatus;
 	
-	public long getGlobalId() {
-		return globalId;
-	}
-	public void setGlobalId(long globalId) {
-		this.globalId = globalId;
-	}
-	public String getEventUUID() {
-		return eventUUID;
-	}
-	public void setEventUUID(String eventUUID) {
-		this.eventUUID = eventUUID;
-	}
-	public String getReviewUUID() {
-		return reviewUUID;
-	}
-	public void setReviewUUID(String reviewUUID) {
-		this.reviewUUID = reviewUUID;
-	}
-	public Date getReviewDatetime() {
-		return reviewDatetime;
-	}
-	public void setReviewDatetime(Date reviewDatetime) {
-		this.reviewDatetime = reviewDatetime;
-	}
-	public long getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(long customerId) {
-		this.customerId = customerId;
-	}
-	public String getReviewContent() {
-		return reviewContent;
-	}
-	public void setReviewContent(String reviewContent) {
-		this.reviewContent = reviewContent;
-	}
-	public int getReviewStatus() {
-		return reviewStatus;
-	}
-	public void setReviewStatus(int reviewStatus) {
-		this.reviewStatus = reviewStatus;
-	}
-	public String getAcctName() {
-		return acctName;
-	}
-	public void setAcctName(String acctName) {
-		this.acctName = acctName;
-	}
-	@Override
-	public String toString() {
-		return "EventReview [globalId=" + globalId + ", eventUUID=" + eventUUID + ", reviewUUID=" + reviewUUID
-				+ ", reviewDatetime=" + reviewDatetime + ", customerId=" + customerId + ", acctName=" + acctName
-				+ ", reviewContent=" + reviewContent + ", reviewStatus=" + reviewStatus + "]";
-	}
+	
 
 }
