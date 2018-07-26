@@ -14,14 +14,15 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.athensoft.content.ad.controller.FileUploadController;
 
+import lombok.extern.log4j.Log4j;
+
 @Service
+@Log4j
 public class FileUploadService {
-	private static final Logger logger = Logger.getLogger(FileUploadService.class);
 	
 	private static final String RESP_SUCCESS = "{\"jsonrpc\" : \"2.0\", \"result\" : \"OK\", \"id\" : \"id\"}";
 	private static final String RESP_ERROR = "{\"jsonrpc\" : \"2.0\", \"error\" : {\"code\": 101, \"message\": \"Failed to open input stream.\"}, \"id\" : \"id\"}";
@@ -47,11 +48,11 @@ public class FileUploadService {
 		
 		// parameter
 		String acctName = (String) request.getParameter("acctName");
-		logger.info("acctName=" + acctName);
+		log.info("acctName=" + acctName);
 		
 		// parameter
 		String adUUID = (String) request.getParameter("adUUID");
-		logger.info("adUUID=" + adUUID);
+		log.info("adUUID=" + adUUID);
 		
 		String filePath = File.separator + acctName +  File.separator + FOLDER_NAME_PROFILE;
 		
@@ -63,11 +64,11 @@ public class FileUploadService {
 		
 		// parameter
 		String acctName = (String) request.getParameter("acctName");
-		logger.info("acctName=" + acctName);
+		log.info("acctName=" + acctName);
 		
 		// parameter
 		String adUUID = (String) request.getParameter("adUUID");
-		logger.info("adUUID=" + adUUID);
+		log.info("adUUID=" + adUUID);
 		
 		String filePath = File.separator + acctName + File.separator + FOLDER_NAME_AD + File.separator + adUUID;
 		
@@ -80,11 +81,11 @@ public class FileUploadService {
 //	public String uploadImageBizLogo(HttpServletRequest request){
 //		// parameter
 //		String advertiserId = (String) request.getParameter("advertiserId");
-//		logger.info("advertiserId=" + advertiserId);
+//		log.info("advertiserId=" + advertiserId);
 //		
 //		// parameter
 //		String bizId = (String) request.getParameter("bizId");
-//		logger.info("bizId=" + bizId);
+//		log.info("bizId=" + bizId);
 //		
 //		String filePath = File.separator + advertiserId + File.separator + bizId +  File.separator + FOLDER_NAME_LOGO;
 //		
@@ -95,15 +96,15 @@ public class FileUploadService {
 //	public String uploadImageBoothCover(HttpServletRequest request){
 //		// parameter
 //		String advertiserId = (String) request.getParameter("advertiserId");
-//		logger.info("advertiserId=" + advertiserId);
+//		log.info("advertiserId=" + advertiserId);
 //		
 //		// parameter
 //		String bizId = (String) request.getParameter("bizId");
-//		logger.info("bizId=" + bizId);
+//		log.info("bizId=" + bizId);
 //		
 //		// parameter
 //		String langNo = (String) request.getParameter("langNo");
-//		logger.info("langNo=" + langNo);
+//		log.info("langNo=" + langNo);
 //		
 //		String filePath = File.separator + advertiserId + File.separator + bizId +  File.separator + langNo + File.separator + FOLDER_NAME_COVER;
 //		
@@ -114,15 +115,15 @@ public class FileUploadService {
 //	public String uploadImageBoothSlider(HttpServletRequest request){
 //		// parameter
 //		String advertiserId = (String) request.getParameter("advertiserId");
-//		logger.info("advertiserId=" + advertiserId);
+//		log.info("advertiserId=" + advertiserId);
 //		
 //		// parameter
 //		String bizId = (String) request.getParameter("bizId");
-//		logger.info("bizId=" + bizId);
+//		log.info("bizId=" + bizId);
 //		
 //		// parameter
 //		String langNo = (String) request.getParameter("langNo");
-//		logger.info("langNo=" + langNo);
+//		log.info("langNo=" + langNo);
 //		
 //		String filePath = File.separator + advertiserId + File.separator + bizId +  File.separator + langNo + File.separator + FOLDER_NAME_SLIDER;
 //		
@@ -133,15 +134,15 @@ public class FileUploadService {
 //	public String uploadImageBoothBanner(HttpServletRequest request){
 //		// parameter
 //		String advertiserId = (String) request.getParameter("advertiserId");
-//		logger.info("advertiserId=" + advertiserId);
+//		log.info("advertiserId=" + advertiserId);
 //		
 //		// parameter
 //		String bizId = (String) request.getParameter("bizId");
-//		logger.info("bizId=" + bizId);
+//		log.info("bizId=" + bizId);
 //		
 //		// parameter
 //		String langNo = (String) request.getParameter("langNo");
-//		logger.info("langNo=" + langNo);
+//		log.info("langNo=" + langNo);
 //		
 //		String filePath = File.separator + advertiserId + File.separator + bizId +  File.separator + langNo + File.separator + FOLDER_NAME_BANNER;
 //		
@@ -162,7 +163,7 @@ public class FileUploadService {
 		String responseString = RESP_SUCCESS;
 
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		logger.info("isMultipart:" + isMultipart);
+		log.info("isMultipart:" + isMultipart);
 
 		if (isMultipart) {
 			ServletFileUpload upload = new ServletFileUpload();
@@ -190,12 +191,12 @@ public class FileUploadService {
 						} 
 						//else if("curl".equals(fieldName)){ this.curl = value; }
 						
-						logger.info("name:" + this.name);
-						logger.info("chunks:" + this.chunks);
-						logger.info("chunk:" + this.chunk);
-						logger.info("user:" + this.user);
-						logger.info("time:" + this.time);
-						// logger.info("curl:" + this.curl);
+						log.info("name:" + this.name);
+						log.info("chunks:" + this.chunks);
+						log.info("chunk:" + this.chunk);
+						log.info("user:" + this.user);
+						log.info("time:" + this.time);
+						// log.info("curl:" + this.curl);
 					}
 
 					// Handle a multi-part MIME encoded file.
@@ -213,8 +214,8 @@ public class FileUploadService {
 						
 						File dst = new File(dstFile.getPath() + File.separator + this.name);
 
-						logger.info("fileDir:" + fileDir);
-						logger.info("fileName:" + this.name);
+						log.info("fileDir:" + fileDir);
+						log.info("fileName:" + this.name);
 
 						doUploadFile(input, dst);
 					}
@@ -228,7 +229,7 @@ public class FileUploadService {
 			responseString = RESP_ERROR;
 		}
 
-		logger.info("responseString:" + responseString);
+		log.info("responseString:" + responseString);
 
 		fileUrlFull = getFileBaseUrl(getLoadedProperties()) + filePath + File.separator + this.name;
 		fileUrlFull = fileUrlFull.replaceAll("\\\\", "/");
@@ -280,14 +281,14 @@ public class FileUploadService {
 	private static String getFileBaseDir(Properties pro) {
 		/* property: docBase of photo at server side */
 		String path = pro.getProperty("file.photo.docbase");
-		logger.info("image base path in file system=" + path);
+		log.info("image base path in file system=" + path);
 		return path;
 	}
 
 	private static String getFileBaseUrl(Properties pro) {
 		/* property: docBase of photo at server side */
 		String path = pro.getProperty("file.photo.baseurl");
-		logger.info("image base url =" + path);
+		log.info("image base url =" + path);
 		return path;
 	}
 

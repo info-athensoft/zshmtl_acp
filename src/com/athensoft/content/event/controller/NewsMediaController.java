@@ -3,7 +3,6 @@ package com.athensoft.content.event.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.service.EventMediaService;
 
+import lombok.extern.log4j.Log4j;
+
 /**
  * The controller of news media
  * 
@@ -24,8 +25,8 @@ import com.athensoft.content.event.service.EventMediaService;
  */
 @Controller
 @RequestMapping("/events/media")
+@Log4j
 public class NewsMediaController {
-	private static final Logger logger = Logger.getLogger(NewsMediaController.class);
 
 	/**
 	 * EventMedia Service instance
@@ -45,7 +46,7 @@ public class NewsMediaController {
 	@RequestMapping(value = "/setCoverMedia", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> setCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID) {
-		logger.info("entering... /events/media/setCoverMedia");
+		log.info("entering... /events/media/setCoverMedia");
 
 		// data - set cover primary state
 		EventMedia previousPrimaryMedia = eventMediaService.getPrimaryMediaByEventUUID(eventUUID);
@@ -53,7 +54,7 @@ public class NewsMediaController {
 			previousPrimaryMedia.setPrimaryMedia(false);
 			eventMediaService.updateEventMedia(previousPrimaryMedia);
 		}
-		logger.info("mediaId=" + mediaId + ",eventUUID=" + eventUUID);
+		log.info("mediaId=" + mediaId + ",eventUUID=" + eventUUID);
 
 		EventMedia media = eventMediaService.getEventMediaByMediaId(mediaId);
 		media.setPrimaryMedia(true);
@@ -61,13 +62,13 @@ public class NewsMediaController {
 
 		// data - media
 		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
-		logger.info("Length of EventReview entries: " + listEventMedia == null ? "NULL" : listEventMedia.size());
+		log.info("Length of EventReview entries: " + listEventMedia == null ? "NULL" : listEventMedia.size());
 
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
 		model.put("eventMediaList", listEventMedia);
 
-		logger.info("leaving... /events/media/setCoverMedia");
+		log.info("leaving... /events/media/setCoverMedia");
 		return model;
 	}
 
@@ -79,17 +80,17 @@ public class NewsMediaController {
 	@RequestMapping(value = "/reloadEventMedia", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> reloadEventMedia(@RequestParam String eventUUID) {
-		logger.info("entering... /events/media/reloadEventMedia");
+		log.info("entering... /events/media/reloadEventMedia");
 
 		// data - media
 		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
-		logger.info("Length of EventReview entries: " + listEventMedia == null ? "NULL" : listEventMedia.size());
+		log.info("Length of EventReview entries: " + listEventMedia == null ? "NULL" : listEventMedia.size());
 
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
 		model.put("eventMediaList", listEventMedia);
 
-		logger.info("leaving... /events/media/reloadEventMedia");
+		log.info("leaving... /events/media/reloadEventMedia");
 		return model;
 	}
 
@@ -97,7 +98,7 @@ public class NewsMediaController {
 	@ResponseBody
 	public void changeMediaName(@RequestParam String jsonObjString) {
 
-		logger.info("entering... /events/media/changeMediaName");
+		log.info("entering... /events/media/changeMediaName");
 
 		JSONObject ic_job = new JSONObject(jsonObjString);
 
@@ -109,14 +110,14 @@ public class NewsMediaController {
 		/* business logic */
 		eventMediaService.changeMediaName(mediaId, eventUUID, mediaName);
 
-		logger.info("leaving... /events/media/changeMediaName");
+		log.info("leaving... /events/media/changeMediaName");
 		return;
 	}
 
 	@RequestMapping(value = "/changeMediaLabel", method = RequestMethod.POST)
 	@ResponseBody
 	public void changeMediaLabel(@RequestParam String jsonObjString) {
-		logger.info("entering... /events/media/changeMediaLabel");
+		log.info("entering... /events/media/changeMediaLabel");
 
 		JSONObject ic_job = new JSONObject(jsonObjString);
 
@@ -128,14 +129,14 @@ public class NewsMediaController {
 		/* business logic */
 		eventMediaService.changeMediaLabel(mediaId, eventUUID, mediaLabel);
 
-		logger.info("leaving... /events/media/changeMediaLabel");
+		log.info("leaving... /events/media/changeMediaLabel");
 		return;
 	}
 
 	@RequestMapping(value = "/changeSortNumber", method = RequestMethod.POST)
 	@ResponseBody
 	public void changeSortNumber(@RequestParam String jsonObjString) {
-		logger.info("entering... /events/media/changeSortNumber");
+		log.info("entering... /events/media/changeSortNumber");
 
 		JSONObject ic_job = new JSONObject(jsonObjString);
 
@@ -147,7 +148,7 @@ public class NewsMediaController {
 		/* business logic */
 		eventMediaService.changeSortNumber(mediaId, eventUUID, sortNumber);
 
-		logger.info("leaving... /events/media/changeSortNumber");
+		log.info("leaving... /events/media/changeSortNumber");
 		return;
 	}
 

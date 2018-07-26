@@ -18,13 +18,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.athensoft.member.entity.Member;
 import com.athensoft.member.entity.MemberStatus;
 import com.athensoft.member.service.MemberService;
-
 import com.athensoft.util.time.DatetimeHelper;
+
+import lombok.extern.log4j.Log4j;
 
 @Controller
 @RequestMapping("/member")
+@Log4j
 public class MemberController {
-	private static final Logger logger = Logger.getLogger(MemberController.class);
 
 	private static final String ACTION_EDIT = "¹ÜÀí";
 	private static final String ACTION_DELETE = "É¾³ý";
@@ -44,11 +45,11 @@ public class MemberController {
 	@RequestMapping(value = "/list", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> getDataMemberList() {
-		logger.info("entering /member/list");
+		log.info("entering /member/list");
 
 		// data
 		List<Member> listMembers = memberService.getAllMembers();
-		logger.info("Length of member entries: " + listMembers.size());
+		log.info("Length of member entries: " + listMembers.size());
 
 		String[][] data = getData(listMembers, ACTION_EDIT);
 
@@ -61,14 +62,14 @@ public class MemberController {
 		model.put("customActionStatus", "OK");
 		model.put("customActionMessage", "Data loaded");
 
-		logger.info("leaving /member/memberListData");
+		log.info("leaving /member/memberListData");
 		return model;
 	}
 
 	@RequestMapping(value = "/search", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> getDataSearchMembers(@RequestParam String jsonObjString) {
-		logger.info("entering... /member/search");
+		log.info("entering... /member/search");
 
 		// get parameters
 		JSONObject jobj = new JSONObject(jsonObjString);
@@ -94,10 +95,10 @@ public class MemberController {
 		queryString.append(where7.length() == 0 ? " " : " and wechat like '%" + where7 + "%' ");
 		queryString.append(where8.length() == 0 ? " " : " and email like '%" + where8 + "%' ");
 		queryString.append(where9 == 0 ? " " : " and member_status = " + where9 + " ");
-		logger.info("QueryString = " + queryString.toString());
+		log.info("QueryString = " + queryString.toString());
 
 		List<Member> listMember = memberService.getMembersByFilter(queryString.toString());
-		logger.info("Length of member entries = " + listMember.size());
+		log.info("Length of member entries = " + listMember.size());
 
 		// data
 		String[][] data = getData(listMember, ACTION_EDIT);
@@ -112,17 +113,17 @@ public class MemberController {
 		model.put("customActionStatus", "OK");
 		model.put("customActionMessage", "OK");
 
-		logger.info("leaving... /member/searchFilterData");
+		log.info("leaving... /member/searchFilterData");
 		return model;
 	}
 
 	@RequestMapping(value = "/edit.html")
 	public ModelAndView gotoMemberEdit(@RequestParam String acctName) {
-		logger.info("entering... /member/edit.html");
+		log.info("entering... /member/edit.html");
 
 		// logic
 		Member member = memberService.getMemberByAcctName(acctName);
-		logger.info("current member profile:" + member.toString());
+		log.info("current member profile:" + member.toString());
 
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
@@ -131,14 +132,14 @@ public class MemberController {
 		String viewName = "member/member_edit";
 		mav.setViewName(viewName);
 
-		logger.info("leaving... /member/edit.html");
+		log.info("leaving... /member/edit.html");
 		return mav;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public void updateMember(@RequestParam String jsonObjString) {
-		logger.info("entering... /member/update");
+		log.info("entering... /member/update");
 
 		JSONObject jsonObj = new JSONObject(jsonObjString);
 
@@ -196,19 +197,19 @@ public class MemberController {
 		// }
 		//
 		// member.setMemberActiveDate(tmpDate); //FIXME
-		logger.info("member = " + member);
+		log.info("member = " + member);
 
 		/* business logic */
 		memberService.updateMember(member);
 
-		logger.info("leaving /member/update");
+		log.info("leaving /member/update");
 		return;
 	}
 
 	@RequestMapping(value = "/updategroup", produces = "application/json")
 	@ResponseBody
 	public void updateGroupMember(@RequestParam String memberArray, @RequestParam int memberStatus) {
-		logger.info("entering... /member/updategroup");
+		log.info("entering... /member/updategroup");
 
 		List<Member> memberList = new ArrayList<Member>();
 		String[] members = memberArray.split(",");
@@ -221,12 +222,12 @@ public class MemberController {
 			memberList.add(member);
 			member = null;
 		}
-		logger.info("memberList size=" + memberList == null ? "NULL" : memberList.size());
+		log.info("memberList size=" + memberList == null ? "NULL" : memberList.size());
 
 		/* business logic */
 		memberService.updateMemberGroup(memberList);
 
-		logger.info("leaving... /member/updategroup");
+		log.info("leaving... /member/updategroup");
 		return ;
 	}
 
@@ -266,7 +267,7 @@ public class MemberController {
 			field10 = "<a href='/acp/member/" + getAction(actionName) + "?acctName=" + field1
 					+ "' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> " + actionName + "</a>";
 
-			// logger.info("field8="+field8);
+			// log.info("field8="+field8);
 
 			data[i][0] = field0;
 			data[i][1] = field1;

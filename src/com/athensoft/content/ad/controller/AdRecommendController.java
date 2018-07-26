@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +18,12 @@ import com.athensoft.content.ad.entity.AdAction;
 import com.athensoft.content.ad.entity.AdRecommend;
 import com.athensoft.content.ad.service.AdRecommendService;
 
+import lombok.extern.log4j.Log4j;
+
 @Controller
 @RequestMapping("/ad/adrcmd")
+@Log4j
 public class AdRecommendController {
-	private static final Logger logger = Logger.getLogger(AdRecommendController.class);
 
 	@Autowired
 	private AdRecommendService adRecommendService;
@@ -41,11 +42,11 @@ public class AdRecommendController {
 
 	@RequestMapping(value = "/edit.html")
 	public ModelAndView gotoEditAdRecommend(@RequestParam int globalId) {
-		logger.info("entering /ad/adrcmd/edit.html");
+		log.info("entering /ad/adrcmd/edit.html");
 	
 		AdRecommend adrcmd = new AdRecommend();
 		adrcmd = adRecommendService.getAdRecommendByGlobalId(globalId);
-		logger.info("adrcmd = " + adrcmd.toString());
+		log.info("adrcmd = " + adrcmd.toString());
 	
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
@@ -54,17 +55,17 @@ public class AdRecommendController {
 		String viewName = "ad/adrecommend_edit";
 		mav.setViewName(viewName);
 	
-		logger.info("exiting... /ad/adrcmd/edit.html");
+		log.info("exiting... /ad/adrcmd/edit.html");
 		return mav;
 	}
 
 	@RequestMapping(value = "/delete.html")
 	public ModelAndView gotoDeleteAdRecommend(@RequestParam int globalId) {
-		logger.info("entering /ad/adrcmd/delete.html");
+		log.info("entering /ad/adrcmd/delete.html");
 	
 		AdRecommend adrcmd = new AdRecommend();
 		adrcmd = adRecommendService.getAdRecommendByGlobalId(globalId);
-		logger.info("adrcmd = " + adrcmd.toString());
+		log.info("adrcmd = " + adrcmd.toString());
 	
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
@@ -73,18 +74,18 @@ public class AdRecommendController {
 		String viewName = "ad/adrecommend_delete";
 		mav.setViewName(viewName);
 	
-		logger.info("exiting... /ad/adrcmd/delete.html");
+		log.info("exiting... /ad/adrcmd/delete.html");
 		return mav;
 	}
 
 	@RequestMapping(value = "/list", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> getDataListAdRecommend() {
-		logger.info("entering... /ad/adrcmd/list");
+		log.info("entering... /ad/adrcmd/list");
 
 		// data
 		List<AdRecommend> listAdRecommend = adRecommendService.getAll();
-		logger.info("Length of listAdRecommend entries: " + listAdRecommend.size());
+		log.info("Length of listAdRecommend entries: " + listAdRecommend.size());
 
 		String[] actions = { AdAction.VIEW, AdAction.EDIT, AdAction.DELETE };
 		String[][] data = adRecommendService.getData(listAdRecommend, actions);
@@ -98,14 +99,14 @@ public class AdRecommendController {
 		model.put("customActionStatus", "OK");
 		model.put("customActionMessage", "Data loaded");
 
-		logger.info("leaving... /ad/adrcmd/list");
+		log.info("leaving... /ad/adrcmd/list");
 		return model;
 	}
 
 	@RequestMapping(value = "/search", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> getDataSearchAdRecommend(@RequestParam String jsonObjString) {
-		logger.info("entering... /ad/adrcmd/search");
+		log.info("entering... /ad/adrcmd/search");
 	
 		JSONObject jobj = new JSONObject(jsonObjString);
 	
@@ -123,11 +124,11 @@ public class AdRecommendController {
 		queryString.append(where4 == 0 ? " " : " and rcmd_rank = " + where4 + " ");
 		queryString.append(where5 == 0 ? " " : " and rcmd_status = " + where5 + " ");
 	
-		logger.info("QueryString = " + queryString.toString());
+		log.info("QueryString = " + queryString.toString());
 	
 		List<AdRecommend> listAdRecommend = adRecommendService.getAdRecommendByFilter(queryString.toString());
 		if (null != listAdRecommend) {
-			logger.info("Length of listAdRecommend entries = " + listAdRecommend.size());
+			log.info("Length of listAdRecommend entries = " + listAdRecommend.size());
 		} else {
 			listAdRecommend = new ArrayList<AdRecommend>();
 		}
@@ -144,14 +145,14 @@ public class AdRecommendController {
 		model.put("customActionStatus", "OK");
 		model.put("customActionMessage", "OK");
 	
-		logger.info("leaving... /ad/adrcmd/search");
+		log.info("leaving... /ad/adrcmd/search");
 		return model;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> createAdRecommend(@RequestParam String jsonObjString) {
-		logger.info("entering /ad/adrcmd/create");
+		log.info("entering /ad/adrcmd/create");
 
 		JSONObject jsonObj = new JSONObject(jsonObjString);
 
@@ -163,7 +164,7 @@ public class AdRecommendController {
 		adrcmd.setRcmdStatus(jsonObj.getInt("rcmdStatus"));
 		adrcmd.setRcmdScore(0.0); // default
 
-		logger.info(adrcmd);
+		log.info(adrcmd);
 
 		/* business logic */
 		adRecommendService.createAdRecommend(adrcmd);
@@ -172,23 +173,23 @@ public class AdRecommendController {
 		Map<String, Object> model = mav.getModel();
 		model.put("adRecommend", adrcmd);
 
-		logger.info("exiting... /ad/adrcmd/create");
+		log.info("exiting... /ad/adrcmd/create");
 		return model;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public void updateAdRecommend(@RequestBody AdRecommend adrcmd) {
-		logger.info("entering... /ad/adrcmd/update");
+		log.info("entering... /ad/adrcmd/update");
 		adRecommendService.updateAdRecommend(adrcmd);
-		logger.info("exiting... /ad/adrcmd/update");
+		log.info("exiting... /ad/adrcmd/update");
 		return;
 	}
 	
 	@RequestMapping(value = "/updategroup", method=RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public void updateGroupAdPost(@RequestBody AdRecommendGroup adRecommendGroup) {
-		logger.info("entering... /ad/adrcmd/updategroup");
+		log.info("entering... /ad/adrcmd/updategroup");
 		
 		List<String> adUUIDs = adRecommendGroup.getAdUUIDArray();
 		int adStatus = adRecommendGroup.getAdStatus();
@@ -204,22 +205,22 @@ public class AdRecommendController {
 			x = null;
 		}
 
-		logger.info("adRecommendList size=" + adRecommendList == null ? "NULL" : adRecommendList.size());
+		log.info("adRecommendList size=" + adRecommendList == null ? "NULL" : adRecommendList.size());
 
 		/* business logic */
 		adRecommendService.updateGroupAdRecommend(adRecommendList);
 
 
-		logger.info("leaving... /ad/adrcmd/updategroup");
+		log.info("leaving... /ad/adrcmd/updategroup");
 		return ;
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public void deleteAdRecommend(@RequestBody AdRecommend adrcmd) {
-		logger.info("entering... /ad/adrcmd/delete");
+		log.info("entering... /ad/adrcmd/delete");
 		adRecommendService.deleteAdRecommend(adrcmd);
-		logger.info("exiting... /ad/adrcmd/delete");
+		log.info("exiting... /ad/adrcmd/delete");
 		return;
 	}
 	

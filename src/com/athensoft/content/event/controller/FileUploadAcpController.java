@@ -16,7 +16,6 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.service.EventMediaService;
 
+import lombok.extern.log4j.Log4j;
+
 
 /**
  * The controller of file uploading
@@ -33,9 +34,8 @@ import com.athensoft.content.event.service.EventMediaService;
  *
  */
 @Controller
+@Log4j
 public class FileUploadAcpController {
-	private static final Logger logger = Logger.getLogger(FileUploadAcpController.class);
-	
 	
 	public static final int BUF_SIZE = 2 * 1024;
 	
@@ -59,16 +59,16 @@ public class FileUploadAcpController {
 	@RequestMapping(value="/events/fileUpload",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> fileUpload(HttpServletRequest req){
-		logger.info("entering /events/fileUpload");
+		log.info("entering /events/fileUpload");
 		
 		//parameter
 		String eventUUID = (String)req.getParameter("eventUUID");
-		logger.info("eventUUID="+eventUUID);
+		log.info("eventUUID="+eventUUID);
 		
 		String responseString = RESP_SUCCESS;
 		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(req);
-		logger.info("isMultipart:" + isMultipart);
+		log.info("isMultipart:" + isMultipart);
 		
 		if(isMultipart){
 			ServletFileUpload upload = new ServletFileUpload();
@@ -95,11 +95,11 @@ public class FileUploadAcpController {
 				        }else if("time".equals(fileName)){
 				        	this.time = value;
 				        }
-				        logger.info("name:" + this.name);
-				        logger.info("chunks:" + this.chunks);
-				        logger.info("chunk:" + this.chunk);
-				        logger.info("user:" + this.user);
-				        logger.info("time:" + this.time);
+				        log.info("name:" + this.name);
+				        log.info("chunks:" + this.chunks);
+				        log.info("chunk:" + this.chunk);
+				        log.info("user:" + this.user);
+				        log.info("time:" + this.time);
 				    }
 				    
 				    // Handle a multi-part MIME encoded file.
@@ -116,8 +116,8 @@ public class FileUploadAcpController {
 						
 						File dst = new File(dstFile.getPath()+ "/" + this.name);
 						
-						logger.info("fileDir:" + fileDir);
-						logger.info("fileName:" + this.name);
+						log.info("fileDir:" + fileDir);
+						log.info("fileName:" + this.name);
 						
 				        saveUploadFile(input, dst);
 				    }
@@ -134,7 +134,7 @@ public class FileUploadAcpController {
 			responseString = RESP_ERROR;
 		}
 		
-		logger.info("responseString:" + responseString);
+		log.info("responseString:" + responseString);
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -149,7 +149,7 @@ public class FileUploadAcpController {
 		model.put("result", "OK");
 		model.put("id", "id");
 		
-		logger.info("leaving /events/fileUpload");
+		log.info("leaving /events/fileUpload");
 		return model;
 	}
 	
@@ -163,17 +163,17 @@ public class FileUploadAcpController {
 	@ResponseBody
 	public Map<String,Object> fileUploadAndCreateRecord(HttpServletRequest req){
 		
-		logger.info("entering /events/fileUploadAndCreateRecord");
+		log.info("entering /events/fileUploadAndCreateRecord");
 		
 		//parameter
 		String eventUUID = (String)req.getParameter("eventUUID");
-		logger.info("eventUUID="+eventUUID);
+		log.info("eventUUID="+eventUUID);
 		
 		
 		String responseString = RESP_SUCCESS;
 		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(req);
-		logger.info("isMultipart:" + isMultipart);
+		log.info("isMultipart:" + isMultipart);
 		
 		if(isMultipart){
 			ServletFileUpload upload = new ServletFileUpload();
@@ -200,11 +200,11 @@ public class FileUploadAcpController {
 				        }else if("time".equals(fileName)){
 				        	this.time = value;
 				        }
-				        logger.info("name:" + this.name);
-				        logger.info("chunks:" + this.chunks);
-				        logger.info("chunk:" + this.chunk);
-				        logger.info("user:" + this.user);
-				        logger.info("time:" + this.time);
+				        log.info("name:" + this.name);
+				        log.info("chunks:" + this.chunks);
+				        log.info("chunk:" + this.chunk);
+				        log.info("user:" + this.user);
+				        log.info("time:" + this.time);
 				    }
 				    
 				    // Handle a multi-part MIME encoded file.
@@ -219,15 +219,15 @@ public class FileUploadAcpController {
 						}
 						File dst = new File(dstFile.getPath()+ "/" + this.name);
 						
-						logger.info("fileDir:" + fileDir);
-						logger.info("fileName:" + this.name);
+						log.info("fileDir:" + fileDir);
+						log.info("fileName:" + this.name);
 						
 				        saveUploadFile(input, dst);
 				        
 //				        String mediaURL = fileDir+File.separator+this.name;
 				        
 				        // persist media record into database
-				        logger.info("Start creating event media - Name:" + this.name);
+				        log.info("Start creating event media - Name:" + this.name);
 				        EventMedia eventMedia = new EventMedia();
 				        eventMedia.setEventUUID(eventUUID);
 				        eventMedia.setMediaName(this.name);
@@ -253,7 +253,7 @@ public class FileUploadAcpController {
 			responseString = RESP_ERROR;
 		}
 		
-		logger.info("responseString:" + responseString);
+		log.info("responseString:" + responseString);
 		
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
@@ -264,7 +264,7 @@ public class FileUploadAcpController {
 		String viewName = "events/event_news_edit";
 		mav.setViewName(viewName);
 		
-		logger.info("leaving /events/fileUploadAndCreateRecord");
+		log.info("leaving /events/fileUploadAndCreateRecord");
 		return model;
 	}
 
@@ -312,14 +312,14 @@ public class FileUploadAcpController {
 	private static String getFileBaseDir(Properties pro) {
 		/* property: docBase of photo at server side */
 		String path = pro.getProperty("file.photo.docbase");
-		logger.info("image base path in file system=" + path);
+		log.info("image base path in file system=" + path);
 		return path;
 	}
 
 	private static String getFileBaseUrl(Properties pro) {
 		/* property: docBase of photo at server side */
 		String path = pro.getProperty("file.photo.baseurl");
-		logger.info("image base url =" + path);
+		log.info("image base url =" + path);
 		return path;
 	}
 

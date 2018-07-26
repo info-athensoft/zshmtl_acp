@@ -3,7 +3,6 @@ package com.athensoft.content.ad.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +13,12 @@ import com.athensoft.content.ad.entity.AdAction;
 import com.athensoft.content.ad.entity.AdRequest;
 import com.athensoft.content.ad.service.AdRequestService;
 
+import lombok.extern.log4j.Log4j;
+
 @Controller
 @RequestMapping("/ad/adrequest")
+@Log4j
 public class AdRequestController {
-	private static final Logger logger = Logger.getLogger(AdRequestController.class);
 
 	@Autowired
 	private AdRequestService adRequestService;
@@ -25,11 +26,11 @@ public class AdRequestController {
 	@RequestMapping(value = "/list", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> getDataListAdRequest() {
-		logger.info("entering... /ad/adrequest/list");
+		log.info("entering... /ad/adrequest/list");
 
 		// data
 		List<AdRequest> listAdRequest = adRequestService.getAllAdRequest();
-		logger.info("Length of adrequest entries: " + listAdRequest == null ? "NULL" : listAdRequest.size());
+		log.info("Length of adrequest entries: " + listAdRequest == null ? "NULL" : listAdRequest.size());
 
 		String[][] data = adRequestService.getData(listAdRequest, AdAction.EDIT);
 
@@ -42,7 +43,7 @@ public class AdRequestController {
 		model.put("customActionStatus", "OK");
 		model.put("customActionMessage", "Data loaded");
 
-		logger.info("leaving... /ad/adrequest/list");
+		log.info("leaving... /ad/adrequest/list");
 		return model;
 	}
 

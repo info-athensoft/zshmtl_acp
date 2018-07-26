@@ -18,12 +18,15 @@ import com.athensoft.content.event.service.NewsService;
 import com.athensoft.member.entity.Member;
 import com.athensoft.member.service.MemberService;
 
+import lombok.extern.log4j.Log4j;
+
 /**
  * The global controller
  * @author Athens
  *
  */
 @Controller
+@Log4j
 public class GlobalController {
 	
 	@Autowired
@@ -58,6 +61,8 @@ public class GlobalController {
 	 */
 	@RequestMapping("/index")
 	public ModelAndView gotoHome2(){
+		log.info("enter... /index");
+		
 		//logic - dashboard
 		long newsTotalCount = newsService.countAllNews();
 		long reviewsTotalCount = eventReviewService.countAllReviews();
@@ -99,6 +104,7 @@ public class GlobalController {
 		String viewName = "index";
 		mav.setViewName(viewName);
 		
+		log.info("exiting... /index");
 		return mav;
 	}
 	

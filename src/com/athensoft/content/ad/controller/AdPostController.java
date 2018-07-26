@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +21,12 @@ import com.athensoft.content.ad.entity.AdPost;
 import com.athensoft.content.ad.service.AdPostService;
 import com.athensoft.util.id.UUIDHelper;
 
+import lombok.extern.log4j.Log4j;
+
 @Controller
 @RequestMapping("/ad/adpost")
+@Log4j
 public class AdPostController {
-	private static final Logger logger = Logger.getLogger(AdPostController.class);
 
 	@Autowired
 	private AdPostService adPostService;
@@ -44,7 +45,7 @@ public class AdPostController {
 
 	@RequestMapping(value = "/edit.html")
 	public ModelAndView gotoEditAdPost(@RequestParam String adUUID) {
-		logger.info("entering... /adpost/edit.html");
+		log.info("entering... /adpost/edit.html");
 
 		// data - news
 		AdPost adpost = adPostService.getAdPostByAdUUID(adUUID);
@@ -57,18 +58,18 @@ public class AdPostController {
 		String viewName = "ad/adpost_edit";
 		mav.setViewName(viewName);
 
-		logger.info("leaving... /adpost/edit.html");
+		log.info("leaving... /adpost/edit.html");
 		return mav;
 	}
 
 	@RequestMapping(value = "/list", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> getDataListAdPost() {
-		logger.info("entering... /ad/adpost/list");
+		log.info("entering... /ad/adpost/list");
 
 		// data
 		List<AdPost> listAdPost = adPostService.getAdPostList();
-		logger.info("Length of adpost entries: " + listAdPost==null?"NULL":listAdPost.size());
+		log.info("Length of adpost entries: " + listAdPost==null?"NULL":listAdPost.size());
 
 		String[][] data = adPostService.getData(listAdPost, AdAction.EDIT);
 
@@ -82,14 +83,14 @@ public class AdPostController {
 		model.put("customActionStatus", "OK");
 		model.put("customActionMessage", "Data loaded");
 
-		logger.info("leaving... /ad/adpost/list");
+		log.info("leaving... /ad/adpost/list");
 		return model;
 	}
 
 	@RequestMapping(value = "/search", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> getDataSearchAdPost(@RequestParam String jsonObjString) {
-		logger.info("entering /ad/adpost/search");
+		log.info("entering /ad/adpost/search");
 
 		JSONObject jobj = new JSONObject(jsonObjString);
 
@@ -111,8 +112,8 @@ public class AdPostController {
 		String where5a = strCreateDatetimeFrom;
 		String where5b = strCreateDatetimeTo;
 
-		logger.info("strCreateDatetimeFrom=" + strCreateDatetimeFrom + "##");
-		logger.info("strCreateDatetimeTo=" + strCreateDatetimeTo + "##");
+		log.info("strCreateDatetimeFrom=" + strCreateDatetimeFrom + "##");
+		log.info("strCreateDatetimeTo=" + strCreateDatetimeTo + "##");
 
 		/* where6a, where6b */
 		String strPostDatetimeFrom = jobj.getString("postDatetimeFrom").trim();
@@ -127,8 +128,8 @@ public class AdPostController {
 		String where6a = strPostDatetimeFrom;
 		String where6b = strPostDatetimeTo;
 
-		logger.info("strPostDatetimeFrom=" + strPostDatetimeFrom + "##");
-		logger.info("strPostDatetimeTo=" + strPostDatetimeTo + "##");
+		log.info("strPostDatetimeFrom=" + strPostDatetimeFrom + "##");
+		log.info("strPostDatetimeTo=" + strPostDatetimeTo + "##");
 
 		/* where7a, where7b */
 		String strExpireDatetimeFrom = jobj.getString("expireDatetimeFrom").trim();
@@ -143,8 +144,8 @@ public class AdPostController {
 		String where7a = strExpireDatetimeFrom;
 		String where7b = strExpireDatetimeTo;
 
-		logger.info("strExpireDatetimeFrom=" + strExpireDatetimeFrom + "##");
-		logger.info("strExpireDatetimeTo=" + strExpireDatetimeTo + "##");
+		log.info("strExpireDatetimeFrom=" + strExpireDatetimeFrom + "##");
+		log.info("strExpireDatetimeTo=" + strExpireDatetimeTo + "##");
 
 		/* where8a, where8b */
 		String strModifyDatetimeFrom = jobj.getString("modifyDatetimeFrom").trim();
@@ -159,8 +160,8 @@ public class AdPostController {
 		String where8a = strModifyDatetimeFrom;
 		String where8b = strModifyDatetimeTo;
 
-		logger.info("strExpireDatetimeFrom=" + strExpireDatetimeFrom + "##");
-		logger.info("strExpireDatetimeTo=" + strExpireDatetimeTo + "##");
+		log.info("strExpireDatetimeFrom=" + strExpireDatetimeFrom + "##");
+		log.info("strExpireDatetimeTo=" + strExpireDatetimeTo + "##");
 
 		int where9 = jobj.getInt("adStatus");
 
@@ -203,7 +204,7 @@ public class AdPostController {
 			}
 
 		} else {
-			logger.info("ERROR: create_datetime not valid date range");
+			log.info("ERROR: create_datetime not valid date range");
 		}
 		queryString.append(queryString_where5);
 
@@ -226,7 +227,7 @@ public class AdPostController {
 						+ "' ) ";
 			}
 		} else {
-			logger.info("ERROR: post_date not valid date range");
+			log.info("ERROR: post_date not valid date range");
 		}
 		queryString.append(queryString_where6);
 
@@ -250,7 +251,7 @@ public class AdPostController {
 			}
 
 		} else {
-			logger.info("ERROR: expire_date not valid date range");
+			log.info("ERROR: expire_date not valid date range");
 		}
 		queryString.append(queryString_where7);
 
@@ -274,15 +275,15 @@ public class AdPostController {
 			}
 
 		} else {
-			logger.info("ERROR: modify_date not valid date range");
+			log.info("ERROR: modify_date not valid date range");
 		}
 		queryString.append(queryString_where8);
 
 		queryString.append(where9 == 0 ? " " : " and ad_status = " + where9 + " ");
-		logger.info("QueryString = " + queryString.toString());
+		log.info("QueryString = " + queryString.toString());
 
 		List<AdPost> listAdPost = adPostService.getAdPostByFilter(queryString.toString());
-		logger.info("Length of listAdPost entries = " + listAdPost.size());
+		log.info("Length of listAdPost entries = " + listAdPost.size());
 
 		String[][] data = adPostService.getData(listAdPost, AdAction.EDIT);
 
@@ -295,14 +296,14 @@ public class AdPostController {
 		model.put("customActionStatus", "OK");
 		model.put("customActionMessage", "OK");
 
-		logger.info("leaving /adpost/searchFilterData");
+		log.info("leaving /adpost/searchFilterData");
 		return model;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
 	public void createAdPost(@RequestParam String jsonObjString) {
-		logger.info("entering /ad/adpost/create");
+		log.info("entering /ad/adpost/create");
 
 		JSONObject jsonObj = new JSONObject(jsonObjString);
 
@@ -335,19 +336,19 @@ public class AdPostController {
 		}
 		adpost.setExpireDate(expireDate);
 
-		logger.info(adpost);
+		log.info(adpost);
 
 		/* business logic */
 		adPostService.createAdPost(adpost);
 
-		logger.info("exiting... /ad/adpost/create");
+		log.info("exiting... /ad/adpost/create");
 		return;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public void updateAdPost(@RequestParam String jsonObjString) {
-		logger.info("entering /ad/adpost/update");
+		log.info("entering /ad/adpost/update");
 
 		JSONObject jsonObj = new JSONObject(jsonObjString);
 
@@ -380,19 +381,19 @@ public class AdPostController {
 		}
 		adpost.setExpireDate(expireDate);
 
-		logger.info(adpost);
+		log.info(adpost);
 
 		/* business logic */
 		adPostService.updateAdPost(adpost);
 
-		logger.info("exiting... /ad/adpost/update");
+		log.info("exiting... /ad/adpost/update");
 		return;
 	}
 
 	@RequestMapping(value = "/updateGroup", method=RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public void updateGroupAdPost(@RequestBody AdPostGroup adPostGroup) {
-		logger.info("entering... /adpost/updateGroup");
+		log.info("entering... /adpost/updateGroup");
 		
 		List<String> adUUIDs = adPostGroup.getAdUUIDArray();
 		int adStatus = adPostGroup.getAdStatus();
@@ -409,13 +410,13 @@ public class AdPostController {
 			adpost = null;
 		}
 
-		logger.info("adpostList size=" + adpostList == null ? "NULL" : adpostList.size());
+		log.info("adpostList size=" + adpostList == null ? "NULL" : adpostList.size());
 
 		/* business logic */
 		adPostService.updateAdPostGroup(adpostList);
 
 
-		logger.info("leaving... /adpost/updateGroup");
+		log.info("leaving... /adpost/updateGroup");
 		return ;
 	}
 	
@@ -423,7 +424,7 @@ public class AdPostController {
 //	@RequestMapping(value = "/updateGroup", method=RequestMethod.POST, produces = "application/json")
 //	@ResponseBody
 //	public void updateGroupAdPost(@RequestParam String adUUIDArray, @RequestParam int adStatus) {
-//		logger.info("entering... /adpost/updateGroup");
+//		log.info("entering... /adpost/updateGroup");
 //		
 //		String[] adUUIDs = adUUIDArray.split(",");
 //		int adUUIDLength = adUUIDs.length;
@@ -438,13 +439,13 @@ public class AdPostController {
 //			adpost = null;
 //		}
 //
-//		logger.info("adpostList size=" + adpostList == null ? "NULL" : adpostList.size());
+//		log.info("adpostList size=" + adpostList == null ? "NULL" : adpostList.size());
 //
 //		/* business logic */
 //		adPostService.updateAdPostGroup(adpostList);
 //
 //
-//		logger.info("leaving... /adpost/updateGroup");
+//		log.info("leaving... /adpost/updateGroup");
 //		return ;
 //	}
 	

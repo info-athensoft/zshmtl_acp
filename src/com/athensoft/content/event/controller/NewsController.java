@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +21,8 @@ import com.athensoft.content.event.service.EventMediaService;
 import com.athensoft.content.event.service.NewsService;
 import com.athensoft.util.id.UUIDHelper;
 
+import lombok.extern.log4j.Log4j;
+
 /**
  * News Controller for ACP
  * @author Athens
@@ -29,8 +30,8 @@ import com.athensoft.util.id.UUIDHelper;
  */
 @Controller
 @RequestMapping("/events/news")
+@Log4j
 public class NewsController {
-	private static final Logger logger = Logger.getLogger(NewsController.class);
 	
 	private static final String ACTION_EDIT = "±à¼­";
 	private static final String ACTION_DELETE = "É¾³ý";
@@ -89,14 +90,14 @@ public class NewsController {
 	 */
 	@RequestMapping(value="/edit.html")
 	public ModelAndView gotoEditNews(@RequestParam String eventUUID){
-		logger.info("entering... /event/news/edit.html");
+		log.info("entering... /event/news/edit.html");
 		
 		//data - news
 		News news = newsService.getNewsByEventUUID(eventUUID);	
 		
 		//data - media
 		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
-		logger.info("Length of EventReview entries: " + listEventMedia == null ? "NULL" : listEventMedia.size());
+		log.info("Length of EventReview entries: " + listEventMedia == null ? "NULL" : listEventMedia.size());
 		
 		
 		ModelAndView mav = new ModelAndView();
@@ -107,7 +108,7 @@ public class NewsController {
 		String viewName = "event/event_news_edit";
 		mav.setViewName(viewName);
 		
-		logger.info("leaving... /event/news/edit.html");
+		log.info("leaving... /event/news/edit.html");
 		return mav;
 	}
 	
@@ -131,11 +132,11 @@ public class NewsController {
 	@RequestMapping(value="/list",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> getDataListNews(){
-		logger.info("entering... /events/news/list");
+		log.info("entering... /events/news/list");
 		
 		//data
 		List<Event> listNews = newsService.getAllNews();
-		logger.info("Length of news entries: "+ listNews==null?"NULL":listNews.size());
+		log.info("Length of news entries: "+ listNews==null?"NULL":listNews.size());
 		
 		String[][] data = getData(listNews, ACTION_EDIT);
 		
@@ -149,7 +150,7 @@ public class NewsController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","Data loaded");
 		
-		logger.info("leaving... /events/news/list");
+		log.info("leaving... /events/news/list");
 		return model;
 	}
 	
@@ -162,7 +163,7 @@ public class NewsController {
 	@RequestMapping(value="/search",produces="application/json")
 	@ResponseBody
 	public Map<String, Object> getDataSearchNews(@RequestParam String jsonObjString){
-		logger.info("entering... /events/news/search");
+		log.info("entering... /events/news/search");
 		
 		//get parameters
 		JSONObject jobj= new JSONObject(jsonObjString);
@@ -185,8 +186,8 @@ public class NewsController {
 		String where5a = strPostDatetimeFrom;
 		String where5b = strPostDatetimeTo;
 		
-		logger.info("strPostDatetimeFrom="+strPostDatetimeFrom+"##");
-		logger.info("strPostDatetimeTo="+strPostDatetimeTo+"##");
+		log.info("strPostDatetimeFrom="+strPostDatetimeFrom+"##");
+		log.info("strPostDatetimeTo="+strPostDatetimeTo+"##");
 		
 		/* where6a, where6b */
 		String strViewNumFrom = jobj.getString("viewNumFrom").trim();
@@ -239,7 +240,7 @@ public class NewsController {
 			}
 			
 		}else{
-			logger.info("ERROR: not valid date range");
+			log.info("ERROR: not valid date range");
 		}
 		queryString.append(queryString_where5);
 		
@@ -260,10 +261,10 @@ public class NewsController {
 		queryString.append(queryString_where6);
 				
 		queryString.append(where7==0?" ":" AND event_status = "+where7+" ");
-		logger.info("QueryString = "+ queryString.toString());
+		log.info("QueryString = "+ queryString.toString());
 		
 		List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
-		logger.info("Length of news entries = "+ listNews.size());
+		log.info("Length of news entries = "+ listNews.size());
 		
 		//data
 		String[][] data = getData(listNews, ACTION_EDIT);
@@ -279,7 +280,7 @@ public class NewsController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving /events/newsSearchFilterData");
+		log.info("leaving /events/newsSearchFilterData");
 		
 		return model;
 	}
@@ -293,11 +294,11 @@ public class NewsController {
 	@RequestMapping(value="/deletelist",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> getDataDeleteListNews(){
-		logger.info("entering... /events/news/deletelist");
+		log.info("entering... /events/news/deletelist");
 		
 		//data
 		List<Event> listNews = newsService.getAllNews();
-		logger.info("Length of news entries: "+ listNews.size());
+		log.info("Length of news entries: "+ listNews.size());
 		
 		String[][] data = getData(listNews, ACTION_DELETE);
 		
@@ -311,7 +312,7 @@ public class NewsController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving... /events/news/deletelist");
+		log.info("leaving... /events/news/deletelist");
 		return model;
 	}
 	
@@ -324,7 +325,7 @@ public class NewsController {
 	@RequestMapping(value="/deletesearch",produces="application/json")
 	@ResponseBody
 	public Map<String, Object> getDataDeleteSearchNews(@RequestParam String jsonObjString){
-		logger.info("entering... /events/news/deletesearch");
+		log.info("entering... /events/news/deletesearch");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -350,8 +351,8 @@ public class NewsController {
 		String where5a = strPostDatetimeFrom;
 		String where5b = strPostDatetimeTo;
 		
-		logger.info("strPostDatetimeFrom="+strPostDatetimeFrom+"##");
-		logger.info("strPostDatetimeTo="+strPostDatetimeTo+"##");
+		log.info("strPostDatetimeFrom="+strPostDatetimeFrom+"##");
+		log.info("strPostDatetimeTo="+strPostDatetimeTo+"##");
 		
 		/* where6a, where6b */
 		String strViewNumFrom = jobj.getString("viewNumFrom").trim();
@@ -403,7 +404,7 @@ public class NewsController {
 			}
 			
 		}else{
-			logger.info("ERROR: not valid date range");
+			log.info("ERROR: not valid date range");
 		}
 		queryString.append(queryString_where5);
 		
@@ -425,10 +426,10 @@ public class NewsController {
 				
 		queryString.append(where7==0?" ":" and event_status = "+where7+" ");
 		
-		logger.info("QueryString = "+ queryString.toString());
+		log.info("QueryString = "+ queryString.toString());
 		
 		List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
-		logger.info("Length of news entries = "+ listNews==null?"NULL":listNews.size());
+		log.info("Length of news entries = "+ listNews==null?"NULL":listNews.size());
 		
 		String[][] data = getData(listNews, ACTION_DELETE);
 		
@@ -439,7 +440,7 @@ public class NewsController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving... /events/news/deletesearch");
+		log.info("leaving... /events/news/deletesearch");
 		return model;
 	}
 
@@ -452,7 +453,7 @@ public class NewsController {
 	@RequestMapping(value="/create",method=RequestMethod.POST)
 	@ResponseBody
 	public void createNews(@RequestParam String jsonObjString) {
-		logger.info("entering /event/news/create");
+		log.info("entering /event/news/create");
 		
         JSONObject ic_job= new JSONObject(jsonObjString);
    
@@ -466,12 +467,12 @@ public class NewsController {
         news.setDescLong(ic_job.getString("descLong"));
         news.setEventClass(ic_job.getString("eventClass"));
         news.setEventStatus(ic_job.getInt("eventStatus"));
-        logger.info(news);
+        log.info(news);
           
 		/* business logic*/
         newsService.createNews(news);
 		
-        logger.info("exiting... /event/news/create");
+        log.info("exiting... /event/news/create");
 		return ;		
 	}
 	
@@ -483,7 +484,7 @@ public class NewsController {
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	@ResponseBody
 	public void updateNews(@RequestParam String jsonObjString) {
-		logger.info("entering... /events/news/update");
+		log.info("entering... /events/news/update");
 		
 
         JSONObject ic_job= new JSONObject(jsonObjString);
@@ -498,12 +499,12 @@ public class NewsController {
         news.setDescLong(ic_job.getString("descLong"));
         news.setEventClass(ic_job.getString("eventClass"));
         news.setEventStatus(ic_job.getInt("eventStatus"));
-        logger.info("news = "+news);
+        log.info("news = "+news);
           
 		/* business logic*/
         newsService.updateNews(news);
 		
-		logger.info("leaving... /events/news/update");
+		log.info("leaving... /events/news/update");
 		return ;		
 	}
 	
@@ -520,7 +521,7 @@ public class NewsController {
 			@RequestParam String eventUUIDArray,
 			@RequestParam int newsStatus
 			) {
-		logger.info("entering... /events/news/updategroup");
+		log.info("entering... /events/news/updategroup");
 		
    
         List<News> newsList = new ArrayList<News>();
@@ -534,12 +535,12 @@ public class NewsController {
              newsList.add(news);
              news = null;
         }
-        logger.info("newsList size="+newsList==null?"NULL":newsList.size());
+        log.info("newsList size="+newsList==null?"NULL":newsList.size());
         
 		/* business logic*/
         newsService.updateNewsGroup(newsList);
         
-		logger.info("leaving... /events/news/updategroup");
+		log.info("leaving... /events/news/updategroup");
 		return ;		
 	}
 	
@@ -552,13 +553,13 @@ public class NewsController {
 	@RequestMapping(value="/events/markNewsStatusDeleted")
 //	@ResponseBody
 	public void markNewsStatusDeleted(@RequestParam String eventUUID){
-		logger.info("entering /event/markNewsStatusDeleted");
+		log.info("entering /event/markNewsStatusDeleted");
 		
-		logger.info("eventUUID="+eventUUID);
+		log.info("eventUUID="+eventUUID);
 		
 		newsService.markNewsStatusDeleted(eventUUID);
 		
-		logger.info("leaving /event/markNewsStatusDeleted");
+		log.info("leaving /event/markNewsStatusDeleted");
 		return ;
 	}
 	
@@ -570,17 +571,17 @@ public class NewsController {
 	 */
 	@RequestMapping(value="/delete",produces="application/json")
 	public void deleteNews(@RequestParam String eventUUID) {
-		logger.info("entering... /events/news/delete");
+		log.info("entering... /events/news/delete");
         
         //data
         News news = new News();
         news.setEventUUID(eventUUID);
-        logger.info("news="+news.toString());
+        log.info("news="+news.toString());
         
 		/* business logic*/
         newsService.deleteNews(news);
         
-        logger.info("leaving... /events/news/delete");
+        log.info("leaving... /events/news/delete");
 		return ;		
 	}
 	
@@ -596,7 +597,7 @@ public class NewsController {
 	@RequestMapping(value = "/deletegroup", produces = "application/json")
 	@ResponseBody
 	public void deleteGroupNews(@RequestParam String eventUUIDArray, @RequestParam int newsStatus) {
-		logger.info("entering... /events/news/deletegroup");
+		log.info("entering... /events/news/deletegroup");
 
 		List<News> newsList = new ArrayList<News>();
 		String[] eventUUIDs = eventUUIDArray.split(",");
@@ -609,12 +610,12 @@ public class NewsController {
 			newsList.add(news);
 			news = null;
 		}
-		logger.info("newsList size=" + newsList.size());
+		log.info("newsList size=" + newsList.size());
 
 		/* business logic */
 		newsService.deleteNewsGroup(newsList);
 
-		logger.info("leaving... /events/news/deletegroup");
+		log.info("leaving... /events/news/deletegroup");
 		return;
 	}
 	
@@ -653,7 +654,7 @@ public class NewsController {
 			field7 = "<span class='label label-sm label-"+eventStatusKey+"'>"+eventStatus+"</span>";
 			field8 = "<a href='/acp/events/news"+getAction(actionName)+"?eventUUID="+field1+"' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> "+actionName+"</a>";
 			
-			//logger.info("field8="+field8);
+			//log.info("field8="+field8);
 			
 			data[i][0] = field0;
 			data[i][1] = field1;

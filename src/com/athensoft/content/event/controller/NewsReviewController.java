@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.athensoft.content.event.entity.EventReview;
 import com.athensoft.content.event.service.EventReviewService;
 
+import lombok.extern.log4j.Log4j;
+
 /**
  * News Review Controller for ACP
  * @author Athens
@@ -23,8 +25,8 @@ import com.athensoft.content.event.service.EventReviewService;
  */
 @Controller
 @RequestMapping("/events")
+@Log4j
 public class NewsReviewController {
-	private static final Logger logger = Logger.getLogger(NewsReviewController.class);
 	
 	/**
 	 * EventReview Service instance
@@ -41,11 +43,11 @@ public class NewsReviewController {
 	@RequestMapping(value="/eventsNewsReviewListAllData",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> getDataNewsReviewList(){
-		logger.info("entering /events/eventsNewsReviewListData");
+		log.info("entering /events/eventsNewsReviewListData");
 		
 		//data
 		List<EventReview> listEventReview = eventReviewService.getAllEventReview();
-		logger.info("Length of EventReview entries: "+ listEventReview==null?"NULL":listEventReview.size());
+		log.info("Length of EventReview entries: "+ listEventReview==null?"NULL":listEventReview.size());
 		
 		String[][] data = getData(listEventReview);
 		
@@ -58,7 +60,7 @@ public class NewsReviewController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving /events/eventsNewsReviewListData");
+		log.info("leaving /events/eventsNewsReviewListData");
 		return model;
 	}
 		
@@ -70,11 +72,11 @@ public class NewsReviewController {
 	@RequestMapping(value="/eventsNewsReviewListData",produces="application/json")
 	@ResponseBody
 	public Map<String,Object> getDataNewsReviewListByEventUUID(@RequestParam String eventUUID){
-		logger.info("entering /events/eventsNewsReviewListData");
+		log.info("entering /events/eventsNewsReviewListData");
 		
 		//data
 		List<EventReview> listEventReview = eventReviewService.getEventReviewByEventUUID(eventUUID);
-		logger.info("Length of EventReview entries: "+ listEventReview==null?"NULL":listEventReview.size());
+		log.info("Length of EventReview entries: "+ listEventReview==null?"NULL":listEventReview.size());
 		
 		String[][] data = getData(listEventReview);
 		
@@ -88,7 +90,7 @@ public class NewsReviewController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving /events/eventsNewsReviewListData");
+		log.info("leaving /events/eventsNewsReviewListData");
 		return model;
 	}
 
@@ -101,7 +103,7 @@ public class NewsReviewController {
 	@RequestMapping(value="/newsReviewSearchFilterData",produces="application/json")
 	@ResponseBody
 	public Map<String, Object> getDataSearchNewsReviewByFilter(@RequestParam String jsonObjString){
-		logger.info("entering /events/newsReviewSearchFilterData");
+		log.info("entering /events/newsReviewSearchFilterData");
 		
 		
 		JSONObject jobj= new JSONObject(jsonObjString);
@@ -121,8 +123,8 @@ public class NewsReviewController {
 		String where2a = strEventReviewDateFrom;
 		String where2b = strEventReviewDateTo;
 		
-		logger.info("strViewNumFrom="+strEventReviewDateFrom+"##");
-		logger.info("strViewNumTo="+strEventReviewDateTo+"##");
+		log.info("strViewNumFrom="+strEventReviewDateFrom+"##");
+		log.info("strViewNumTo="+strEventReviewDateTo+"##");
 		
 		String where3 = jobj.getString("eventReviewCustomer").trim();
 		String where4 = jobj.getString("eventReviewContent").trim();
@@ -163,13 +165,13 @@ public class NewsReviewController {
 				
 		queryString.append(where5==0?" ":" and review_status = "+where5+" ");
 		
-		logger.info("QueryString = "+ queryString.toString());
+		log.info("QueryString = "+ queryString.toString());
 		
 //		List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
-//		logger.info("Length of news entries = "+ listNews.size());
+//		log.info("Length of news entries = "+ listNews.size());
 		
 		List<EventReview> listEventReview = eventReviewService.getEventReviewByFilter(queryString.toString());
-		logger.info("Length of news review entries = "+ listEventReview.size());
+		log.info("Length of news review entries = "+ listEventReview.size());
 		
 		
 		String[][] data = getData(listEventReview);
@@ -186,7 +188,7 @@ public class NewsReviewController {
 		model.put("customActionStatus","OK");
 		model.put("customActionMessage","OK");
 		
-		logger.info("leaving /events/newsReviewSearchFilterData");
+		log.info("leaving /events/newsReviewSearchFilterData");
 		
 		return model;
 	}
@@ -199,11 +201,11 @@ public class NewsReviewController {
 	 */
 	@RequestMapping(value="/review/edit.html")
 	public ModelAndView gotoEventReviewEdit(@RequestParam String reviewUUID){
-		logger.info("entering... /events/review/edit.html");
+		log.info("entering... /events/review/edit.html");
 				
 		//data - review
 		EventReview eventReview = eventReviewService.getEventReviewByReviewUUID(reviewUUID);
-		logger.info("eventReview: "+ eventReview.toString());
+		log.info("eventReview: "+ eventReview.toString());
 		
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
@@ -212,7 +214,7 @@ public class NewsReviewController {
 		String viewName = "event/review_edit";
 		mav.setViewName(viewName);
 		
-		logger.info("leaving... /events/review/edit.html");
+		log.info("leaving... /events/review/edit.html");
 		return mav;
 	}
 
@@ -227,7 +229,7 @@ public class NewsReviewController {
 	@RequestMapping(value="/review/update",method=RequestMethod.POST)
 	@ResponseBody
 	public void updateNewsReview(@RequestParam String jsonObjString) {
-		logger.info("entering /events/review/update");
+		log.info("entering /events/review/update");
 		
         JSONObject ic_job= new JSONObject(jsonObjString);
    
@@ -240,12 +242,12 @@ public class NewsReviewController {
 //        newsReview.setReviewDatetime(new Date());
         newsReview.setReviewStatus(ic_job.getInt("reviewStatus"));
           
-        logger.info("newsReview = "+newsReview);
+        log.info("newsReview = "+newsReview);
           
 		/* business logic*/
         eventReviewService.updateEventReviewStatus(newsReview);
 		
-		logger.info("leaving /events/review/update");
+		log.info("leaving /events/review/update");
 		return ;		
 	}
 	
