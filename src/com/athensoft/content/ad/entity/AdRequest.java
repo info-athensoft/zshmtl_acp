@@ -2,9 +2,13 @@ package com.athensoft.content.ad.entity;
 
 import java.util.Date;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
 public class AdRequest {
 	private Long globalId;
 	private String acctName;

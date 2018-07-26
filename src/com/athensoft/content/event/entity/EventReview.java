@@ -2,7 +2,9 @@ package com.athensoft.content.event.entity;
 
 import java.util.Date;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * A review object binding to an event object, which represents a review from web visitors
@@ -10,7 +12,9 @@ import lombok.Data;
  * @author Athens
  * @version 1.0 
  */
-@Data
+@Setter
+@Getter
+@ToString
 public class EventReview {
 	
 	public static final int UNKNOWN = 0;

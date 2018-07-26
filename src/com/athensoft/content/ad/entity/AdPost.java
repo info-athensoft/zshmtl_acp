@@ -2,9 +2,13 @@ package com.athensoft.content.ad.entity;
 
 import java.util.Date;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Setter
+@Getter
+@ToString
 public class AdPost {
 	private Long globalId;
 	private String adUUID;
