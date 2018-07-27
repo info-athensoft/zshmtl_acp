@@ -1,6 +1,8 @@
 package com.athensoft.content.event.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * A tag object binding to an event object, which represents a keyword
@@ -8,7 +10,9 @@ import lombok.Data;
  * @author Athens
  * @version 1.0 
  */
-@Data
+@Setter
+@Getter
+@ToString
 public class EventTag {
 	
 	/**
