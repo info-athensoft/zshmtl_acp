@@ -125,11 +125,11 @@ function groupUpdateStatus(adUUIDArray,adStatus){
         timeout :   30000,
         
         success:function(msg){
-        	alert("提示: 广告状态批量修改成功!");
+        	alert("提示: 状态批量修改成功!");
             location.href="/acp/ad/adpost/list.html";
         },
         error:function(XMLHttpRequest, textStatus){
-            alert("错误: 广告状态批量修改异常，请重新尝试!");     
+            alert("错误: 状态批量修改异常，请重新尝试!");     
 //            alert(XMLHttpRequest.status+","+textStatus);
         },            
         complete: function(XMLHttpRequest, textStatus){

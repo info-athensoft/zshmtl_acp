@@ -8,12 +8,15 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.athensoft.content.ad.controller.AdPostController.AdPostGroup;
+import com.athensoft.content.ad.entity.AdPost;
 import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.entity.News;
@@ -515,22 +518,21 @@ public class NewsController {
 	 * @param newsStatus
 	 * @return
 	 */
-	@RequestMapping(value="/updategroup",produces="application/json")
+	@RequestMapping(value = "/updategroup", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void updateGroupNews(
-			@RequestParam String eventUUIDArray,
-			@RequestParam int newsStatus
+	public void updateGroupNews(@RequestBody NewsGroup newsGroup
 			) {
 		log.info("entering... /events/news/updategroup");
 		
+		List<String> eventUUIDs = newsGroup.getEventUUIDArray();
+		int newsStatus = newsGroup.getNewsStatus();
    
+        int eventUUIDLength = eventUUIDs.size();
         List<News> newsList = new ArrayList<News>();
-        String[] eventUUIDs = eventUUIDArray.split(",");
-        int eventUUIDLength = eventUUIDs.length;
         
         for(int i=0; i<eventUUIDLength; i++){
         	 News news = new News();
-             news.setEventUUID(eventUUIDs[i]);
+             news.setEventUUID(eventUUIDs.get(i));
              news.setEventStatus(newsStatus);
              newsList.add(news);
              news = null;
@@ -740,5 +742,26 @@ public class NewsController {
 			break;
 		}
 		return action;
+	}
+	
+	public static class NewsGroup{
+		private List<String> eventUUIDArray;
+		private int newsStatus;
+		public List<String> getEventUUIDArray() {
+			return eventUUIDArray;
+		}
+		public void setEventUUIDArray(List<String> eventUUIDArray) {
+			this.eventUUIDArray = eventUUIDArray;
+		}
+		public int getNewsStatus() {
+			return newsStatus;
+		}
+		public void setNewsStatus(int newsStatus) {
+			this.newsStatus = newsStatus;
+		}
+		@Override
+		public String toString() {
+			return "NewsGroup [eventUUIDArray=" + eventUUIDArray + ", newsStatus=" + newsStatus + "]";
+		}
 	}
 }

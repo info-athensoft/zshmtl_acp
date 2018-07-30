@@ -110,21 +110,28 @@ function groupUpdateStatus(eventUUIDArray,newsStatus){
 	//alert("groupUpdateStatus()");
     //alert(eventUUIDArray+":"+newsStatus);
 	
+	var jsonObjString = {
+			eventUUIDArray:eventUUIDArray,
+			newsStatus:newsStatus
+		};
+	var param = JSON.stringify(jsonObjString);
+	
     //execute saving
     $.ajax({
-        type    :   "post",
+    	async	:	false,
+    	type    :   "post",
         url     :	"/acp/events/news/updategroup",
-        data	:	"eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
-        dataType:   "json",
+        data	:	param,
+        contentType:"application/json",
         timeout :   30000,
         
         success:function(msg){
-        	alert("提示: 修改成功!");
+        	alert("提示: 状态批量修改成功!");
             location.href="/acp/events/news/list.html";
         	//alert("INFO: News status updated.");
         },
         error:function(XMLHttpRequest, textStatus){
-        	alert("错误: 修改失败，请重新尝试!");
+        	alert("错误: 状态批量修改失败，请重新尝试!");
 //            alert("ERROR: News updating failed.");     
         },            
         complete:function(XMLHttpRequest, textStatus){
