@@ -135,7 +135,7 @@
                                     <div class="caption">
                                         	新闻列表 <span class="caption-helper"></span></div>
                                     <div class="actions">
-                                        <a href="eventsNewsCreate" class="btn btn-circle btn-info">
+                                        <a href="${webapp_name}/events/news/create.html" class="btn btn-circle btn-info">
                                             <i class="fa fa-plus"></i><span class="hidden-xs"> 新增新闻 </span>
                                         </a>
                                         <!-- 

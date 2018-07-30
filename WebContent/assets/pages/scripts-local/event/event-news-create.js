@@ -12,18 +12,36 @@ function createNews() {
     var businessObject = getBusinessObject();
     var param = JSON.stringify(businessObject);
     
-    /* validating by business rule */
+    /* validating with business rule */
     //event title
     var eventTitle = businessObject.title;
     if(isEmptyString(eventTitle)){
-    	alert("WARNING: event title must not be empty!");
+    	alert("提示: 新闻标题不可为空");
     	return;
     }
+    
+    //author
     var author = businessObject.author;
     if(isEmptyString(author)){
-    	alert("WARNING: author must not be empty!");
+    	alert("提示: 编辑不可为空");
     	return;
     }
+    
+    //descShort
+    var descShort = businessObject.descShort;
+    if(isEmptyString(descShort)){
+    	alert("提示: 摘要不可为空");
+    	return;
+    }
+    
+    //longShort
+    var descLong = businessObject.descLong;
+    if(isEmptyString(descLong)){
+    	alert("提示: 正文不可为空");
+    	return;
+    }
+    
+    
     
     //execute saving
     $.ajax({
@@ -58,6 +76,6 @@ function resetCreateNews(){
     var p6 = $("#viewNum").val(0);
     var p7 = $("#descShort").val("");
     var p8 = $("#descLong").val("");
-    var p9 = $("#eventClass").val();
+    var p9 = $("#eventClass").val("1");
     var p10 = $("#eventStatus").val();
 }

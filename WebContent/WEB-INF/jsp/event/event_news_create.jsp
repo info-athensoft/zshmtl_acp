@@ -187,7 +187,7 @@
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="title" name="title" placeholder="">
+															<input type="text" class="form-control" id="title" name="title" placeholder="字数不超过30">
 														</div>
 													</div>
 													<div class="form-group">
@@ -195,26 +195,27 @@
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="author" name="author" placeholder="">
+															<input type="text" class="form-control" id="author" name="author" placeholder="作者或编辑的名字、笔名或昵称">
 														</div>
 													</div>
+													<!-- 
 													<div class="form-group">
-														<label class="col-md-2 control-label">发布时间: <span class="required">
+														<label class="col-md-2 control-label">创建时间: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
+															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2018" data-date-format="mm/dd/yyyy">
 																<input type="text" class="form-control" id="postDatetime" name="postDatetime" disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
-													</div>
+													</div> -->
 													<div class="form-group">
 														<label class="col-md-2 control-label">浏览数: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder="" disabled="disabled" value="0">
+															<input type="text" class="form-control" id="viewNum" name="viewNum" readonly="readonly" value="0">
 														</div>
 													</div>
 													<div class="form-group">
@@ -222,7 +223,7 @@
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<textarea class="form-control" id="descShort" name="descShort"></textarea>
+															<textarea class="form-control" id="descShort" name="descShort" placeholder="字数不超过100"></textarea>
 															<span class="help-block"> </span>
 														</div>
 														
@@ -259,14 +260,16 @@
 														</label>
 														<div class="col-md-10">
 															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
-																<option value="0">请选择...</option>
-																<option value="1">已发布</option>
+																
 																<option value="2" selected="selected">待发布</option>
 																<!-- 
+																<option value="0">请选择...</option>
+																<option value="1">已发布</option>
 																<option value="3">已删除</option>
 																<option value="4">已过期</option>
 																<option value="5">已挂起</option>  -->
 															</select>
+															<span class="help-block">新增成功后方可从新闻编辑页面发布或管理其它状态</span>
 														</div>
 													</div>
 													
