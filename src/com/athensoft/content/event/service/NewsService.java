@@ -5,9 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.athensoft.content.event.dao.EventMediaDao;
+import com.athensoft.content.event.dao.EventReviewDao;
 import com.athensoft.content.event.dao.NewsDao;
 import com.athensoft.content.event.entity.Event;
+import com.athensoft.content.event.entity.EventStatus;
 import com.athensoft.content.event.entity.News;
 
 /**
@@ -25,6 +29,14 @@ public class NewsService {
 	@Autowired
 	@Qualifier("newsDaoJdbcImpl")
 	private NewsDao newsDao;
+	
+	@Autowired
+	@Qualifier("eventMediaDaoJdbcImpl")
+	private EventMediaDao eventMediaDao;
+	
+	@Autowired
+	@Qualifier("eventMediaDaoJdbcImpl")
+	private EventReviewDao eventReviewDao;
 
 	
 	/**
@@ -71,6 +83,11 @@ public class NewsService {
 	 */
 	public List<Event> getLatestNews(int count){
 		String queryString = " ORDER BY post_datetime DESC LIMIT "+count;
+		return newsDao.findByFilter(queryString);
+	}
+	
+	public List<Event> getAllMarkedDeletedNews(){
+		String queryString = " AND event_status ="+ EventStatus.DELETED;
 		return newsDao.findByFilter(queryString);
 	}
 
@@ -120,18 +137,21 @@ public class NewsService {
 	 * @param eventUUID
 	 */
 	public void markNewsStatusDeleted(String eventUUID) {
-		this.newsDao.markNewsStatusDeleted(eventUUID);
+		this.newsDao.markDeleted(eventUUID);
 	}
 	
-	public void deleteNews(News news) {
-		this.newsDao.delete(news);
+	@Transactional
+	public void deleteNews(News newsDTO) {
+		this.newsDao.delete(newsDTO);
+		this.eventMediaDao.delete();
+		this.eventReviewDao.delete();
 	}
 	
 	/**
 	 * delete news objects and persist them in batch
 	 * @param newsList
 	 */
-	public void deleteNewsGroup(List<News> newsList) {
-		this.newsDao.deleteBatch(newsList);
+	public void deleteNewsGroup(List<News> newsDTOList) {
+		this.newsDao.deleteBatch(newsDTOList);
 	}
 }

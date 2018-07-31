@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import com.athensoft.base.dao.BaseDaoJdbcImpl;
 import com.athensoft.content.event.entity.Event;
+import com.athensoft.content.event.entity.EventStatus;
 import com.athensoft.content.event.entity.News;
 
 @Component
@@ -179,7 +180,7 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 	}
 
 	@Override
-	public int markNewsStatusDeleted(String eventUUID) {
+	public int markDeleted(String eventUUID) {
 		StringBuffer sbf = new StringBuffer();
 		sbf.append("update " + TABLE + " ");
 		sbf.append("set ");
@@ -191,17 +192,23 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("event_uuid", eventUUID);
-		paramSource.addValue("event_status", 3);
+		paramSource.addValue("event_status", EventStatus.DELETED);
 
 		return jdbc.update(sql, paramSource);
 	}
 
 	@Override
-	public int delete(News news) {
-
-		String sql = "delete from event_news where event_uuid =:eventUUID";
+	public int delete(News newsDTO) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("DELETE FROM ").append(TABLE);
+		sbf.append(" WHERE ");
+		sbf.append(" event_uuid =:eventUUID");
+		//String sql = "delete from event_news where event_uuid =:eventUUID";
+		
+		String sql = sbf.toString();
+		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("eventUUID", news.getEventUUID());
+		paramSource.addValue("eventUUID", newsDTO.getEventUUID());
 
 		return jdbc.update(sql, paramSource);
 	}

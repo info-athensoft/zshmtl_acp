@@ -65,7 +65,7 @@ public interface NewsDao {
 	 */
 	public int[] updateBatch(List<News> news);
 
-	public int markNewsStatusDeleted(String eventUUID);
+	public int markDeleted(String eventUUID);
 
 	/**
 	 * remove a news object from data source<p>

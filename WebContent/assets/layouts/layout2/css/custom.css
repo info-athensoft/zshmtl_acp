@@ -6,3 +6,7 @@
 .custom-operation-em{
 	color: red
 }
+
+.custom-label-left{
+	text-align: left !important;
+}

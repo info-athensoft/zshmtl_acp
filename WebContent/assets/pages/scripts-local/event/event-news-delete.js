@@ -1,29 +1,112 @@
-/** event_news_list.jsp */
+/** event_news_edit.jsp 
+ * 
+ *  images upload processing
+ * 
+ */
+/* edit news - init */
+var EventNewsEdit = function (option) {
 
-/* remove news - init */
-var EventNewsDelete = function () {
+    var handleImages = function(option) {
 
-    var initPickers = function () {
-        //init date pickers
-        $('.date-picker').datepicker({
-            rtl: App.isRTL(),
-            autoclose: true
+        // see http://www.plupload.com/
+        var uploader = new plupload.Uploader({
+            runtimes : 'html5,flash,silverlight,html4',
+             
+            browse_button : document.getElementById('tab_images_uploader_pickfiles'), // you can pass in id...
+            container: document.getElementById('tab_images_uploader_container'), // ... or DOM Element itself
+             
+            //url : "http://localhost:8080/acp/events/fileUpload", //TODO: Change to relative url
+            url : "", //TODO: Change to relative url
+             
+            filters : {
+                max_file_size : '8mb',
+                mime_types: [
+                    {title : "Image files", extensions : "jpg,gif,png"},
+                    {title : "Zip files", extensions : "zip"}
+                ]
+            },
+         
+            // Flash settings
+            flash_swf_url : '/acp/assets/plugins/plupload/js/Moxie.swf',
+     
+            // Silverlight settings
+            silverlight_xap_url : '/acp/assets/plugins/plupload/js/Moxie.xap',             
+         
+            init: {
+                PostInit: function() {
+                    $('#tab_images_uploader_filelist').html("");
+         
+                    $('#tab_images_uploader_uploadfiles').click(function() {
+                        uploader.start();
+                        return false;
+                    });
+
+                    $('#tab_images_uploader_filelist').on('click', '.added-files .remove', function(){
+                        uploader.removeFile($(this).parent('.added-files').attr("id"));    
+                        $(this).parent('.added-files').remove();                     
+                    });
+                },
+         
+                FilesAdded: function(up, files) {
+                    plupload.each(files, function(file) {
+                        $('#tab_images_uploader_filelist').append('<div class="alert alert-warning added-files" id="uploaded_file_' + file.id + '">' + file.name + '(' + plupload.formatSize(file.size) + ') <span class="status label label-info"></span>&nbsp;<a href="javascript:;" style="margin-top:-5px" class="remove pull-right btn btn-sm red"><i class="fa fa-times"></i> remove</a></div>');
+                    });
+                },
+         
+                UploadProgress: function(up, file) {
+                    $('#uploaded_file_' + file.id + ' > .status').html(file.percent + '%');
+                },
+
+                FileUploaded: function(up, file, response) {
+                    var response = $.parseJSON(response.response);
+
+                    if (response.result && response.result == 'OK') {
+                    	//alert(file.id);
+                    	
+                        var id = response.id; // uploaded file's unique name. Here you can collect uploaded file names and submit an jax request to your server side script to process the uploaded files and update the images tabke
+
+                        $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-success").html('<i class="fa fa-check"></i> Done'); // set successfull upload
+                        
+                        //create media record to database
+                        alert("提示：图片已上传");
+                        
+                    } else {
+                        $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-danger").html('<i class="fa fa-warning"></i> Failed'); // set failed upload
+                        Metronic.alert({type: 'danger', message: 'One of uploads failed. Please retry.', closeInSeconds: 10, icon: 'warning'});
+                    }
+                },
+         
+                Error: function(up, err) {
+                    Metronic.alert({type: 'danger', message: err.message, closeInSeconds: 10, icon: 'warning'});
+                },
+                
+                UploadComplete: function(){
+                	var eventUUID = option;
+                	//refresh tab_images when uploading done
+                	reloadEventMedia(eventUUID);
+                }
+            }
         });
+        
+        uploader.setOption('url','/acp/events/fileUploadAndCreateRecord?eventUUID='+option);
+        uploader.init();
     }
 
-    var handleProducts = function() {
+    var handleReviews = function () {
+    	var eventUUID = $("#eventUUID").val();
+    	//console.log("option eventUUID="+eventUUID);
+    	
         var grid = new Datatable();
 
         grid.init({
-            src: $("#datatable_eventNewsList"),
+            src: $("#datatable_reviews"),
             onSuccess: function (grid) {
-            	//alert("success");
+                // execute some code after table records loaded
             },
             onError: function (grid) {
-                // execute some code on network or other general error
-            	alert("onError");
+                // execute some code on network or other general error  
             },
-            loadingMessage: 'Loading ...',
+            loadingMessage: 'Loading...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
 
                 // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
@@ -32,72 +115,93 @@ var EventNewsDelete = function () {
                 //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
 
                 "lengthMenu": [
-                    [2,10, 20, 50, 100, 150, 200],
-                    [2,10, 20, 50, 100, 150, 200] // change per page values here 
+                    [10, 20, 50, 100, 150, -1],
+                    [10, 20, 50, 100, 150, "All"] // change per page values here
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "/acp/events/news/deletelist", // ajax source
-                    //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
-                    //"dataSrc": "data"
+                    //"url": "/acp/events/eventsNewsReviewListData?eventUUID="+eventUUID, // ajax source
+                	"url": "/acp/events/eventsNewsReviewListData", // ajax source
+                	"data":{
+                	    "eventUUID": eventUUID
+                	}
                 },
+                "columnDefs": [{ // define columns sorting options(by default all columns are sortable extept the first checkbox column)
+                    'orderable': true,
+                    'targets': [0]
+                }],
                 "order": [
-                    [1, "asc"]
+                    [0, "asc"]
                 ] // set first column as a default sort by asc
             }
         });
+    }
 
-         // handle group action submit button click
-        grid.getTableWrapper().on('click', '.table-group-action-submit', function (e) {
-        	//alert("getTableWrapper");
-            e.preventDefault();
-            var action = $(".table-group-action-input", grid.getTableWrapper());
-            
-            //alert(action.val());
-            
-            if (action.val() != "" && grid.getSelectedRowsCount() > 0) {
-                grid.setAjaxParam("customActionType", "group_action");
-                grid.setAjaxParam("customActionName", action.val());
-                grid.setAjaxParam("id", grid.getSelectedRows());
-                
-                //modified by Athens
-                var eventUUIDArray = grid.getSelectedRows();
-                var newsStatus = action.val();
-                groupDeleteNews(eventUUIDArray,newsStatus);
-                //end-of-modified
-                
-                //grid.getDataTable().ajax.reload();
-                //grid.getDataTable().ajax.url("/acp/events/eventsNewsListData").load();
-                //grid.getDataTable().ajax.reload();
-                grid.clearAjaxParams();
-                
-                
-            } else if (action.val() == "") {
-                App.alert({
-                    type: 'danger',
-                    icon: 'warning',
-                    message: 'Please select an action',
-                    container: grid.getTableWrapper(),
-                    place: 'prepend'
-                });
-            } else if (grid.getSelectedRowsCount() === 0) {
-            	App.alert({
-                    type: 'danger',
-                    icon: 'warning',
-                    message: 'No record selected',
-                    container: grid.getTableWrapper(),
-                    place: 'prepend'
-                });
+    var handleHistory = function () {
+
+        var grid = new Datatable();
+
+        grid.init({
+            src: $("#datatable_history"),
+            onSuccess: function (grid) {
+                // execute some code after table records loaded
+            },
+            onError: function (grid) {
+                // execute some code on network or other general error  
+            },
+            loadingMessage: 'Loading...',
+            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
+                "lengthMenu": [
+                    [10, 20, 50, 100, 150, -1],
+                    [10, 20, 50, 100, 150, "All"] // change per page values here
+                ],
+                "pageLength": 10, // default record count per page
+                "ajax": {
+                    "url": "demo/ecommerce_product_history.php", // ajax source
+                },
+                "columnDefs": [{ // define columns sorting options(by default all columns are sortable extept the first checkbox column)
+                    'orderable': true,
+                    'targets': [0]
+                }],
+                "order": [
+                    [0, "asc"]
+                ] // set first column as a default sort by asc
             }
+        });
+    } 
+
+    var initComponents = function () {
+        //init datepickers
+        $('.date-picker').datepicker({
+            rtl: App.isRTL(),		//modified by Athens
+            autoclose: true
+        });
+
+        //init datetimepickers
+        $(".datetime-picker").datetimepicker({
+            isRTL: App.isRTL(),		//modified by Athens
+            autoclose: true,
+            todayBtn: true,
+            pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left"),
+            minuteStep: 10
+        });
+
+        //init maxlength handler
+        $('.maxlength-handler').maxlength({
+            limitReachedClass: "label label-danger",
+            alwaysShow: true,
+            threshold: 5
         });
     }
 
     return {
 
         //main function to initiate the module
-        init: function () {
-            handleProducts();
-            initPickers();
+        init: function (option) {
+            initComponents();
+            handleImages(option);
+            handleReviews();
+            //handleHistory();
         }
 
     };
@@ -105,55 +209,32 @@ var EventNewsDelete = function () {
 }();
 
 
-/* remove news - button:group delete news permanently */
-function groupDeleteNews(eventUUIDArray,newsStatus){
-	//alert("groupUpdateStatus()");
+/*edit news - button:back */
+function backToNewsDeleteList(){
+	location.href = "/acp/events/news/deletelist.html";
+}
+
+
+/* event news - button:save change,update */
+function deleteNews() {
+    var businessObject = getBusinessObject();
+	var param = JSON.stringify(businessObject)
 	
     //execute saving
     $.ajax({
-        type    :	"post",
-        url     :	"/acp/events/news/deletegroup",
-        data	:	"eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
-        dataType:	"json",
-        timeout :	30000,
-        
-        success:function(msg){
-        	alert("提示: 删除成功!");
-            location.href="/acp/events/deletelist.html";
-        	//alert("INFO: News status updated.");
-        },
-        error:function(){
-        	alert("错误: 删除失败，请重新尝试!");
-//            alert("ERROR: News deleting failed.");     
-        },            
-        complete: function(XMLHttpRequest, textStatus){
-            //reset to avoid duplication
-        }        
-    });
-}
-
-
-/* remove news - button:group delete news permanently */
-function deleteNews(){
-	
-	var eventUUID = $("#eventUUID").val();
-	
-    //execute deleting
-    $.ajax({
-        type    :	"post",
+        type    :   "post",
         url     :	"/acp/events/news/delete",
-        data	:	"eventUUID="+eventUUID,
-//        dataType:	"json",
-        timeout :	30000,
+        data	:	"jsonObjString="+param,
+//        dataType:   "html",
+        timeout :   30000,
         
         success:function(msg){
         	alert("提示: 删除成功!");
             location.href="/acp/events/deletelist.html";
-        	//alert("INFO: News status updated.");
         },
-        error:function(){
+        error:function(XMLHttpRequest, textStatus){
         	alert("错误: 删除失败，请重新尝试!");
-//            alert("ERROR: News deleting failed.");     
+//            alert("ERROR: News updating failed."); 
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
@@ -163,25 +244,24 @@ function deleteNews(){
 
 
 
+/*edit news - tab:images */
+function reloadEventMedia(eventUUID){
+	//alert("RELOADING...");
+	location.reload();
+}
 
-/* list news - datatable:button:filter search */
-function filterSearch(){
-	
-//	alert("do filterSearch()");
-//	create a json object
-    var p2 = $("#eventUUID").val();
-    var p3 = $("#eventTitle").val();
-    var p4 = $("#eventAuthor").val();
-    var p5a = $("#postDatetimeFrom").val();
-    var p5b = $("#postDatetimeTo").val();
-    var p6a = $("#viewNumFrom").val();
-    var p6b = $("#viewNumTo").val();
-    var p9 = $("#eventClass").val();
-    var p10 = $("#eventStatus").val();
 
-//    alert(p5a+" -- "+p5b);
-    
+/*edit news - tab:reviews */
+function filterSearchReview(){
+    var p1 = $("#event_review_no").val();
+    var p2a = $("#event_review_date_from").val();
+    var p2b = $("#event_review_date_to").val();
+    var p3 = $("#event_review_customer").val();
+    var p4 = $("#event_review_content").val();
+    var p5 = $("#event_review_status").val();
+
 //	validate
+    /*
 	if(!isNonNegativeInteger(p6a)){
 		p6a = "";
 		$("#viewNumFrom").val("");
@@ -189,42 +269,17 @@ function filterSearch(){
 	if(!isNonNegativeInteger(p6b)){
 		p6b = "";
 		$("#viewNumTo").val("");
-	}
-//	isNonNegativeInteger(p6b);
-//	alert(p5a+" "+p5b);
+	}*/
   
-    var businessObject =
+    var eventReviewObject =
     {
-    //		globalId    :    p1,
-    		eventUUID   :    p2,
-    		title    	:    p3,
-    		author    	:    p4,
-     		postDatetimeFrom:  p5a,            
-     		postDatetimeTo:    p5b,            
-    		viewNumFrom :    p6a,            
-    		viewNumTo 	:    p6b,            
-    //		descShort   :    p7,
-    //		descLong	:    p8,
-      		eventClass  :    p9,
-    		eventStatus	:    p10
+    		eventReviewNo		:	p1,
+    		eventReviewDateFrom	:   p2a,
+    		eventReviewDateTo	:   p2b,
+    		eventReviewCustomer	:   p3,
+    		eventReviewContent	:   p4,
+    		eventReviewStatus	:   p5
     };
-
-    var dt = $("#datatable_eventNewsList").DataTable();
-    var param = JSON.stringify(businessObject);
-    var x = dt.ajax.url("/acp/events/news/deletesearch?jsonObjString="+param).load();
-}
-
-
-/* list news - datatable:button:filter reset */
-function filterReset(){
-//	alert("do filterReset()");
-	var p2 = $("#eventUUID").val("");
-    var p3 = $("#eventTitle").val("");        
-    var p4 = $("#eventAuthor").val("");
-    var p5a = $("#postDatetimeFrom").val("");
-    var p5b = $("#postDatetimeTo").val("");
-    var p6a = $("#viewNumFrom").val("");
-    var p6b = $("#viewNumTo").val("");
-    var p9 = $("#eventClass").val(0);
-    var p10 = $("#eventStatus").val(0);
+    var dt = $("#datatable_reviews").DataTable();
+    var x = dt.ajax.url("newsReviewSearchFilterData?jsonObjString="+JSON.stringify(eventReviewObject)).load();
 }

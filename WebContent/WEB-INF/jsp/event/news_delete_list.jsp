@@ -278,7 +278,7 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/global-validate.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news.js"></script>
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-delete.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-deletelist.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 EventNewsDelete.init();

@@ -25,7 +25,7 @@ import com.athensoft.content.event.entity.EventMedia;
  *
  */
 @Component
-@Qualifier("eventMediaDaoJDBCImpl")
+@Qualifier("eventMediaDaoJdbcImpl")
 public class EventMediaDaoJdbcImpl extends BaseDaoJdbcImpl implements EventMediaDao {
 
 	private static final String TABLE = "event_media";

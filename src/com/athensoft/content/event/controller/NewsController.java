@@ -121,9 +121,33 @@ public class NewsController {
 	 * @return the target view name 
 	 */
 	@RequestMapping(value="/deletelist.html")
-	public String gotoDeleteNews(){
-		String viewName = "event/event_news_delete";
+	public String gotoListDeleteNews(){
+		String viewName = "event/news_delete_list";
 		return viewName;
+	}
+	
+	@RequestMapping(value="/delete.html")
+	public ModelAndView gotoDeleteNews(@RequestParam String eventUUID){
+		log.info("entering... /event/news/delete.html");
+		
+		//data - news
+		News news = newsService.getNewsByEventUUID(eventUUID);	
+		
+		//data - media
+		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
+		log.info("Length of EventReview entries: " + listEventMedia == null ? "NULL" : listEventMedia.size());
+		
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
+		model.put("newsObject", news);
+		model.put("eventMediaList", listEventMedia);
+		
+		String viewName = "event/news_delete";
+		mav.setViewName(viewName);
+		
+		log.info("leaving... /event/news/delete.html");
+		return mav;
 	}
 
 
@@ -300,8 +324,8 @@ public class NewsController {
 		log.info("entering... /events/news/deletelist");
 		
 		//data
-		List<Event> listNews = newsService.getAllNews();
-		log.info("Length of news entries: "+ listNews.size());
+		List<Event> listNews = newsService.getAllMarkedDeletedNews();
+		log.info("Length of news entries: "+ listNews==null?"NULL":listNews.size());
 		
 		String[][] data = getData(listNews, ACTION_DELETE);
 		

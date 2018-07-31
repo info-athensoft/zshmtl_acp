@@ -18,7 +18,7 @@ import com.athensoft.base.dao.BaseDaoJdbcImpl;
 import com.athensoft.content.event.entity.EventReview;
 
 @Component
-@Qualifier("eventReviewDaoJDBCImpl")
+@Qualifier("eventReviewDaoJdbcImpl")
 public class EventReviewDaoJdbcImpl extends BaseDaoJdbcImpl implements EventReviewDao {
 	private static final Logger logger = Logger.getLogger(EventReviewDaoJdbcImpl.class);
 
