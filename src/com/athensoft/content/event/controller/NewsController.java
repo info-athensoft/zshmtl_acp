@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.entity.News;
+import com.athensoft.content.event.entity.NewsAction;
 import com.athensoft.content.event.service.EventMediaService;
 import com.athensoft.content.event.service.NewsService;
 import com.athensoft.util.id.UUIDHelper;
@@ -35,8 +36,8 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class NewsController {
 
-	private static final String ACTION_EDIT = "±à¼­";
-	private static final String ACTION_DELETE = "É¾³ý";
+//	private static final String ACTION_EDIT = "±à¼­";
+//	private static final String ACTION_DELETE = "É¾³ý";
 
 	/**
 	 * News Service instance
@@ -164,7 +165,8 @@ public class NewsController {
 		List<Event> listNews = newsService.getAllNews();
 		log.info("Length of news entries: " + listNews == null ? "NULL" : listNews.size());
 
-		String[][] data = getData(listNews, ACTION_EDIT);
+//		String[][] data = getData(listNews, ACTION_EDIT);
+		String[][] data = getData(listNews, NewsAction.EDIT);
 
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
@@ -305,7 +307,8 @@ public class NewsController {
 		log.info("Length of news entries = " + listNews.size());
 
 		// data
-		String[][] data = getData(listNews, ACTION_EDIT);
+//		String[][] data = getData(listNews, ACTION_EDIT);
+		String[][] data = getData(listNews, NewsAction.EDIT);
 
 		//
 		ModelAndView mav = new ModelAndView();
@@ -338,7 +341,8 @@ public class NewsController {
 		List<Event> listNews = newsService.getAllMarkedDeletedNews();
 		log.info("Length of news entries: " + listNews == null ? "NULL" : listNews.size());
 
-		String[][] data = getData(listNews, ACTION_DELETE);
+//		String[][] data = getData(listNews, ACTION_DELETE);
+		String[][] data = getData(listNews, NewsAction.DELETE);
 
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
@@ -481,7 +485,8 @@ public class NewsController {
 		List<Event> listNews = newsService.getNewsByFilter(queryString.toString());
 		log.info("Length of news entries = " + listNews == null ? "NULL" : listNews.size());
 
-		String[][] data = getData(listNews, ACTION_DELETE);
+//		String[][] data = getData(listNews, ACTION_DELETE);
+		String[][] data = getData(listNews, NewsAction.DELETE);
 
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
@@ -790,10 +795,10 @@ public class NewsController {
 	private String getAction(String actionName) {
 		String action = "";
 		switch (actionName) {
-		case ACTION_EDIT:
+		case NewsAction.EDIT:
 			action = "/edit.html";
 			break;
-		case ACTION_DELETE:
+		case NewsAction.DELETE:
 			action = "/delete.html";
 			break;
 		}
