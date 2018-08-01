@@ -215,7 +215,14 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 
 	@Override
 	public int[] deleteBatch(final List<News> newsList) {
-		String sql = "delete from event_news where event_uuid =:eventUUID";
+		//String sql = "delete from event_news where event_uuid =:eventUUID";
+		
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("DELETE FROM ").append(TABLE);
+		sbf.append(" WHERE ");
+		sbf.append(" event_uuid =:eventUUID ");
+		
+		String sql = sbf.toString();
 
 		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();
 		for (News x : newsList) {

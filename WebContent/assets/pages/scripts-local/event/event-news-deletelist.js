@@ -109,21 +109,27 @@ var EventNewsDelete = function () {
 function groupDeleteNews(eventUUIDArray,newsStatus){
 	//alert("groupUpdateStatus()");
 	
+	var jsonObjString = {
+			eventUUIDArray:eventUUIDArray,
+			newsStatus:newsStatus
+		};
+	var param = JSON.stringify(jsonObjString);
+	
     //execute saving
     $.ajax({
         type    :	"post",
         url     :	"/acp/events/news/deletegroup",
-        data	:	"eventUUIDArray="+eventUUIDArray+"&newsStatus="+newsStatus,
-        dataType:	"json",
+        data	:	param,
+        contentType:"application/json",
         timeout :	30000,
         
         success:function(msg){
-        	alert("提示: 删除成功!");
+        	alert("提示: 批量删除成功!");
             location.href="/acp/events/deletelist.html";
         	//alert("INFO: News status updated.");
         },
         error:function(){
-        	alert("错误: 删除失败，请重新尝试!");
+        	alert("错误: 批量删除失败，请重新尝试!");
 //            alert("ERROR: News deleting failed.");     
         },            
         complete: function(XMLHttpRequest, textStatus){

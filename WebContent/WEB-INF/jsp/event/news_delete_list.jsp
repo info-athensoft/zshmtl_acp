@@ -134,7 +134,7 @@
                                     <div class="caption">
                                         	删除新闻 <span class="caption-helper">永久删除新闻</span></div>
                                     <div class="actions">
-                                        <a href="${webapp_name}/events/news/deletelist.html" class="btn btn-circle btn-info">
+                                        <a href="${webapp_name}/events/news/list.html" class="btn btn-circle btn-info">
                                             <i class="fa fa-plus"></i><span class="hidden-xs"> 返回新闻列表 </span>
                                         </a>
                                     </div>

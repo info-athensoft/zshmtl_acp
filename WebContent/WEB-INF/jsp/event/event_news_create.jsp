@@ -170,7 +170,7 @@
 														<label class="col-md-2 control-label">全局编号: <span class="required">
 														* </span>
 														</label>
-														<div class="col-md-10">
+														<div class="col-md-4">
 															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled">
 														</div>
 													</div>
@@ -178,7 +178,7 @@
 														<label class="col-md-2 control-label">新闻编号: <span class="required">
 														* </span>
 														</label>
-														<div class="col-md-10">
+														<div class="col-md-4">
 															<input type="text" class="form-control" id="eventUUID" name="eventUUID" placeholder="" disabled="disabled">
 														</div>
 													</div>
@@ -194,7 +194,7 @@
 														<label class="col-md-2 control-label">编辑: <span class="required">
 														* </span>
 														</label>
-														<div class="col-md-10">
+														<div class="col-md-4">
 															<input type="text" class="form-control" id="author" name="author" placeholder="作者或编辑的名字、笔名或昵称">
 														</div>
 													</div>
@@ -210,14 +210,7 @@
 															<span class="help-block"></span>
 														</div>
 													</div> -->
-													<div class="form-group">
-														<label class="col-md-2 control-label">浏览数: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="viewNum" name="viewNum" readonly="readonly" value="0">
-														</div>
-													</div>
+													
 													<div class="form-group">
 														<label class="col-md-2 control-label">摘要: <span class="required">
 														* </span>
@@ -234,10 +227,19 @@
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<textarea class="form-control" id="descLong" name="descLong" rows="6"></textarea>
+															<textarea class="form-control" id="descLong" name="descLong" rows="12"></textarea>
 															<span class="help-block"> </span>
 														</div>
 														
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">浏览数: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="viewNum" name="viewNum" readonly="readonly" value="0">
+														</div>
 													</div>
 													
 													<div class="form-group">

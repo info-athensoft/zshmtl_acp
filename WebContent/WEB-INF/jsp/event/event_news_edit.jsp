@@ -165,17 +165,30 @@
 													<div class="form-group">
 														<label class="col-md-2 control-label">全局编号: <span class="required"> * </span>
 														</label>
-														<div class="col-md-10">
+														<div class="col-md-4">
 															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled"  value="${newsObject.globalId}">
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="col-md-2 control-label">新闻编号: <span class="required"> * </span>
 														</label>
-														<div class="col-md-10">
+														<div class="col-md-4">
 															<input type="text" class="form-control" id="eventUUID" name="eventUUID"  placeholder="" value="${newsObject.eventUUID}" disabled="disabled">
 														</div>
 													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">发布时间: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-4">
+															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
+																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${newsObject.postDatetime}" disabled="disabled">
+															</div>
+															<span class="help-block"></span>
+														</div>
+														
+													</div>
+													
 													<div class="form-group">
 														<label class="col-md-2 control-label">新闻标题: <span class="required"> * </span>
 														</label>
@@ -187,29 +200,11 @@
 														<label class="col-md-2 control-label">编辑: <span class="required">
 														* </span>
 														</label>
-														<div class="col-md-10">
+														<div class="col-md-4">
 															<input type="text" class="form-control" id="author" name="author" placeholder=""  value="${newsObject.author}">
 														</div>
 													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">发布时间: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${newsObject.postDatetime}" disabled="disabled">
-															</div>
-															<span class="help-block"></span>
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">浏览数: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<input type="text" class="form-control" id="viewNum" name="viewNum" placeholder=""  value="${newsObject.viewNum}" disabled="disabled">
-														</div>
-													</div>
+													
 													<div class="form-group">
 														<label class="col-md-2 control-label">摘要: <span class="required">
 														* </span>
@@ -226,11 +221,18 @@
 														* </span>
 														</label>
 														<div class="col-md-10">
-															<textarea class="form-control" id="descLong" name="descLong" rows="6">${newsObject.descLong}</textarea>
+															<textarea class="form-control" id="descLong" name="descLong" rows="12">${newsObject.descLong}</textarea>
 														</div>
 														
 													</div>
-													
+													<div class="form-group">
+														<label class="col-md-2 control-label">浏览数: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-4">
+															<input type="text" class="form-control" id="viewNum" name="viewNum" value="${newsObject.viewNum}" disabled="disabled">
+														</div>
+													</div>
 													<div class="form-group">
 														<label class="col-md-2 control-label">新闻类别: <span class="required">
 														* </span>
