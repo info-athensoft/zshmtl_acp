@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.athensoft.content.ad.controller.AdPostController.AdPostGroup;
-import com.athensoft.content.ad.entity.AdPost;
 import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.entity.News;
@@ -595,20 +593,23 @@ public class NewsController {
 	 * @param eventUUID eventUUID
 	 * @return data and target view
 	 */
-	@RequestMapping(value="/delete",produces="application/json")
-	public void deleteNews(@RequestParam String eventUUID) {
+	@RequestMapping(value = "/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public void deleteNews(@RequestParam String jsonObjString) {
 		log.info("entering... /events/news/delete");
-        
-        //data
-        News news = new News();
-        news.setEventUUID(eventUUID);
-        log.info("news="+news.toString());
-        
-		/* business logic*/
-        newsService.deleteNews(news);
-        
-        log.info("leaving... /events/news/delete");
-		return ;		
+
+		JSONObject jObj = new JSONObject(jsonObjString);
+		String eventUUID = jObj.getString("eventUUID");
+		// data
+		News news = new News();
+		news.setEventUUID(eventUUID);
+		log.info("news=" + news.toString());
+
+		/* business logic */
+		newsService.deleteNews(news);
+
+		log.info("leaving... /events/news/delete");
+		return;
 	}
 	
 	

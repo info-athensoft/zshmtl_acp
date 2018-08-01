@@ -163,9 +163,18 @@ public class EventReviewDaoJdbcImpl extends BaseDaoJdbcImpl implements EventRevi
 	}
 
 	@Override
-	public int delete() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(EventReview eventReviewDTO) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("DELETE FROM ").append(TABLE);
+		sbf.append(" WHERE ");
+		sbf.append(" event_uuid =:eventUUID");
+		
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("eventUUID", eventReviewDTO.getEventUUID());
+
+		return jdbc.update(sql, paramSource);
 	}
 
 	private static class EventReviewRowMapper implements RowMapper<EventReview> {

@@ -168,6 +168,7 @@
 													<div class="form-group">
 														<label class="col-md-2 control-label">新闻编号: <span class="required"> * </span></label>
 														<label class="col-md-10 control-label custom-label-left">${newsObject.eventUUID}</label>
+														<input type="hidden" id="eventUUID" name="eventUUID" value="${newsObject.eventUUID}"/> 
 													</div>
 													<div class="form-group">
 														<label class="col-md-2 control-label">新闻标题: <span class="required"> * </span></label>

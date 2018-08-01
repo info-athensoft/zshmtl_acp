@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.athensoft.base.dao.BaseDaoJdbcImpl;
 import com.athensoft.content.event.entity.EventMedia;
+import com.athensoft.content.event.entity.News;
 
 /**
  * The Spring JDBC Implementation of {@link:EventMediaDao}
@@ -118,9 +119,18 @@ public class EventMediaDaoJdbcImpl extends BaseDaoJdbcImpl implements EventMedia
 	}
 
 	@Override
-	public int delete() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(EventMedia eventMediaDTO) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("DELETE FROM ").append(TABLE);
+		sbf.append(" WHERE ");
+		sbf.append(" event_uuid =:eventUUID");
+		
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("eventUUID", eventMediaDTO.getEventUUID());
+
+		return jdbc.update(sql, paramSource);
 	}
 
 	@Override

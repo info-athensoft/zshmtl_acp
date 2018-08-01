@@ -79,7 +79,7 @@ public interface EventMediaDao {
 	 * remove an event media object from data source<p>
 	 * WARNING: THE METHOD HAS NOT COMPLETED.
 	 */
-	public int delete();
+	public int delete(EventMedia eventMediaDTO);
 	
 	
 }

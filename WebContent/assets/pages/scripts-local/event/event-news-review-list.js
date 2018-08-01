@@ -38,7 +38,7 @@ var EventNewsReviewList = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "/acp/events/eventsNewsReviewListAllData", // ajax source
+                    "url": "/acp/events/review/list", // ajax source
                     //"url": "http://localhost:8080/acp/events/eventsNewsListData?length=3", // ajax source
                 },
                 "order": [

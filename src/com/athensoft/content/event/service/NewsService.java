@@ -11,6 +11,8 @@ import com.athensoft.content.event.dao.EventMediaDao;
 import com.athensoft.content.event.dao.EventReviewDao;
 import com.athensoft.content.event.dao.NewsDao;
 import com.athensoft.content.event.entity.Event;
+import com.athensoft.content.event.entity.EventMedia;
+import com.athensoft.content.event.entity.EventReview;
 import com.athensoft.content.event.entity.EventStatus;
 import com.athensoft.content.event.entity.News;
 
@@ -35,7 +37,7 @@ public class NewsService {
 	private EventMediaDao eventMediaDao;
 	
 	@Autowired
-	@Qualifier("eventMediaDaoJdbcImpl")
+	@Qualifier("eventReviewDaoJdbcImpl")
 	private EventReviewDao eventReviewDao;
 
 	
@@ -143,8 +145,12 @@ public class NewsService {
 	@Transactional
 	public void deleteNews(News newsDTO) {
 		this.newsDao.delete(newsDTO);
-		this.eventMediaDao.delete();
-		this.eventReviewDao.delete();
+		EventMedia eventMediaDTO = new EventMedia();
+		eventMediaDTO.setEventUUID(newsDTO.getEventUUID());
+		this.eventMediaDao.delete(eventMediaDTO);
+		EventReview eventReviewDTO = new EventReview();
+		eventReviewDTO.setEventUUID(newsDTO.getEventUUID());
+		this.eventReviewDao.delete(eventReviewDTO);
 	}
 	
 	/**

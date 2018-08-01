@@ -94,12 +94,12 @@ var EventNewsEdit = function (option) {
 
     var handleReviews = function () {
     	var eventUUID = $("#eventUUID").val();
-    	//console.log("option eventUUID="+eventUUID);
+    	console.log("option eventUUID="+eventUUID);
     	
         var grid = new Datatable();
 
         grid.init({
-            src: $("#datatable_reviews"),
+            src: $("#datatable_eventNewsReviews"),
             onSuccess: function (grid) {
                 // execute some code after table records loaded
             },
@@ -121,7 +121,7 @@ var EventNewsEdit = function (option) {
                 "pageLength": 10, // default record count per page
                 "ajax": {
                     //"url": "/acp/events/eventsNewsReviewListData?eventUUID="+eventUUID, // ajax source
-                	"url": "/acp/events/eventsNewsReviewListData", // ajax source
+                	"url": "/acp/events/review/list/eventuuid", // ajax source
                 	"data":{
                 	    "eventUUID": eventUUID
                 	}

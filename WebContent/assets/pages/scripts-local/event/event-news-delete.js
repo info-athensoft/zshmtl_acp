@@ -217,10 +217,16 @@ function backToNewsDeleteList(){
 
 /* event news - button:save change,update */
 function deleteNews() {
-    var businessObject = getBusinessObject();
-	var param = JSON.stringify(businessObject)
 	
-    //execute saving
+	var p1 = $("#eventUUID").val();
+    var businessObject = 
+    {
+    	eventUUID:p1
+    };
+    	
+	var param = JSON.stringify(businessObject);
+	
+    //execute delete news
     $.ajax({
         type    :   "post",
         url     :	"/acp/events/news/delete",
@@ -230,7 +236,7 @@ function deleteNews() {
         
         success:function(msg){
         	alert("提示: 删除成功!");
-            location.href="/acp/events/deletelist.html";
+            location.href="/acp/events/news/deletelist.html";
         },
         error:function(XMLHttpRequest, textStatus){
         	alert("错误: 删除失败，请重新尝试!");

@@ -134,7 +134,7 @@
                                     <div class="caption">
                                         	删除新闻 <span class="caption-helper">永久删除新闻</span></div>
                                     <div class="actions">
-                                        <a href="${webapp_name}/events/news/list.html" class="btn btn-circle btn-info">
+                                        <a href="${webapp_name}/events/news/deletelist.html" class="btn btn-circle btn-info">
                                             <i class="fa fa-plus"></i><span class="hidden-xs"> 返回新闻列表 </span>
                                         </a>
                                     </div>
@@ -144,10 +144,10 @@
                                         <div class="table-actions-wrapper">
                                             <span> </span>
                                             <select class="table-group-action-input form-control input-inline input-small input-sm" name="groupOption">
-                                                <option value="">Select...</option>
-												<option value="6">Delete permanently</option>
+                                                <option value="">请选择...</option>
+												<option value="6">彻底删除</option>
                                             </select>
-                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Group Delete</button>
+                                            <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> 批量删除</button>
                                         </div>
                                         <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_eventNewsList">
                                             <thead>
@@ -158,14 +158,14 @@
                                                             <span></span>
                                                         </label>
                                                     </th>
-                                                    <th width="8%">ID</th>
-													<th width="25%">Title</th>
-													<th width="8%">Author</th>
-													<th width="8%">Category</th>
-													<th width="15%">Date&nbsp;Post</th>
-													<th width="6%">Views</th>
-													<th width="8%">Status</th>
-													<th width="8%">Actions</th>
+                                                    <th width="8%">新闻编号</th>
+													<th width="25%">新闻标题</th>
+													<th width="8%">编辑</th>
+													<th width="8%">类别</th>
+													<th width="15%">删除日期</th>
+													<th width="6%">浏览量</th>
+													<th width="8%">状态</th>
+													<th width="8%">操作</th>
                                                 </tr>
                                                 <tr role="row" class="filter">
 													<td></td>
@@ -202,19 +202,15 @@
 													</td>
 													<td>
 														<select class="form-control form-filter input-sm" name="event_status" id="eventStatus">
-															<option value="0">Select...</option>
-															<option value="1">Published</option>
-															<option value="2">Wait to post</option>
-															<option value="3">Deleted</option>
-															<option value="4">Out of date</option>
-															<option value="5">Suspended</option>
+															<option value="0">请选择...</option>
+															<option value="3">已删除</option>
 														</select>
 													</td>
 													<td>
 														<div class="margin-bottom-5">
-														<button class="btn btn-sm yellow filter-submit1 margin-bottom" onclick="filterSearch();"><i class="fa fa-search"></i> Search</button>
+														<button class="btn btn-sm yellow filter-submit1 margin-bottom" onclick="filterSearch();"><i class="fa fa-search"></i> 查找</button>
 														</div>
-														<button class="btn btn-sm red filter-cancel1" onclick="filterReset();"><i class="fa fa-times"></i> Reset</button>
+														<button class="btn btn-sm red filter-cancel1" onclick="filterReset();"><i class="fa fa-times"></i> 重置</button>
 													</td>
 												</tr>
                                             </thead>

@@ -74,7 +74,7 @@ public interface EventReviewDao {
 	 * remove an event review object from data source<p>
 	 * WARNING: THE METHOD HAS NOT COMPLETED.
 	 */
-	public int delete();
+	public int delete(EventReview eventReviewDTO);
 	
 	
 }

@@ -450,7 +450,7 @@
 jQuery(document).ready(function() {    
 	var eventUUID = $("#eventUUID").val();
 	EventNewsEdit.init(eventUUID);
-	EventNewsReviewList.init();
+	//EventNewsReviewList.init();
 
 //local
 //select object for event class
