@@ -106,10 +106,35 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 	@Override
 	public int create(News news) {
 		StringBuffer sbf = new StringBuffer();
-		sbf.append("insert into " + TABLE);
-		sbf.append("(event_uuid,title,author,post_datetime,view_num,desc_short,desc_long,event_class,event_status) ");
-		sbf.append(
-				"values(:event_uuid,:title,:author,:post_datetime,:view_num,:desc_short,:desc_long,:event_class,:event_status)");
+		sbf.append("INSERT INTO ").append(TABLE);
+		sbf.append(" (");
+		sbf.append(" event_uuid,");
+		sbf.append(" title,");
+		sbf.append(" author,");
+		sbf.append(" post_date,");
+		sbf.append(" create_date,");
+		sbf.append(" modify_date,");
+		sbf.append(" delete_date,");
+		sbf.append(" view_num,");
+		sbf.append(" desc_short,");
+		sbf.append(" desc_long,");
+		sbf.append(" event_class,");
+		sbf.append(" event_status");
+		sbf.append(" ) VALUES(");
+		sbf.append(" event_uuid,");
+		sbf.append(" title,");
+		sbf.append(" author,");
+		sbf.append(" post_date,");
+		sbf.append(" create_date,");
+		sbf.append(" modify_date,");
+		sbf.append(" delete_date,");
+		sbf.append(" view_num,");
+		sbf.append(" desc_short,");
+		sbf.append(" desc_long,");
+		sbf.append(" event_class,");
+		sbf.append(" event_status");
+		sbf.append(")");
+		
 		String sql = sbf.toString();
 
 		// final int USER_ACCOUNT_STATUS = 0; //1: registered and active, 0:
@@ -121,7 +146,10 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 		paramSource.addValue("event_uuid", news.getEventUUID());
 		paramSource.addValue("title", news.getTitle());
 		paramSource.addValue("author", news.getAuthor());
-		paramSource.addValue("post_datetime", news.getPostDate());
+		paramSource.addValue("post_date", news.getPostDate());
+		paramSource.addValue("create_date", news.getCreateDate());
+		paramSource.addValue("modify_date", news.getModifyDate());
+		paramSource.addValue("delete_date", news.getDeleteDate());
 		paramSource.addValue("view_num", news.getViewNum());
 		paramSource.addValue("desc_short", news.getDescShort());
 		paramSource.addValue("desc_long", news.getDescLong());

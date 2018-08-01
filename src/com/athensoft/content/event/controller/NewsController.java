@@ -514,7 +514,9 @@ public class NewsController {
 		news.setEventUUID(UUIDHelper.getUUID());
 		news.setTitle(ic_job.getString("title"));
 		news.setAuthor(ic_job.getString("author"));
-		news.setPostDate(new Date());
+//		news.setPostDate(new Date());
+		news.setCreateDate(new Date());
+		news.setModifyDate(news.getCreateDate());
 		news.setViewNum(ic_job.getInt("viewNum"));
 		news.setDescShort(ic_job.getString("descShort"));
 		news.setDescLong(ic_job.getString("descLong"));
