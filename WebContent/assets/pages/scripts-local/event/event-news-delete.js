@@ -4,7 +4,7 @@
  * 
  */
 /* edit news - init */
-var EventNewsEdit = function (option) {
+var EventNewsDelete = function (option) {
 
     var handleImages = function(option) {
 
@@ -121,7 +121,7 @@ var EventNewsEdit = function (option) {
                 "pageLength": 10, // default record count per page
                 "ajax": {
                     //"url": "/acp/events/eventsNewsReviewListData?eventUUID="+eventUUID, // ajax source
-                	"url": "/acp/events/eventsNewsReviewListData", // ajax source
+                	"url": "/acp/events/review/list", // ajax source
                 	"data":{
                 	    "eventUUID": eventUUID
                 	}
@@ -286,6 +286,6 @@ function filterSearchReview(){
     		eventReviewContent	:   p4,
     		eventReviewStatus	:   p5
     };
-    var dt = $("#datatable_reviews").DataTable();
-    var x = dt.ajax.url("newsReviewSearchFilterData?jsonObjString="+JSON.stringify(eventReviewObject)).load();
+    var dt = $("#datatable_eventNewsReviews").DataTable();
+    var x = dt.ajax.url("/acp/events/review/search?jsonObjString="+JSON.stringify(eventReviewObject)).load();
 }

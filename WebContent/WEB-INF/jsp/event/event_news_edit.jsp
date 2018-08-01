@@ -162,6 +162,7 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab_general">
                                                     <div class="form-body">
+                                                    <!-- 
 													<div class="form-group">
 														<label class="col-md-2 control-label">全局编号: <span class="required"> * </span>
 														</label>
@@ -169,6 +170,9 @@
 															<input type="text" class="form-control" id="globalId" name="globalId" placeholder="" disabled="disabled"  value="${newsObject.globalId}">
 														</div>
 													</div>
+													 -->
+													<input type="hidden" class="form-control" id="globalId" name="globalId" value="${newsObject.globalId}">
+													
 													<div class="form-group">
 														<label class="col-md-2 control-label">新闻编号: <span class="required"> * </span>
 														</label>
@@ -335,9 +339,9 @@
 																	<input type="text" class="form-control" name="primaryMedia" value="${eventMedia.primaryMedia}" disabled="disabled">
 																</td>
 																<td>
-																	<a href="javascript:;" onclick="setCoverMedia(${eventMedia.mediaId},'${eventMedia.eventUUID}');return false;" class="btn default btn-sm">
+																	<a href="javascript:;" class="btn default btn-sm" onclick="return false;" >
 																	<i class="fa fa-edit"></i> 设为封面 </a>
-																	<a href="javascript:test();" class="btn default btn-sm">
+																	<a href="javascript:;" class="btn default btn-sm" onclick="return false;" >
 																	<i class="fa fa-times"></i> 删除 </a>
 																</td>
 															</tr>

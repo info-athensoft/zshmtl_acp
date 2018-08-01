@@ -85,7 +85,7 @@ public class NewsService {
 	 * @return
 	 */
 	public List<Event> getLatestNews(int count){
-		String queryString = " ORDER BY post_datetime DESC LIMIT "+count;
+		String queryString = " ORDER BY post_date DESC LIMIT "+count;
 		return newsDao.findByFilter(queryString);
 	}
 	

@@ -161,10 +161,11 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab_general">
                                                     <div class="form-body">
+                                                    <!-- 
 													<div class="form-group">
 														<label class="col-md-2 control-label">全局编号: <span class="required"> * </span></label>
 														<label class="col-md-10 control-label custom-label-left">${newsObject.globalId}</label>
-													</div>
+													</div> -->
 													<div class="form-group">
 														<label class="col-md-2 control-label">新闻编号: <span class="required"> * </span></label>
 														<label class="col-md-10 control-label custom-label-left">${newsObject.eventUUID}</label>
@@ -180,7 +181,7 @@
 													</div>
 													<div class="form-group">
 														<label class="col-md-2 control-label">标记删除时间: <span class="required"> * </span></label>
-														<label class="col-md-10 control-label custom-label-left">${newsObject.postDatetime}</label>
+														<label class="col-md-10 control-label custom-label-left">${newsObject.postDate}</label>
 													</div>
 													<div class="form-group">
 														<label class="col-md-2 control-label">浏览数: <span class="required"> * </span></label>
@@ -399,8 +400,8 @@
 <script>
 jQuery(document).ready(function() {    
 	var eventUUID = $("#eventUUID").val();
-	EventNewsEdit.init(eventUUID);
-	EventNewsReviewList.init();
+	EventNewsDelete.init(eventUUID);
+	//EventNewsReviewList.init();
 
 //local
 //select object for event class

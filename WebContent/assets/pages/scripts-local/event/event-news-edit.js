@@ -519,7 +519,7 @@ function filterSearchReview(){
     		eventReviewStatus	:   p5
     };
     var dt = $("#datatable_reviews").DataTable();
-    var x = dt.ajax.url("newsReviewSearchFilterData?jsonObjString="+JSON.stringify(eventReviewObject)).load();
+    var x = dt.ajax.url("/acp/events/review/search?jsonObjString="+JSON.stringify(eventReviewObject)).load();
 }
 
 function getBusinessObject(){	

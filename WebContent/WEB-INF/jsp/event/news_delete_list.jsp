@@ -278,7 +278,6 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 EventNewsDelete.init();
-
 </script>
 </body>
 

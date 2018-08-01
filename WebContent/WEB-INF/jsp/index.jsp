@@ -540,7 +540,7 @@
 	                                                        <img class="item-pic rounded" src="${webapp_name}/assets/pages/media/users/avatar4.jpg">
 	                                                        <a href="" class="item-name primary-link">${news.title}</a><br/>
 	                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                                                        <span class="item-label">${news.author}, ${news.postDatetime}</span>
+	                                                        <span class="item-label">${news.author}, ${news.postDate}</span>
 	                                                    </div>
 	                                                    <span class="item-status">
 		                                                    <c:choose>

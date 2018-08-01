@@ -105,10 +105,10 @@ public class NewsReviewController {
 	 *            search criteria object in JSON format
 	 * @return a map structure containing data rendered to views
 	 */
-	@RequestMapping(value = "/newsReviewSearchFilterData", produces = "application/json")
+	@RequestMapping(value = "/search", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> getDataSearchNewsReviewByFilter(@RequestParam String jsonObjString) {
-		log.info("entering... /events/newsReviewSearchFilterData");
+		log.info("entering... /events/review/search");
 
 		JSONObject jobj = new JSONObject(jsonObjString);
 
@@ -199,7 +199,7 @@ public class NewsReviewController {
 		model.put("customActionStatus", "OK");
 		model.put("customActionMessage", "OK");
 
-		log.info("leaving /events/newsReviewSearchFilterData");
+		log.info("leaving... /events/review/search");
 
 		return model;
 	}
