@@ -36,9 +36,6 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class NewsController {
 
-//	private static final String ACTION_EDIT = "±à¼­";
-//	private static final String ACTION_DELETE = "É¾³ý";
-
 	/**
 	 * News Service instance
 	 */
@@ -166,7 +163,7 @@ public class NewsController {
 		log.info("Length of news entries: " + listNews == null ? "NULL" : listNews.size());
 
 //		String[][] data = getData(listNews, ACTION_EDIT);
-		String[][] data = getData(listNews, NewsAction.EDIT);
+		String[][] data = newsService.getData(listNews, NewsAction.EDIT);
 
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
@@ -308,7 +305,7 @@ public class NewsController {
 
 		// data
 //		String[][] data = getData(listNews, ACTION_EDIT);
-		String[][] data = getData(listNews, NewsAction.EDIT);
+		String[][] data = newsService.getData(listNews, NewsAction.EDIT);
 
 		//
 		ModelAndView mav = new ModelAndView();
@@ -342,7 +339,7 @@ public class NewsController {
 		log.info("Length of news entries: " + listNews == null ? "NULL" : listNews.size());
 
 //		String[][] data = getData(listNews, ACTION_DELETE);
-		String[][] data = getData(listNews, NewsAction.DELETE);
+		String[][] data = newsService.getData(listNews, NewsAction.DELETE);
 
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
@@ -486,7 +483,7 @@ public class NewsController {
 		log.info("Length of news entries = " + listNews == null ? "NULL" : listNews.size());
 
 //		String[][] data = getData(listNews, ACTION_DELETE);
-		String[][] data = getData(listNews, NewsAction.DELETE);
+		String[][] data = newsService.getData(listNews, NewsAction.DELETE);
 
 		model.put("draw", new Integer(1));
 		model.put("recordsTotal", new Integer(5));
@@ -682,7 +679,7 @@ public class NewsController {
 		log.info("leaving... /events/news/deletegroup");
 		return;
 	}
-
+/*
 	private String[][] getData(List<Event> listNews, String action) {
 		int entryLength = listNews.size();
 		final int COLUMN_NUM = 9;
@@ -825,7 +822,8 @@ public class NewsController {
 		}
 		return actionName;
 	}
-
+*/
+	
 	public static class NewsGroup {
 		private List<String> eventUUIDArray;
 		private int newsStatus;
