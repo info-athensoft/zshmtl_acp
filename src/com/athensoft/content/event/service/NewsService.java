@@ -187,7 +187,7 @@ public class NewsService {
 			String strEventClass = (listNews.get(i).getEventClass()).trim();
 			field4 = getEventClass(strEventClass);
 
-			field5 = listNews.get(i).getPostDatetime() + "";
+			field5 = listNews.get(i).getPostDate() + "";
 			field6 = listNews.get(i).getViewNum() + "";
 
 			int intEventStatus = listNews.get(i).getEventStatus();

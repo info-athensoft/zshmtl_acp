@@ -121,7 +121,7 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 		paramSource.addValue("event_uuid", news.getEventUUID());
 		paramSource.addValue("title", news.getTitle());
 		paramSource.addValue("author", news.getAuthor());
-		paramSource.addValue("post_datetime", news.getPostDatetime());
+		paramSource.addValue("post_datetime", news.getPostDate());
 		paramSource.addValue("view_num", news.getViewNum());
 		paramSource.addValue("desc_short", news.getDescShort());
 		paramSource.addValue("desc_long", news.getDescLong());
@@ -156,7 +156,7 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 		paramSource.addValue("event_uuid", news.getEventUUID());
 		paramSource.addValue("title", news.getTitle());
 		paramSource.addValue("author", news.getAuthor());
-		paramSource.addValue("post_datetime", news.getPostDatetime());
+		paramSource.addValue("post_datetime", news.getPostDate());
 		paramSource.addValue("view_num", news.getViewNum());
 		paramSource.addValue("desc_short", news.getDescShort());
 		paramSource.addValue("desc_long", news.getDescLong());
@@ -245,7 +245,7 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 			x.setEventClass(rs.getString("event_class"));
 			x.setEventStatus(rs.getInt("event_status"));
 			Timestamp pd = rs.getTimestamp("post_datetime");
-			x.setPostDatetime(pd == null ? null : new Date(pd.getTime()));
+			x.setPostDate(pd == null ? null : new Date(pd.getTime()));
 
 			return x;
 		}

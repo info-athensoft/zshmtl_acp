@@ -49,7 +49,16 @@ public class Event {
 	 * the date-time when the event content is post
 	 */
 	@Setter
-	private Date 		postDatetime;
+	private Date 		postDate;
+	
+	@Setter
+	private Date 		createDate;
+	
+	@Setter
+	private Date 		modifyDate;
+	
+	@Setter
+	private Date 		deleteDate;
 	
 	/**
 	 * the number of views on the event, a statistics indicator
