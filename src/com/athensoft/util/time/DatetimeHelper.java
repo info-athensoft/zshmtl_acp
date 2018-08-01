@@ -38,8 +38,4 @@ public class DatetimeHelper {
 	public static Date addOneYear(Date orginalDate){
 		return shiftYear(orginalDate, 1);
 	}
-	
-	
-	
-	
 }
