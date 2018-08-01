@@ -121,18 +121,18 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 		sbf.append(" event_class,");
 		sbf.append(" event_status");
 		sbf.append(" ) VALUES(");
-		sbf.append(" event_uuid,");
-		sbf.append(" title,");
-		sbf.append(" author,");
-		sbf.append(" post_date,");
-		sbf.append(" create_date,");
-		sbf.append(" modify_date,");
-		sbf.append(" delete_date,");
-		sbf.append(" view_num,");
-		sbf.append(" desc_short,");
-		sbf.append(" desc_long,");
-		sbf.append(" event_class,");
-		sbf.append(" event_status");
+		sbf.append(" :event_uuid,");
+		sbf.append(" :title,");
+		sbf.append(" :author,");
+		sbf.append(" :post_date,");
+		sbf.append(" :create_date,");
+		sbf.append(" :modify_date,");
+		sbf.append(" :delete_date,");
+		sbf.append(" :view_num,");
+		sbf.append(" :desc_short,");
+		sbf.append(" :desc_long,");
+		sbf.append(" :event_class,");
+		sbf.append(" :event_status");
 		sbf.append(")");
 		
 		String sql = sbf.toString();
@@ -197,7 +197,7 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 
 	@Override
 	public int[] updateBatch(final List<News> newsList) {
-		String sql = "update event_news set event_status=:eventStatus where event_uuid =:eventUUID";
+		String sql = "UPDATE event_news SET event_status=:eventStatus WHERE event_uuid =:eventUUID";
 
 		List<SqlParameterSource> parameters = new ArrayList<SqlParameterSource>();
 		for (News x : newsList) {
@@ -210,11 +210,11 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 	@Override
 	public int markDeleted(String eventUUID) {
 		StringBuffer sbf = new StringBuffer();
-		sbf.append("update " + TABLE + " ");
-		sbf.append("set ");
-		sbf.append("event_status = :event_status ");
-		sbf.append("where ");
-		sbf.append("event_uuid = :event_uuid");
+		sbf.append("UPDATE ").append(TABLE);
+		sbf.append(" SET ");
+		sbf.append(" event_status = :event_status ");
+		sbf.append(" WHERE ");
+		sbf.append(" event_uuid = :event_uuid");
 
 		String sql = sbf.toString();
 
@@ -272,8 +272,18 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 			x.setDescLong(rs.getString("desc_long"));
 			x.setEventClass(rs.getString("event_class"));
 			x.setEventStatus(rs.getInt("event_status"));
-			Timestamp pd = rs.getTimestamp("post_datetime");
+			
+			Timestamp pd = rs.getTimestamp("post_date");
 			x.setPostDate(pd == null ? null : new Date(pd.getTime()));
+			
+			Timestamp cd = rs.getTimestamp("create_date");
+			x.setCreateDate(cd == null ? null : new Date(cd.getTime()));
+			
+			Timestamp md = rs.getTimestamp("modify_date");
+			x.setModifyDate(md == null ? null : new Date(md.getTime()));
+			
+			Timestamp dd = rs.getTimestamp("delete_date");
+			x.setDeleteDate(dd == null ? null : new Date(dd.getTime()));
 
 			return x;
 		}

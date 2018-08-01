@@ -9,7 +9,7 @@ function getBusinessObject(){
     var p2 = $("#eventUUID").val();        
     var p3 = $("#title").val();
     var p4 = $("#author").val();
-    var p5 = $("#postDatetime").val();
+    var p5 = $("#postDate").val();
     var p6 = $("#viewNum").val();
     var p7 = $("#descShort").val();
     	p7 = p7.replace(/\n/g,"<br/>");		//solve manually return and change line
@@ -24,7 +24,7 @@ function getBusinessObject(){
     		eventUUID   :    p2,
     		title    	:    p3,
     		author    	:    p4,
-    		postDatetime:    p5,            
+    		postDate	:    p5,            
     		viewNum    	:    p6,            
     		descShort   :    p7,
     		descLong	:    p8,

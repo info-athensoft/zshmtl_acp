@@ -214,6 +214,26 @@ function backToNewsList(){
 	location.href = "/acp/events/news/list.html";
 }
 
+function resetNews(){
+	
+	//object for reset
+	var p3 = '${newsObject.title}';
+	var p4 = '${newsObject.author}';
+	var p6 = '${newsObject.viewNum}';
+	var p7 = '${newsObject.descShort}';
+	var p8 = '${newsObject.descLong}';
+	var p9 = '${newsObject.eventClass}';
+	var p10 ='${newsObject.eventStatus}';
+	
+	$("#title").val(p3);
+	$("#author").val(p4);
+	$("#viewNum").val(p6);
+	$("#descShort").val(p7);
+	$("#descLong").val(p8);
+	$("#eventClass").val(p9);
+	$("#eventStatus").val(p10);
+}
+
 
 /* event news - button:save change,update */
 function updateNews() {
@@ -500,4 +520,35 @@ function filterSearchReview(){
     };
     var dt = $("#datatable_reviews").DataTable();
     var x = dt.ajax.url("newsReviewSearchFilterData?jsonObjString="+JSON.stringify(eventReviewObject)).load();
+}
+
+function getBusinessObject(){	
+    var p1 = $("#globalId").val();
+    var p2 = $("#eventUUID").val();        
+    var p3 = $("#title").val();
+    var p4 = $("#author").val();
+    var p5 = $("#postDate").val();
+    var p6 = $("#viewNum").val();
+    var p7 = $("#descShort").val();
+    	p7 = p7.replace(/\n/g,"<br/>");		//solve manually return and change line
+    var p8 = $("#descLong").val();
+    	p8 = p8.replace(/\n/g,"<br/>");		//solve manually return and change line
+    var p9 = $("#eventClass").val();
+    var p10 = $("#eventStatus").val();
+    
+    var businessObject =
+    {
+    		globalId    :    p1,
+    		eventUUID   :    p2,
+    		title    	:    p3,
+    		author    	:    p4,
+    		postDate	:    p5,            
+    		viewNum    	:    p6,            
+    		descShort   :    p7,
+    		descLong	:    p8,
+    		eventClass  :    p9,
+    		eventStatus	:    p10
+    };
+    
+    return businessObject;
 }

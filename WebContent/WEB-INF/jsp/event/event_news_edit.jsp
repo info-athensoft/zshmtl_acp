@@ -177,16 +177,37 @@
 														</div>
 													</div>
 													<div class="form-group">
+														<label class="col-md-2 control-label">创建时间: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-4">
+															<div class="input-group input-large">
+																<input type="text" class="form-control" id="createDate" name="createDate"  value="${newsObject.createDate}" disabled="disabled">
+															</div>
+															<span class="help-block"></span>
+														</div>
+													</div>
+													<div class="form-group">
 														<label class="col-md-2 control-label">发布时间: <span class="required">
 														* </span>
 														</label>
 														<div class="col-md-4">
 															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${newsObject.postDatetime}" disabled="disabled">
+																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${newsObject.postDate}" disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
-														
+													</div>
+													<div class="form-group">
+														<label class="col-md-2 control-label">上次修改时间: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-4">
+															<div class="input-group input-large">
+																<input type="text" class="form-control" id="modifyDate" name="modifyDate"  value="${newsObject.modifyDate}" disabled="disabled">
+															</div>
+															<span class="help-block"></span>
+														</div>
 													</div>
 													
 													<div class="form-group">
@@ -443,7 +464,6 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-edit.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-review-list.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
@@ -465,31 +485,7 @@ jQuery(document).ready(function() {
 	
 });
 
-function resetNews(){
-	
-	//object for reset
-	//var p1 = ${newsObject.globalId};
-	//var p2 = '${newsObject.eventUUID}';
-	var p3 = '${newsObject.title}';
-	var p4 = '${newsObject.author}';
-	//var p5 = ${newsObject.postDatetime};
-	var p6 = ${newsObject.viewNum};
-	var p7 = '${newsObject.descShort}';
-	var p8 = '${newsObject.descLong}';
-	var p9 = ${newsObject.eventClass};
-	var p10 = ${newsObject.eventStatus};
-	
-	//$("#globalId").val(p1);
-	//$("#eventUUID").val(p2);
-	$("#title").val(p3);
-	$("#author").val(p4);
-	//$("#postDatetime").val(p5);
-	$("#viewNum").val(p6);
-	$("#descShort").val(p7);
-	$("#descLong").val(p8);
-	$("#eventClass").val(p9);
-	$("#eventStatus").val(p10);
-}    
+    
 </script>
 </body>
 

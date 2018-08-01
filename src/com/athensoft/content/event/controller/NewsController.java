@@ -543,18 +543,18 @@ public class NewsController {
 	public void updateNews(@RequestParam String jsonObjString) {
 		log.info("entering... /events/news/update");
 
-		JSONObject ic_job = new JSONObject(jsonObjString);
+		JSONObject jObj = new JSONObject(jsonObjString);
 
 		News news = new News();
-		news.setEventUUID(ic_job.getString("eventUUID"));
-		news.setTitle(ic_job.getString("title"));
-		news.setAuthor(ic_job.getString("author"));
-		news.setPostDate(new Date());
-		news.setViewNum(ic_job.getInt("viewNum"));
-		news.setDescShort(ic_job.getString("descShort"));
-		news.setDescLong(ic_job.getString("descLong"));
-		news.setEventClass(ic_job.getString("eventClass"));
-		news.setEventStatus(ic_job.getInt("eventStatus"));
+		news.setEventUUID(jObj.getString("eventUUID"));
+		news.setTitle(jObj.getString("title"));
+		news.setAuthor(jObj.getString("author"));
+		news.setModifyDate(new Date());
+		news.setViewNum(jObj.getInt("viewNum"));
+		news.setDescShort(jObj.getString("descShort"));
+		news.setDescLong(jObj.getString("descLong"));
+		news.setEventClass(jObj.getString("eventClass"));
+		news.setEventStatus(jObj.getInt("eventStatus"));
 		log.info("news = " + news);
 
 		/* business logic */

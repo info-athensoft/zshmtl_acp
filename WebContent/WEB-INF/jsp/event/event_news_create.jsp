@@ -212,9 +212,7 @@
 													</div> -->
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">摘要: <span class="required">
-														* </span>
-														</label>
+														<label class="col-md-2 control-label">摘要: <span class="required"> * </span></label>
 														<div class="col-md-10">
 															<textarea class="form-control" id="descShort" name="descShort" placeholder="字数不超过100"></textarea>
 															<span class="help-block"> </span>
@@ -223,8 +221,7 @@
 													</div>
 													
 															<div class="form-group">
-														<label class="col-md-2 control-label">正文: <span class="required">
-														* </span>
+														<label class="col-md-2 control-label">正文: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
 															<textarea class="form-control" id="descLong" name="descLong" rows="12"></textarea>
@@ -234,8 +231,7 @@
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">浏览数: <span class="required">
-														* </span>
+														<label class="col-md-2 control-label">浏览数: <span class="required"> * </span>
 														</label>
 														<div class="col-md-4">
 															<input type="text" class="form-control" id="viewNum" name="viewNum" readonly="readonly" value="0">
