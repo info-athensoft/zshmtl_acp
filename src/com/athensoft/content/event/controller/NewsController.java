@@ -683,7 +683,7 @@ public class NewsController {
 		return;
 	}
 
-	private String[][] getData(List<Event> listNews, String actionName) {
+	private String[][] getData(List<Event> listNews, String action) {
 		int entryLength = listNews.size();
 		final int COLUMN_NUM = 9;
 		String[][] data = new String[entryLength][COLUMN_NUM];
@@ -715,8 +715,8 @@ public class NewsController {
 			String eventStatusKey = eventStatusPair[0];
 			String eventStatus = eventStatusPair[1];
 			field7 = "<span class='label label-sm label-" + eventStatusKey + "'>" + eventStatus + "</span>";
-			field8 = "<a href='/acp/events/news" + getAction(actionName) + "?eventUUID=" + field1
-					+ "' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> " + actionName + "</a>";
+			field8 = "<a href='" + getActionUrl(action) + "?eventUUID=" + field1
+					+ "' class='btn btn-xs default btn-editable'><i class='fa fa-pencil'></i> " + getActionName(action) + "</a>";
 
 			// log.info("field8="+field8);
 
@@ -792,17 +792,38 @@ public class NewsController {
 		return eventStatusPair;
 	}
 
-	private String getAction(String actionName) {
-		String action = "";
-		switch (actionName) {
+	private String getActionUrl(String action) {
+		String actionUrl = "";
+		switch (action) {
 		case NewsAction.EDIT:
-			action = "/edit.html";
+			actionUrl = "/acp/events/news/edit.html";
 			break;
 		case NewsAction.DELETE:
-			action = "/delete.html";
+			actionUrl = "/acp/events/news/delete.html";
 			break;
 		}
-		return action;
+		return actionUrl;
+	}
+	
+	public String getActionName(String action){
+		String actionName = "";
+		switch(action){
+			case NewsAction.VIEW:
+				actionName = "查看";	//adPost Button Name - view
+				break;
+			case NewsAction.EDIT:
+				actionName = "编辑";	//adPost Button Name - edit
+				break;
+			case NewsAction.DELETE:
+				actionName = "删除";	//adPost Button Name - delete
+				break;
+			case NewsAction.MANAGE:
+				actionName = "管理";	//adPost Button Name - view
+				break;
+			default:
+				actionName = "未定义";
+		}
+		return actionName;
 	}
 
 	public static class NewsGroup {
