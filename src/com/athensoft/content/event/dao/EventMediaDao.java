@@ -81,5 +81,5 @@ public interface EventMediaDao {
 	 */
 	public int delete(EventMedia eventMediaDTO);
 	
-	
+	public int delete(long mediaId);
 }

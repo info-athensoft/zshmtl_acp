@@ -43,10 +43,10 @@ public class NewsMediaController {
 	 *            the eventUUID of current event
 	 * @return data table of updated media object
 	 */
-	@RequestMapping(value = "/setCoverMedia", produces = "application/json")
+	@RequestMapping(value = "/setcover", method=RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> setCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID) {
-		log.info("entering... /events/media/setCoverMedia");
+		log.info("entering... /events/media/setcover");
 
 		// data - set cover primary state
 		EventMedia previousPrimaryMedia = eventMediaService.getPrimaryMediaByEventUUID(eventUUID);
@@ -68,7 +68,30 @@ public class NewsMediaController {
 		Map<String, Object> model = mav.getModel();
 		model.put("eventMediaList", listEventMedia);
 
-		log.info("leaving... /events/media/setCoverMedia");
+		log.info("leaving... /events/media/setcover");
+		return model;
+	}
+	
+	
+	
+	@RequestMapping(value = "/removecover", method=RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> removeCoverMedia(@RequestParam long mediaId, @RequestParam String eventUUID) {
+		log.info("entering... /events/media/removecover");
+
+		// data - set cover primary state
+		
+		eventMediaService.deleteEventMediaById(mediaId);
+
+		// data - media
+		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
+		log.info("Length of EventReview entries: " + listEventMedia == null ? "NULL" : listEventMedia.size());
+
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> model = mav.getModel();
+		model.put("eventMediaList", listEventMedia);
+
+		log.info("leaving... /events/media/removecover");
 		return model;
 	}
 

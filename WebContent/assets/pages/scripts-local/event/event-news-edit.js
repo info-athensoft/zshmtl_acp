@@ -323,7 +323,8 @@ function setCoverMedia(mediaId, eventUUID) {
 	
     $.ajax({
         type	:	"post",
-        url		:	"/acp/events/media/setCoverMedia?mediaId="+mediaId+"&eventUUID="+eventUUID,
+        url		:	"/acp/events/media/setcover",
+        data	:	"mediaId="+mediaId+"&eventUUID="+eventUUID,
         dataType:	"json",
         timeout :	30000,
         
@@ -354,7 +355,7 @@ function setCoverMedia(mediaId, eventUUID) {
 				+'<td><input type="text" class="form-control" name="sortNumber" value="'+mydata[i].sortNumber+'"></td>'
 				+'<td><input type="text" class="form-control" name="postTimestamp" value="'+mydata[i].postTimestamp+'"></td>'
 				+'<td><input type="text" class="form-control" name="primaryMedia" value="'+mydata[i].primaryMedia+'" disabled="disabled"></td>'
-				+'<td><a href="javascript:;" onclick="setCoverMedia('+mydata[i].mediaId+',\''+mydata[i].eventUUID+'\');return false;" class="btn default btn-sm"><i class="fa fa-edit"></i> 设为封面 </a> <a href="javascript:;" class="btn default btn-sm"><i class="fa fa-times"></i> 删除 </a></td>'
+				+'<td><a href="javascript:;" onclick="setCoverMedia('+mydata[i].mediaId+',\''+mydata[i].eventUUID+'\');return false;" class="btn default btn-sm"><i class="fa fa-edit"></i> 设为封面 </a> <a href="javascript:;" class="btn default btn-sm" onclick="removeCoverMedia('+mydata[i].mediaId+',\''+mydata[i].eventUUID+'\');return false;"><i class="fa fa-times"></i> 删除 </a></td>'
 				+'</tr>';
 			}
 			    
@@ -372,6 +373,67 @@ function setCoverMedia(mediaId, eventUUID) {
         },            
         complete: function(XMLHttpRequest, textStatus){
         	//alert("封面图已设定");
+        	//location.reload();
+        }        
+    });   
+}
+
+
+/*edit news - tab:images */
+function removeCoverMedia(mediaId, eventUUID) {
+	//alert('ENTERING setCoverMedia='+mediaId+"    "+eventUUID);
+	
+    $.ajax({
+        type	:	"post",
+        url		:	"/acp/events/media/removecover",
+        data	:	"mediaId="+mediaId+"&eventUUID="+eventUUID,
+        dataType:	"json",
+        timeout :	30000,
+        
+        success:function(msg){
+        	//var t = $("#tabs_event").tabs({active:2});
+        	//$("#tabs_event").tabs({ active: 2 });
+        	var mydata = msg.eventMediaList;
+        	
+        	var str = '<table class="table table-bordered table-hover"><thead>'
+					+ '<tr role="row" class="heading">'
+					+ '<th width="8%">图片</th>'
+					+ '<th width="20%">标签</th>'
+					+ '<th width="8%">序号</th>'
+					+ '<th width="15%">上传时间</th>'
+					+ '<th width="10%">是否为封面</th>'
+					+ '<th width="10%">操作</th></tr>'
+					+ '</thead><tbody>';
+			
+		    for(var index in mydata){
+				var i = index;
+				
+				//alert(mydata[i].mediaURL+mydata[i].mediaName);
+				
+				str = str+ '<tr>'
+				+'<td><a href="'+mydata[i].mediaURL+mydata[i].mediaName+'" class="fancybox-button" data-rel="fancybox-button">'
+				+	'<img class="img-responsive" src="'+mydata[i].mediaURL+mydata[i].mediaName+'" alt=""></a></td>'
+				+'<td><input type="text" class="form-control" name="mediaName" value="'+mydata[i].mediaLabel+'"></td>'
+				+'<td><input type="text" class="form-control" name="sortNumber" value="'+mydata[i].sortNumber+'"></td>'
+				+'<td><input type="text" class="form-control" name="postTimestamp" value="'+mydata[i].postTimestamp+'"></td>'
+				+'<td><input type="text" class="form-control" name="primaryMedia" value="'+mydata[i].primaryMedia+'" disabled="disabled"></td>'
+				+'<td><a href="javascript:;" onclick="setCoverMedia('+mydata[i].mediaId+',\''+mydata[i].eventUUID+'\');return false;" class="btn default btn-sm"><i class="fa fa-edit"></i> 设为封面 </a> <a href="javascript:;" class="btn default btn-sm" onclick="removeCoverMedia('+mydata[i].mediaId+',\''+mydata[i].eventUUID+'\');return false;"><i class="fa fa-times"></i> 删除 </a></td>'
+				+'</tr>';
+			}
+			    
+			str = str + '</tbody></table>';
+			$("#event-media-table").html(str);
+			
+			alert("提示：插图移除成功!");
+			
+			//console.log(str);
+			//location.reload();
+        },
+        error:function(XMLHttpRequest, textStatus){
+        	alert("错误: 插图移除失败，请重新尝试！");     
+//            alert("ERROR: Set Cover Media failed.");     
+        },            
+        complete: function(XMLHttpRequest, textStatus){
         	//location.reload();
         }        
     });   

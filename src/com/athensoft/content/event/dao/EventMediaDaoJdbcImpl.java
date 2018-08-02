@@ -134,6 +134,21 @@ public class EventMediaDaoJdbcImpl extends BaseDaoJdbcImpl implements EventMedia
 	}
 
 	@Override
+	public int delete(long mediaId) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("DELETE FROM ").append(TABLE);
+		sbf.append(" WHERE ");
+		sbf.append(" media_id =:media_id");
+		
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("media_id", mediaId);
+
+		return jdbc.update(sql, paramSource);
+	}
+
+	@Override
 	public int update(EventMedia media) {
 		StringBuffer sbf = new StringBuffer();
 		sbf.append("UPDATE " + TABLE + " ");

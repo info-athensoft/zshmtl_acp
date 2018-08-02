@@ -75,6 +75,10 @@ public class EventMediaService {
 	public void updateEventMedia(EventMedia media) {
 		this.eventMediaDao.update(media);
 	}
+	
+	public void deleteEventMediaById(long mediaId) {
+		this.eventMediaDao.delete(mediaId);
+	}
 
 	/**
 	 * @param mediaId
