@@ -243,14 +243,14 @@ function updateNews() {
     //execute saving
     $.ajax({
         type    :   "post",
-        url     :	"/acp/events/update",
+        url     :	"/acp/events/news/update",
         data	:	"jsonObjString="+param,
 //        dataType:   "html",
         timeout :   30000,
         
         success:function(msg){
         	alert("提示: 修改成功!");
-            location.href="/acp/events/list.html";
+            location.href="/acp/events/news/list.html";
         },
         error:function(XMLHttpRequest, textStatus){
         	alert("错误: 修改失败，请重新尝试!");

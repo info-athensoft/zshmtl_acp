@@ -1,10 +1,14 @@
 package com.athensoft.content.event.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.EventMedia;
+import com.athensoft.content.event.entity.EventStatus;
 import com.athensoft.content.event.entity.News;
 import com.athensoft.content.event.entity.NewsAction;
 import com.athensoft.content.event.service.EventMediaService;
@@ -267,12 +272,12 @@ public class NewsController {
 			 */
 			int dateFlag = strPostDatetimeFrom.compareTo(strPostDatetimeTo);
 			if (dateFlag < 0) {
-				queryString_where5 = " AND (date(post_datetime) between adddate('" + where5a + "', -1) AND '" + where5b
+				queryString_where5 = " AND (date(post_date) between adddate('" + where5a + "', -1) AND '" + where5b
 						+ "' ) ";
 			} else if (dateFlag == 0) {
-				queryString_where5 = " AND (date(post_datetime) =  '" + where5a + "' ) ";
+				queryString_where5 = " AND (date(post_date) =  '" + where5a + "' ) ";
 			} else {
-				queryString_where5 = " AND (date(post_datetime) between adddate('" + where5b + "', -1) AND '" + where5a
+				queryString_where5 = " AND (date(post_date) between adddate('" + where5b + "', -1) AND '" + where5a
 						+ "' ) ";
 			}
 
@@ -545,20 +550,49 @@ public class NewsController {
 
 		JSONObject jObj = new JSONObject(jsonObjString);
 
-		News news = new News();
-		news.setEventUUID(jObj.getString("eventUUID"));
-		news.setTitle(jObj.getString("title"));
-		news.setAuthor(jObj.getString("author"));
-		news.setModifyDate(new Date());
-		news.setViewNum(jObj.getInt("viewNum"));
-		news.setDescShort(jObj.getString("descShort"));
-		news.setDescLong(jObj.getString("descLong"));
-		news.setEventClass(jObj.getString("eventClass"));
-		news.setEventStatus(jObj.getInt("eventStatus"));
-		log.info("news = " + news);
+		News newsDTO = new News();
+		newsDTO.setEventUUID(jObj.getString("eventUUID"));
+		newsDTO.setTitle(jObj.getString("title"));
+		newsDTO.setAuthor(jObj.getString("author"));
+		log.info(jObj.get("postDate").toString());
+		//Date postDate = new Date((jObj.getString("postDate"));
+		String strPostDate = jObj.get("postDate").toString().trim();
+		Date postDate = new Date();
+		if(strPostDate.length()==0){
+			postDate = null;
+		}else{
+			DateFormat dateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss zzz yyyy");
+			try {
+				postDate = dateFormat.parse(jObj.getString("postDate"));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		newsDTO.setPostDate(postDate);
+		newsDTO.setModifyDate(new Date());
+		newsDTO.setViewNum(jObj.getInt("viewNum"));
+		newsDTO.setDescShort(jObj.getString("descShort"));
+		newsDTO.setDescLong(jObj.getString("descLong"));
+		newsDTO.setEventClass(jObj.getString("eventClass"));
+		newsDTO.setEventStatus(jObj.getInt("eventStatus"));
+		
+		switch(newsDTO.getEventStatus()){
+			case EventStatus.PUBLISHED:
+				newsDTO.setPostDate(newsDTO.getModifyDate());
+				break;
+			case EventStatus.DELETED:
+				newsDTO.setDeleteDate(newsDTO.getModifyDate());
+				break;
+			default:
+				break;
+		}
+		
+		log.info("newsDTO = " + newsDTO);
 
 		/* business logic */
-		newsService.updateNews(news);
+		newsService.updateNews(newsDTO);
 
 		log.info("leaving... /events/news/update");
 		return;
@@ -583,11 +617,24 @@ public class NewsController {
 		List<News> newsList = new ArrayList<News>();
 
 		for (int i = 0; i < eventUUIDLength; i++) {
-			News news = new News();
-			news.setEventUUID(eventUUIDs.get(i));
-			news.setEventStatus(newsStatus);
-			newsList.add(news);
-			news = null;
+			News newsDTO = new News();
+			newsDTO.setEventUUID(eventUUIDs.get(i));
+			newsDTO.setEventStatus(newsStatus);
+			newsDTO.setModifyDate(new Date());
+			
+			switch(newsDTO.getEventStatus()){
+			case EventStatus.PUBLISHED:
+				newsDTO.setPostDate(newsDTO.getModifyDate());
+				break;
+			case EventStatus.DELETED:
+				newsDTO.setDeleteDate(newsDTO.getModifyDate());
+				break;
+			default:
+				break;
+		}
+			
+			newsList.add(newsDTO);
+			newsDTO = null;
 		}
 		log.info("newsList size=" + newsList == null ? "NULL" : newsList.size());
 

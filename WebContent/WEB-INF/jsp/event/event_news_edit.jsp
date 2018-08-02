@@ -45,7 +45,7 @@
         <!-- BEGIN THEME LAYOUT STYLES -->
         <link href="${webapp_name}/assets/layouts/layout2/css/layout.min.css" rel="stylesheet" type="text/css" />
         <link href="${webapp_name}/assets/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="${webapp_name}/assets/layouts/layout2/css/custom.min.css" rel="stylesheet" type="text/css" />
+        <link href="${webapp_name}/assets/layouts/layout2/css/custom.css" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="favicon.ico" /> </head>
     <!-- END HEAD -->
@@ -174,15 +174,14 @@
 													<input type="hidden" class="form-control" id="globalId" name="globalId" value="${newsObject.globalId}">
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">新闻编号: <span class="required"> * </span>
+														<label class="col-md-2 control-label">新闻编号: 
 														</label>
 														<div class="col-md-4">
-															<input type="text" class="form-control" id="eventUUID" name="eventUUID"  placeholder="" value="${newsObject.eventUUID}" disabled="disabled">
+															<input type="text" class="form-control" id="eventUUID" name="eventUUID"  placeholder="" value="${newsObject.eventUUID}" readonly="readonly">
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">创建时间: <span class="required">
-														* </span>
+														<label class="col-md-2 control-label">创建时间: 
 														</label>
 														<div class="col-md-4">
 															<div class="input-group input-large">
@@ -192,25 +191,77 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">发布时间: <span class="required">
-														* </span>
+														<label class="col-md-2 control-label">发布时间: 
 														</label>
 														<div class="col-md-4">
-															<div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-																<input type="text" class="form-control" id="postDatetime" name="postDatetime"  value="${newsObject.postDate}" disabled="disabled">
+															<div class="input-group input-large">
+																<input type="text" class="form-control" id="postDate" name="postDate"  value="${newsObject.postDate}" disabled="disabled">
 															</div>
 															<span class="help-block"></span>
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">上次修改时间: <span class="required">
-														* </span>
+														<label class="col-md-2 control-label">上次修改时间: 
 														</label>
 														<div class="col-md-4">
 															<div class="input-group input-large">
 																<input type="text" class="form-control" id="modifyDate" name="modifyDate"  value="${newsObject.modifyDate}" disabled="disabled">
 															</div>
 															<span class="help-block"></span>
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">当前类别: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-4">
+															<select class="table-group-action-input form-control input-medium" id="eventClass_2" name="eventClass_2" disabled="disabled">
+																<option value="0" ${newsObject.eventClass == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${newsObject.eventClass == '1' ? 'selected' : ''}>普通</option>
+																<option value="2" ${newsObject.eventClass == '2' ? 'selected' : ''}>新</option>
+																<option value="3" ${newsObject.eventClass == '3' ? 'selected' : ''}>热</option>
+															</select>
+														</div>
+														<label class="col-md-2 control-label custom-operation-em">管理类别: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-4">
+															<select class="table-group-action-input form-control input-medium" id="eventClass" name="eventClass">
+																<option value="0" ${newsObject.eventClass == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${newsObject.eventClass == '1' ? 'selected' : ''}>普通</option>
+																<option value="2" ${newsObject.eventClass == '2' ? 'selected' : ''}>新</option>
+																<option value="3" ${newsObject.eventClass == '3' ? 'selected' : ''}>热</option>
+															</select>
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-md-2 control-label">当前状态: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-4">
+															<select class="table-group-action-input form-control input-medium" id="eventStatus_2" name="eventStatus_2" disabled="disabled">
+																<option value="0" ${newsObject.eventStatus == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${newsObject.eventStatus == '1' ? 'selected' : ''}>已发布</option>
+																<option value="2" ${newsObject.eventStatus == '2' ? 'selected' : ''}>待发布</option>
+																<option value="3" ${newsObject.eventStatus == '3' ? 'selected' : ''}>已删除</option>
+																<option value="4" ${newsObject.eventStatus == '4' ? 'selected' : ''}>已过期</option>
+																<option value="5" ${newsObject.eventStatus == '5' ? 'selected' : ''}>审查中</option>
+															</select>
+														</div>
+														<label class="col-md-2 control-label custom-operation-em">管理状态: <span class="required">
+														* </span>
+														</label>
+														<div class="col-md-4">
+															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
+																<option value="0" ${newsObject.eventStatus == '0' ? 'selected' : ''}>请选择...</option>
+																<option value="1" ${newsObject.eventStatus == '1' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;已发布</option>
+																<option value="2" ${newsObject.eventStatus == '2' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;待发布</option>
+																<option value="3" ${newsObject.eventStatus == '3' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;已删除</option>
+																<option value="4" ${newsObject.eventStatus == '4' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;已过期</option>
+																<option value="5" ${newsObject.eventStatus == '5' ? 'selected' : ''}>(变更到)&nbsp;&nbsp;审查中</option>
+															</select>
 														</div>
 													</div>
 													
@@ -222,8 +273,7 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">编辑: <span class="required">
-														* </span>
+														<label class="col-md-2 control-label">编辑: <span class="required"> * </span>
 														</label>
 														<div class="col-md-4">
 															<input type="text" class="form-control" id="author" name="author" placeholder=""  value="${newsObject.author}">
@@ -231,8 +281,7 @@
 													</div>
 													
 													<div class="form-group">
-														<label class="col-md-2 control-label">摘要: <span class="required">
-														* </span>
+														<label class="col-md-2 control-label">摘要: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
 															<textarea class="form-control" id="descShort" name="descShort">${newsObject.descShort}</textarea>
@@ -242,8 +291,7 @@
 													</div>
 													
 															<div class="form-group">
-														<label class="col-md-2 control-label">新闻正文: <span class="required">
-														* </span>
+														<label class="col-md-2 control-label">新闻正文: <span class="required"> * </span>
 														</label>
 														<div class="col-md-10">
 															<textarea class="form-control" id="descLong" name="descLong" rows="12">${newsObject.descLong}</textarea>
@@ -251,42 +299,13 @@
 														
 													</div>
 													<div class="form-group">
-														<label class="col-md-2 control-label">浏览数: <span class="required">
-														* </span>
+														<label class="col-md-2 control-label">浏览数: 
 														</label>
 														<div class="col-md-4">
 															<input type="text" class="form-control" id="viewNum" name="viewNum" value="${newsObject.viewNum}" disabled="disabled">
 														</div>
 													</div>
-													<div class="form-group">
-														<label class="col-md-2 control-label">新闻类别: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" id="eventClass" name="eventClass">
-																<option value="0" ${newsObject.eventClass == '0' ? 'selected' : ''}>请选择...</option>
-																<option value="1" ${newsObject.eventClass == '1' ? 'selected' : ''}>普通</option>
-																<option value="2" ${newsObject.eventClass == '2' ? 'selected' : ''}>新</option>
-																<option value="3" ${newsObject.eventClass == '3' ? 'selected' : ''}>热</option>
-															</select>
-														</div>
-													</div>
 													
-													<div class="form-group">
-														<label class="col-md-2 control-label">新闻状态: <span class="required">
-														* </span>
-														</label>
-														<div class="col-md-10">
-															<select class="table-group-action-input form-control input-medium" id="eventStatus" name="eventStatus">
-																<option value="0" ${newsObject.eventStatus == '0' ? 'selected' : ''}>请选择...</option>
-																<option value="1" ${newsObject.eventStatus == '1' ? 'selected' : ''}>已发布</option>
-																<option value="2" ${newsObject.eventStatus == '2' ? 'selected' : ''}>待发布</option>
-																<option value="3" ${newsObject.eventStatus == '3' ? 'selected' : ''}>已删除</option>
-																<option value="4" ${newsObject.eventStatus == '4' ? 'selected' : ''}>已过期</option>
-																<option value="5" ${newsObject.eventStatus == '5' ? 'selected' : ''}>审查中</option>
-															</select>
-														</div>
-													</div>
 												</div>
                                                 </div>
                                                 <div class="tab-pane" id="tab_images">
