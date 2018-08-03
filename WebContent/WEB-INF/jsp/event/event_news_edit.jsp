@@ -30,6 +30,7 @@
         <link href="${webapp_name}/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
         <link href="${webapp_name}/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="${webapp_name}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+        <link href="${webapp_name}/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
         <link href="${webapp_name}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
@@ -152,6 +153,9 @@
                                                 </li>
                                                 <li>
                                                     <a href="#tab_images" data-toggle="tab"> 新闻图片 </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab_tags" data-toggle="tab"> 新闻标签 </a>
                                                 </li>
                                                 <li>
                                                     <a href="#tab_reviews" data-toggle="tab"> 评论
@@ -427,7 +431,20 @@
                                                         </table>
                                                     </div>
                                                 </div>
-                                               
+                                                <div class="tab-pane" id="tab_tags">
+                                                	<div class="form-group">
+														<label class="col-md-2 control-label">标签: <span class="required"> * </span>
+														</label>
+														<div class="col-md-10">
+															<div>
+																<input type="text" class="form-control" id="eventTags" name="eventTags" data-role="tagsinput">
+															</div>
+															<button name="testTag" onclick="showtagstring(); return false;" >Show Tags String</button>
+															<button name="testTag" onclick="saveTags(); return false;" >Save Tags</button>
+															
+														</div>
+													</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -464,6 +481,7 @@
 <script src="${webapp_name}/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="${webapp_name}/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
@@ -489,6 +507,7 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-edit.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-review-list.js"></script>
+<script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/tag/tag-edit.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 
 <script>
@@ -509,6 +528,10 @@ jQuery(document).ready(function() {
 });
 
     
+</script>
+<script>
+
+
 </script>
 </body>
 

@@ -31,6 +31,7 @@
         <link href="${webapp_name}/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
         <link href="${webapp_name}/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="${webapp_name}/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+        <link href="${webapp_name}/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
         <link href="${webapp_name}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
@@ -198,6 +199,7 @@
 															<input type="text" class="form-control" id="author" name="author" placeholder="作者或编辑的名字、笔名或昵称">
 														</div>
 													</div>
+													
 													<!-- 
 													<div class="form-group">
 														<label class="col-md-2 control-label">创建时间: <span class="required">
@@ -217,7 +219,6 @@
 															<textarea class="form-control" id="descShort" name="descShort" placeholder="字数不超过100"></textarea>
 															<span class="help-block"> </span>
 														</div>
-														
 													</div>
 													
 															<div class="form-group">
@@ -326,6 +327,7 @@
 <script src="${webapp_name}/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="${webapp_name}/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/scripts/datatable.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
 <script src="${webapp_name}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
@@ -353,9 +355,8 @@
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news.js"></script>
 <script type="text/javascript" src="${webapp_name}/assets/pages/scripts-local/event/event-news-create.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
-<script>
 
-</script>
+
 </body>
 
 </html>
