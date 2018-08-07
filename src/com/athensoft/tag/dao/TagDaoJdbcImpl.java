@@ -10,10 +10,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.athensoft.base.dao.BaseDaoJdbcImpl;
-import com.athensoft.content.event.entity.News;
 import com.athensoft.tag.entity.Tag;
 
 @Repository
@@ -115,7 +116,7 @@ public class TagDaoJdbcImpl extends BaseDaoJdbcImpl implements TagDao {
 	@Override
 	public int[] saveBatch(List<Tag> tagList) {
 		StringBuffer sbf = new StringBuffer();
-		sbf.append("INSERT IGNORE INTO").append(TABLE);
+		sbf.append("INSERT IGNORE INTO ").append(TABLE);
 		sbf.append(" ( ");
 		sbf.append(" tag_name ");
 		sbf.append(" ) VALUES (");
@@ -127,7 +128,7 @@ public class TagDaoJdbcImpl extends BaseDaoJdbcImpl implements TagDao {
 		for (Tag x : tagList) {
 			parameters.add(new BeanPropertySqlParameterSource(x));
 		}
-
+		
 		return jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
 	}
 

@@ -440,7 +440,7 @@
 																<input type="text" class="form-control" id="eventTags" name="eventTags" data-role="tagsinput">
 															</div>
 															<button name="testTag" onclick="showtagstring(); return false;" >Show Tags String</button>
-															<button name="testTag" onclick="saveTags(); return false;" >Save Tags</button>
+															<button name="testTag" onclick="saveNewsTags(); return false;" >Save Tags</button>
 															
 														</div>
 													</div>

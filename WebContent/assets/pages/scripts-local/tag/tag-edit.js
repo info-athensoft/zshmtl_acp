@@ -4,7 +4,7 @@ function showtagstring(){
 }
 
 /* tag - button:save change,update and create if not exists */
-function saveTags() {
+function saveNewsTags() {
     var businessObject = getBusinessObject();
 	var param = JSON.stringify(businessObject);
 	
@@ -14,17 +14,17 @@ function saveTags() {
     $.ajax({
     	async	:	false,
     	type    :   "post",
-        url     :	"/acp/tag/save",
+        url     :	"/acp/event/tag/save",
         data	:	param,
         contentType:"application/json",
         timeout :   30000,
         
         success:function(msg){
-        	alert("提示: 标签保存成功!");
+        	alert("提示: 新闻标签保存成功!");
 //            location.href="/acp/events/news/list.html";
         },
         error:function(XMLHttpRequest, textStatus){
-        	alert("错误: 标签保存失败，请重新尝试!");
+        	alert("错误: 新闻签保存失败，请重新尝试!");
 //            alert("ERROR: News updating failed."); 
         },            
         complete: function(XMLHttpRequest, textStatus){
