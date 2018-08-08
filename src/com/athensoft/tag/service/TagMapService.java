@@ -32,4 +32,8 @@ public class TagMapService {
 		tagNames = sbf.toString();
 		return tagNames.substring(0,tagNames.length()-1);
 	}
+	
+	public List<TagMap> getTagsByObjectId(int moduleId, long objectId){
+		return tagMapDao.findByObjectId(moduleId, objectId);
+	}
 }

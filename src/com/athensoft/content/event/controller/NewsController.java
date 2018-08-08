@@ -564,6 +564,8 @@ public class NewsController {
 		log.info("entering... /events/news/update");
 
 		JSONObject jObj = new JSONObject(jsonObjString);
+		
+		System.out.println(jObj);
 
 		News newsDTO = new News();
 		newsDTO.setEventUUID(jObj.getString("eventUUID"));

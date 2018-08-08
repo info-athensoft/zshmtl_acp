@@ -237,7 +237,7 @@ function resetNews(){
 
 /* event news - button:save change,update */
 function updateNews() {
-    var businessObject = getBusinessObject();
+    var businessObject = getNewsObject();
 	var param = JSON.stringify(businessObject)
 	
     //execute saving
@@ -584,7 +584,7 @@ function filterSearchReview(){
     var x = dt.ajax.url("/acp/events/review/search?jsonObjString="+JSON.stringify(eventReviewObject)).load();
 }
 
-function getBusinessObject(){	
+function getNewsObject(){	
     var p1 = $("#globalId").val();
     var p2 = $("#eventUUID").val();        
     var p3 = $("#title").val();
