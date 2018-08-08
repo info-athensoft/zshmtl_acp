@@ -7,7 +7,7 @@ import com.athensoft.tag.entity.Tag;
 public interface TagDao {
 	public List<Tag> findAll();
 	
-	public List<Tag> findByQuery();
+	public List<Tag> findByQuery(final String queryString);
 	
 	public int create(Tag tag);
 	

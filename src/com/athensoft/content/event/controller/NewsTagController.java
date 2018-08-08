@@ -23,12 +23,13 @@ public class NewsTagController {
 	@Autowired
 	private TagService tagService;
 	
+	
 	@RequestMapping(value="/save", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public void saveTag(@RequestBody TagGroup tagGroup){
 		log.info("entering... /event/tag/save");
 		
-		String tagNames = tagGroup.getTagNameArray();
+		String tagNames = tagGroup.getTagNameArray().trim();
 		
 		String[] tagNameArray = tagNames.split(",");
 		
@@ -40,7 +41,7 @@ public class NewsTagController {
 			tag = null;
 		}
 		
-		tagService.saveTags(tagList);
+		tagService.saveNewsTags(tagList, tagGroup.getObjectId());
 		
 		//System.out.println(">>>>>>>>>>>>>>>>>>"+tagList.toString());
 		
@@ -50,6 +51,7 @@ public class NewsTagController {
 	
 	private static class TagGroup{
 		private String tagNameArray;
+		private long objectId;
 
 		public String getTagNameArray() {
 			return tagNameArray;
@@ -59,11 +61,18 @@ public class NewsTagController {
 			this.tagNameArray = tagNameArray;
 		}
 
+		public long getObjectId() {
+			return objectId;
+		}
+
+		public void setObjectId(long objectId) {
+			this.objectId = objectId;
+		}
+
 		@Override
 		public String toString() {
-			return "TagGroup [tagNameArray=" + tagNameArray + "]";
+			return "TagGroup [tagNameArray=" + tagNameArray + ", objectId=" + objectId + "]";
 		}
-		
 	}
 	
 }

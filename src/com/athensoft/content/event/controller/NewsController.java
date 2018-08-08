@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.athensoft.base.entity.Module;
 import com.athensoft.content.event.entity.Event;
 import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.entity.EventStatus;
@@ -26,6 +27,7 @@ import com.athensoft.content.event.entity.News;
 import com.athensoft.content.event.entity.NewsAction;
 import com.athensoft.content.event.service.EventMediaService;
 import com.athensoft.content.event.service.NewsService;
+import com.athensoft.tag.service.TagMapService;
 import com.athensoft.util.id.UUIDHelper;
 
 import lombok.extern.log4j.Log4j;
@@ -52,6 +54,11 @@ public class NewsController {
 	 */
 	@Autowired
 	private EventMediaService eventMediaService;
+	
+	
+	@Autowired
+	private TagMapService tagMapService;
+	
 
 	/**
 	 * go to the view of event dashboard
@@ -105,11 +112,19 @@ public class NewsController {
 		// data - media
 		List<EventMedia> listEventMedia = eventMediaService.getEventMediaByEventUUID(eventUUID);
 		log.info("Length of EventReview entries: " + listEventMedia == null ? "NULL" : listEventMedia.size());
-
+		
+		// data - tag
+		String tagNames = tagMapService.getTagNames(Module.NEWS, news.getGlobalId());
+		
+		System.out.println("news.getGlobalId()="+news.getGlobalId());
+		System.out.println("tagNames="+tagNames);
+		
+		
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> model = mav.getModel();
 		model.put("newsObject", news);
 		model.put("eventMediaList", listEventMedia);
+		model.put("newsTagNames", tagNames);
 
 		String viewName = "event/event_news_edit";
 		mav.setViewName(viewName);

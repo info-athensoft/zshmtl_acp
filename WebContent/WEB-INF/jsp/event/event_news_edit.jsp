@@ -437,11 +437,12 @@
 														</label>
 														<div class="col-md-10">
 															<div>
-																<input type="text" class="form-control" id="eventTags" name="eventTags" data-role="tagsinput">
+																<input type="text" class="form-control" id="eventTags" name="eventTags" data-role="tagsinput" value="${newsTagNames}">
 															</div>
-															<button name="testTag" onclick="showtagstring(); return false;" >Show Tags String</button>
-															<button name="testTag" onclick="saveNewsTags(); return false;" >Save Tags</button>
-															
+															<!-- <button name="testTag" class="btn btn-success" onclick="showtagstring(); return false;" >Show Tags String</button>  -->
+															<div>
+																<button name="saveTag" class="btn btn-success" onclick="saveNewsTags(); return false;" >保存标签</button>
+															</div>
 														</div>
 													</div>
                                                 </div>

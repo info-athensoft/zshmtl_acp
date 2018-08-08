@@ -92,9 +92,9 @@ public class TagMapDaoJdbcImpl extends BaseDaoJdbcImpl implements TagMapDao{
 		sbf.append(" tag_id,");
 		sbf.append(" object_id");
 		sbf.append(" ) VALUES(");
-		sbf.append(" :module_id,");
-		sbf.append(" :tag_id,");
-		sbf.append(" :object_id");
+		sbf.append(" :moduleId,");
+		sbf.append(" :tagId,");
+		sbf.append(" :objectId");
 		sbf.append(" )");
 		String sql = sbf.toString();
 
@@ -104,6 +104,24 @@ public class TagMapDaoJdbcImpl extends BaseDaoJdbcImpl implements TagMapDao{
 		}
 		
 		return jdbc.batchUpdate(sql, parameters.toArray(new SqlParameterSource[0]));
+	}
+
+
+	@Override
+	public int deleteByObjectId(int moduleId, long objectId) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("DELETE FROM ");
+		sbf.append(TABLE);
+		sbf.append(" WHERE 1=1 ");
+		sbf.append(" AND module_id=:module_id ");
+		sbf.append(" AND object_id=:object_id ");
+		String sql = sbf.toString();
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("object_id", objectId);
+		paramSource.addValue("module_id", moduleId);
+		
+		return jdbc.update(sql, paramSource);
 	}
 
 

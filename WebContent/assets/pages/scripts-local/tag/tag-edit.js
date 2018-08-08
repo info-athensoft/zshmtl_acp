@@ -5,6 +5,13 @@ function showtagstring(){
 
 /* tag - button:save change,update and create if not exists */
 function saveNewsTags() {
+	
+	p1 = $("#eventTags").val();
+	if(p1.trim().length==0){
+		alert("提示: 新闻标签清空成功!");
+		return;
+	}
+	
     var businessObject = getBusinessObject();
 	var param = JSON.stringify(businessObject);
 	
@@ -35,9 +42,13 @@ function saveNewsTags() {
 
 function getBusinessObject(){
 	p1 = $("#eventTags").val();
+	p2 = $("#globalId").val();	//event global id
+	
+	
 	
 	var businessObject = {
-			tagNameArray: p1
+			tagNameArray: p1,
+			objectId: p2
 	}
 		
 	return businessObject;

@@ -13,4 +13,6 @@ public interface TagMapDao {
 	public int create(TagMapDTO tagMapDTO);
 	
 	public int[] createBatch(List<TagMapDTO> tagMapDTOList);
+	
+	public int deleteByObjectId(int moduleId, long objectId);
 }

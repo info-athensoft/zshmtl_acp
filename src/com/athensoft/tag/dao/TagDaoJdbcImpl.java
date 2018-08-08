@@ -51,9 +51,33 @@ public class TagDaoJdbcImpl extends BaseDaoJdbcImpl implements TagDao {
 	}
 
 	@Override
-	public List<Tag> findByQuery() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Tag> findByQuery(final String queryString) {
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("SELECT ");
+		sbf.append(" tag_id,");
+		sbf.append(" tag_name,");
+		sbf.append(" tag_num,");
+		sbf.append(" tag_score");
+		sbf.append(" FROM ");
+		sbf.append(TABLE);
+		sbf.append(" WHERE 1=1 ");
+		sbf.append(queryString);
+		
+		String sql = sbf.toString();
+		
+		List<Tag> x = null;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		
+		try{
+			x = jdbc.query(sql, paramSource, new TagRowMapper());
+			if(null==x){
+				x = new ArrayList<Tag>();
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return x;
 	}
 
 	@Override
