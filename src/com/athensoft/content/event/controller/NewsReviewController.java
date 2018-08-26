@@ -6,6 +6,7 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -211,7 +212,7 @@ public class NewsReviewController {
 	 *            the eventUUID of new object selected
 	 * @return data of review objects of news
 	 */
-	@RequestMapping(value = "/review/edit.html")
+	@RequestMapping(value = "/edit.html")
 	public ModelAndView gotoEditEventReview(@RequestParam String reviewUUID) {
 		log.info("entering... /events/review/edit.html");
 
@@ -237,16 +238,17 @@ public class NewsReviewController {
 	 *            news object to update in JSON format
 	 * @return data and target view
 	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes="application/json", produces="application/json")
 	@ResponseBody
-	public void updateNewsReview(@RequestParam String jsonObjString) {
+	public void updateNewsReview(@RequestBody ReviewDTO review) {
 		log.info("entering /events/review/update");
 
-		JSONObject ic_job = new JSONObject(jsonObjString);
+//		JSONObject ic_job = new JSONObject(jsonObjString);
 
 		EventReview newsReview = new EventReview();
-		newsReview.setReviewUUID(ic_job.getString("reviewUUID"));
-		newsReview.setReviewStatus(ic_job.getInt("reviewStatus"));
+		newsReview.setEventUUID(review.getEventUUID());
+		newsReview.setReviewUUID(review.getReviewUUID());
+		newsReview.setReviewStatus(review.getReviewStatus());
 
 		log.info("newsReview = " + newsReview);
 
@@ -312,6 +314,35 @@ public class NewsReviewController {
 		}
 
 		return data;
+	}
+	
+	public static class ReviewDTO {
+		private String eventUUID;
+		private String reviewUUID;
+		private int reviewStatus;
+		public String getEventUUID() {
+			return eventUUID;
+		}
+		public void setEventUUID(String eventUUID) {
+			this.eventUUID = eventUUID;
+		}
+		public String getReviewUUID() {
+			return reviewUUID;
+		}
+		public void setReviewUUID(String reviewUUID) {
+			this.reviewUUID = reviewUUID;
+		}
+		public int getReviewStatus() {
+			return reviewStatus;
+		}
+		public void setReviewStatus(int reviewStatus) {
+			this.reviewStatus = reviewStatus;
+		}
+		@Override
+		public String toString() {
+			return "ReviewDTO [eventUUID=" + eventUUID + ", reviewUUID=" + reviewUUID + ", reviewStatus=" + reviewStatus
+					+ "]";
+		}
 	}
 
 }

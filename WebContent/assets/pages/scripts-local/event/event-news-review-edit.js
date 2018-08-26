@@ -63,17 +63,21 @@ function updateReviewStatus() {
     
    //alert(JSON.stringify(reviewObject));
     
+    var param = JSON.stringify(reviewObject);
+    
     //execute saving
     $.ajax({
-        type    :    "post",
-        url        : "/acp/events/review/update?jsonObjString="+JSON.stringify(reviewObject),
+        type    :	"post",
+        url     :	"/acp/events/review/update",
         //dataType:    "html",
-        timeout :     30000,
+        contentType:	"application/json",
+        data	:	param,
+        timeout :	30000,
         
         success:function(msg){
         	alert("提示: 评论状态修改成功!");
         	var tabId = "#tab_reviews";
-            location.href="/acp/events/eventsNewsEdit?eventUUID="+p1+tabId;
+            location.href="/acp/events/news/edit.html?eventUUID="+p1+tabId;
         },
         error:function(){
         	alert("错误: 评论状态修改失败，请重新尝试");     
@@ -96,7 +100,7 @@ function updateNewsReviewAndContinue(){
 function backToNewsEdit(){
 	var p1 = $("#eventUUID").val();
 	var tabId = "#tab_reviews";
-	location.href = "/acp/events/eventsNewsEdit?eventUUID="+p1+tabId;
+	location.href = "/acp/events/news/edit.html?eventUUID="+p1+tabId;
 }
 
 
