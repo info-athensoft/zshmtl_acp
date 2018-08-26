@@ -214,6 +214,7 @@ function backToNewsList(){
 	location.href = "/acp/events/news/list.html";
 }
 
+/*
 function resetNews(){
 	
 	//object for reset
@@ -232,7 +233,7 @@ function resetNews(){
 	$("#descLong").val(p8);
 	$("#eventClass").val(p9);
 	$("#eventStatus").val(p10);
-}
+}*/
 
 
 /* event news - button:save change,update */

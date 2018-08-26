@@ -531,7 +531,25 @@ jQuery(document).ready(function() {
     
 </script>
 <script>
-
+function resetNews(){
+	
+	//object for reset
+	var p3 = '${newsObject.title}';
+	var p4 = '${newsObject.author}';
+	var p6 = '${newsObject.viewNum}';
+	var p7 = '${newsObject.descShort}';
+	var p8 = '${newsObject.descLong}';
+	var p9 = '${newsObject.eventClass}';
+	var p10 ='${newsObject.eventStatus}';
+	
+	$("#title").val(p3);
+	$("#author").val(p4);
+	$("#viewNum").val(p6);
+	$("#descShort").val(p7);
+	$("#descLong").val(p8);
+	$("#eventClass").val(p9);
+	$("#eventStatus").val(p10);
+}
 
 </script>
 </body>
