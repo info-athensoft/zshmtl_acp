@@ -87,7 +87,7 @@ public class AdPostService {
 			String strObjectClass = (listObj.get(i).getAdType())+"";
 			field7 = getObjectClass(strObjectClass);
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
 			field8 = sdf.format(listObj.get(i).getCreateDate())+"";
 			field9 = sdf.format(listObj.get(i).getPostDate())+"";
 			field10 = sdf.format(listObj.get(i).getExpireDate())+"";

@@ -323,11 +323,11 @@ public class AdPostController {
 		adpost.setAdStatus(jsonObj.getInt("adpostStatus"));
 
 		String strExpireDate = jsonObj.getString("expireDate");
-		Date expireDate = null;
+		Date expireDate = new Date();
 		if (strExpireDate == null || strExpireDate.length() == 0) {
 			strExpireDate = "3000-01-01"; // set to not expired
 		} else {
-			SimpleDateFormat ft = new SimpleDateFormat("yyyy-mm-dd");
+			SimpleDateFormat ft = new SimpleDateFormat("E MMM dd HH:mm:ss zzz yyyy");
 			try {
 				expireDate = ft.parse(strExpireDate);
 			} catch (Exception ex) {
@@ -366,13 +366,14 @@ public class AdPostController {
 		adpost.setPostDate(new Date()); // TODO
 		adpost.setExpireDate(new Date()); // TODO
 		adpost.setModifyDate(new Date()); // TODO
+		adpost.setAdOwnerId(1L);
 
 		String strExpireDate = jsonObj.getString("expireDate");
-		Date expireDate = null;
+		Date expireDate = new Date();
 		if (strExpireDate == null || strExpireDate.length() == 0) {
 			strExpireDate = "3000-01-01"; // set to not expired
 		} else {
-			SimpleDateFormat ft = new SimpleDateFormat("yyyy-mm-dd");
+			SimpleDateFormat ft = new SimpleDateFormat("E MMM dd HH:mm:ss zzz yyyy");
 			try {
 				expireDate = ft.parse(strExpireDate);
 			} catch (Exception ex) {
