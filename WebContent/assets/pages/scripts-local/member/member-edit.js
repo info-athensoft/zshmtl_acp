@@ -257,7 +257,7 @@ function updateMember() {
         type    :	"post",
         url		:	"/acp/member/update",
         data	:	"jsonObjString="+param,
-        dataType:	"html",
+        dataType:	"json",
         timeout :	30000,
         
         success:function(msg){
@@ -265,9 +265,19 @@ function updateMember() {
         	alert("提示: 修改成功!");
             location.href="/acp/member/list.html";
         },
-        error:function(){
-//            alert("ERROR: Member updating failed.");     
-            alert("错误: 修改失败，请返回到列表页面，重新尝试");     
+        error:function(XMLHttpRequest, textStatus){
+//          alert("ERROR: Member updating failed.");     
+//        	alert(XMLHttpRequest.readyState);
+//        	alert(XMLHttpRequest.status);
+//        	alert(XMLHttpRequest.responseText);
+        	
+        	if (XMLHttpRequest.readyState==4 && XMLHttpRequest.status == "200") {
+        		alert("提示: 修改成功!");
+        		location.href="/acp/member/list.html";
+        	}else{
+        		alert("错误: 修改失败，请返回到列表页面，重新尝试"); 
+        	}
+            
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication

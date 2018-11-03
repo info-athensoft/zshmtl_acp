@@ -40,8 +40,14 @@ function createAdPost() {
         	location.href="/acp/ad/adpost/list.html";
         },
         error:function(XMLHttpRequest, textStatus){
-        	alert("错误: 广告新增失败，请检查输入重新尝试!");
-//            alert("ERROR: AdPost creating failed.");     
+//        	alert("错误: 广告新增失败，请检查输入重新尝试!");
+//            alert("ERROR: AdPost creating failed.");   
+        	if (XMLHttpRequest.readyState==4 && XMLHttpRequest.status == "200") {
+        		alert("提示: 广告创建成功!");
+        		location.href="/acp/ad/adpost/list.html";
+        	}else{
+        		alert("错误: 广告新增失败，请检查输入重新尝试!"); 
+        	}
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication

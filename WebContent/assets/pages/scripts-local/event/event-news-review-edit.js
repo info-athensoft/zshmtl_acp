@@ -80,8 +80,14 @@ function updateReviewStatus() {
             location.href="/acp/events/news/edit.html?eventUUID="+p1+tabId;
         },
         error:function(){
-        	alert("错误: 评论状态修改失败，请重新尝试");     
-//            alert("ERROR: News review updating failed.");     
+//        	alert("错误: 评论状态修改失败，请重新尝试");     
+//            alert("ERROR: News review updating failed.");
+        	if (XMLHttpRequest.readyState==4 && XMLHttpRequest.status == "200") {
+        		alert("提示: 修改成功!");
+        		location.href="/acp/events/news/edit.html?eventUUID="+p1+tabId;
+        	}else{
+        		alert("错误: 修改失败，请重新尝试!"); 
+        	}
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication

@@ -39,8 +39,14 @@ function updateAdPost() {
         	location.href="/acp/ad/adpost/list.html";
         },
         error:function(XMLHttpRequest, textStatus){
-        	alert("错误: 修改失败，请检查输入重新尝试!");     
-//            alert("ERROR: AdPost editing failed.");     
+//        	alert("错误: 修改失败，请检查输入重新尝试!");     
+//            alert("ERROR: AdPost editing failed.");  
+        	if (XMLHttpRequest.readyState==4 && XMLHttpRequest.status == "200") {
+        		alert("提示: 修改成功!");
+        		location.href="/acp/ad/adpost/list.html";
+        	}else{
+        		alert("错误: 修改失败，请检查输入重新尝试!"); 
+        	}
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication

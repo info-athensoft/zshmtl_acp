@@ -158,8 +158,14 @@ function deleteNews(){
         	//alert("INFO: News status updated.");
         },
         error:function(){
-        	alert("错误: 删除失败，请重新尝试!");
-//            alert("ERROR: News deleting failed.");     
+//        	alert("错误: 删除失败，请重新尝试!");
+//            alert("ERROR: News deleting failed."); 
+        	if (XMLHttpRequest.readyState==4 && XMLHttpRequest.status == "200") {
+        		alert("提示: 删除成功!");
+        		location.href="/acp/events/deletelist.html";
+        	}else{
+        		alert("错误: 删除失败，请重新尝试!"); 
+        	}
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication

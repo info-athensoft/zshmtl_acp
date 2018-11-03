@@ -56,8 +56,15 @@ function createNews() {
         	location.href="/acp/events/news/list.html";
         },
         error:function(XMLHttpRequest, textStatus){
-        	alert("错误: 新增失败，请重新尝试!");     
-//            alert("ERROR: News creating failed.");     
+//        	alert("错误: 新增失败，请重新尝试!");     
+//            alert("ERROR: News creating failed.");
+        	
+        	if (XMLHttpRequest.readyState==4 && XMLHttpRequest.status == "200") {
+        		alert("提示: 新增成功!");
+        		location.href="/acp/events/news/list.html";
+        	}else{
+        		alert("错误: 新增失败，请重新尝试!"); 
+        	}
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication

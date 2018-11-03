@@ -31,8 +31,15 @@ function saveNewsTags() {
 //            location.href="/acp/events/news/list.html";
         },
         error:function(XMLHttpRequest, textStatus){
-        	alert("错误: 新闻签保存失败，请重新尝试!");
+//        	alert("错误: 新闻签保存失败，请重新尝试!");
 //            alert("ERROR: News updating failed."); 
+        	
+        	if (XMLHttpRequest.readyState==4 && XMLHttpRequest.status == "200") {
+        		alert("提示: 新闻标签保存成功!");
+        		//location.href="/acp/member/list.html";
+        	}else{
+        		alert("错误: 新闻签保存失败，请重新尝试!"); 
+        	}
         },            
         complete: function(XMLHttpRequest, textStatus){
             //reset to avoid duplication
