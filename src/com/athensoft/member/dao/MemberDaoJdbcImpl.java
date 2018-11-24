@@ -59,7 +59,7 @@ public class MemberDaoJdbcImpl extends BaseDaoJdbcImpl implements MemberDao {
 		sbf.append("member_pending_date, ");
 		sbf.append("member_banned_date ");
 		sbf.append(" FROM "+TABLE);
-		sbf.append(" ORDER BY name1");
+		sbf.append(" ORDER BY member_apply_date desc, name1");
 		String sql = sbf.toString();
 		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();

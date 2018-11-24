@@ -228,7 +228,7 @@
 														</label>
 														<div class="col-md-4">
 															<div class="input-group input-large date-picker input-daterange" data-date="2018-01-01" data-date-format="yyyy-mm-dd">
-																<input type="text" class="form-control" id="memberApplyDate" name="memberApplyDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd HH:mm:ss" value="${memberObject.memberApplyDate}"/>' disabled="disabled">
+																<input type="text" class="form-control" id="memberApplyDate" name="memberApplyDate"  value='<fmt:formatDate type="date" pattern="yyyy-MMM-dd HH:mm:ss" value="${memberObject.memberApplyDate}"/>' >
 															</div>
 															<span class="help-block"></span>
 														</div>

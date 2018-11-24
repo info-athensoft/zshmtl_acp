@@ -38,10 +38,10 @@ var MemberList = function () {
                 "pageLength": 20, 	// default record count per page
                 "ajax": {
                     "url": "/acp/member/list", // ajax source
-                },
-                "order": [
-                    [1, "asc"]		// set first column as a default sort by asc
-                ] 
+                }//,
+                //"order": [
+                  //  [1, "asc"]		// set first column as a default sort by asc
+                //] 
             }
         });
 
