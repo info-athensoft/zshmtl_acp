@@ -15,17 +15,39 @@ function createAdPost() {
 	var param = JSON.stringify(businessObject);
 	
     /* validating by business rule */
-    /*
-    var eventTitle = businessObject.title;
-    if(isEmptyString(eventTitle)){
-    	alert("WARNING: event title must not be empty!");
+    
+    var adType = businessObject.title;
+    if(isEmptyString(adType)){
+    	alert("提示: 请选择广告类型!");
     	return;
     }
-    var author = businessObject.author;
-    if(isEmptyString(author)){
-    	alert("WARNING: author must not be empty!");
+    
+    var acctName = businessObject.acctName;
+    if(isEmptyString(acctName)){
+    	alert("提示: 请输入会员账号!");
     	return;
-    }*/
+    }
+    
+    var adTitle = businessObject.adTitle;
+    if(isEmptyString(adTitle)){
+    	alert("提示: 请输入广告标题!");
+    	return;
+    }
+    if(adTitle.length>20){
+    	alert("提示: 标题不超过20个字!");
+    	return;
+    }
+    
+        
+    var adText = businessObject.adText;
+    if(isEmptyString(adText)){
+    	alert("提示: 请输入广告文字!");
+    	return;
+    }
+    if(adText.length>60){
+    	alert("提示: 广告内容不超过60个字!");
+    	return;
+    }
     
     //execute saving
     $.ajax({
