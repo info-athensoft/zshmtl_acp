@@ -24,20 +24,20 @@ public interface EventReviewDao {
 	 * @return	list of event review objects
 	 */
 	public List<EventReview> findByFilter(String queryString);
-	
-	/**
-	 * get all event review objects by eventUUID
-	 * @param eventUUID the eventUUID of news object
-	 * @return	list of event review objects
-	 */
-	public List<EventReview> findByEventUUID(String eventUUID);
-	
+
 	/**
 	 * get event review object by its gloablId
 	 * @param globalId the globlaId of news review object
 	 * @return a event review object
 	 */
 	public EventReview findById(long globalId);
+
+	/**
+	 * get all event review objects by eventUUID
+	 * @param eventUUID the eventUUID of news object
+	 * @return	list of event review objects
+	 */
+	public List<EventReview> findByEventUUID(String eventUUID);
 	
 	/**
 	 * get event review object by its reviewUUID
@@ -47,22 +47,34 @@ public interface EventReviewDao {
 	public EventReview findByReviewUUID(String reviewUUID);	
 	
 	/**
+	 * get total count of all reviews
+	 * @return
+	 */
+	public long count();
+	
+	/**
 	 * create an event review object and persist it
 	 * @param review an event review object
 	 */
-	public void create(EventReview review);
+	public int create(EventReview review);
 	
 	/**
 	 * update an event review object and persist it
 	 * @param review an event review object
 	 */
-	public void update(EventReview review);
-
+	public int update(EventReview review);
+	
+	
+	/**
+	 * @param review
+	 */
+	public int updateStatus(EventReview review);
+	
 	/**
 	 * remove an event review object from data source<p>
 	 * WARNING: THE METHOD HAS NOT COMPLETED.
 	 */
-	public void delete();
+	public int delete(EventReview eventReviewDTO);
 	
 	
 }

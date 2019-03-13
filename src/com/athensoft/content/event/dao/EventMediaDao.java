@@ -19,19 +19,19 @@ public interface EventMediaDao {
 	public List<EventMedia> findAll();
 	
 	/**
+	 * get event media object by its gloablId
+	 * @param mediaId the globlaId of news media object
+	 * @return an event media object
+	 */
+	public EventMedia findById(long mediaId);
+
+	/**
 	 * get event media object by its eventUUID
 	 * @param eventUUID the eventUUID of news object
 	 * @return an event media object
 	 */
 	public List<EventMedia> findByEventUUID(String eventUUID);
 
-	/**
-	 * get event media object by its gloablId
-	 * @param mediaId the globlaId of news media object
-	 * @return an event media object
-	 */
-	public EventMedia findById(long mediaId);
-	
 	/**
 	 * get primary event media object by its eventUUID
 	 * @param eventUUID the eventUUID of news object
@@ -43,13 +43,13 @@ public interface EventMediaDao {
 	 * create an event media object and persist it
 	 * @param media an event media object
 	 */
-	public void create(EventMedia media);
+	public int create(EventMedia media);
 	
 	/**
 	 * update an event media object and persist it
 	 * @param media an event media object
 	 */
-	public void update(EventMedia media);
+	public int update(EventMedia media);
 
 	/**
 	 * change and save sort number of media object by media id under specified event UUID
@@ -57,7 +57,7 @@ public interface EventMediaDao {
 	 * @param eventUUID
 	 * @param sortNumber
 	 */
-	public void changeSortNumber(String mediaId, String eventUUID, String sortNumber);
+	public int changeSortNumber(String mediaId, String eventUUID, String sortNumber);
 
 	/**
 	 * change the label of media object
@@ -65,7 +65,7 @@ public interface EventMediaDao {
 	 * @param eventUUID
 	 * @param mediaLabel
 	 */
-	public void changeMediaLabel(String mediaId, String eventUUID, String mediaLabel);
+	public int changeMediaLabel(String mediaId, String eventUUID, String mediaLabel);
 	
 	/**
 	 * change the file name of media object
@@ -73,13 +73,13 @@ public interface EventMediaDao {
 	 * @param eventUUID
 	 * @param mediaName
 	 */
-	public void changeMediaName(String mediaId, String eventUUID, String mediaName);
+	public int changeMediaName(String mediaId, String eventUUID, String mediaName);
 
 	/**
 	 * remove an event media object from data source<p>
 	 * WARNING: THE METHOD HAS NOT COMPLETED.
 	 */
-	public void delete();
+	public int delete(EventMedia eventMediaDTO);
 	
-	
+	public int delete(long mediaId);
 }

@@ -21,12 +21,8 @@ public class EventReviewService {
 	 * DAO of EventReview
 	 */
 	@Autowired
-	@Qualifier("eventReviewDaoJDBCImpl")
+	@Qualifier("eventReviewDaoJdbcImpl")
 	private EventReviewDao eventReviewDao;
-	
-	public void setEventReviewDao(EventReviewDao eventReviewDao) {
-		this.eventReviewDao = eventReviewDao;
-	}
 	
 	/**
 	 * get an eventReview object by its globalId
@@ -72,6 +68,35 @@ public class EventReviewService {
 		return eventReviewDao.findAll();
 	}
 	
+	
+	/**
+	 * get latest reviews of news for shortcut control panel, shows 8 entries by default
+	 * @param queryString
+	 * @return
+	 */
+	public List<EventReview> getLatestReview(){
+		final int DEFAULT_COUNT = 8;
+		return getLatestReview(DEFAULT_COUNT);
+	}
+	
+	/**
+	 * get latest reviews of news for shortcut control panel by specified number
+	 * @param count
+	 * @return
+	 */
+	public List<EventReview> getLatestReview(int count){
+		String queryString = " ORDER BY review_datetime DESC LIMIT "+count;
+		return eventReviewDao.findByFilter(queryString);
+	}
+	
+	/**
+	 * get total count of all news
+	 * @return
+	 */
+	public long countAllReviews(){
+		return eventReviewDao.count();
+	}
+	
 	/**
 	 * create eventReview and persist it
 	 * @param review the eventReview object to persist
@@ -86,5 +111,9 @@ public class EventReviewService {
 	 */
 	public void updateEventReview(EventReview review) {
 		this.eventReviewDao.update(review);
+	}
+	
+	public void updateEventReviewStatus(EventReview review) {
+		this.eventReviewDao.updateStatus(review);
 	}
 }

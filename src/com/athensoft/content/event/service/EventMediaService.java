@@ -20,12 +20,9 @@ public class EventMediaService {
 	 * DAO of EventMedia
 	 */
 	@Autowired
-	@Qualifier("eventMediaDaoJDBCImpl")
+	@Qualifier("eventMediaDaoJdbcImpl")
 	private EventMediaDao eventMediaDao;
 
-	public void setEventMediaDao(EventMediaDao eventMediaDao) {
-		this.eventMediaDao = eventMediaDao;
-	}
 	
 	/**
 	 * get eventMedia objects by its eventUUID
@@ -77,6 +74,10 @@ public class EventMediaService {
 	 */
 	public void updateEventMedia(EventMedia media) {
 		this.eventMediaDao.update(media);
+	}
+	
+	public void deleteEventMediaById(long mediaId) {
+		this.eventMediaDao.delete(mediaId);
 	}
 
 	/**

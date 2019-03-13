@@ -1,0 +1,12 @@
+/* here you can put your own css to customize and override the theme */
+
+/* customer-operation-em
+   member_edit.jsp
+ */
+.custom-operation-em{
+	color: red
+}
+
+.custom-label-left{
+	text-align: left !important;
+}

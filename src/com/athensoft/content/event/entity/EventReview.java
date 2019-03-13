@@ -2,13 +2,22 @@ package com.athensoft.content.event.entity;
 
 import java.util.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * A review object binding to an event object, which represents a review from web visitors
  * 
  * @author Athens
  * @version 1.0 
  */
+@Setter
+@Getter
+@ToString
 public class EventReview {
+	
+	public static final int UNKNOWN = 0;
 	
 	/**
 	 * the status of review, constant value, APPROVED = 1
@@ -51,6 +60,11 @@ public class EventReview {
 	private long customerId;
 	
 	/**
+	 * 
+	 */
+	private String acctName;
+	
+	/**
 	 * the content of the review
 	 */
 	private String reviewContent;
@@ -64,55 +78,6 @@ public class EventReview {
 	 */
 	private int reviewStatus;
 	
-	public long getGlobalId() {
-		return globalId;
-	}
-	public void setGlobalId(long globalId) {
-		this.globalId = globalId;
-	}
-	public String getEventUUID() {
-		return eventUUID;
-	}
-	public void setEventUUID(String eventUUID) {
-		this.eventUUID = eventUUID;
-	}
-	public String getReviewUUID() {
-		return reviewUUID;
-	}
-	public void setReviewUUID(String reviewUUID) {
-		this.reviewUUID = reviewUUID;
-	}
-	public Date getReviewDatetime() {
-		return reviewDatetime;
-	}
-	public void setReviewDatetime(Date reviewDatetime) {
-		this.reviewDatetime = reviewDatetime;
-	}
-	public long getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(long customerId) {
-		this.customerId = customerId;
-	}
-	public String getReviewContent() {
-		return reviewContent;
-	}
-	public void setReviewContent(String reviewContent) {
-		this.reviewContent = reviewContent;
-	}
-	public int getReviewStatus() {
-		return reviewStatus;
-	}
-	public void setReviewStatus(int reviewStatus) {
-		this.reviewStatus = reviewStatus;
-	}
-	@Override
-	public String toString() {
-		return "EventReview [globalId=" + globalId + ", eventUUID=" + eventUUID
-				+ ", reviewUUID=" + reviewUUID + ", reviewDatetime="
-				+ reviewDatetime + ", customerId=" + customerId
-				+ ", reviewContent=" + reviewContent + ", reviewStatus="
-				+ reviewStatus + "]";
-	}
+	
 
 }

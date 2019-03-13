@@ -42,38 +42,49 @@ public interface NewsDao {
 	 */
 	public Event findByEventUUID(String eventUUID);	
 	
+	
+	/**
+	 * count all news
+	 * @return
+	 */
+	public Long count();	
+	
 	/**
 	 * create a news object and persist it
 	 * @param news a news object
 	 */
-	public void create(News news);
+	public int create(News news);
 	
 	/**
 	 * update a news object and persist it
 	 * @param news a news object
 	 */
-	public void update(News news);
+	public int update(News news);
 	
 	/**
 	 * update news objects and persist them in batch
 	 * @param news list of news objects to persist
 	 */
-	public void updateBatch(List<News> news);
+	public int[] updateBatch(List<News> news);
 
-	public void markNewsStatusDeleted(String eventUUID);
+	public int markDeleted(String eventUUID);
 
 	/**
 	 * remove a news object from data source<p>
 	 * WARNING: THE METHOD HAS NOT COMPLETED.
 	 */
-	public void delete();
+	public int delete(News news);
 	
 	/**
 	 * remove news objects permanently in batch
 	 * @param news list of news objects to persist
 	 */
+<<<<<<< HEAD
 	public void deleteBatch(List<News> news);
 
 	public List<Map<String, Integer>> getViewNumStats();
+=======
+	public int[] deleteBatch(List<News> news);
+>>>>>>> branch 'master' of https://github.com/info-athensoft/zshmtl_acp.git
 	
 }

@@ -1,69 +1,44 @@
-<!-- DOC: Remove "hide" class to enable the page header actions -->
-<!-- 
-<div class="page-actions hide">  
--->
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="webapp_name" value="/acp"/>
+
 <div class="page-actions">
-			<div class="btn-group">
-				<button type="button" class="btn btn-circle red-pink dropdown-toggle" data-toggle="dropdown">
-				<i class="icon-bar-chart"></i>&nbsp;<span class="hidden-sm hidden-xs">New&nbsp;</span>&nbsp;<i class="fa fa-angle-down"></i>
-				</button>
-				<ul class="dropdown-menu" role="menu">
-					<li>
-						<a href="javascript:;">
-						<i class="icon-user"></i> New User </a>
-					</li>
-					<li>
-						<a href="javascript:;">
-						<i class="icon-present"></i> New Event <span class="badge badge-success">4</span>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-						<i class="icon-basket"></i> New order </a>
-					</li>
-					<li class="divider">
-					</li>
-					<li>
-						<a href="javascript:;">
-						<i class="icon-flag"></i> Pending Orders <span class="badge badge-danger">4</span>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-						<i class="icon-users"></i> Pending Users <span class="badge badge-warning">12</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn btn-circle green-haze dropdown-toggle" data-toggle="dropdown">
-				<i class="icon-bell"></i>&nbsp;<span class="hidden-sm hidden-xs">Post&nbsp;</span>&nbsp;<i class="fa fa-angle-down"></i>
-				</button>
-				<ul class="dropdown-menu" role="menu">
-					<li>
-						<a href="javascript:;">
-						<i class="icon-docs"></i> New Post </a>
-					</li>
-					<li>
-						<a href="javascript:;">
-						<i class="icon-tag"></i> New Comment </a>
-					</li>
-					<li>
-						<a href="javascript:;">
-						<i class="icon-share"></i> Share </a>
-					</li>
-					<li class="divider">
-					</li>
-					<li>
-						<a href="javascript:;">
-						<i class="icon-flag"></i> Comments <span class="badge badge-success">4</span>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-						<i class="icon-users"></i> Feedbacks <span class="badge badge-danger">2</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+    <div class="btn-group">
+        <button type="button" class="btn btn-circle btn-outline red dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-plus"></i>&nbsp;
+            <span class="hidden-sm hidden-xs">常用功能&nbsp;</span>&nbsp;
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a href="${webapp_name}/events/news/create.html">
+                    <i class="icon-docs"></i> 新建新闻 </a>
+            </li>
+            <li>
+                <a href="${webapp_name}/ad/adpost/create.html">
+                    <i class="icon-tag"></i> 新建广告 </a>
+            </li>
+            <li>
+                <a href="${webapp_name}/member/list.html">
+                    <i class="icon-share"></i> 审核会员 </a>
+            </li>
+            <!-- 
+            <li class="divider"> </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-flag"></i> Comments
+                    <span class="badge badge-success">4</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-users"></i> Feedbacks
+                    <span class="badge badge-danger">2</span>
+                </a>
+            </li>
+             -->
+        </ul>
+    </div>
+</div>
