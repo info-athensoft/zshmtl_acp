@@ -163,12 +163,12 @@ public class NewsService {
 	public void deleteNewsGroup(List<News> newsDTOList) {
 		this.newsDao.deleteBatch(newsDTOList);
 	}
-<<<<<<< HEAD
+
 
 	public List<Map<String, Integer>> getViewNumStats() {
 		return this.newsDao.getViewNumStats();
 	}
-=======
+
 	
 
 	public String[][] getData(List<Event> listNews, String action) {
@@ -314,5 +314,4 @@ public class NewsService {
 		return actionName;
 	}
 
->>>>>>> branch 'master' of https://github.com/info-athensoft/zshmtl_acp.git
 }

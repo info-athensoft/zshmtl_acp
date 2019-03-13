@@ -22,7 +22,7 @@ import com.athensoft.content.event.entity.EventMedia;
 import com.athensoft.content.event.entity.News;
 import com.athensoft.content.event.service.EventMediaService;
 import com.athensoft.content.event.service.NewsService;
-import com.athensoft.util.UUIDHelper;
+import com.athensoft.util.id.UUIDHelper;
 
 /**
  * News Controller for ACP
@@ -500,7 +500,7 @@ public class NewsAcpController {
 				}
 				field4 = eventClass;
 						
-				field5 = listNews.get(i).getPostDatetime()+"";
+				field5 = listNews.get(i).getPostDate()+"";
 				field6 = listNews.get(i).getViewNum()+"";
 				int intEventStatus = listNews.get(i).getEventStatus();
 				String eventStatus = "";
@@ -610,7 +610,7 @@ public class NewsAcpController {
 			}
 			field4 = eventClass;
 			
-			field5 = listNews.get(i).getPostDatetime()+"";
+			field5 = listNews.get(i).getPostDate()+"";
 			field6 = listNews.get(i).getViewNum()+"";
 			int intEventStatus = listNews.get(i).getEventStatus();
 			String eventStatus = "";
@@ -695,7 +695,7 @@ public class NewsAcpController {
         news.setAuthor(ic_job.getString("author"));
           
 //      news.setPostDatetime(new Date(ic_job.getString("postDatetime")));
-        news.setPostDatetime(new Date());
+        news.setPostDate(new Date());
         news.setViewNum(ic_job.getInt("viewNum"));
         news.setDescShort(ic_job.getString("descShort"));
         news.setDescLong(ic_job.getString("descLong"));
@@ -740,7 +740,7 @@ public class NewsAcpController {
         news.setAuthor(ic_job.getString("author"));
           
 //      news.setPostDatetime(new Date(ic_job.getString("postDatetime")));
-        news.setPostDatetime(new Date());
+        news.setPostDate(new Date());
         news.setViewNum(ic_job.getInt("viewNum"));
         news.setDescShort(ic_job.getString("descShort"));
         news.setDescLong(ic_job.getString("descLong"));
@@ -908,7 +908,7 @@ public class NewsAcpController {
 			String strEventClass = (listNews.get(i).getEventClass()).trim();
 			field4 = getEventClass(strEventClass);
 			
-			field5 = listNews.get(i).getPostDatetime()+"";
+			field5 = listNews.get(i).getPostDate()+"";
 			field6 = listNews.get(i).getViewNum()+"";
 			
 			int intEventStatus = listNews.get(i).getEventStatus();

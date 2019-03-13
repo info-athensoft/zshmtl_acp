@@ -79,12 +79,11 @@ public interface NewsDao {
 	 * remove news objects permanently in batch
 	 * @param news list of news objects to persist
 	 */
-<<<<<<< HEAD
-	public void deleteBatch(List<News> news);
+
 
 	public List<Map<String, Integer>> getViewNumStats();
-=======
+
 	public int[] deleteBatch(List<News> news);
->>>>>>> branch 'master' of https://github.com/info-athensoft/zshmtl_acp.git
+
 	
 }
