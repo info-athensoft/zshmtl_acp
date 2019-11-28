@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -301,6 +302,12 @@ public class NewsDaoJdbcImpl extends BaseDaoJdbcImpl implements NewsDao {
 
 			return x;
 		}
+	}
+
+	@Override
+	public List<Map<String, Integer>> getViewNumStats() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
